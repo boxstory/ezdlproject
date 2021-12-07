@@ -1,5 +1,5 @@
 {% load static %}
-<!-- ...navbar... -->
+<!-- ...header... -->
 
 
 <div class="container-fluid bg-light">
@@ -13,9 +13,9 @@
                 href="{% url 'webpages:index' %}"
             >
                 <img
-                    src="{{ MEDIA_URL }}webpages/img/ezzy-logo-long-white.png"
+                    src="{% static 'webpages/img/ezzy-logo-long-white.png' %}"
                     alt=""
-                    width="250"
+                    width="200"
                     height="50"
                 >
             </a>

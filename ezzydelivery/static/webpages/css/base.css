@@ -14,8 +14,8 @@ body {
 }
 
 .btn-primary-fill {
-  background-color: #03bfcb;
-  border: 0.06em solid #03bfcb;
+  background-color: #ebd300;
+  border: 0.06em solid #ebd300;
   border-radius: 0.19em;
   color: #231e39;
   font-family: Poppins-Medium;
@@ -24,8 +24,10 @@ body {
   width: 9em;
 }
 .btn-primary-fill:hover {
-  background: #6cecf5;
+  background: #f7e64d;
   color: #231e39;
+  border: 0.06em solid #ffc400;
+  border-radius: 0.29em;
   transition: background 0.3s;
 }
 
@@ -47,7 +49,7 @@ body {
 
 .follow {
   margin: 1.5em auto 0 auto;
-  background-color: #2589cc;
+  background-color: #ffd900;
   width: 150px;
   color: white;
   font-family: "Lato";
