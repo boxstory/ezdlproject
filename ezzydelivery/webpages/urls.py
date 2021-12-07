@@ -7,6 +7,7 @@ urlpatterns = [
     path('about/', webpages_views.about, name='about'),
     path('contact/', webpages_views.contact, name='contact'),
     path('services/', webpages_views.services, name='services'),
+    path('join_driver/', webpages_views.join_driver, name='join_driver'),
     path('privacy/', webpages_views.privacy, name='privacy'),
 
 

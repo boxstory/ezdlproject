@@ -1,0 +1,81 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block account_content %}
+<div class="row justify-content-center">
+  <div class="col-10 col-md-8">
+    <form
+      class="login  "
+      method="POST"
+      action="{% url 'account_login' %}"
+    >
+      <div>
+        {% csrf_token %}
+        {{ form | crispy }}
+        {% if redirect_field_value %}
+        <input
+          type="hidden"
+          name="{{ redirect_field_name }}"
+          value="{{ redirect_field_value }}"
+        />
+        {% endif %}
+      </div>
+
+      <div class="pb-4 text-center">
+        <a
+          class="button secondaryAction"
+          href="{% url 'account_reset_password' %}"
+        >{% trans "Forgot Password?" %}</a>
+      </div>
+
+      <div class=" text-center ">
+        <button
+          class=" primaryAction  btn btn-primary-fill text-uppercase mb-4"
+          type="submit"
+        >{% trans "Sign In" %}</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+<!--
+  <div
+  class="login-or text-center"
+>{% trans 'or' %}</div> -->
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+
+<div class="socialaccount_ballot justify-content-center">
+
+  <ul class="socialaccount_providers text-center p-0">
+    <br>OR: <br>
+    <li class=" btn btn-primary-fill  w-75 text-uppercase mb-4">
+      <a
+        class=" link-light text-decoration-none"
+        href="{{ signup_url }}"
+      >Signup with Email</a>
+    </li><br>OR JOIN WITH : <br>
+    <!-- <div class="login-or text-left">{% trans 'or' %}</div> -->
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+  <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+</p>
+{% endif %}
+
+
+{% endblock %}

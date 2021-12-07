@@ -59,6 +59,10 @@ INSTALLED_APPS = [
 ]
 
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 # SOCIALACCOUNT_PROVIDERS specific settings
 SITE_ID = 1
 
