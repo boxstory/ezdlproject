@@ -1,3 +1,8 @@
+{% load static %}
+<!-- ...footer... -->
+
+
+
 <footer
     id="sticky-footer"
     class="footer mt-auto py-3 bg-light "
@@ -6,36 +11,33 @@
         <div class="container">
             <div class="mb-8 border-bottom">
                 <div class="text-center">
-                    <a
-                        class="navbar-brand h4 text-decoration-none"
-                        href="#"
-                    ><img
-                            src="{{ MEDIA_URL }}webpages/img/ezzy-logo-sqr-round.png'
-                            alt="
-                            YK.qa"
-                            width="150"
-                        ></a>
+                    <img
+                        class="w-25
+                         mb-2"
+                        src="{% static 'webpages/img/ezzy-logo-sqr-round.png' %}"
+                    ></a>
 
                     <ul
                         class="mb-8 d-flex flex-wrap gap-4 align-items-center justify-content-center list-unstyled"
                         style="font-size: 14px;"
                     >
+
                         <li class="mb-2 mb-md-0"><a
                                 class="text-decoration-none link-dark fw-bold"
-                                href="/join_marketing/"
-                            >Join in Marketing</a></li>
+                                href="/contact/"
+                            >Delivery Partner</a></li>
                         <li class="mb-2 mb-md-0"><a
                                 class="text-decoration-none link-dark fw-bold"
-                                href="/property/add/"
-                            >Register Property</a></li>
+                                href="/join_driver/"
+                            >Join as Driver</a></li>
                         <li class="mb-2 mb-md-0"><a
                                 class="text-decoration-none link-dark fw-bold"
-                                href="#"
-                            >About</a></li>
+                                href="/about/"
+                            >Testimonials</a></li>
                         <li class="mb-2 mb-md-0 d-none d-md-block"><a
                                 class="text-decoration-none link-dark fw-bold"
                                 href="#"
-                            >Testimonials</a></li>
+                            >About</a></li>
                     </ul>
                     <div class="d-flex justify-content-center">
                         <a

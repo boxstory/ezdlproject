@@ -9,8 +9,10 @@ media
 # Environments 
 *.env 
 .venv 
+.venvezdl 
 env/ 
 venv/ 
+venvezdl/ 
 
 .DS_Store
 

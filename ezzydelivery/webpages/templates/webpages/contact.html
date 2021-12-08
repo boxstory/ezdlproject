@@ -6,6 +6,65 @@
 {% block content %}
 <div class="container">
 
-    <h1> Contactus</h1>
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="display-5 fw-bold mb-5">Contact Us</h2>
+                    <h4 class="fw-bold">Address</h4>
+                    <p class="text-muted mb-5">#102, Al sadd, Doha, Qatar</p>
+                    <h4 class="fw-bold">Contact Us</h4>
+                    <p class="text-muted mb-1">ezzydelivery@gmail.com</p>
+                    <p class="text-muted mb-0">+974-66451589</p>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <form
+                        action="post"
+                        data-dashlane-rid="7c1f8a453a645a1a"
+                        data-form-type="contact"
+                    >
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <div class="col-12">
+                                {{ form.name.errors }}
+                                {{ form.name | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                {{ form.email.errors }}
+                                {{ form.email | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                {{ form.mobile.errors }}
+                                {{ form.mobile | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                {{ form.purpose.errors }}
+                                {{ form.purpose | as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                {{ form.message.errors }}
+                                {{ form.message | as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <button
+                            class="btn btn-primary-fill w-100"
+                            data-dashlane-rid="d7f5d4425d0a9f42"
+                            data-form-type="action"
+                        >SUBMIT</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+
 {% endblock content %}
