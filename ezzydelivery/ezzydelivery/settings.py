@@ -30,7 +30,7 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['ezzydelivery.qa', 'www.ezzydelivery.qa',
-                 '195.110.58.186', '127.0.0.1']
+                 '167.71.49.94', '127.0.0.1']
 
 
 # Application definition
