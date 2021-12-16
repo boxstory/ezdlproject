@@ -10,8 +10,11 @@
 
   <h1>{% trans "Sign Up" %}</h1>
 
-  <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">
-      <button class="btn p-0 btn-primary-fill text-uppercase text-dark text-decoration-none">
+  <p>{% blocktrans %}Already have an account? Then please <a
+      class="text-decoration-none text-dark"
+      href="{{ login_url }}"
+    >
+      <button class="btn p-0 btn-primary-fill text-uppercase ">
         Sign in
     </a>
     </button>
@@ -25,6 +28,7 @@
   action="{% url 'account_signup' %}"
 >
   {% csrf_token %}
+
   {{ form | crispy }}
 
   {% if redirect_field_value %}

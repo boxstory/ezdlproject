@@ -34,10 +34,11 @@ def join_driver(request):
     return render(request, 'webpages/join_driver.html', data)
 
 
-def contact(request):
+def contactus(request):
     if request.method == 'POST':
         f = ContactForm(request.POST)
         if f.is_valid():
+            print("form is valid")
 
             name = f.cleaned_data['name']
             email = f.cleaned_data['email']
@@ -45,8 +46,7 @@ def contact(request):
             purpose = f.cleaned_data['purpose']
 
             message = f.cleaned_data['message']
-            f = ContactForm(name=name, email=email, mobile=mobile,
-                            purpose=purpose, message=message)
+
             f.save()
 
             return redirect('/')

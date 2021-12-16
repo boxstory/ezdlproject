@@ -1,17 +1,18 @@
 from django import forms
+from webpages.models import ContactUs
 
 
 class ContactForm(forms.Form):
+    DELIVERY_REQUEST = 'dr'
+    FULLFILLMENT = 'fl'
     DRIVER_JOB = 'd'
     FEEDBACK = 'fb'
-    NEW_FEATURE = 'nf'
-    DELIVERY_REQUEST = 'dr'
     OTHER = 'o'
     purpose_choices = (
-        (FEEDBACK, 'Feedback'),
-        (NEW_FEATURE, 'Feature Request'),
         (DELIVERY_REQUEST, 'Delivery Request'),
+        (FULLFILLMENT, 'Fullfillment'),
         (DRIVER_JOB, 'Driver Jobs'),
+        (FEEDBACK, 'Feedback'),
         (OTHER, 'Other'),
     )
 
@@ -20,4 +21,12 @@ class ContactForm(forms.Form):
     mobile = forms.CharField()
     purpose = forms.ChoiceField(choices=purpose_choices)
     message = forms.CharField(
-        widget=forms.Textarea(attrs={'cols': 40, 'rows': 5}))
+        widget=forms.Textarea(attrs={'cols': 20, 'rows': 3}))
+
+    def save(self):
+        data = self.cleaned_data
+        contactus = ContactUs(name=data['name'], email=data['email'],
+                              mobile=data['mobile'], purpose=data['purpose'],
+                              message=data['message'])
+        contactus.save()
+        return contactus

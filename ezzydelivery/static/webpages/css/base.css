@@ -16,12 +16,13 @@ body {
 .btn-primary-fill {
   background-color: #ebd300;
   border: 0.06em solid #ebd300;
-  border-radius: 0.19em;
+  /* border-radius: 0.19em; */
   color: #231e39;
   font-family: Poppins-Medium;
   font-weight: 500;
   padding: 0.6em 0.6em;
   width: 9em;
+  text-decoration: none;
 }
 .btn-primary-fill:hover {
   background: #f7e64d;
