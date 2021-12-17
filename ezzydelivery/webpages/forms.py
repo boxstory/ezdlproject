@@ -10,7 +10,7 @@ class ContactForm(forms.Form):
     OTHER = 'o'
     purpose_choices = (
         (DELIVERY_REQUEST, 'Delivery Request'),
-        (FULLFILLMENT, 'Fullfillment'),
+        (FULLFILLMENT, 'Fullfillment Request'),
         (DRIVER_JOB, 'Driver Jobs'),
         (FEEDBACK, 'Feedback'),
         (OTHER, 'Other'),
