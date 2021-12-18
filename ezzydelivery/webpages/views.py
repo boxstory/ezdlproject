@@ -54,7 +54,7 @@ def contactus(request):
     else:
         f = ContactForm()
 
-    return render(request, 'webpages/contact.html', {'form': f})
+    return render(request, 'webpages/contactus.html', {'form': f})
 
 
 def privacy(request):
