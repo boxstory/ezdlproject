@@ -1,5 +1,5 @@
 from django import forms
-from webpages.models import ContactUs
+from webpages.models import ContactUs, DeliveryAddress
 
 
 class ContactForm(forms.Form):

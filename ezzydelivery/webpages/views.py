@@ -1,6 +1,6 @@
 from django.forms.fields import DateTimeField
 from django.shortcuts import redirect, render
-from webpages.forms import ContactForm, DeliveryAddress
+from webpages.forms import ContactForm, DeliveryAddressForm
 from django.core.mail import mail_admins
 
 # Create your views here.
