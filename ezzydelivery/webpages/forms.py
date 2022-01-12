@@ -31,7 +31,7 @@ class ContactForm(forms.Form):
         contactus.save()
         return contactus
 
-class DeliveryAddressForm(form.Form):
+class DeliveryAddressForm(forms.Form):
     full_name = forms.CharField()
     mobile_no = forms.CharField()
     zone_name = forms.CharField()
