@@ -19,7 +19,7 @@ class ContactForm(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()
     mobile = forms.CharField()
-    purpose = forms.ChoiceField(choices=purpose_choices)
+    purpose = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=purpose_choices,)
     message = forms.CharField(
         widget=forms.Textarea(attrs={'cols': 20, 'rows': 3}))
 
@@ -32,7 +32,6 @@ class ContactForm(forms.Form):
         return contactus
 
 class DeliveryAddressForm(form.Form):
-
     full_name = forms.CharField()
     mobile_no = forms.CharField()
     zone_name = forms.CharField()
