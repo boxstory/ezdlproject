@@ -8,7 +8,7 @@
 
     <section class="py-5">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row justify-content-center">
                 
                 <div class="col-12 col-lg-6">
                     <form
@@ -29,12 +29,14 @@
                                 {{ form.mobile_no | as_crispy_field }}
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <div class="col-12">
-                                {{ form.zone_name.errors }}
-                                {{ form.zone_name | as_crispy_field }}
+                                {{ form.unit_no.errors }}
+                                {{ form.unit_no | as_crispy_field }}
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <div class="col-12">
                                 {{ form.zone_number.errors }}
@@ -55,8 +57,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-12">
-                                {{ form.unit_no.errors }}
-                                {{ form.unit_no | as_crispy_field }}
+                                {{ form.zone_name.errors }}
+                                {{ form.zone_name | as_crispy_field }}
                             </div>
                         </div>
                         <div class="form-group row">

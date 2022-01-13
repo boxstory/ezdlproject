@@ -34,13 +34,13 @@ class ContactForm(forms.Form):
 class DeliveryAddressForm(forms.Form):
     full_name = forms.CharField()
     mobile_no = forms.CharField()
-    zone_name = forms.CharField()
+    zone_name = forms.CharField(blank=True)
     zone_number = forms.CharField()
     street_no = forms.CharField()
     building_no = forms.CharField()
-    unit_no = forms.CharField()
-    is_villa_compound = forms.BooleanField()
-    is_flat = forms.BooleanField()
+    unit_no = forms.CharField(blank=True)
+    is_villa_compound = forms.BooleanField(blank=True)
+    is_flat = forms.BooleanField(blank=True)
 
     def save(self):
         data = self.cleaned_data
