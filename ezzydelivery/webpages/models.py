@@ -28,6 +28,8 @@ class DeliveryAddress(models.Model):
     unit_no = models.CharField(max_length=2)
     is_villa_compound = models.BooleanField(default=False)
     is_flat = models.BooleanField(default=False)
+    is_office = models.BooleanField(default=False)
+    order_id = models.CharField(max_length=100)
 
     def __str__(self):
         return self.full_name

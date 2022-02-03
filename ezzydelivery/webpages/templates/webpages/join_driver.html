@@ -6,6 +6,175 @@
 {% block content %}
 <div class="container">
 
-    <h1> join_driver</h1>
-</div>
-{% endblock content %}
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="col-12 ">
+                <h1 class="display-5 fw-bold lh-1  pb-3">Looking for delivery driver jobs?</h1>
+                <br>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <form
+                            class="needs-validation"
+                            novalidate=""
+                        >
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label
+                                        for="firstName"
+                                        class="form-label"
+                                    >First name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="firstName"
+                                        placeholder=""
+                                        value=""
+                                        required=""
+                                    >
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label
+                                        for="lastName"
+                                        class="form-label"
+                                    >Last name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="lastName"
+                                        placeholder=""
+                                        value=""
+                                        required=""
+                                    >
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <label
+                                        for="address"
+                                        class="form-label"
+                                    >Address</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="address"
+                                        placeholder="Enter A Landmark"
+                                        required=""
+                                    >
+                                    <div class="invalid-feedback">
+                                        Please enter your address.
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label
+                                        for="building_no"
+                                        class="form-label"
+                                    >Building No</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="building_no"
+                                        placeholder=""
+                                        required=""
+                                    >
+                                    <div class="invalid-feedback">
+                                        Building No code required.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <label
+                                        for="street_no"
+                                        class="form-label"
+                                    >Street No</label>
+                                    <input
+                                        class="form-control"
+                                        type="text"
+                                        id="street_no"
+                                        required=""
+                                    >
+
+
+                                    <div class="invalid-feedback">
+                                        Please select a valid country.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label
+                                        for="state"
+                                        class="form-label"
+                                    >Zone No</label>
+                                    <select
+                                        class="form-select"
+                                        id="state"
+                                        required=""
+                                    >
+                                        <option value="">Choose...</option>
+                                        <option>Doha</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Zone.
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <hr class="my-4">
+                            <h3>
+
+                                Qatar Driving licece
+                            </h3>
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input"
+                                    id="qatar_driving_license"
+                                >
+                                <label
+                                    class="form-check-label"
+                                    for="qatar_driving_license"
+                                >Car</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input"
+                                    id="qatar_driving_license"
+                                >
+                                <label
+                                    class="form-check-label"
+                                    for="qatar_driving_license"
+                                >Bike</label>
+                            </div>
+
+
+                            <hr class="my-4">
+
+                            <button
+                                class="w-100 btn btn-primary btn-lg"
+                                type="submit"
+                            >JOIN AS DRIVER</button>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6 d-none d-md-block p-0 overflow-hidden ">
+                        <img
+                            class="rounded-lg-3"
+                            src="{% static 'webpages/img/home-delivery-service-banner.png ' %}"
+                            alt=""
+                            width="100%"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

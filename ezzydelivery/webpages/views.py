@@ -27,6 +27,13 @@ def services(request):
     return render(request, 'webpages/services.html', data)
 
 
+def fullfillment(request):
+    data = {
+
+    }
+    return render(request, 'webpages/fullfillment.html', data)
+
+
 def join_driver(request):
     data = {
 
@@ -55,6 +62,7 @@ def contactus(request):
         f = ContactForm()
 
     return render(request, 'webpages/contactus.html', {'form': f})
+
 
 def delivery_address_details(request):
     if request.method == 'POST':

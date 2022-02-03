@@ -48,7 +48,14 @@
                             class="nav-link active"
                             aria-current="page"
                             href="{% url 'webpages:services' %}"
-                        >Services</a>
+                        >Delivery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link active"
+                            aria-current="page"
+                            href="{% url 'webpages:fullfillment' %}"
+                        >Fullfillment</a>
                     </li>
                     <li class="nav-item">
                         <a
@@ -57,13 +64,7 @@
                             href="../contactus/"
                         >Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active"
-                            aria-current="page"
-                            href="{% url 'webpages:about' %}"
-                        >About</a>
-                    </li>
+
 
 
                     {% if user.is_authenticated %}

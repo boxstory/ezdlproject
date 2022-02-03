@@ -19,7 +19,8 @@ class ContactForm(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()
     mobile = forms.CharField()
-    purpose = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=purpose_choices,)
+    purpose = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, choices=purpose_choices,)
     message = forms.CharField(
         widget=forms.Textarea(attrs={'cols': 20, 'rows': 3}))
 
@@ -31,16 +32,20 @@ class ContactForm(forms.Form):
         contactus.save()
         return contactus
 
+
 class DeliveryAddressForm(forms.Form):
     full_name = forms.CharField()
     mobile_no = forms.CharField()
-    zone_name = forms.CharField(blank=True)
+    zone_name = forms.CharField()
     zone_number = forms.CharField()
     street_no = forms.CharField()
     building_no = forms.CharField()
-    unit_no = forms.CharField(blank=True)
-    is_villa_compound = forms.BooleanField(blank=True)
-    is_flat = forms.BooleanField(blank=True)
+    unit_no = forms.CharField()
+    is_villa_compound = forms.BooleanField()
+    is_flat = forms.BooleanField()
+    is_office = forms.BooleanField()
+
+    order_id = forms.CharField()
 
     def save(self):
         data = self.cleaned_data
@@ -54,6 +59,8 @@ class DeliveryAddressForm(forms.Form):
             unit_no=data['unit_no'],
             is_villa_compound=data['is_villa_compound'],
             is_flat=data['is_flat'],
+            is_office=data['is_office'],
+            order_id=data['order_id'],
         )
         delivery_address_details.save()
         return delivery_address_details
