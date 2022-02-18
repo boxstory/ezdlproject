@@ -17,9 +17,9 @@ class DeliveryAddressForm(forms.Form):
     is_office = forms.BooleanField(required=False, initial=False)
     order_id = forms.CharField(required=False)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['zone_name'].queryset = ZoneName.objects.none()
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['zone_name'].queryset = ZoneName.objects.none()
 
     def save(self):
         data = self.cleaned_data
