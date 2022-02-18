@@ -10,7 +10,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
 
-    path('', include('webpages.urls')),
+    path('', include('core.urls', namespace='core')),
+    path('', include('webpages.urls', namespace='webpages')),
+    path('delivery/', include('delivery.urls', namespace='delivery')),
+    path('orders/', include('orders.urls', namespace='orders')),
 
 
 ]

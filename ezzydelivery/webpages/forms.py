@@ -1,5 +1,5 @@
 from django import forms
-from webpages.models import ContactUs, DeliveryAddress
+from webpages.models import *
 
 
 class ContactForm(forms.Form):
@@ -33,34 +33,52 @@ class ContactForm(forms.Form):
         return contactus
 
 
-class DeliveryAddressForm(forms.Form):
-    full_name = forms.CharField()
-    mobile_no = forms.CharField()
-    zone_name = forms.CharField()
-    zone_number = forms.CharField()
-    street_no = forms.CharField()
-    building_no = forms.CharField()
-    unit_no = forms.CharField()
-    is_villa_compound = forms.BooleanField()
-    is_flat = forms.BooleanField()
-    is_office = forms.BooleanField()
+class DriverJobForm(forms.Form):
+    vehicle_choices = (
+        ('none', 'None'),
+        ('bike', 'Bike'),
+        ('car', 'Car'),
+        ('van', 'Van'),
+        ('pickup', 'Pickup'),
+        ('pickup_big', 'Pickup Big'),
 
-    order_id = forms.CharField()
+    )
+    licence_choices = (
+        ('none', 'None'),
+        ('2wheeler', '2 Wheeler'),
+        ('4wheeler', '4 Wheeler'),
+        ('heavy', 'Heavy'),
+    )
+    job_type_choices = (
+        ('part_time', 'Part Time'),
+        ('full_time', 'Full Time'),
+        ('both', 'Both'),
+    )
+    user_id = forms.CharField()
+    f_name = forms.CharField()
+    l_name = forms.CharField()
+    mobile_no = forms.CharField()
+    landmark = forms.CharField()
+    zone_name = forms.CharField()
+    is_in_qatar = forms.BooleanField(required=False)
+    own_vehicle_choices = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, choices=vehicle_choices,)
+
+    licence_choices = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, choices=licence_choices,)
+    job_type_choices = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, choices=job_type_choices,)
 
     def save(self):
         data = self.cleaned_data
-        delivery_address_details = DeliveryAddress(
-            full_name=data['full_name'],
-            mobile_no=data['mobile_no'],
-            zone_name=data['zone_name'],
-            zone_number=data['zone_number'],
-            street_no=data['street_no'],
-            building_no=data['building_no'],
-            unit_no=data['unit_no'],
-            is_villa_compound=data['is_villa_compound'],
-            is_flat=data['is_flat'],
-            is_office=data['is_office'],
-            order_id=data['order_id'],
-        )
-        delivery_address_details.save()
-        return delivery_address_details
+        driverjob = DriverJob(user_id=data['user_id'],
+                              f_name=data['f_name'], l_name=data['l_name'],
+                              mobile=data['mobile'], landmark=data['landmark'],
+                              zone_name=data['zone_name'],
+                              is_own_vehicle=data['is_own_vehicle'],
+                              own_vehicle_choices=data['own_vehicle_choices'],
+                              licence_choices=data['licence_choices'],
+                              job_type_choices=data['job_type_choices'],
+                              )
+        driverjob.save()
+        return driverjob
