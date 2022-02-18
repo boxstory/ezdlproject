@@ -41,6 +41,7 @@ class DeliveryTask(models.Model):
 
     class Meta:
         verbose_name_plural = "Delivery Task"
+        app_label = 'delivery'
 
 
 class DeliveryAddress(models.Model):
@@ -61,6 +62,7 @@ class DeliveryAddress(models.Model):
 
     class Meta:
         verbose_name_plural = "Delivery Address"
+        app_label = 'delivery'
 
    
 
@@ -73,3 +75,4 @@ class ZoneName(models.Model):
 
     class Meta:
         verbose_name_plural = "Zone Name"
+        app_label = 'delivery'
