@@ -88,7 +88,7 @@ def dl_address(request, dl_id, mobile_no):
 # AJAX
 def get_zone_name(request):
     zone_number = request.GET.get('zone_number')
-    zone_name = Zone_Name.objects.filter(zone_number=zone_number).all()
+    zone_name = ZoneName.objects.filter(zone_number=zone_number).all()
     print(zone_name)
     print("get_zone_name")
     return render(request, 'delivery/zone_names.html', {'zone_name': zone_name})

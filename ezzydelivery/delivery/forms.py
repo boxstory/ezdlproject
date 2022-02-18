@@ -19,7 +19,7 @@ class DeliveryAddressForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['zone_name'].queryset = Zone_Name.objects.none()
+        self.fields['zone_name'].queryset = ZoneName.objects.none()
 
     def save(self):
         data = self.cleaned_data

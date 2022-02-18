@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Zone_Name(models.Model):
+class ZoneName(models.Model):
     zone_name = models.CharField(max_length=100)
     zone_number = models.CharField(max_length=2)
 
@@ -14,7 +14,7 @@ class Zone_Name(models.Model):
         verbose_name_plural = "Zone Name"
 
 
-class delivery_task(models.Model):
+class DeliveryTask(models.Model):
     dl_task_status = (
         ('Pending', 'Pending'),
         ('In Transit', 'In Transit'),
