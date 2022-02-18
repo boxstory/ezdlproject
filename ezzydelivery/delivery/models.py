@@ -3,15 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class ZoneName(models.Model):
-    zone_name = models.CharField(max_length=100)
-    zone_number = models.CharField(max_length=2)
-
-    def __str__(self):
-        return self.zone_name
-
-    class Meta:
-        verbose_name_plural = "Zone Name"
 
 
 class DeliveryTask(models.Model):
@@ -72,3 +63,13 @@ class DeliveryAddress(models.Model):
         verbose_name_plural = "Delivery Address"
 
    
+
+class ZoneName(models.Model):
+    zone_name = models.CharField(max_length=100)
+    zone_number = models.CharField(max_length=2)
+
+    def __str__(self):
+        return self.zone_name
+
+    class Meta:
+        verbose_name_plural = "Zone Name"

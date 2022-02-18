@@ -1,6 +1,6 @@
 from email.policy import default
 from django import forms
-from delivery.models import *
+from delivery.models import DeliveryAddress
 
 
 class DeliveryAddressForm(forms.Form):
