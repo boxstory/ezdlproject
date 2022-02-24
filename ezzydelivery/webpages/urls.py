@@ -12,5 +12,8 @@ urlpatterns = [
     path('fullfillment/', webpages_views.fullfillment, name='fullfillment'),
     path('join_driver/', webpages_views.join_driver, name='join_driver'),
     path('privacy/', webpages_views.privacy, name='privacy'),
+    path('terms/', webpages_views.terms, name='terms'),
+    path('test/', webpages_views.test, name='test'),
+
 
 ]

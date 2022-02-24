@@ -27,6 +27,18 @@ def services(request):
     }
     return render(request, 'webpages/services.html', data)
 
+def terms(request):
+    data = {
+
+    }
+    return render(request, 'webpages/terms.html', data)
+
+def test(request):
+    data = {
+
+    }
+    return render(request, 'webpages/test.html', data)
+
 
 def fullfillment(request):
     data = {
