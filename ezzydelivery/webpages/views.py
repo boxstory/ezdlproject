@@ -27,11 +27,13 @@ def services(request):
     }
     return render(request, 'webpages/services.html', data)
 
+
 def terms(request):
     data = {
 
     }
     return render(request, 'webpages/terms.html', data)
+
 
 def test(request):
     data = {
@@ -45,6 +47,13 @@ def fullfillment(request):
 
     }
     return render(request, 'webpages/fullfillment.html', data)
+
+
+def fleets(request):
+    data = {
+
+    }
+    return render(request, 'webpages/fleets.html', data)
 
 
 @login_required(login_url='account_login')
