@@ -10,6 +10,7 @@ urlpatterns = [
     path('contactus/', webpages_views.contactus, name='contactus'),
     path('services/', webpages_views.services, name='services'),
     path('fullfillment/', webpages_views.fullfillment, name='fullfillment'),
+    path('fleets/', webpages_views.fleets, name='fleets'),
     path('join_driver/', webpages_views.join_driver, name='join_driver'),
     path('privacy/', webpages_views.privacy, name='privacy'),
     path('terms/', webpages_views.terms, name='terms'),
