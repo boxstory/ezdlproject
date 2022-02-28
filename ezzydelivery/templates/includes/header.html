@@ -68,38 +68,49 @@
 
 
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active p-0"
-                            aria-current="page"
-                            href="{% url 'core:profile' %}"
+                    <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Button group with nested dropdown"
+                    >
+                        <div
+                            class="btn-group"
+                            role="group"
                         >
-                            <lord-icon
-                                src="https://cdn.lordicon.com//dxjqoygy.json"
-                                trigger="loop"
-                                colors="primary:#0a2e5c,secondary:#107c91"
-                                width="24"
-                                height="24"
-                                title="{{ user.username }}"
+                            <button
+                                id="btnGroupDrop1"
+                                type="button"
+                                class="btn btn-light dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
                             >
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active p-0"
-                            aria-current="page"
-                            href="{% url 'core:profile' %}"
-                        >
+                                <img
+                                    src="{% static 'webpages/img/avatar.png' %}"
+                                    alt=""
+                                    width="30"
+                                    height="30"
+                                    title="{{ user.username }}"
+                                >
 
-                            <img
-                                src="{% static 'webpages/img/avatar.png' %}"
-                                alt=""
-                                width="30"
-                                height="30"
+                            </button>
+                            <ul
+                                class="dropdown-menu dropdown-menu-end bg-light ms-3 border-0 text-center"
+                                aria-labelledby="btnGroupDrop1"
                             >
+                                <li><a
+                                        class="nav-link active "
+                                        aria-current="page"
+                                        href="{% url 'core:profile_view' %}"
+                                    > Profile</a></li>
+                                <li><a
+                                        class="nav-link active"
+                                        aria-current="page"
+                                        href="{% url 'account_logout' %}"
+                                    > Log Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
 
-                        </a>
-                    </li>
                     {% else %}
                     <li class="nav-item  "><a
                             class="nav-link active"

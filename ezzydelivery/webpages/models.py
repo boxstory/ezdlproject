@@ -5,9 +5,9 @@ from django.db import models
 
 
 class ContactUs(models.Model):
-    name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
     email = models.EmailField()
-    mobile = models.CharField(max_length=100)
+    mobile = models.IntegerField()
     purpose = models.CharField(max_length=100)
     message = models.TextField()
     date = models.DateField(auto_now_add=True)

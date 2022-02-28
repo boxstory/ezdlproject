@@ -4,7 +4,177 @@
 
 
 {% block content %}
-Profile page
 
+
+<section style="background-color: #eee;">
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav
+                    aria-label="breadcrumb"
+                    class="bg-light rounded-3 p-3 mb-4"
+                >
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li
+                            class="breadcrumb-item active"
+                            aria-current="page"
+                        >User</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+
+
+
+
+
+
+                        <img
+                            src="{{profile.profile_pic.url}}"
+                            alt="avatar"
+                            class="rounded-circle img-fluid"
+                            style="width: 180px;"
+                        >
+
+
+
+
+
+
+                        <h5 class="my-3">{{profile.first_name}} {{profile.last_name}}</h5>
+                        <p class="text-muted mb-1">{{profile.profile_pic}}</p>
+                        <p class="text-muted mb-4">{{profile.zone_name}}</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button
+                                type="button"
+                                class="btn btn-primary-fill"
+                            >Follow</button>
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary ms-1"
+                            >Message</button>
+                        </div>
+                        <div class="d-flex justify-content-center p-3">
+                            <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
+                            <a href="#!"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
+                            <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Name:</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="text-muted mb-0">
+                                    {{profile.first_name }}
+                                </p>
+                            </div>
+                            <div class="col-sm-5">
+                                <p class="text-muted mb-0">
+                                    {{profile.last_name}}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    {{profile.email }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">nationlity</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    {{profile.nationlity }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Birthday</p>
+                            </div>
+                            <div class="col-sm-5">
+                                <p class="text-muted mb-0">
+                                    {{profile.date_of_birth }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Mobile</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="mb-0">{{profile.phone }}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Whatsapp</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    {{profile.whatsapp }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Zone Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    {{profile.zone_name }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">
+                                    {{profile.address }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 col-6 align-content-end">
+                    <a
+                        href="/profile/{{profile.user_id}}/update"
+                        class="btn btn-primary btn-dark"
+                    >Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}

@@ -6,9 +6,12 @@ from orders import views as orders_views
 
 app_name = 'core'
 urlpatterns = [
-    path('profile/', core_views.profile, name='profile'),
-
-
+    path('profile/', core_views.profile_view, name='profile_view'),
+    path('profile/<int:pk>/', core_views.profile, name='profile'),
+    path('profile/<int:pk>/update/',
+         core_views.profile_update, name='profile_update'),
+    path('profile/add/',
+         core_views.profile_add, name='profile_add'),
 
 
 ]

@@ -42,8 +42,8 @@
                         {% csrf_token %}
                         <div class="form-group row">
                             <div class="col-12">
-                                {{ form.name.errors }}
-                                {{ form.name | as_crispy_field }}
+                                {{ form.full_name.errors }}
+                                {{ form.full_name | as_crispy_field }}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -72,6 +72,8 @@
                         </div>
 
                         <button
+                            type="submit"
+                            method="POST"
                             class="btn btn-primary-fill w-100"
                             data-dashlane-rid="d7f5d4425d0a9f42"
                             data-form-type="action"

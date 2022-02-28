@@ -5,7 +5,6 @@
 
 {% block content %}
 <div class="container">
-
     <div class="container my-5">
         <div class="row p-4   pt-lg-5 align-items-center rounded-3 border shadow-lg">
             <div class="col-12 ">
@@ -13,121 +12,68 @@
                 <br>
                 <div class="row">
                     <div class="col-12 ">
-                        {% csrf_token %}
-                        <form
-                            class="needs-validation"
-                            novalidate=""
-                        >
+                        <form method="POST">{% csrf_token %}
                             <div class="row g-3">
-                                <div class="col-sm-6">
-                                    <label
-                                        for="f_name"
-                                        class="form-label"
-                                    >First name</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="f_name"
-                                        placeholder=""
-                                        value=""
-                                        required=""
-                                    >
-                                    <div class="invalid-feedback">
-                                        Valid first name is required.
-                                    </div>
+                                <div class="col-12 mt-md-4 mt-3">
+                                    {{ driverjobform.full_name | as_crispy_field }}
                                 </div>
-
                                 <div class="col-sm-6">
-                                    <label
-                                        for="l_name"
-                                        class="form-label"
-                                    >Last name</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="l_name"
-                                        placeholder=""
-                                        value=""
-                                        required=""
-                                    >
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
+                                    {{driverjobform.mobile_no | as_crispy_field}}
                                 </div>
-
-
-                                <div class="col-12">
-                                    <label
-                                        for="landmark"
-                                        class="form-label"
-                                    >Landmark</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="landmark"
-                                        placeholder="Enter A nearby Landmark"
-                                        required=""
-                                    >
-                                    <div class="invalid-feedback">
-                                        Please enter your Landmark.
-                                    </div>
-
-
-
-
-                                    <div class="col-12 mt-md-4 mt-3">
-                                        {{ form.mobile_no | as_crispy_field }}
-                                    </div>
+                                <div class="col-sm-6">
+                                    {{driverjobform.whatsapp_no | as_crispy_field}}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{driverjobform.zone_name | as_crispy_field}}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{driverjobform.landmark | as_crispy_field}}
                                 </div>
 
                             </div>
-
-                            <div class="form-group row">
-                                <div class="col-lg-8 m-2 ">
-                                    {{ form.is_in_qatar | as_crispy_field }}
-                                </div>
-                                <div class="col-lg-8 m-2 ">
-                                    {{ form.own_vehicle_choices | as_crispy_field }}
-                                </div>
-
-                                <div class="col-lg-8 m-2 ">
-                                    {{ form.licence_choices | as_crispy_field }}
-                                </div>
-
-                                <div class="col-lg-8 m-2 ">
-                                    {{ form.job_type_choices | as_crispy_field }}
-                                </div>
-                            </div>
-
-
-
-
-                            <button
-                                class="w-100 btn btn-primary-fill btn-lg"
-                                type="submit"
-                                value="submit"
-                            >JOIN AS DRIVER</button>
-                        </form>
-
-
-
-
-
                     </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6 m-2 ">
+                            {{ driverjobform.is_in_qatar | as_crispy_field }}
+                        </div>
+                        <div class="col-lg-6 m-2 ">
+                            {{ driverjobform.job_type | as_crispy_field }}
+                        </div>
+                        <div class="col-lg-6 m-2 ">
+                            {{ driverjobform.licence | as_crispy_field }}
+                        </div>
+                        <div class="col-lg-6 m-2 ">
 
+                            {{ driverjobform.own_vehicle | as_crispy_field }}
+                        </div>
+                    </div>
+                    {% if form.driverjobform.errors %}
+                    <ol>
+                        {% for error in form.driverjobform.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ol>
+                    {% endif %}
 
+                    <button
+                        class="w-100 btn btn-primary-fill btn-lg"
+                        type="submit"
+                        value="submit"
+                    >JOIN AS DRIVER</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    {% endblock content %}
+</div>
+{% endblock content %}
 
 
-    {% block extra_js %}
-    <!-- extra js -->
-    <script
-        type="text/javascript"
-        src="{% static '/webpages/js/driver_join.js' %}"
-    ></script>
+{% block extra_js %}
+<!-- extra js -->
+<script
+    type="text/javascript"
+    src="{% static '/webpages/js/driver_join.js' %}"
+></script>
 
-    {% endblock extra_js %}
+{% endblock extra_js %}

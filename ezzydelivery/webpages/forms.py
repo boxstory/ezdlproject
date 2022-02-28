@@ -1,5 +1,8 @@
+from urllib import request
 from django import forms
+from core.models import DriverJob
 from webpages.models import *
+from crispy_forms.helper import FormHelper
 
 
 class ContactForm(forms.Form):
@@ -33,52 +36,13 @@ class ContactForm(forms.Form):
         return contactus
 
 
-class DriverJobForm(forms.Form):
-    vehicle_choices = (
-        ('none', 'None'),
-        ('bike', 'Bike'),
-        ('car', 'Car'),
-        ('van', 'Van'),
-        ('pickup', 'Pickup'),
-        ('pickup_big', 'Pickup Big'),
+class DriverJobForm(forms.ModelForm):
+    class Meta:
+        model = DriverJob
+        fields = ['full_name', 'mobile_no', 'whatsapp_no', 'landmark', 'zone_name',
+                  'licence', 'is_in_qatar', 'own_vehicle', 'job_type']
 
-    )
-    licence_choices = (
-        ('none', 'None'),
-        ('2wheeler', '2 Wheeler'),
-        ('4wheeler', '4 Wheeler'),
-        ('heavy', 'Heavy'),
-    )
-    job_type_choices = (
-        ('part_time', 'Part Time'),
-        ('full_time', 'Full Time'),
-        ('both', 'Both'),
-    )
-    user_id = forms.CharField()
-    f_name = forms.CharField()
-    l_name = forms.CharField()
-    mobile_no = forms.CharField()
-    landmark = forms.CharField()
-    zone_name = forms.CharField()
-    is_in_qatar = forms.BooleanField(required=False)
-    own_vehicle_choices = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, choices=vehicle_choices,)
-
-    licence_choices = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, choices=licence_choices,)
-    job_type_choices = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, choices=job_type_choices,)
-
-    def save(self):
-        data = self.cleaned_data
-        driverjob = DriverJob(user_id=data['user_id'],
-                              f_name=data['f_name'], l_name=data['l_name'],
-                              mobile=data['mobile'], landmark=data['landmark'],
-                              zone_name=data['zone_name'],
-                              is_own_vehicle=data['is_own_vehicle'],
-                              own_vehicle_choices=data['own_vehicle_choices'],
-                              licence_choices=data['licence_choices'],
-                              job_type_choices=data['job_type_choices'],
-                              )
-        driverjob.save()
-        return driverjob
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = True

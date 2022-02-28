@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.forms.fields import DateTimeField
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from delivery.models import ZoneName
 from webpages.forms import *
 from delivery.forms import *
 from orders.forms import *

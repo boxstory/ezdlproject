@@ -37,13 +37,35 @@
         href="{% static 'webpages/css/base.css' %}"
     >
 
+    <!-- Our project just needs Font Awesome Free's Solid + Brand files -->
+    <link
+        href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+        rel="stylesheet"
+        type="text/css"
+    >
+    <link
+        href="{% static 'fontawesomefree/css/brands.css' %}"
+        rel="stylesheet"
+        type="text/css"
+    >
+    <link
+        href="{% static 'fontawesomefree/css/solid.css' %}"
+        rel="stylesheet"
+        type="text/css"
+    >
+
+
 
     {% block extra_css %}
     <!-- extra css -->
     {% endblock extra_css %}
+
+
+
     <title>
         {% block title %}Ezzy Delivery | Qatar Delivery Partner{% endblock title %}
     </title>
+
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -55,7 +77,6 @@
     <!-- body content goes here -->
 
     {% endblock fullbody%}
-
 
 
 
