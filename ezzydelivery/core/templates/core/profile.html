@@ -167,10 +167,19 @@
                     </div>
                 </div>
                 <div class="d-grid gap-2 col-6 align-content-end">
+                    {% if profile.user_id %}
                     <a
                         href="/profile/{{profile.user_id}}/update"
                         class="btn btn-primary btn-dark"
                     >Edit</a>
+                    {% else %}
+                    <a
+                        href="/profile/add/"
+                        class="btn btn-primary btn-dark"
+                    >Edit</a>
+
+                    {% endif %}
+
                 </div>
             </div>
         </div>
