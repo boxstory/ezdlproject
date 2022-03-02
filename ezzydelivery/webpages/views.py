@@ -87,7 +87,7 @@ def contactus(request):
         if f.is_valid():
             print("form is valid")
 
-            name = f.cleaned_data['name']
+            full_name = f.cleaned_data['full_name']
             email = f.cleaned_data['email']
             mobile = f.cleaned_data['mobile']
             purpose = f.cleaned_data['purpose']

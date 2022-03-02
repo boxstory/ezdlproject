@@ -19,7 +19,7 @@ class ContactForm(forms.Form):
         (OTHER, 'Other'),
     )
 
-    name = forms.CharField()
+    full_name = forms.CharField()
     email = forms.EmailField()
     mobile = forms.CharField()
     purpose = forms.MultipleChoiceField(

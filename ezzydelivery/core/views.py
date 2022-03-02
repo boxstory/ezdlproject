@@ -1,5 +1,6 @@
 from multiprocessing import context
 from PIL import Image
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from core.models import *
 from core.forms import *
@@ -38,6 +39,8 @@ def profile_add(request):
             form.user_id = request.user.id
             print(form.user_id)
             form.save()
+            messages.success(
+                request, f'Your account details has been added!')
 
             return redirect('core:profile', pk=request.user.id)
 
@@ -55,6 +58,8 @@ def profile_update(request, pk):
     form = ProfileForm(request.POST or None, instance=instance)
     if form.is_valid():
         form.save()
+        messages.success(
+            request, f'Your account details has been Updated!')
         return redirect('core:profile', pk=pk)
     context = {
         'profileform': form,
