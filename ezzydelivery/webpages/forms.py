@@ -29,7 +29,7 @@ class ContactForm(forms.Form):
 
     def save(self):
         data = self.cleaned_data
-        contactus = ContactUs(name=data['name'], email=data['email'],
+        contactus = ContactUs(full_name=data['full_name'], email=data['email'],
                               mobile=data['mobile'], purpose=data['purpose'],
                               message=data['message'])
         contactus.save()
