@@ -12,13 +12,6 @@ from django.core.mail import mail_admins
 # Create your views here.
 
 
-def dashboard(request):
-    data = {
-
-    }
-    return render(request, 'delivery/dashboard.html', data)
-
-
 @login_required(login_url='account_login')
 def delivery_jobs(request):
     data = {

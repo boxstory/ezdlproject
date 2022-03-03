@@ -1,12 +1,54 @@
-from multiprocessing import context
 from PIL import Image
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+
 from core.models import *
 from core.forms import *
 
 
 # Create your views here.
+
+@login_required(login_url='account_login')
+def seller_dashboard(request):
+    data = {
+
+    }
+    return render(request, 'core/seller_dashboard.html', data)
+
+
+@login_required(login_url='account_login')
+def fleet_dashboard(request):
+    data = {
+
+    }
+    return render(request, 'core/fleet_dashboard.html', data)
+
+
+def join_us(request):
+    joinusform = JoinUsForm(request.POST)
+    if request.method == 'POST':
+        if joinusform.is_valid():
+            form = joinusform.save(commit=False)
+            form.user_id = request.user.id
+            form.save()
+            messages.success(
+                request, f'Your account details has been added!')
+
+            return redirect('core:profile', pk=request.user.id)
+    else:
+
+        context = {
+            'joinusform': joinusform,
+        }
+        return render(request, 'core/join_us.html', context)
+
+    return render(request, 'core/join_us.html')
+
+
+def join_seller(request):
+    return render(request, 'core/join_seller.html')
+
 
 def profile_view(request):
     user_id = request.user.id
@@ -67,3 +109,11 @@ def profile_update(request, pk):
     }
 
     return render(request, 'core/profile_update.html', context)
+
+
+def profile_delete(request, pk):
+    instance = get_object_or_404(Profile, user_id=pk)
+    instance.delete()
+    messages.success(
+        request, f'Your account details has been Deleted!')
+    return redirect('core:profile_update', pk=pk)

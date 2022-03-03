@@ -18,3 +18,15 @@ class ProfileForm(forms.ModelForm):
         self.fields['profile_pic'].required = False
         self.helper = FormHelper()
         self.helper.form_show_labels = False
+
+
+class JoinUsForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['id', 'is_seller', 'is_driver']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False

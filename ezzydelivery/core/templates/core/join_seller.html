@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% load static %} {% load crispy_forms_tags %}
 {% block content %}
 
-<section style="background-color: #eee">
+
+<section style="background-color: #eee;">
+
     <div class="container py-5">
         <div class="row">
             <div class="col">
@@ -11,91 +13,107 @@
                 >
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/profile/">User</a></li>
                         <li
                             class="breadcrumb-item active"
                             aria-current="page"
-                        >
-                            User Profile add
-                        </li>
+                        >User</li>
                     </ol>
                 </nav>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
 
-        <form method="POST">
-            <div class="row">
-                {% csrf_token %}
-                <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <img
-                                src="/media/core/user/avatar.png"
-                                alt="avatar"
-                                class="rounded-circle img-fluid"
-                                style="width: 180px;"
+
+
+
+
+
+                        <img
+                            src="/media/core/user/avatar.png"
+                            alt="avatar"
+                            class="rounded-circle img-fluid"
+                            style="width: 180px;"
+                        >
+
+
+
+
+
+
+                        <h5 class="my-3">{{profile.first_name}} {{profile.last_name}}</h5>
+                        <p class="text-muted mb-1">{{profile.profile_pic}}</p>
+                        <p class="text-muted mb-4">{{profile.zone_name}}</p>
+                        <div class="d-flex justify-content-center mb-2">
+
+                            {% if profile.is_seller %}
+                            <a
+                                type="button"
+                                class="btn btn-primary-fill"
+                                href="{% url 'core:seller_dashboard' %}"
                             >
+                                Dashboard
+                            </a>
+                            <p>{{profile.is_seller}}</p>
 
 
+                            {% elif profile.is_driver %}
+                            <a
+                                type="button"
+                                class="btn btn-primary-fill"
+                                href="{% url 'core:fleet_dashboard' %}"
+                            >
+                                Dashboard
+                            </a>
+                            {% else %}
+                            <a
+                                type="button"
+                                class="btn btn-primary-fill"
+                                href="{% url 'core:join_us' %}"
+                            >
+                                DASHBOARD
+                            </a>
 
-                            <div class="text-muted my-2 col-10  d-inline-block px-2">
-                                {{profileaddform.profile_pic | as_crispy_field}}
-                            </div>
-                            <div class="d-flex justify-content-center mb-2">
 
-                                <button
-                                    type="button"
-                                    class="btn btn-primary-fill"
-                                    href="/"
-                                >
-                                    Dashboard
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-primary ms-1"
-                                >
-                                    Message
-                                </button>
-                            </div>
-                            <div class="d-flex justify-content-center p-3">
-                                <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
-                                <a href="#!"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
-                                <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
-                            </div>
+                            {% endif %}
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary ms-1"
+                            >Message</button>
+                        </div>
+                        <div class="d-flex justify-content-center p-3">
+                            <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
+                            <a href="#!"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
+                            <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-lg-8">
+
+            <div class="col-lg-8">
+                <form method="POST">
+                    {% csrf_token %}
+
+
                     <div class="card mb-4">
                         <div class="card-body">
-                            {% if profileaddform.errors %}
-                            {% for field in profileaddform %}
-                            {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <p>{{field}}</p>
-                                <strong>{{ error|escape }}{{field}}</strong>
-                            </div>
-                            {% endfor %}
-                            {% endfor %}
-                            {% for error in profileaddform.non_field_errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}{{field}}</strong>
-                            </div>
-                            {% endfor %}
-                            {% endif %}
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Name:</p>
                                 </div>
                                 <div class="col-sm-4">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.first_name | as_crispy_field }}
+                                        1st name
                                     </p>
                                 </div>
                                 <div class="col-sm-5">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.last_name | as_crispy_field}}
+
                                     </p>
                                 </div>
                             </div>
@@ -106,7 +124,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.email | as_crispy_field}}
+
                                     </p>
                                 </div>
                             </div>
@@ -117,7 +135,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.nationlity | as_crispy_field}}
+
                                     </p>
                                 </div>
                             </div>
@@ -128,7 +146,7 @@
                                 </div>
                                 <div class="col-sm-5">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.date_of_birth | as_crispy_field }}
+
                                     </p>
                                 </div>
                             </div>
@@ -138,7 +156,10 @@
                                     <p class="mb-0">Mobile</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="mb-0">{{ profileaddform.phone | as_crispy_field}}</p>
+                                    <p class="mb-0">
+
+
+                                    </p>
                                 </div>
                             </div>
                             <hr />
@@ -148,7 +169,8 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.whatsapp | as_crispy_field}}
+
+
                                     </p>
                                 </div>
                             </div>
@@ -159,7 +181,8 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.zone_name | as_crispy_field}}
+
+
                                     </p>
                                 </div>
                             </div>
@@ -170,7 +193,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.address | as_crispy_field}}
+
                                     </p>
                                 </div>
                             </div>
@@ -185,9 +208,9 @@
                             Submit
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </section>
 

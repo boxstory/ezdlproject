@@ -8,13 +8,13 @@ class Client(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     client_id = models.CharField(max_length=100)
-    client_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.client_name
+    business_name = models.CharField(max_length=100)
+    business_location = models.CharField(max_length=100, blank=True)
+    pickup_location = models.CharField(max_length=100, blank=True)
+    product_catgory = models.CharField(max_length=100, blank=True)
 
     class Meta:
-        verbose_name_plural = "Client"
+        verbose_name_plural = "Clients"
 
 
 class Order(models.Model):

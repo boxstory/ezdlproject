@@ -5,7 +5,6 @@ from orders import views as orders_views
 
 app_name = 'delivery'
 urlpatterns = [
-    path('', delivery_views.dashboard, name='dashboard'),
     path('jobs/', delivery_views.delivery_jobs, name='delivery_jobs'),
     path('delivery_address_details/', delivery_views.delivery_address_details,
          name='delivery_address_details'),

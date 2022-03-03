@@ -12,6 +12,15 @@ urlpatterns = [
          core_views.profile_update, name='profile_update'),
     path('profile/add/',
          core_views.profile_add, name='profile_add'),
+    path('seller/',
+         core_views.seller_dashboard, name='seller_dashboard'),
+    path('fleet/',
+         core_views.fleet_dashboard, name='fleet_dashboard'),
+    path('join_us/',
+         core_views.join_us, name='join_us'),
+    path('join_seller/',
+         core_views.join_seller, name='join_seller'),
+
 
 
 ]
