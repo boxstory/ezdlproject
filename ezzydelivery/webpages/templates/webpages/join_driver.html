@@ -29,38 +29,37 @@
                                 <div class="col-sm-6">
                                     {{driverjobform.landmark | as_crispy_field}}
                                 </div>
-
                             </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-6 m-2 ">
-                            {{ driverjobform.is_in_qatar | as_crispy_field }}
-                        </div>
-                        <div class="col-lg-6 m-2 ">
-                            {{ driverjobform.job_type | as_crispy_field }}
-                        </div>
-                        <div class="col-lg-6 m-2 ">
-                            {{ driverjobform.licence | as_crispy_field }}
-                        </div>
-                        <div class="col-lg-6 m-2 ">
+                            <div class="form-group row">
+                                <div class="col-lg-6 m-2 ">
+                                    {{ driverjobform.is_in_qatar | as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6 m-2 ">
+                                    {{ driverjobform.job_type | as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6 m-2 ">
+                                    {{ driverjobform.licence | as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6 m-2 ">
 
-                            {{ driverjobform.own_vehicle | as_crispy_field }}
-                        </div>
-                    </div>
-                    {% if form.driverjobform.errors %}
-                    <ol>
-                        {% for error in form.driverjobform.errors %}
-                        <li><strong>{{ error|escape }}</strong></li>
-                        {% endfor %}
-                    </ol>
-                    {% endif %}
+                                    {{ driverjobform.own_vehicle | as_crispy_field }}
+                                </div>
+                            </div>
+                            {% if form.driverjobform.errors %}
+                            <ol>
+                                {% for error in form.driverjobform.errors %}
+                                <li><strong>{{ error|escape }}</strong></li>
+                                {% endfor %}
+                            </ol>
+                            {% endif %}
 
-                    <button
-                        class="w-100 btn btn-primary-fill btn-lg"
-                        type="submit"
-                        value="submit"
-                    >JOIN AS DRIVER</button>
-                    </form>
+                            <button
+                                class="w-100 btn btn-primary-fill btn-lg"
+                                type="submit"
+                                value="submit"
+                            >JOIN AS DRIVER</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

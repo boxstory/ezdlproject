@@ -21,7 +21,8 @@ body {
   font-family: Poppins-Medium;
   font-weight: 500;
   padding: 0.6em 0.6em;
-  width: 9em;
+  width: 12em;
+  box-sizing: none;
 }
 .btn-primary-fill:hover {
   background: #f7e64d;

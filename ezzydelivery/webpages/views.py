@@ -58,17 +58,9 @@ def fleets(request):
 
 @login_required(login_url='account_login')
 def join_driver(request):
-    print("join driver")
     if request.method == 'POST':
-        print("POST")
         driverjobform = DriverJobForm(request.POST or None)
-
-        print('driverjobform valid checking')
-        print(driverjobform.is_valid())
-        print(driverjobform.errors)
         if driverjobform.is_valid():
-
-            print("driverjobform is valid")
             form = driverjobform.save(commit=False)
             form.user_id = request.user.id
             form.save()
@@ -76,7 +68,6 @@ def join_driver(request):
             return redirect('/')
 
     else:
-        print("load form")
         driverjobform = DriverJobForm()
     return render(request, 'webpages/join_driver.html', {'driverjobform': driverjobform})
 
@@ -85,8 +76,6 @@ def contactus(request):
     if request.method == 'POST':
         f = ContactForm(request.POST)
         if f.is_valid():
-            print("form is valid")
-
             full_name = f.cleaned_data['full_name']
             email = f.cleaned_data['email']
             mobile = f.cleaned_data['mobile']
