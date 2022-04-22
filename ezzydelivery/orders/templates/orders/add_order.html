@@ -9,19 +9,29 @@
 
 
 {% block content %}
-<div class="container">
+<div class="container col-8 align-content-center">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Add Order</h1>
+        <div class="col-md-12 text-center ">
+            <h2>Add Order</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form method="post">
-                {{ form.as_p }}
+
+            <form method="POST">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <div>
+                    {{error}}
+
+                </div>
+                {% endfor %}
+                {% endif %}
+                {{ form | crispy }}
                 <button
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-dark align-content-center"
                 >Add Order</button>
             </form>
         </div>

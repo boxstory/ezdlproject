@@ -6,8 +6,6 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light ">
         <div class="container-fluid ">
             <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-
-
             <a
                 class="navbar-brand m-0"
                 href="{% url 'webpages:index' %}"
@@ -42,7 +40,6 @@
                             href="{% url 'webpages:index' %}"
                         >Home</a>
                     </li>
-
                     <li class="nav-item">
                         <a
                             class="nav-link active"
@@ -64,9 +61,6 @@
                             href="{% url 'webpages:contactus' %}"
                         >Contact</a>
                     </li>
-
-
-
                     {% if user.is_authenticated %}
                     <div
                         class="btn-group"
@@ -91,17 +85,21 @@
                                     height="30"
                                     title="{{ user.username }}"
                                 >
-
                             </button>
                             <ul
                                 class="dropdown-menu dropdown-menu-end bg-light ms-3 border-0 text-center"
                                 aria-labelledby="btnGroupDrop1"
                             >
                                 <li><a
-                                        class="nav-link active "
+                                        class="nav-link active"
                                         aria-current="page"
                                         href="{% url 'core:profile_view' %}"
                                     > Profile</a></li>
+                                <li><a
+                                        class="nav-link active"
+                                        aria-current="page"
+                                        href="{% url 'core:main_dashboard' %}"
+                                    > Dashboard</a></li>
                                 <li><a
                                         class="nav-link active"
                                         aria-current="page"
@@ -110,15 +108,13 @@
                             </ul>
                         </div>
                     </div>
-
                     {% else %}
-                    <li class="nav-item  "><a
+                    <li class="nav-item"><a
                             class="nav-link active"
                             aria-current="page"
                             href="{% url 'account_login' %}"
                         >Log In</a>
                     <li class="nav-item">
-
                         <a
                             class="nav-link active"
                             aria-current="page"
@@ -126,9 +122,7 @@
                         >Sign Up</a>
                     </li>
                     {% endif %}
-
                 </ul>
-
             </div>
         </div>
     </nav>

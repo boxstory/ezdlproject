@@ -56,20 +56,6 @@ def fleets(request):
     return render(request, 'webpages/fleets.html', data)
 
 
-@login_required(login_url='account_login')
-def join_driver(request):
-    if request.method == 'POST':
-        driverjobform = DriverJobForm(request.POST or None)
-        if driverjobform.is_valid():
-            form = driverjobform.save(commit=False)
-            form.user_id = request.user.id
-            form.save()
-
-            return redirect('/')
-
-    else:
-        driverjobform = DriverJobForm()
-    return render(request, 'webpages/join_driver.html', {'driverjobform': driverjobform})
 
 
 def contactus(request):

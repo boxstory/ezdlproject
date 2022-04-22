@@ -46,7 +46,7 @@
                                 {% if profileform.is_seller %}
                                 <a
                                     type="button"
-                                    class="btn btn-primary-fill"
+                                    class="btn btn-dark"
                                     href="{% url 'core:seller_dashboard' %}"
                                 >
                                     DASHBOARD
@@ -54,7 +54,7 @@
                                 {% elif profileform.is_driver %}
                                 <a
                                     type="button"
-                                    class="btn btn-primary-fill"
+                                    class="btn btn-dark"
                                     href="{% url 'core:fleet_dashboard' %}"
                                 >
                                     DASHBOARD
@@ -62,7 +62,7 @@
                                 {% else %}
                                 <a
                                     type="button"
-                                    class="btn btn-primary-fill"
+                                    class="btn btn-dark"
                                     href="{% url 'core:join_us' %}"
                                 >
                                     DASHBOARD

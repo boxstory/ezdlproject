@@ -1,22 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
-
 {% block extra_css %}
-<!-- extra css -->
 {% endblock extra_css %}
 {% block title %}
-<!-- Title -->
+EZZY FLEET DASHBOARD
 {% endblock title %}
-
 {% block content %}
+<h3> DELIVERY TASKS</h3>
 
-seller dashboard
 
 
-{% endblock content %}
+{% for dl_task in dl_tasks %}
 
-{% block extra_js %}
-<!-- extra js -->
-{% endblock extra_js %}
+{{ dl_task.dl_task_id }}
+
+{% endfor %}{% endblock content %}

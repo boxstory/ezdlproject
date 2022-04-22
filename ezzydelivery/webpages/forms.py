@@ -1,9 +1,9 @@
 from urllib import request
 from django import forms
-from core.models import DriverJob
 from webpages.models import *
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.bootstrap import InlineCheckboxes
+from fleet import models as fleet_models
 
 
 class ContactForm(forms.Form):
@@ -37,23 +37,3 @@ class ContactForm(forms.Form):
         return contactus
 
 
-class DriverJobForm(forms.ModelForm):
-    class Meta:
-        model = DriverJob
-        fields = ['full_name', 'mobile_no', 'whatsapp_no', 'landmark', 'zone_name',
-                  'licence', 'is_in_qatar', 'own_vehicle', 'job_type']
-        Layout(
-            InlineCheckboxes('own_vehicle')
-        )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['licence'].widget = forms.CheckboxSelectMultiple(
-            choices=DriverJob.LICENCE_CHOICES)
-        self.fields['own_vehicle'].widget = forms.CheckboxSelectMultiple(
-            choices=DriverJob.VEHICLE_CHOICES)
-        self.fields['job_type'].widget = forms.CheckboxSelectMultiple(
-            choices=DriverJob.JOB_TYPE_CHOICES)
-        self.helper = FormHelper()
-
-        self.helper.form_show_labels = True

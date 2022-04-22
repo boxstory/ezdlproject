@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'fontawesomefree',
 
     'core',
     'webpages',
+    'client',
+    'fleet',
     'delivery',
     'orders',
-    'fontawesomefree'
 
 
 ]
@@ -99,7 +101,9 @@ LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
-
+ACCOUNT_FORMS = {
+    'signup': 'core.forms.CustomSignupForm',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

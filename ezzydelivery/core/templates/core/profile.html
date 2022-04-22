@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load show_results %}
 
 
 {% block content %}
@@ -30,11 +31,6 @@
                 <div class="card mb-4">
                     <div class="card-body text-center">
 
-
-
-
-
-
                         <img
                             src="{{profile.profile_pic.url}}"
                             alt="avatar"
@@ -42,56 +38,58 @@
                             style="width: 180px;"
                         >
 
-
-
-
-
-
                         <h5 class="my-3">{{profile.first_name}} {{profile.last_name}}</h5>
-                        <p class="text-muted mb-1">{{profile.profile_pic}}</p>
-                        <p class="text-muted mb-4">{{profile.zone_name}}</p>
+                        <p class="text-muted mb-1">Nationlity: {{profile.nationlity}}</p>
+                        <p class="text-muted mb-4">Qatar Location: {{profile.zone_name}}</p>
                         <div class="d-flex justify-content-center mb-2">
 
                             {% if profile.is_seller %}
                             <a
                                 type="button"
-                                class="btn btn-primary-fill"
-                                href="{% url 'core:seller_dashboard' %}"
+                                class="btn btn-dark"
+                                href="{% url 'core:main_dashboard' %}"
                             >
                                 DASHBOARD
                             </a>
                             {% elif profile.is_driver %}
                             <a
                                 type="button"
-                                class="btn btn-primary-fill"
-                                href="{% url 'core:fleet_dashboard' %}"
+                                class="btn btn-dark"
+                                href="{% url 'core:main_dashboard' %}"
                             >
                                 DASHBOARD
                             </a>
                             {% else %}
                             <a
                                 type="button"
-                                class="btn btn-primary-fill"
+                                class="btn btn-dark"
                                 href="{% url 'core:join_us' %}"
                             >
-                                DASHBOARD
+                                SELECT ROLE
                             </a>
                             {% endif %}
 
                             <button
                                 type="button"
-                                class="btn btn-outline-primary ms-1"
-                            >Message</button>
+                                class="btn btn-outline-primary ms-1 position-relative"
+                            >Message
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                >
+                                    9+
+                                </span></button>
+
                         </div>
                         <div class="d-flex justify-content-center p-3">
                             <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
-                            <a href="#!"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
+                            <a href="http://wa.me/974{{profile.whatsapp}}!"><i
+                                    class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"
+                                ></i></a>
                             <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div class="col-lg-8">
                 <div class="card mb-4">

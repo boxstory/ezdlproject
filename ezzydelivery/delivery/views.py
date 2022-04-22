@@ -2,27 +2,26 @@ from multiprocessing import context
 from django.forms.fields import DateTimeField
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from delivery.models import ZoneName
-from webpages.forms import *
-from delivery.forms import *
-from orders.forms import *
 
-from django.core.mail import mail_admins
+from core import models as core_models
+from fleet import models as fleet_models
+from client import models as client_models
+from delivery import models as delivery_models
+from orders import models as order_models
+
+from webpages import forms as webpages_forms
+from orders import forms as order_forms
+from delivery import forms as delivery_forms
+from fleet import forms as fleet_forms
+
 
 # Create your views here.
 
 
-@login_required(login_url='account_login')
-def delivery_jobs(request):
-    data = {
-
-    }
-    return render(request, 'delivery/delivery_jobs.html', data)
-
-
+# address collection form costumer------------------------------------------------------
 def delivery_address_details(request):
     if request.method == 'POST':
-        f = DeliveryAddressForm(request.POST)
+        f = delivery_forms.DeliveryAddressForm(request.POST)
         if f.is_valid():
             print("DeliveryAddressForm full  is valid")
 
@@ -40,14 +39,14 @@ def delivery_address_details(request):
 
             return redirect('/')
     else:
-        f = DeliveryAddressForm()
+        f = delivery_forms.DeliveryAddressForm()
     return render(request, 'delivery/delivery_address_details.html', {'form': f})
 
 
 def dl_address(request, dl_id, mobile_no):
     if request.method == 'POST':
         print("dl_address request.POST")
-        f = DeliveryAddressForm(request.POST)
+        f = delivery_forms.DeliveryAddressForm(request.POST)
 
         if f.is_valid():
             print("DeliveryAddressForm 2 is valid")
@@ -67,7 +66,7 @@ def dl_address(request, dl_id, mobile_no):
             return redirect('/')
     else:
         print("dl_address else")
-        f = DeliveryAddressForm()
+        f = delivery_forms.DeliveryAddressForm()
 
     zone_name = "Zone 1"
     context = {
@@ -82,8 +81,20 @@ def dl_address(request, dl_id, mobile_no):
 # AJAX
 def get_zone_name(request):
     zone_number = request.GET.get('zone_number')
-    zone_name = ZoneName.objects.filter(zone_number=zone_number).all()
+    zone_name = delivery_models.ZoneName.objects.filter(
+        zone_number=zone_number).all()
     print(zone_name)
     print("get_zone_name")
     return render(request, 'delivery/zone_names.html', {'zone_name': zone_name})
     # return JsonResponse(list(cities.values('id', 'name')), safe=False)
+
+
+# delivery details -------------------------------------------------------------------------
+
+
+# client side delivery data --------------------------------------------------------------
+def delivery_list(request):
+    data = {
+
+    }
+    return render(request, 'delivery/delivery_list.html', data)

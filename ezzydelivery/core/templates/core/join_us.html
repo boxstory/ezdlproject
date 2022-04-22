@@ -4,6 +4,7 @@
 
 <section style="background-color: #eee;">
     <div class="container py-5">
+        <!-- file path section -->
         <div class="row">
             <div class="col">
                 <nav
@@ -25,27 +26,25 @@
             </div>
         </div>
         <div class="row">
+            <!-- profile left side section -->
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-
                         <img
                             src="/media/core/user/avatar.png"
                             alt="avatar"
                             class="rounded-circle img-fluid"
                             style="width: 180px;"
                         >
-
                         <h5 class="my-3">{{joinusform.first_name}} {{joinusform.last_name}}</h5>
                         <p class="text-muted mb-1">{{joinusform.profile_pic}}</p>
                         <p class="text-muted mb-4">{{joinusform.zone_name}}</p>
                         <div class="d-flex justify-content-center mb-2">
-
                             {% if profile.is_seller %}
                             <a
                                 type="button"
-                                class="btn btn-primary-fill"
-                                href="{% url 'core:seller_dashboard' %}"
+                                class="btn btn-dark"
+                                href="{% url 'client:client_dashboard' %}"
                             >
                                 Dashboard
                             </a>
@@ -55,18 +54,18 @@
                             {% elif profile.is_driver %}
                             <a
                                 type="button"
-                                class="btn btn-primary-fill"
-                                href="{% url 'core:fleet_dashboard' %}"
+                                class="btn btn-dark"
+                                href="{% url 'fleet:fleet_dashboard' %}"
                             >
                                 Dashboard
                             </a>
                             {% else %}
                             <a
                                 type="button"
-                                class="btn btn-primary-fill"
+                                class="btn btn-dark"
                                 href="{% url 'core:join_us' %}"
                             >
-                                DASHBOARD
+                                SELECT ROLE
                             </a>
                             {% endif %}
 
@@ -83,123 +82,43 @@
                     </div>
                 </div>
             </div>
-
-
+            <!-- profile join form section -->
             <div class="col-lg-8">
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Name:</p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p class="text-muted mb-0">
-                                        {{joinusform.id}}
-                                    </p>
-                                </div>
-                                <div class="col-sm-5">
-                                    <p class="text-muted mb-0">
-                                        {{joinusform.id}}
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Email</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">
-
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">nationlity</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">
-
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Birthday</p>
-                                </div>
-                                <div class="col-sm-5">
-                                    <p class="text-muted mb-0">
-
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Mobile</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="mb-0">
-
-
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Whatsapp</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">
-
-
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Zone Name</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">
-
-
-                                    </p>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Address</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-grid gap-2 col-6 align-content-end">
-                        <button
-                            class="btn btn-primary btn-dark"
-                            type="submit"
-                            value="submit"
+                <div class="card-body bg-light">
+                    <!-- join buttons -->
+                    <ul
+                        class="nav  mb-3"
+                        id="pills-tab"
+                        role="tablist"
+                    >
+                        <li
+                            class="nav-item"
+                            role="presentation"
                         >
-                            Submit
-                        </button>
-                    </div>
-                </form>
+                            <a
+                                href="{%url 'core:join_seller'%} "
+                                class="text-decoration-none"
+                            >
+                                <button class="nav-link  btn joinbtn  me-5">JOIN AS SELLER</button></a>
+                        </li>
+                        <li
+                            class="nav-item"
+                            role="presentation"
+                        ><a
+                                href="{%url 'core:join_driver'%}"
+                                class="text-decoration-none"
+                            >
+                                <button class="nav-link  btn joinbtn ">JOIN AS DRIVER</button>
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-{% endblock content %} {% block extra_js %} {% endblock extra_js %}
+{% endblock content %}
+{% block extra_js %}
+{% endblock extra_js %}
