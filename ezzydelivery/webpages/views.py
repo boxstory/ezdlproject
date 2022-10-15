@@ -1,6 +1,7 @@
 from django.forms.fields import DateTimeField
 from django.shortcuts import redirect, render
-from webpages.forms import ContactForm
+from django.contrib.auth.decorators import login_required
+from webpages.forms import *
 from django.core.mail import mail_admins
 
 # Create your views here.
@@ -27,34 +28,52 @@ def services(request):
     return render(request, 'webpages/services.html', data)
 
 
-def join_driver(request):
+def terms(request):
     data = {
 
     }
-    return render(request, 'webpages/join_driver.html', data)
+    return render(request, 'webpages/terms.html', data)
 
 
-def contact(request):
+def test(request):
+    data = {
+
+    }
+    return render(request, 'webpages/test.html', data)
+
+
+def fullfillment(request):
+    data = {
+
+    }
+    return render(request, 'webpages/fullfillment.html', data)
+
+
+def fleets(request):
+    data = {
+
+    }
+    return render(request, 'webpages/fleets.html', data)
+
+
+
+
+def contactus(request):
     if request.method == 'POST':
         f = ContactForm(request.POST)
         if f.is_valid():
-
-            name = f.cleaned_data['name']
+            full_name = f.cleaned_data['full_name']
             email = f.cleaned_data['email']
             mobile = f.cleaned_data['mobile']
             purpose = f.cleaned_data['purpose']
-
             message = f.cleaned_data['message']
-            f = ContactForm(name=name, email=email, mobile=mobile,
-                            purpose=purpose, message=message)
             f.save()
 
             return redirect('/')
-
     else:
         f = ContactForm()
 
-    return render(request, 'webpages/contact.html', {'form': f})
+    return render(request, 'webpages/contactus.html', {'form': f})
 
 
 def privacy(request):

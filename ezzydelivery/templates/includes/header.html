@@ -6,8 +6,6 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light ">
         <div class="container-fluid ">
             <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-
-
             <a
                 class="navbar-brand m-0"
                 href="{% url 'webpages:index' %}"
@@ -42,82 +40,81 @@
                             href="{% url 'webpages:index' %}"
                         >Home</a>
                     </li>
-
                     <li class="nav-item">
                         <a
                             class="nav-link active"
                             aria-current="page"
                             href="{% url 'webpages:services' %}"
-                        >Services</a>
+                        >Delivery</a>
                     </li>
                     <li class="nav-item">
                         <a
                             class="nav-link active"
                             aria-current="page"
-                            href="{% url 'webpages:contact' %}"
+                            href="{% url 'webpages:fullfillment' %}"
+                        >Fullfillment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link active"
+                            aria-current="page"
+                            href="{% url 'webpages:contactus' %}"
                         >Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active"
-                            aria-current="page"
-                            href="{% url 'webpages:about' %}"
-                        >About</a>
-                    </li>
-
-
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active p-0"
-                            aria-current="page"
-                            href="{% url 'property:own_properties' pk=user.pk %} "
+                    <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Button group with nested dropdown"
+                    >
+                        <div
+                            class="btn-group"
+                            role="group"
                         >
-                            <lord-icon
-                                src="https://cdn.lordicon.com//dxjqoygy.json"
-                                trigger="loop"
-                                colors="primary:#0a2e5c,secondary:#107c91"
-                                width="24"
-                                height="24"
-                                title="{{ user.username }}"
+                            <button
+                                id="btnGroupDrop1"
+                                type="button"
+                                class="btn btn-light dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
                             >
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active p-0"
-                            aria-current="page"
-                            href="{% url 'account_logout' %}"
-                        >
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                fill="currentColor"
-                                class="bi bi-box-arrow-right"
-                                viewBox="0 0 16 16"
+                                <img
+                                    src="{% static 'webpages/img/avatar.png' %}"
+                                    alt=""
+                                    width="30"
+                                    height="30"
+                                    title="{{ user.username }}"
+                                >
+                            </button>
+                            <ul
+                                class="dropdown-menu dropdown-menu-end bg-light ms-3 border-0 text-center"
+                                aria-labelledby="btnGroupDrop1"
                             >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
-                                ></path>
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
-                                ></path>
-                            </svg>
-
-                        </a>
-                    </li>
+                                <li><a
+                                        class="nav-link active"
+                                        aria-current="page"
+                                        href="{% url 'core:profile_view' %}"
+                                    > Profile</a></li>
+                                <li><a
+                                        class="nav-link active"
+                                        aria-current="page"
+                                        href="{% url 'core:main_dashboard' %}"
+                                    > Dashboard</a></li>
+                                <li><a
+                                        class="nav-link active"
+                                        aria-current="page"
+                                        href="{% url 'account_logout' %}"
+                                    > Log Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     {% else %}
-                    <li class="nav-item  "><a
+                    <li class="nav-item"><a
                             class="nav-link active"
                             aria-current="page"
                             href="{% url 'account_login' %}"
                         >Log In</a>
                     <li class="nav-item">
-
                         <a
                             class="nav-link active"
                             aria-current="page"
@@ -125,9 +122,7 @@
                         >Sign Up</a>
                     </li>
                     {% endif %}
-
                 </ul>
-
             </div>
         </div>
     </nav>

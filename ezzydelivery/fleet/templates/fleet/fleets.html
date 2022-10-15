@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% load static %}
+{% block content %}
+
+
+
+{% for fleet in fleets %}
+
+{{fleet.id}}
+{{fleet.driver_id}}
+{{fleet.driver_status}}
+
+
+{% endfor %}
+
+{% endblock content %}

@@ -14,14 +14,15 @@ body {
 }
 
 .btn-primary-fill {
-  background-color: #ebd300;
-  border: 0.06em solid #ebd300;
+  background-color: #ecc903;
+  border: 0.06em solid #ffed4f;
   border-radius: 0.19em;
   color: #231e39;
   font-family: Poppins-Medium;
   font-weight: 500;
   padding: 0.6em 0.6em;
-  width: 9em;
+  width: 12em;
+  box-sizing: none;
 }
 .btn-primary-fill:hover {
   background: #f7e64d;
@@ -31,20 +32,51 @@ body {
   transition: background 0.3s;
 }
 
-.btn-primary-blank {
+.btn-primary-fill:active {
+  background: #fdfdf9;
   color: #231e39;
-  border: 1px solid #03bfcb;
+  border: 0.06em solid #ffc400;
+  border-radius: 0.29em;
+  transition: background 0.3s;
+}
+
+.btn-primary-blank {
+  color: #5a5a5c;
+  border: 1px solid #d7d8cf;
   border-radius: 0.19em;
   font-family: Poppins-Medium;
   font-weight: 500;
   width: 9em;
   padding: 0.6em 0.6em;
   background-color: #231e39;
-  color: #02899c;
+  color: #eeeedc;
 }
 .btn-primary-blank:hover {
   background: #312b49;
   transition: background 0.3s;
+}
+
+.joinbtn {
+  background-color: #83bfce !important;
+
+  border-radius: 0.19em;
+  color: #000000;
+  font-family: Poppins-Medium;
+  font-weight: 500;
+  padding: 0.6em 0.6em;
+  width: 15em;
+  text-decoration: none;
+}
+
+.joinbtn.active {
+  background-color: #013f4e !important;
+
+  border-radius: 0.19em;
+  color: #eeeedc;
+  font-family: Poppins-Medium;
+  font-weight: 500;
+  padding: 0.6em 0.6em;
+  width: 15em;
 }
 
 .follow {
@@ -77,3 +109,11 @@ body {
   background-color: #167abd;
   cursor: pointer;
 }
+
+@media screen and (min-width: 768px) {
+  .footerlogo {
+    width: 150px !important;
+    height: 135px !important;
+  }
+}
+>>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b

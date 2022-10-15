@@ -9,6 +9,7 @@ media
 # Environments 
 *.env 
 .venv 
+<<<<<<< HEAD
 .venvezdl 
 env/ 
 venv/ 

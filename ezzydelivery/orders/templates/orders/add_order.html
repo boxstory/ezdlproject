@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+<head>
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+</head>
+
+
+{% block content %}
+<div class="container col-8 align-content-center">
+    <div class="row">
+        <div class="col-md-12 text-center ">
+            <h2>Add Order</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <form method="POST">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <div>
+                    {{error}}
+
+                </div>
+                {% endfor %}
+                {% endif %}
+                {{ form | crispy }}
+                <button
+                    type="submit"
+                    class="btn btn-dark align-content-center"
+                >Add Order</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<!-- extra js -->
+{% endblock extra_js %}

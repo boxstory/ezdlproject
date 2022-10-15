@@ -14,8 +14,10 @@ body {
 }
 
 .btn-primary-fill {
-  background-color: #ebd300;
-  border: 0.06em solid #ebd300;
+
+  background-color: #ecc903;
+  border: 0.06em solid #ffed4f;
+
   border-radius: 0.19em;
   color: #231e39;
   font-family: Poppins-Medium;
@@ -33,14 +35,14 @@ body {
 
 .btn-primary-blank {
   color: #231e39;
-  border: 1px solid #03bfcb;
+  border: 1px solid #d7d8cf;
   border-radius: 0.19em;
   font-family: Poppins-Medium;
   font-weight: 500;
   width: 9em;
   padding: 0.6em 0.6em;
   background-color: #231e39;
-  color: #02899c;
+  color: #eeeedc;
 }
 .btn-primary-blank:hover {
   background: #312b49;
