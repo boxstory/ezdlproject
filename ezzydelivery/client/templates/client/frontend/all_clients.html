@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block title %}
+EZZY FLEET {{driver.driver_code}}
+{% endblock title %}
+{% block content %}
+<h1> Sellers</h1>
+
+<div class="p-3">
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">client_code</th>
+                <th scope="col">brand_name</th>
+                <th scope="col">client_languages</th>
+                <th scope="col">client_status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+            <tr
+                class="clickable "
+                onclick="window.location='/client/{{client.client_id}}/'"
+            >
+                <td scope="row">{{forloop.counter}}</td>
+                <td scope="row">{{client.client_code}}</td>
+                <td scope="row">{{client.brand_name}}</td>
+                <td scope="row">{{client.client_languages}}</td>
+                <td scope="row">{{client.client_status}}</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<a href="{%url 'client:all_clients' %}">
+    <div class="btn btn-dark">
+        <i class="fa-solid fa-chevron-left me-2"></i> Back
+    </div>
+</a>
+<a href="{% url 'core:main_dashboard' %}">
+    <div class="btn btn-dark">
+        <i class="fa-solid fa-chart-line"></i> Dashboard
+    </div>
+</a>
+<a href="{%url 'core:join_seller' %}">
+    <div class="btn btn-dark">
+        <i class="fa fa-add me-2"></i> join As Seller
+    </div>
+</a>
+{% endblock content %}

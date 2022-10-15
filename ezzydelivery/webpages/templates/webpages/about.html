@@ -15,61 +15,21 @@
     <section class="py-5">
         <div class="container">
             <h2 class="text-center mb-3"> TRUSTED BRANDS</h2>
-            <div class="row">
+            <div class="row mx-auto">
+
+                {% for brand in brands %}
                 <div class="col-4 col-md-3 col-lg-2 mb-5 mb-lg-0">
                     <div>
-                        <img
-                            class="d-block mx-auto img-fluid"
-                            src="{% static 'webpages/img/logos/default.png' %}"
-                            alt=""
-                        >
+                        <a href="/client/{{brand.id}}">
+                            <img
+                                class="avatar d-block mx-auto img-fluid rounded-circle"
+                                src="{{brand.client_logo.url}}"
+                                alt=""
+                            ></a>
                     </div>
                 </div>
-                <div class="col-4 col-md-3 col-lg-2 mb-5 mb-lg-0">
-                    <div>
-                        <img
-                            class="d-block mx-auto img-fluid"
-                            src="{% static 'webpages/img/logos/default.png' %}"
-                            alt=""
-                        >
-                    </div>
-                </div>
-                <div class="col-4 col-md-3 col-lg-2 mb-5 mb-lg-0">
-                    <div>
-                        <img
-                            class="d-block mx-auto img-fluid"
-                            src="{% static 'webpages/img/logos/default.png' %}"
-                            alt=""
-                        >
-                    </div>
-                </div>
-                <div class="col-4 col-md-3 col-lg-2 mb-5 mb-md-0">
-                    <div>
-                        <img
-                            class="d-block mx-auto img-fluid"
-                            src="{% static 'webpages/img/logos/default.png' %}"
-                            alt=""
-                        >
-                    </div>
-                </div>
-                <div class="col-4 col-md-3 col-lg-2 mb-5 mb-md-0">
-                    <div>
-                        <img
-                            class="d-block mx-auto img-fluid"
-                            src="{% static 'webpages/img/logos/default.png' %}"
-                            alt=""
-                        >
-                    </div>
-                </div>
-                <div class="col-4 col-md-3 col-lg-2">
-                    <div>
-                        <img
-                            class="d-block mx-auto img-fluid"
-                            src="{% static 'webpages/img/logos/default.png' %}"
-                            alt=""
-                        >
-                    </div>
-                </div>
+
+                {% endfor %}
             </div>
         </div>
     </section>

@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db import models
 from django.conf import settings
 import os
+from core import models as core_models
 
 
 # Create your models here.
@@ -59,7 +60,14 @@ class DriverVacancyAplication(models.Model):
 class Driver(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    driver_id = models.CharField(max_length=100)
+    profile = models.ForeignKey(
+        core_models.Profile, on_delete=models.SET_NULL, blank=True, null=True, related_name='driver')
+    driver_id = models.PositiveSmallIntegerField(primary_key=True)
+
+    driver_code = models.CharField(max_length=100)
+    driver_phone = models.CharField(max_length=100)
+    driver_whatsapp = models.CharField(max_length=100)
+    driver_bio = models.CharField(max_length=225, blank=True, null=True)
     driver_languages_choices = (
         ('arabic', 'Arabic'),
         ('english', 'English'),
@@ -70,17 +78,17 @@ class Driver(models.Model):
     driver_languages = models.CharField(
         max_length=100, choices=driver_languages_choices)
     driver_license_number = models.CharField(max_length=100)
-    driver_qid = models.CharField(max_length=11)
     driver_rating = models.IntegerField(default=0)
     driver_rating_count = models.IntegerField(default=0)
     driver_reviews = models.TextField(default="")
     driver_reviews_count = models.IntegerField(default=0)
 
     driver_status = models.CharField(max_length=100)
-    driver_join_date = models.DateField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.driver_qid
+        return self.driver_code
 
     class Meta:
         verbose_name_plural = "Driver"

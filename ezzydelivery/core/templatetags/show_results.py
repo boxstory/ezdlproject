@@ -1,4 +1,3 @@
-from random import choice
 from django import template
 
 register = template.Library()

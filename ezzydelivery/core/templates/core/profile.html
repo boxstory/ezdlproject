@@ -49,7 +49,7 @@
                                 class="btn btn-dark"
                                 href="{% url 'core:main_dashboard' %}"
                             >
-                                DASHBOARD
+                                SELLER DASHBOARD
                             </a>
                             {% elif profile.is_driver %}
                             <a
@@ -57,7 +57,7 @@
                                 class="btn btn-dark"
                                 href="{% url 'core:main_dashboard' %}"
                             >
-                                DASHBOARD
+                                DRIVER DASHBOARD
                             </a>
                             {% else %}
                             <a
@@ -71,7 +71,7 @@
 
                             <button
                                 type="button"
-                                class="btn btn-outline-primary ms-1 position-relative"
+                                class="btn btn-outline-dark ms-1 position-relative"
                             >Message
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"

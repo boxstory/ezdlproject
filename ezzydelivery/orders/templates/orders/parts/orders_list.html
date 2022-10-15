@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row table-responsive">
+        <div class=" col-md-12 d-flex flex-row justify-content-between">
+            <h2 class="m-0">Orders list</h2>
+            <a
+                class="btn btn-dark pe-3 text-white"
+                href="{% url 'orders:add_order' %}"
+            >
+                <i class="fa fa-add me-3"></i> Add Orders
+            </a>
+        </div>
+        {% if not orders %}
+        <p> No orders</p>
+        {%else%}
+        <table class="table table-striped table-hover my-3">
+            <tr>
+                <th>Order No</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>COD</th>
+                <th>cod Amount</th>
+                <th>Name</th>
+                <th>Whatsapp</th>
+                <th>Zone_no</th>
+                <th>Actions</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.order_name }}</td>
+                <td>{{ order.order_status }}</td>
+                <td>{{ order.cash_on_delivery }}</td>
+                <td>{{ order.cod_amount }}</td>
+                <td>{{ order.costumer_name }}</td>
+                <td>{{ order.costumer_whatsapp }}</td>
+                <td>{{ order.costumer_zone_no }}</td>
+                <td>
+                    <a
+                        href="{% url 'orders:update_order' order.id %} "
+                        class="me-3  text-dark"
+                    >
+                        <i class="fa fa-lg fa-edit "></i>
+                    </a>
+                    <a
+                        class="btn pe-3 text-dark"
+                        hx-confirm="Are you sure you wish to delete?"
+                        hx-delete="#"
+                        hx-target='#dasboard_div'
+                        class="   text-danger"
+                    >
+                        <i class="fa fa-lg fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>

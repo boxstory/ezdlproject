@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<!-- services listing ----------->
+<div class="container">
+    <section class="py-md-5 p-2">
+        <div class="container">
+            <div class="p-3  p-md-5 bg-light">
+                <div class="text-center">
+                    <h3 class="fw-bold ">
+                        WE PROVIDE A FULL SERVICE TO OUR CUSTOMERS, WHICH INCLUDES:
+                    </h3>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap">
+                <div class="col-12 col-md-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <a
+                            href="{%url 'fleet:fleets' %}"
+                            class="text-decoration-none"
+                        >
+                            <div class="text-center">
+                                <img
+                                    class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                    src="{% static 'webpages/img/flat_price.png' %}"
+                                    alt=""
+                                >
+                                <h4 class="fw-bold mb-3 text-dark">FLAT RATE PRICING</h4>
+                                <p class="text-muted">
+                                    20 QR FOR UPTO 25KM
+                                </p>
+                                <div class="btn btn-dark w-md-50">
+                                    <i class="fa-solid fa-list me-2 "></i> INTERESTED
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <a
+                            href="{%url 'client:all_clients' %}"
+                            class="text-decoration-none"
+                        >
+                            <div class="text-center">
+
+                                <img
+                                    class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                    src="{% static 'webpages/img/dynamic_pricing.png' %}"
+                                    alt=""
+                                >
+                                <h4 class="fw-bold mb-3 text-dark">DYNAMIC PRICING</h4>
+                                <p class="text-muted"> price depends on distance like inside doha 15QR, outside doha
+                                    20QR, outer Doha 25+ QR
+                                </p>
+                                <div class="btn btn-dark w-md-50 ">
+                                    <i class="fa fa-list me-2 "></i>INTERESTED
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap">
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/fullfillment.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Fullfillment Pricing</h5>
+                            <p class="text-muted mb-1"> Starage charge is onl Qr 250 for each Meter Squirecube space,
+                                similer like one pallet size space</p>
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="{% url 'webpages:fullfillment' %}"
+                            >
+                                <div class="btn btn-dark w-md-50">
+                                    <i class="fa-solid fa-box-open me-2"></i>
+                                    INTERESTED
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/delivery.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">3PL Delivery Partner</h5>
+                            <p class="text-muted">Make us your delivery partner for your Business. we take care of
+                                your all orders delivery on time and in professionally. it helps to get reorder and save
+                                your time for focus in
+                                marketing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/affiliate-marketing.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Affiliate Marketing Model</h5>
+                            <p class="text-muted">Make a passive income. get commission depends on seller/ products</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/c2c.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Peer-to-Peer Model</h5>
+                            <p class="text-muted">The actual handling of the task or the delivery is left up to the
+                                people involved in the transaction.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+{% endblock content %}

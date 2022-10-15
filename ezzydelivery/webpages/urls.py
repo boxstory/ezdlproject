@@ -18,6 +18,7 @@ urlpatterns = [
     path('contactus/', webpages_views.contactus, name='contactus'),
 
     path('fullfillment/', webpages_views.fullfillment, name='fullfillment'),
+    path('3pl/pricing/', webpages_views.delivery_pricing, name='delivery_pricing'),
 
 
 

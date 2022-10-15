@@ -24,7 +24,7 @@ class DriverJoinForm(forms.ModelForm):
     class Meta:
         model = fleet_models.Driver
         fields = '__all__'
-        exclude = ['user', 'driver_id', 'driver_status', 'driver_rating',
+        exclude = ['user', 'driver_id', 'driver_code', 'driver_status', 'driver_rating',
                    'driver_rating_count', 'driver_reviews', 'driver_reviews_count', ]
 
     def __init__(self, *args, **kwargs):

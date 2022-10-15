@@ -12,8 +12,29 @@ from fleet import models as fleet_models
 # drivers---------------------------------------------------------------------------------------------------------------------
 
 
-
 # Task---------------------------------------------------------------------------------------------------------------------
+
+class DlAddressUpdate(models.Model):
+    full_name = models.CharField(max_length=100)
+    mobile_no = models.CharField(max_length=11)
+    zone_name = models.CharField(max_length=100)
+    zone_number = models.PositiveIntegerField()
+    street_no = models.PositiveIntegerField()
+    building_no = models.PositiveIntegerField()
+    unit_no = models.CharField(max_length=2)
+    is_villa_compound = models.BooleanField(default=False)
+    is_flat = models.BooleanField(default=False)
+    is_office = models.BooleanField(default=False)
+    dl_task_number = models.CharField(max_length=100)
+    time_slot = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.full_name
+
+    class Meta:
+        verbose_name_plural = "Delivery Address"
+        app_label = 'delivery'
+
 
 class DeliveryTask(models.Model):
     dl_task_status = (
@@ -24,7 +45,7 @@ class DeliveryTask(models.Model):
         ('Delivered', 'Delivered'),
         ('Cancelled', 'Cancelled'),
     )
-
+    dl_task_publish = models.BooleanField(default=False)
     dl_task_number = models.CharField(max_length=100)
     dl_task_name = models.CharField(max_length=100)
     dl_task_description = models.CharField(max_length=100)
@@ -33,10 +54,12 @@ class DeliveryTask(models.Model):
     order = models.ForeignKey(orders_models.Order, on_delete=models.CASCADE)
     driver = models.ForeignKey(
         fleet_models.Driver, on_delete=models.CASCADE, blank=True, null=True)
-    dl_task_time_slot = models.TimeField(auto_now_add=True)
+    client = models.ForeignKey(
+        client_models.Client, on_delete=models.CASCADE, blank=True, null=True)
+
     pickup_location = models.ForeignKey(
         client_models.PickupLocation, on_delete=models.CASCADE, blank=True, null=True)
-
+    dl_waight = models.IntegerField(default=1)
     dl_category_choices = (
         ('Food', 'Food'),
         ('Regular', 'Regular'),
@@ -53,43 +76,39 @@ class DeliveryTask(models.Model):
     )
     dl_speed = models.CharField(
         max_length=100, choices=dl_speed_choices, blank=True)
+    dl_price = models.IntegerField(null=True, blank=True)
+    dl_to_address = models.ForeignKey(
+        delivery_models.DlAddressUpdate, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
-        return self.task_name
+        return self.dl_task_name
 
     class Meta:
         verbose_name_plural = "Delivery Task"
-        app_label = 'delivery'
-
-
-class DeliveryAddress(models.Model):
-    full_name = models.CharField(max_length=100)
-    mobile_no = models.CharField(max_length=11)
-    zone_name = models.CharField(max_length=100)
-    zone_number = models.CharField(max_length=2)
-    street_no = models.CharField(max_length=3)
-    building_no = models.CharField(max_length=2)
-    unit_no = models.CharField(max_length=2)
-    is_villa_compound = models.BooleanField(default=False)
-    is_flat = models.BooleanField(default=False)
-    is_office = models.BooleanField(default=False)
-    dl_id = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.full_name
-
-    class Meta:
-        verbose_name_plural = "Delivery Address"
-        app_label = 'delivery'
 
 
 class ZoneName(models.Model):
     zone_name = models.CharField(max_length=100)
-    zone_number = models.CharField(max_length=2)
+    zone_number = models.PositiveIntegerField()
 
     def __str__(self):
         return self.zone_name
 
     class Meta:
         verbose_name_plural = "Zone Name"
+        app_label = 'delivery'
+
+
+class AssignedDriver(models.Model):
+    driver = models.ForeignKey(fleet_models.Driver, on_delete=models.CASCADE)
+    dl_task = models.ForeignKey(DeliveryTask, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.driver.driver_name
+
+    class Meta:
+        verbose_name_plural = "Assigned Driver"
         app_label = 'delivery'

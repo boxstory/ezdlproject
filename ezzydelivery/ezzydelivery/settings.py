@@ -17,7 +17,6 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-#ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['ezzydelivery.qa', 'www.ezzydelivery.qa',
 ]
 
@@ -32,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
 
+    # 3rdparty apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -43,10 +43,13 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'fontawesomefree',
+    'rest_framework',
 
+    # local apps
     'core',
     'webpages',
     'client',
+    'product',
     'fleet',
     'delivery',
     'orders',

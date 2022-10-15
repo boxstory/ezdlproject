@@ -18,6 +18,11 @@ CLIENT_LANGUAGE_CHOICES = (
     ('philipine', 'Philipine'),
     ('other', 'Other'),
 )
+CLIENT_STATUS_CHOICES = (
+    ('aproval pending', 'Aproval Pending'),
+    ('active', 'Active'),
+    ('inactive', 'Inactive'),
+)
 
 # Client FORM ---------------------------------------------------------------------------------------------------------------------
 
@@ -26,11 +31,14 @@ class ClinetRegisterForm(forms.ModelForm):
     class Meta:
         model = client_models.Client
         fields = '__all__'
-        exclude = ['user', 'client_status', 'client_code']
+        exclude = ['profile', 'client_id', 'user',
+                   'client_status', 'client_code', 'pickup_location']
         widgets = {
             'client_name': forms.TextInput(attrs={'class': 'form-control'}),
             'client_languages': forms.Select(
                 choices=CLIENT_LANGUAGE_CHOICES),
+            'client_status': forms.Select(
+                choices=CLIENT_STATUS_CHOICES),
             'brand_name': forms.TextInput(attrs={'placeholder': 'List your major brands'}),
 
         }
@@ -39,7 +47,7 @@ class ClinetRegisterForm(forms.ModelForm):
             "client_phone": "Business Phone No",
             "client_whatsapp": "Business Whatsapp No",
             "brand_name": "Brand Lists",
-            "client_qid": "Client QID No",
+            "client_qid": "Passport/QID No",
 
         }
 
@@ -49,5 +57,12 @@ class ClinetRegisterForm(forms.ModelForm):
 class PickupLocationsAddForm(forms.ModelForm):
     class Meta:
         model = client_models.PickupLocation
+        fields = '__all__'
+        exclude = ['client']
+
+
+class RegularDriverContactsAddForm(forms.ModelForm):
+    class Meta:
+        model = client_models.RegularDriverContacts
         fields = '__all__'
         exclude = ['client']

@@ -8,7 +8,7 @@ from fleet import models as fleet_models
 
 
 @receiver(post_save, sender=fleet_models.Driver)
-def order_pre_save_receiver(sender, instance, created, *args, **kwargs):
+def fleet_register_pre_save_receiver(sender, instance, created, *args, **kwargs):
     print("Driver post save receiver")
     if created:
         print(instance)
@@ -22,5 +22,8 @@ def order_pre_save_receiver(sender, instance, created, *args, **kwargs):
         if instance.id not in fleet_models.DriverDocument.objects.values_list('driver_id', flat=True):
             fleet_models.DriverDocument.objects.create(
                 driver_id=instance.id,
+                driver_code=instance.driver_code,
+                qid_expirey_date='31/12/2021',
+
             )
             instance.save()

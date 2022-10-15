@@ -16,7 +16,7 @@ def order_pre_save_receiver(sender, instance, *args, **kwargs):
         print(instance.order_number)
 
 
-@receiver(post_save, sender=Order)
+@ receiver(post_save, sender=Order)
 def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
     print('order_post_save_receiver')
     if created:
@@ -28,7 +28,16 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
                 dl_task_name=instance.order_name,
                 dl_task_description="na",
                 dl_task_status='for_review',
-                dl_task_time_slot='na',
                 pickup_location_id=instance.pickup_location.id,
+            )
+            instance.save()
+        if instance.order_number not in DlAddressUpdate.objects.values_list('dl_task_number', flat=True):
+            DlAddressUpdate.objects.create(
+                full_name=instance.costumer_name,
+                dl_task_number=instance.order_number,
+                mobile_no=instance.costumer_phone,
+                zone_number=instance.costumer_zone_no,
+                dl_price=instance.dl_amount,
+
             )
             instance.save()

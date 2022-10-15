@@ -1,0 +1,58 @@
+{% load static %}
+
+<h2>list of Driver Contacts</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-hover my-3">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Mob No</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if contacts %} {% for contact in contacts %}
+            <tr>
+                <td>{{contact.driver.user}}</td>
+                <td>{{contact.driver.driver_code}}</td>
+                <td>{{contact.driver.driver_phone}}</td>
+                <td>{{contact.driver.driver_status}}</td>
+                <td>
+                    <a
+                        class="pe-3 text-dark"
+                        class="btn pe-3 text-dark"
+                        hx-confirm="Are you sure you wish to delete?"
+                        hx-target="#dasboard_div"
+                        hx-swap="innerHTML swap:1s"
+                        hx-delete="{% url 'client:regular_driver_contacts_delete' contact.id %}"
+                    ><i class="fa fa-lg fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %} {% else %}
+            <tr>
+                <td
+                    colspan="5"
+                    class="py-2"
+                >No Drivers Added</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td
+                    colspan="5"
+                    class="py-2"
+                >
+                    <a
+                        class="btn btn-dark"
+                        hx-get="{% url 'client:regular_driver_contacts_add' %}"
+                        hx-trigger="click "
+                        hx-target="#dasboard_div"
+                    ><i class="fa fa-lg fa-add me-2"></i>
+                        Search
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

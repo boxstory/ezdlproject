@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
@@ -14,9 +13,9 @@ from orders import forms as orders_forms
 
 @login_required(login_url='account_login')
 def orders_list(request):
-    client_id = client_models.Client.objects.get(user_id=request.user.id)
+    client = client_models.Client.objects.get(user_id=request.user.id)
     orders = orders_models.Order.objects.filter(
-        client_id=client_id.id).order_by('-id')
+        client_id=client.client_id).order_by('-id')
     context = {
         'orders': orders
     }
@@ -26,32 +25,34 @@ def orders_list(request):
 @login_required(login_url='account_login')
 def add_order(request):
     if request.method == 'POST':
-        form = AddOrderForm(request.POST)
+        form = orders_forms.AddOrderForm(request.POST)
+        form.fields['product_list'].queryset = orders_models.Items.objects.filter(
+            client=request.user.client)
         if form.is_valid():
             order = form.save(commit=False)
             order.client_id = client_models.Client.objects.get(
                 user_id=request.user.id).id
             print(order.client)
             form.save()
-            form = AddOrderForm()
+            form = orders_forms.AddOrderForm()
             return redirect('/orders/')
     else:
-        form = AddOrderForm()
+        form = orders_forms.AddOrderForm()
     return render(request, 'orders/add_order.html', {'form': form})
 
 
 @login_required(login_url='account_login')
 def update_order(request, order_id):
-    order = Order.objects.get(id=order_id)
+    order = orders_models.Order.objects.get(id=order_id)
     if request.method == 'POST':
-        form = UpdateOrderForm(request.POST, instance=order)
+        form = orders_forms.UpdateOrderForm(request.POST, instance=order)
         print('form valid checking')
         if form.is_valid():
             print('form valid')
             form.save()
-            return redirect('/orders/')
+            return redirect('/client/dashboard/')
     else:
-        form = UpdateOrderForm(instance=order)
+        form = orders_forms.UpdateOrderForm(instance=order)
 
     context = {
         'form': form,
@@ -59,15 +60,6 @@ def update_order(request, order_id):
         'order_id': order_id
     }
     return render(request, 'orders/update_order.html', context)
-
-
-@login_required(login_url='account_login')
-def order_details(request, order_id):
-    order = Order.objects.get(id=order_id)
-    data = {
-        'order': order
-    }
-    return render(request, 'orders/order_details.html', data)
 
 
 @login_required(login_url='account_login')
@@ -79,61 +71,9 @@ def delete_order(request):
 
 
 @login_required(login_url='account_login')
-def order_add_item(request):
-    if request.method == 'POST':
-        form = AddItemsForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = AddItemsForm()
-            return redirect('/')
-    else:
-        form = AddItemsForm()
-
+def order_details(request, order_id):
+    order = orders_models.Order.objects.get(id=order_id)
     data = {
-        'form': form,
+        'order': order
     }
-    return render(request, 'orders/add_product_items.html', data)
-
-
-@login_required(login_url='account_login')
-def order_delete_item(request):
-    data = {
-
-    }
-    return render(request, 'orders/delete_product_item.html', data)
-
-
-@login_required(login_url='account_login')
-def order_update_item(request):
-    data = {
-
-    }
-    return render(request, 'orders/update_product_item.html', data)
-
-
-#path('order_details/<int:pk>/add_item_sku/', orders_views.orders_dadd_item_sku, name='orders_dadd_item_sku'),
-@login_required(login_url='account_login')
-def order_add_item_sku(request):
-    data = {
-
-    }
-    return render(request, 'orders/add_product_item_sku.html', data)
-
-
-#path('order_details/<int:pk>/delete_item_sku/<int:item_sku_pk>/', orders_views.orders_delete_item_sku, name='orders_ddelete_item_sku'),
-@login_required(login_url='account_login')
-def order_delete_item_sku(request):
-    data = {
-
-    }
-    return render(request, 'orders/delete_product_item_sku.html', data)
-
-#path('order_details/<int:pk>/update_item_sku/<int:item_sku_pk>/', orders_views.orders_update_item_sku, name='orders_dupdate_item_sku'),
-
-
-@login_required(login_url='account_login')
-def order_update_item_sku(request):
-    data = {
-
-    }
-    return render(request, 'orders/update_product_item_sku.html', data)
+    return render(request, 'orders/order_details.html', data)

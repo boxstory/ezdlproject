@@ -1,24 +1,31 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
+from requests import request
 from orders.models import *
 from client import models as client_models
+from product import models as product_models
 
 ORDER_STATUS = {
-    ('pending payment', 'Pending Payment'),
-    ('pending for item confirmation', 'Pending for Item Confirmation'),
-    ('ready to pickup', 'ready to pickup'),
-    ('Out for delivery', 'Out for delivery'),
+    ('dl_pending_payment', 'Pending Delivery charge Payment'),
+    ('pending_for_item_confirmation', 'Pending for Item Confirmation'),
+    ('ready_to_pickup', 'Ready to pickup'),
+    ('custumer_cofirm', 'Customer Confirmation Pending'),
+    ('custumer_delaying', 'Customer make delaying'),
+    ('out_for_delivery', 'Out for delivery'),
     ('delivered', 'Delivered'),
     ('cancelled', 'Cancelled'),
 }
+
 COD_STATUS = {
     ('include', 'Include'),
-    ('no cod', 'No COD'),
-    ('not collected', 'Not Collected'),
-    ('partially collected', 'Partially Collected'),
-    ('fully collected', 'Fully Collected'),
-    ('cod sattled', 'COD Sattled'),
+    ('no_cod', 'No COD'),
+    ('not_collected', 'Not Collected'),
+    ('partially_collected', 'Partially Collected'),
+    ('fully_paid', 'Fully Collected'),
+    ('cod_with_driver', 'COD Collected with Driver'),
+    ('cod_with_ezzy', 'COD handover to EZZY'),
+    ('cod_sattled_with_seller', 'COD Sattled with Seller'),
 }
-
 
 
 # ORDERS FORM ---------------------------------------------------------------------------------------------------------------------
@@ -28,18 +35,19 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['clientside_order_code', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+        fields = ['clientside_order_code', 'order_name', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
                   'costumer_zone_no', 'costumer_address',
-                  'pickup_location', 'order_status', 'order_name',
+                  'pickup_location', 'order_status',
                   ]
-        exclude = ['order_number', 'client', 'delivery_task', 'order_date',
+        exclude = ['order_number', 'client', 'delivery_task', 'deadline_date',
                    'pickup_location_id']
         widgets = {
             'order_name': forms.TextInput(attrs={'class': 'form-control'}),
             'order_status': forms.Select(attrs={'class': 'form-control'}, choices=ORDER_STATUS),
         }
         labels = {
-            'order_name': 'Order Name / Note',
+            'order_name': _('Order Title/Short description'),
+            'cod_amount': 'Balance COD with Delivery charge'
         }
 
     def __init__(self, *args, **kwargs):
@@ -54,9 +62,8 @@ class AddOrderForm(forms.ModelForm):
             self.fields['cod_status'].widget = forms.RadioSelect(
                 choices=COD_STATUS)
             # need to specify clients only products
-            self.fields['product_list'].queryset = Items.objects.all()
-            self.fields['product_list'].widget = forms.CheckboxSelectMultiple(
-                attrs={'class': 'form-check-input'})
+
+            self.fields['product_list'].widget = forms.CheckboxSelectMultiple()
 
     def save(self, commit=True):
         order = super().save(commit=False)
@@ -75,29 +82,27 @@ class UpdateOrderForm(forms.ModelForm):
                   ]
         exclude = ['order_number', 'client', 'delivery_task', 'order_date',
                    'pickup_location_id']
+        labels = {
+            'order_name': 'Order Name / Notes',
+            'cod_amount': 'Balance COD with Delivery charge'
+        }
         widgets = {
             'order_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'cod_amount': forms.TextInput(attrs={'class': 'form-control'}),
             'order_status': forms.Select(attrs={'class': 'form-control'}, choices=ORDER_STATUS),
         }
-        labels = {
-            'order_name': 'Order Name / Note',
-        }
 
-
-# ITEMS FORM ----------------------------------------------------------------------------------------------------------------------
-
-class AddItemsForm(forms.ModelForm):
-    class Meta:
-        model = Items
-        verbose_name = 'Items'
-        verbose_name_plural = 'Itemss'
-        fields = '__all__'
-
-        widgets = {
-            'item_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'item_price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'item_quantity': forms.NumberInput(attrs={'class': 'form-control'}),
-
-        }
-
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {'class': 'form-control'})
+            self.fields['cash_on_delivery'].widget = forms.CheckboxInput(
+                attrs={'class': 'form-check-input '})
+            self.fields['order_status'].widget = forms.RadioSelect(
+                choices=ORDER_STATUS)
+            self.fields['cod_status'].widget = forms.RadioSelect(
+                choices=COD_STATUS)
+            # need to specify clients only products
+            self.fields['product_list'].attr = forms.ModelMultipleChoiceField(
+                queryset=product_models.Product.objects.all(), widget=forms.CheckboxSelectMultiple())
