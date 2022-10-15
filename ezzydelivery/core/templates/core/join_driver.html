@@ -10,6 +10,7 @@
                     <form
                         method="POST"
                         name="driver_join"
+                        enctype="multipart/form-data"
                     >{% csrf_token %}
                         <div class="row g-3">
                             {{ driverjoinform | crispy }}

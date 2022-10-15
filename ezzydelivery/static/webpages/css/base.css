@@ -21,7 +21,8 @@ body {
   font-family: Poppins-Medium;
   font-weight: 500;
   padding: 0.6em 0.6em;
-  width: 9em;
+  width: 12em;
+  box-sizing: none;
 }
 .btn-primary-fill:hover {
   background: #f7e64d;
@@ -31,8 +32,16 @@ body {
   transition: background 0.3s;
 }
 
-.btn-primary-blank {
+.btn-primary-fill:active {
+  background: #fdfdf9;
   color: #231e39;
+  border: 0.06em solid #ffc400;
+  border-radius: 0.29em;
+  transition: background 0.3s;
+}
+
+.btn-primary-blank {
+  color: #5a5a5c;
   border: 1px solid #d7d8cf;
   border-radius: 0.19em;
   font-family: Poppins-Medium;
@@ -45,6 +54,29 @@ body {
 .btn-primary-blank:hover {
   background: #312b49;
   transition: background 0.3s;
+}
+
+.joinbtn {
+  background-color: #83bfce !important;
+
+  border-radius: 0.19em;
+  color: #000000;
+  font-family: Poppins-Medium;
+  font-weight: 500;
+  padding: 0.6em 0.6em;
+  width: 15em;
+  text-decoration: none;
+}
+
+.joinbtn.active {
+  background-color: #013f4e !important;
+
+  border-radius: 0.19em;
+  color: #eeeedc;
+  font-family: Poppins-Medium;
+  font-weight: 500;
+  padding: 0.6em 0.6em;
+  width: 15em;
 }
 
 .follow {
@@ -83,4 +115,18 @@ body {
     width: 150px !important;
     height: 135px !important;
   }
+}
+
+.footer {
+  background-color: #3e5766;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='%23fada00' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.header {
+  background-color: #3e5766;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h16v2h-6v6h6v8H8v-6H2v6H0V0zm4 4h2v2H4V4zm8 8h2v2h-2v-2zm-8 0h2v2H4v-2zm8-8h2v2h-2V4z' fill='%23fada00' fill-opacity='0.41' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+.bg-check {
+  background-color: #3e5766;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h16v2h-6v6h6v8H8v-6H2v6H0V0zm4 4h2v2H4V4zm8 8h2v2h-2v-2zm-8 0h2v2H4v-2zm8-8h2v2h-2V4z' fill='%23fada00' fill-opacity='0.41' fill-rule='evenodd'/%3E%3C/svg%3E");
 }

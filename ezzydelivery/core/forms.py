@@ -39,6 +39,11 @@ class ProfileForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_labels = False
 
+        self.fields['date_of_birth'].widget = forms.SelectDateWidget(
+            years=YEARS)
+        self.fields['date_of_birth'].widget.attrs = {
+            'class': 'form-control d-flex justify-content-center'}
+
 
 class JoinUsForm(forms.ModelForm):
     class Meta:

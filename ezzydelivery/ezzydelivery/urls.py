@@ -11,11 +11,15 @@ urlpatterns = [
 
     path('accounts/', include('allauth.urls')),
 
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('ezzy_api.urls')),
 
 
 
     path('', include('core.urls', namespace='core')),
     path('', include('webpages.urls', namespace='webpages')),
+
+    path('product/', include('product.urls', namespace='product')),
 
     path('client/', include('client.urls', namespace='client')),
     path('orders/', include('orders.urls', namespace='orders')),
@@ -25,6 +29,9 @@ urlpatterns = [
 
 
 ]
+
+handler404 = 'webpages.views.page_not_found'
+handler500 = 'webpages.views.server_error'
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

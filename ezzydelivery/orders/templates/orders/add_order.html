@@ -1,18 +1,16 @@
-{% extends "base.html" %}
 {% load crispy_forms_tags %}
-
-<head>
-    <title>{% block head_title %}{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
-</head>
-
-
-{% block content %}
-<div class="container col-8 align-content-center">
+<div class="container  align-content-center">
     <div class="row">
-        <div class="col-md-12 text-center ">
+        <div class="col-md-12 pb-3 d-flex justify-content-between">
             <h2>Add Order</h2>
+            <a
+                class='text-decoration-none text-light'
+                href="{% url 'orders:orders_list' %}"
+            >
+                <div class="btn btn-dark my-2">
+                    Back
+                </div>
+            </a>
         </div>
     </div>
     <div class="row">
@@ -37,9 +35,3 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-
-{% block extra_js %}
-<!-- extra js -->
-{% endblock extra_js %}

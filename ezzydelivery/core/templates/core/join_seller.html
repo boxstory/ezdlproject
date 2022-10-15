@@ -10,9 +10,10 @@
                     <form
                         method="POST"
                         name="join_seller"
+                        enctype ="multipart/form-data"
                     >{% csrf_token %}
                         <div class="row g-3">
-                            {{ clientresisterform | crispy }}
+                            {{ form | crispy }}
 
                             <button
                                 class="w-100 btn btn-dark btn-lg"

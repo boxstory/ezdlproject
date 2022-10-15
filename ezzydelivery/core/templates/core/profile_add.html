@@ -70,19 +70,13 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             {% if profileaddform.errors %}
-                            {% for field in profileaddform %}
-                            {% for error in field.errors %}
                             <div class="alert alert-danger">
-                                <p>{{field}}</p>
-                                <strong>{{ error|escape }}{{field}}</strong>
+                                <ul>
+                                    {% for error in profileaddform.errors.all %}
+                                    <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
                             </div>
-                            {% endfor %}
-                            {% endfor %}
-                            {% for error in profileaddform.non_field_errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}{{field}}</strong>
-                            </div>
-                            {% endfor %}
                             {% endif %}
                             <div class="row">
                                 <div class="col-sm-3">
@@ -90,7 +84,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <p class="text-muted mb-0">
-                                        {{ profileaddform.first_name | as_crispy_field }}
+                                        {{ profileaddform.first_name | as_crispy_field}}
                                     </p>
                                 </div>
                                 <div class="col-sm-5">
@@ -128,6 +122,8 @@
                                 </div>
                                 <div class="col-sm-5">
                                     <p class="text-muted mb-0">
+
+
                                         {{ profileaddform.date_of_birth | as_crispy_field }}
                                     </p>
                                 </div>
@@ -148,6 +144,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
+                                        {{ profileaddform.whatsapp.error}}
                                         {{ profileaddform.whatsapp | as_crispy_field}}
                                     </p>
                                 </div>
@@ -170,6 +167,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">
+                                        {{ profileaddform.address.error}}
                                         {{ profileaddform.address | as_crispy_field}}
                                     </p>
                                 </div>

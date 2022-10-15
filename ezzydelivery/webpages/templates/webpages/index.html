@@ -10,12 +10,11 @@
         <div class="row">
             <div class="col-12 col-lg-8 mx-auto mb-5">
                 <div class="text-center">
-                    <h1 class="display-5  fw-bold mt-2 mb-4 text-uppercase">we Take Care of your Delivery Process.
-                    </h1>
-                    <a
-                        class="btn btn-dark"
-                        href="contactus/"
-                    >KNOW MORE</a>
+                    <h1 class=" fw-bold mt-2 mb-4 text-uppercase">Easy e-commerce shipping</h1>
+                    <h4 class=" fw-bold mt-2 mb-4 text-uppercase">Shipping, Warehousing and fulfillment for your
+                        e-business</h4>
+
+
                 </div>
             </div>
         </div>
@@ -42,7 +41,8 @@
                 </div>
                 <div>
                     <h4 class="fw-bold">QUICK REVIEW</h4>
-                    <p>We make sure you get feedback the same day.</p>
+                    <p>Our REST API allows you to connect your custom website or ordering system to us with industry
+                        standard XML..</p>
                 </div>
             </div>
             <div class="col-12 col-lg-4 d-flex mb-5 mb-lg-0">
@@ -98,101 +98,158 @@
         </div>
     </div>
 </section>
-<!-- What is Last Mile Delivery? -->
-<section class="py-5">
-    <div class="container">
-        <div class="row align-items-center mb-5">
-            <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-                <h2 class="display-5 fw-bold mt-2 mb-3">What is Last Mile Delivery?</h2>
-                <p class="lead text-muted">“Last mile delivery refers to the final step in the shipping process. It is
-                    when the consumers will receive their products. If businesses are able to achieve on-time delivery
-                    in the last leg it can easily result in an improved delivery experience.
 
-                    Last-mile delivery is one of the most crucial steps in the supply chain process. If performed well,
-                    it offers the delivery company a competitive advantage over others in the market.”</p>
+<!-- services listing ----------->
+{%include 'webpages/parts/services_list.html' %}
+<!-- <div class="container">
+    <section class="py-md-5 p-2">
+        <div class="container">
+            <div class="p-3  p-md-5 bg-light">
+                <div class="text-center">
+                    <h3 class="fw-bold ">
+                        WE PROVIDE A FULL SERVICE TO OUR CUSTOMERS, WHICH INCLUDES:
+                    </h3>
+                </div>
             </div>
-            <div class="col-12 col-lg-6">
-                <img
-                    class="img-fluid"
-                    src="{% static 'webpages/img/poster1.png' %}"
-                    alt=""
-                >
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 d-flex mb-5 mb-5">
-                <div class="d-flex">
-                    <span
-                        class="flex-shrink-0 d-flex justify-content-center align-items-center bg-primary text-white rounded-circle me-3"
-                        style="width: 48px;height: 48px"
-                    >1</span>
-                    <div>
-                        <p class="lead text-muted">Nowadays, access and convenience have changed dramatically, and the
-                            trend is tilted heavily towards online orders and home delivery. This trend equates to a
-                            compounding complexity for last mile delivery process flow and the last-mile logistics
-                            sector as a whole.</p>
+            <div class="d-flex flex-wrap">
+                <div class="col-12 col-md-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <a
+                            href="{%url 'fleet:fleets' %}"
+                            class="text-decoration-none"
+                        >
+                            <div class="text-center">
+                                <img
+                                    class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                    src="{% static 'webpages/img/drivers.png' %}"
+                                    alt=""
+                                >
+                                <h4 class="fw-bold mb-3 text-dark">PROVIDE DRIVERS LIST</h4>
+                                <p class="text-muted">Find delivery partner for your Business. we provide list of
+                                    delivery
+                                    teams details to get deliver on time and in professionally. it helps to get reorder
+                                    and
+                                    save your time for focus in marketing. sellers can find out driver list with
+                                    documents
+                                </p>
+                                <div class="btn btn-dark w-md-50">
+                                    <i class="fa-solid fa-list me-2 "></i> All Drivers
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <a
+                            href="{%url 'client:all_clients' %}"
+                            class="text-decoration-none"
+                        >
+                            <div class="text-center">
+
+                                <img
+                                    class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                    src="{% static 'webpages/img/sellers.png' %}"
+                                    alt=""
+                                >
+                                <h4 class="fw-bold mb-3 text-dark">PROVIDE SELLERS LISTED</h4>
+                                <p class="text-muted"> If you wish to get delivery job from qatar sellers, you can
+                                    <span class="text-muted fw-bold text-uppercase">
+
+                                        REQUEST TO SELLERS
+                                    </span>
+
+
+                                    to make delivery deals with list of sellers available in Qatar.
+                                </p>
+                                <div class="btn btn-dark w-md-50 ">
+                                    <i class="fa fa-list me-2 "></i>All Clients
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex mb-5 mb-5">
-                <span
-                    class="flex-shrink-0 d-flex justify-content-center align-items-center bg-primary text-white rounded-circle me-3"
-                    style="width: 48px;height: 48px"
-                >2</span>
-                <div>
-                    <p class="lead text-muted">For the purpose of scaling operations, businesses often rope in third
-                        party logistics providers to satisfy their final mile delivery demands. It eventually helps them
-                        to grow faster and stay competitive.</p>
+            <div class="d-flex flex-wrap">
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/fullfillment.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Fullfillment Service</h5>
+                            <p class="text-muted mb-1">We Handle your bulk order shippment to our store and we repack,
+                                deliver to
+                                your clients according to orders</p>
+                            <p class="text-muted fw-bold">with keeping invontery stock managment system</p>
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="{% url 'webpages:fullfillment' %}"
+                            >
+                                <div class="btn btn-dark w-md-50">
+                                    <i class="fa-solid fa-box-open me-2"></i>
+                                    Fullfillment
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex mb-5 mb-5">
-                <span
-                    class="flex-shrink-0 d-flex justify-content-center align-items-center bg-primary text-white rounded-circle me-3"
-                    style="width: 48px;height: 48px"
-                >3</span>
-                <div>
-                    <p class="lead text-muted">A poorly planned and optimized final delivery will never reach the final
-                        destination on time. The unplanned deliveries will have the driver going around the same
-                        locality without any proper direction.
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/delivery.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">3PL Delivery Partner</h5>
+                            <p class="text-muted">Make us your delivery partner for your Business. we take care of
+                                your all orders delivery on time and in professionally. it helps to get reorder and save
+                                your time for focus in
+                                marketing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
 
-                        But with a good route optimization solution helps in cutting down the time spent doing
-                        deliveries.</p>
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/affiliate-marketing.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Affiliate Marketing Model</h5>
+                            <p class="text-muted">Make a passive income. If you wish to marketing products available in
+                                Qatar, join us as Affiliate Marketing exicutives. we provide verity of products to
+                                market through your business channel.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex mb-5 mb-md-0">
-                <span
-                    class="flex-shrink-0 d-flex justify-content-center align-items-center bg-primary text-white rounded-circle me-3"
-                    style="width: 48px;height: 48px"
-                >4</span>
-                <div>
-                    <p class="lead text-muted">Proof of delivery helps in verifying that the delivery has been made
-                        successfully. Drivers can easily finish capturing proof of delivery and add it to their daily
-                        report of deliveries. It clears out any confusion or false claims.</p>
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/c2c.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Peer-to-Peer Model</h5>
+                            <p class="text-muted">The actual handling of the task or the delivery is left up to the
+                                people involved in the transaction.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex mb-5 mb-md-0">
-                <span
-                    class="flex-shrink-0 d-flex justify-content-center align-items-center bg-primary text-white rounded-circle me-3"
-                    style="width: 48px;height: 48px"
-                >5</span>
-                <div>
-                    <p class="lead text-muted">When you have clear lines for passing on a message through easy tools
-                        like a mobile app, tracking number, or in-app instant messaging, it can automatically improve
-                        the communication among the drivers, dispatchers, and the customer base.</p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex">
-                <span
-                    class="flex-shrink-0 d-flex justify-content-center align-items-center bg-primary text-white rounded-circle me-3"
-                    style="width: 48px;height: 48px"
-                >6</span>
-                <div>
-                    <p class="lead text-muted">New technologies are transforming the industry, and the transformation of
-                        the last mile is spurring new technologies. There are enormous increases in venture capital
-                        investments in supply chain management and logistics start-ups.</p>
-                </div>
+
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+
+
+</div> -->
+
 {% endblock content %}

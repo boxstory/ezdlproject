@@ -16,9 +16,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
+DEBUG = config("DEBUG", cast=bool)
 
-#ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['ezzydelivery.qa', 'www.ezzydelivery.qa',
                  '167.71.49.94', '127.0.0.1']
 
@@ -33,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
 
+    # 3rdparty apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -44,10 +44,13 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'fontawesomefree',
+    'rest_framework',
 
+    # local apps
     'core',
     'webpages',
     'client',
+    'product',
     'fleet',
     'delivery',
     'orders',

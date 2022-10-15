@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block title %} EZZY FLEET DASHBOARD
+{% endblock title %}
+{% block content %}
+<div class="container col-12 col-md-8  bg-light">
+    <div class="row">
+        <div class="col-12 px-4">
+            <div class="col-12 text-dark d-flex my-5 justify-content-between">
+                <h2>UPLOAD DOCUMENTS</h2>
+
+                <a href="{%url 'fleet:driver_documents'%}">
+                    <button class="btn btn-dark ">Back</button></a>
+
+            </div>
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                {% csrf_token %}
+                {{ form | crispy}}
+
+
+
+                <div class="submit  my-3 text-center">
+                    <button
+                        type="submit"
+                        value="submit"
+                        class="btn btn-dark w-75"
+                    >Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+{% endblock extra_js %}

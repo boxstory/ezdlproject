@@ -18,62 +18,37 @@ from fleet import forms as fleet_forms
 # Create your views here.
 
 
-# address collection form costumer------------------------------------------------------
-def delivery_address_details(request):
-    if request.method == 'POST':
-        f = delivery_forms.DeliveryAddressForm(request.POST)
-        if f.is_valid():
-            print("DeliveryAddressForm full  is valid")
-
-            dl_id = f.cleaned_data['dl_id']
-            full_name = f.cleaned_data['full_name']
-            mobile_no = f.cleaned_data['mobile_no']
-            zone_name = f.cleaned_data['zone_name']
-            zone_number = f.cleaned_data['zone_number']
-            street_no = f.cleaned_data['street_no']
-            building_no = f.cleaned_data['building_no']
-            unit_no = f.cleaned_data['unit_no']
-            is_villa_compound = f.cleaned_data['is_villa_compound']
-            is_flat = f.cleaned_data['is_flat']
-            f.save()
-
-            return redirect('/')
-    else:
-        f = delivery_forms.DeliveryAddressForm()
-    return render(request, 'delivery/delivery_address_details.html', {'form': f})
+# requst to user update address before delivery
 
 
-def dl_address(request, dl_id, mobile_no):
+def dl_address_update(request, dl_task_number, mobile_no):
+    instance = delivery_models.DlAddressUpdate.objects.get(
+        dl_task_number=dl_task_number)
+    form = delivery_forms.DlAddressUpdateForm(
+        request.POST or None, instance=instance)
     if request.method == 'POST':
         print("dl_address request.POST")
-        f = delivery_forms.DeliveryAddressForm(request.POST)
+
+        f = delivery_forms.DlAddressUpdateForm(
+            request.POST)
 
         if f.is_valid():
-            print("DeliveryAddressForm 2 is valid")
-            dl_id = f.cleaned_data['dl_id']
-            full_name = f.cleaned_data['full_name']
-            mobile_no = f.cleaned_data['mobile_no']
-            zone_name = f.cleaned_data['zone_name']
-            zone_number = f.cleaned_data['zone_number']
-            street_no = f.cleaned_data['street_no']
-            building_no = f.cleaned_data['building_no']
-            unit_no = f.cleaned_data['unit_no']
-            is_villa_compound = f.cleaned_data['is_villa_compound']
-            is_flat = f.cleaned_data['is_flat']
-            f.save()
-            print(f.cleaned_data)
+            print("DlAddressUpdateForm 2 is valid")
+            form = f.save(commit=False)
+            form.dl_task_number = dl_task_number
+            form.mobile_no = mobile_no
+
+            print(form)
+            form.save()
 
             return redirect('/')
     else:
         print("dl_address else")
-        f = delivery_forms.DeliveryAddressForm()
 
-    zone_name = "Zone 1"
     context = {
-        'form': f,
-        'dl_id': dl_id,
+        'form': form,
+        'dl_task_number': dl_task_number,
         'mobile_no': mobile_no,
-        'zone_name': zone_name,
     }
     return render(request, 'delivery/dl_address.html', context)
 
@@ -92,8 +67,28 @@ def get_zone_name(request):
 # delivery details -------------------------------------------------------------------------
 
 
+def all_delivery_tasks(request):
+    driver = fleet_models.Driver.objects.get(user_id=request.user.id)
+    print('fleet', driver.driver_id)
+    dl_tasks = delivery_models.DeliveryTask.objects.all()
+    print(dl_tasks)
+
+    context = {
+        'cards': dl_tasks,
+    }
+    return render(request, 'delivery/parts/tasks_all.html', context)
+    # return render(request, 'delivery/all_delivery_tasks.html', context)
+
+
+def assign_driver_to_task(request, dl_task_number):
+    print("assign_driver_to_task")
+
+    return redirect('/delivery/all_delivery_tasks')
+
 # client side delivery data --------------------------------------------------------------
-def delivery_list(request):
+
+
+def delivery_client_update(request):
     data = {
 
     }

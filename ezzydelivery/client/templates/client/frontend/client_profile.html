@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block title %}
+EZZY FLEET {{driver.driver_code}}
+{% endblock title %}
+{% block content %}
+<h2> Seller Profile</h2>
+
+<!-- Profile pge section -->
+<section
+    class="section about-section my-3"
+    id="about"
+>
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse my-4">
+            <div class="col-md-6">
+                <div class="about-text go-to">
+                    <h3 class="dark-color">{{client.brand_name}}
+                        ({{client.client_code}})</h3>
+                    <h6 class="theme-color lead">Freelance :
+                        {% if profile.is_client == True %}
+
+                        <b>Driver</b>
+
+                        {% elif profile.is_seller == True %}
+                        <b>Seller</b>
+                        {% else %}
+                        <b>User</b>
+                        {% endif %}
+                    </h6>
+
+
+                    <p>Bio: {{client.client_bio}}</p>
+                    <div class="row about-list">
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Since</label>
+                                <p>{{client.brand_since}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Category</label>
+                                <p>{{client.brand_product_category}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Store Products</label>
+                                <p>{{profile.zone_name}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Address</label>
+                                <p>{{profile.address}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>E-mail</label>
+                                <p>{{profile.email}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Phone</label>
+                                <p>Click me</p>
+                            </div>
+                            <div class="media">
+                                <label>Store Location</label>
+                                {% for loc in location %}
+
+
+                                <p>{{forloop.counter}}: {{loc}}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="media">
+                                <label>Freelance</label>
+                                {% if profile.is_driver == True %}
+
+                                <p>Driver</p>
+                                {% elif profile.is_seller == True %}
+                                <p>Seller</p>
+                                {% else %}
+                                <p>User</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class=" w-sm-50 w-75">
+                    {% if profile.profile_pic %}
+                    <img
+                        src="{{client.client_logo.url}}"
+                        alt=""
+                        class=" img-fluid text-center"
+                    />
+                    {% else %}
+                    <img
+                        src="/media/client/avatar.png"
+                        title=""
+                        alt=""
+                        class=" img-fluid text-center"
+                    >
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="counter">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6
+                            class="count h2"
+                            data-to="500"
+                            data-speed="500"
+                        >200</h6>
+                        <p class="m-0px font-w-600">Tasks Listed</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6
+                            class="count h2"
+                            data-to="150"
+                            data-speed="150"
+                        >170</h6>
+                        <p class="m-0px font-w-600">Tasks Completed</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6
+                            class="count h2"
+                            data-to="850"
+                            data-speed="850"
+                        >2</h6>
+                        <p class="m-0px font-w-600">Products</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6
+                            class="count h2"
+                            data-to="190"
+                            data-speed="190"
+                        >68 (M)</h6>
+                        <p class="m-0px font-w-600">Running</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

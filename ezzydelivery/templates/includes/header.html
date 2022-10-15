@@ -2,8 +2,8 @@
 <!-- ...header... -->
 
 
-<div class="container-fluid bg-light">
-    <nav class="navbar navbar-expand-md navbar-light bg-light ">
+<div class="container-fluid bg-light header">
+    <nav class="navbar navbar-expand-md navbar-light  ">
         <div class="container-fluid ">
             <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
             <a
@@ -35,28 +35,22 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a
-                            class="nav-link active"
+                            class="btn btn-outline-dark fw-bold  px-3 me-2 my-1"
                             aria-current="page"
                             href="{% url 'webpages:index' %}"
                         >Home</a>
                     </li>
                     <li class="nav-item">
                         <a
-                            class="nav-link active"
+                            class="  fw-bold btn btn-outline-dark  px-3 me-2 my-1"
                             aria-current="page"
                             href="{% url 'webpages:services' %}"
-                        >Delivery</a>
+                        >Services</a>
                     </li>
+
                     <li class="nav-item">
                         <a
-                            class="nav-link active"
-                            aria-current="page"
-                            href="{% url 'webpages:fullfillment' %}"
-                        >Fullfillment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active"
+                            class="btn btn-outline-dark  fw-bold  me-2 my-1"
                             aria-current="page"
                             href="{% url 'webpages:contactus' %}"
                         >Contact</a>
@@ -74,7 +68,7 @@
                             <button
                                 id="btnGroupDrop1"
                                 type="button"
-                                class="btn btn-light dropdown-toggle"
+                                class="btn bg-light bg-check dropdown-toggle"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
@@ -87,19 +81,23 @@
                                 >
                             </button>
                             <ul
-                                class="dropdown-menu dropdown-menu-end bg-light ms-3 border-0 text-center"
+                                class="dropdown-menu bg-light bg-check dropdown-menu-end  ms-3 border-1 text-center"
                                 aria-labelledby="btnGroupDrop1"
                             >
                                 <li><a
-                                        class="nav-link active"
+                                        class="nav-link active border-bottom-1 border-dark "
                                         aria-current="page"
                                         href="{% url 'core:profile_view' %}"
                                     > Profile</a></li>
-                                <li><a
+
+                                <li>
+                                    <a
                                         class="nav-link active"
                                         aria-current="page"
                                         href="{% url 'core:main_dashboard' %}"
-                                    > Dashboard</a></li>
+                                    > Dashboard</a>
+                                </li>
+
                                 <li><a
                                         class="nav-link active"
                                         aria-current="page"
@@ -110,13 +108,13 @@
                     </div>
                     {% else %}
                     <li class="nav-item"><a
-                            class="nav-link active"
+                            class="btn btn-outline-dark   fw-bold  me-2 my-1"
                             aria-current="page"
                             href="{% url 'account_login' %}"
                         >Log In</a>
                     <li class="nav-item">
                         <a
-                            class="nav-link active"
+                            class="btn btn-outline-dark   fw-bold  me-2 my-1"
                             aria-current="page"
                             href="{% url 'account_signup' %}"
                         >Sign Up</a>

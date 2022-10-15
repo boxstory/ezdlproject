@@ -1,9 +1,11 @@
+import random
 from django.forms.fields import DateTimeField
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from webpages.forms import *
 from django.core.mail import mail_admins
-
+from client import models as client_models
+from fleet import models as fleet_models
 # Create your views here.
 
 
@@ -14,8 +16,28 @@ def index(request):
     return render(request, 'webpages/index.html', data)
 
 
-def about(request):
+def delivery_pricing(request):
     data = {
+
+    }
+    return render(request, 'webpages/3pl_pricing.html', data)
+
+
+def about(request):
+
+    brands = list(client_models.Client.objects.all())
+    # brands = list(fleet_models.Driver.objects.all())
+
+    print(len(brands))
+    if len(brands) > 5:
+        brands = random.sample(brands, 6)
+    else:
+        brands = random.sample(brands, len(brands))
+
+    print(brands)
+
+    data = {
+        'brands': brands,
 
     }
     return render(request, 'webpages/about.html', data)
@@ -56,8 +78,6 @@ def fleets(request):
     return render(request, 'webpages/fleets.html', data)
 
 
-
-
 def contactus(request):
     if request.method == 'POST':
         f = ContactForm(request.POST)
@@ -81,3 +101,11 @@ def privacy(request):
 
     }
     return render(request, 'webpages/privacy.html', data)
+
+
+def page_not_found(request, exception):
+    return render(request, 'webpages/page_not_found.html', status=404)
+
+
+def server_error(request):
+    return render(request, 'webpages/server_error.html', status=500)

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block extra_head %}Products
+    {% endblock extra_head %}
+
+
+{% block content %}
+<div class="container col-8 align-content-center">
+    <div class="row">
+        <div class="col-md-12 pb-3 d-flex justify-content-between">
+            <h2>Add Product</h2>
+            <a
+                class='text-decoration-none text-light'
+                href=""
+            >
+                <div class="btn btn-dark my-2">
+                    Back
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            {{ form | crispy }}
+            <div class="submit my-3  text-center">
+                <button
+                    type="submit"
+                    value="submit"
+                    class="btn btn-primary-fill"
+                >Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<!-- extra js -->
+{% endblock extra_js %}
