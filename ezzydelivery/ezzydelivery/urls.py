@@ -3,20 +3,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-<<<<<<< HEAD
-=======
 from orders import views as orders_views
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
-    path('accounts/', include('allauth.urls')),
-
-
-    path('', include('webpages.urls')),
-=======
 
     path('accounts/', include('allauth.urls')),
 
@@ -35,7 +26,6 @@ urlpatterns = [
 
     path('fleet/', include('fleet.urls', namespace='fleet')),
     path('delivery/', include('delivery.urls', namespace='delivery')),
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b
 
 
 ]

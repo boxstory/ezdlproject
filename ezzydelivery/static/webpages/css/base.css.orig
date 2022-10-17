@@ -14,13 +14,8 @@ body {
 }
 
 .btn-primary-fill {
-<<<<<<< HEAD
-  background-color: #ebd300;
-  border: 0.06em solid #ebd300;
-=======
   background-color: #ecc903;
   border: 0.06em solid #ffed4f;
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b
   border-radius: 0.19em;
   color: #231e39;
   font-family: Poppins-Medium;
@@ -38,22 +33,14 @@ body {
 
 .btn-primary-blank {
   color: #231e39;
-<<<<<<< HEAD
-  border: 1px solid #03bfcb;
-=======
   border: 1px solid #d7d8cf;
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b
   border-radius: 0.19em;
   font-family: Poppins-Medium;
   font-weight: 500;
   width: 9em;
   padding: 0.6em 0.6em;
   background-color: #231e39;
-<<<<<<< HEAD
-  color: #02899c;
-=======
   color: #eeeedc;
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b
 }
 .btn-primary-blank:hover {
   background: #312b49;
@@ -90,8 +77,6 @@ body {
   background-color: #167abd;
   cursor: pointer;
 }
-<<<<<<< HEAD
-=======
 
 @media screen and (min-width: 768px) {
   .footerlogo {
@@ -99,4 +84,3 @@ body {
     height: 135px !important;
   }
 }
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b

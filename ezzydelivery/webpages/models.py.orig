@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.db import models
-
-# Create your models here.
-=======
 from django.conf import settings
 from django.db import models
 
@@ -22,4 +17,3 @@ class ContactUs(models.Model):
 
     class Meta:
         verbose_name_plural = "Contact Us"
->>>>>>> efb83dc66fb99846065e84f234c6600276aaf31b

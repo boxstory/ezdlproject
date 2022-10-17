@@ -6,7 +6,7 @@ from client import models as client_models
 
 @admin.register(client_models.Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('user', 'client_id', 'client_business_name', 'client_phone', 'client_whatsapp',
+    list_display = ( 'client_business_name', 'client_phone', 'client_whatsapp',
                     'brand_name', 'brand_since', 'brand_product_category', 'client_code', 'created_at', 'updated_at')
     list_filter = ('created_at', 'updated_at')
     list_per_page = 10

@@ -9,11 +9,11 @@ media
 # Environments 
 *.env 
 .venv 
-<<<<<<< HEAD
+
 .venvezdl 
-env/ 
-venv/ 
-venvezdl/ 
+env/
+venv/
+venvezdl/
 
 .DS_Store
 
