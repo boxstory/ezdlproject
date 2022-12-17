@@ -17,8 +17,8 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ['ezzydelivery.qa', 'www.ezzydelivery.qa',
-]
+ALLOWED_HOSTS = ['ezzydelivery.qa',
+                 'www.ezzydelivery.qa', '127.0.0.1', 'localhost']
 
 
 # Application definition
