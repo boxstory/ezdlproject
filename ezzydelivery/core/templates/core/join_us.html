@@ -17,9 +17,10 @@
                             class="breadcrumb-item active"
                             aria-current="page"
                         >
-                        <a href="#">
-                            User
-                        </a></li>
+                            <a href="#">
+                                User
+                            </a>
+                        </li>
                         <li
                             class="breadcrumb-item active"
                             aria-current="page"
@@ -43,15 +44,15 @@
                         <p class="text-muted mb-1">{{joinusform.profile_pic}}</p>
                         <p class="text-muted mb-4">{{joinusform.zone_name}}</p>
                         <div class="d-flex justify-content-center mb-2">
-                            {% if profile.is_seller %}
+                            {% if profile.is_business %}
                             <a
                                 type="button"
                                 class="btn btn-dark"
-                                href="{% url 'client:client_dashboard' %}"
+                                href="{% url 'business:business_dashboard' %}"
                             >
                                 Dashboard
                             </a>
-                            <p>{{profile.is_seller}}</p>
+                            <p>{{profile.is_business}}</p>
 
 
                             {% elif profile.is_driver %}
@@ -89,23 +90,41 @@
             <div class="col-lg-8">
                 <div class="card-body bg-light ">
                     <!-- join buttons -->
+                    {% if form.errors %}
+
+                    <!-- For each field in form -->
+                    {% for field in form %}
+                    <!-- For each error in field -->
+                    {% for error in field.errors %}
+                    <!-- Output error text message only -->
+                    <div>{{error}}</div>
+                    {% endfor %}
+                    {% endfor %}
+
+                    {% endif %}
                     <ul
-                        class="nav  mb-3 flex-column flex-sm-row justify-content-center"
+                        class="  mb-3  justify-content-center text-decoration-none"
                         id="pills-tab"
+                        style="list-style: none;"
                         role="tablist"
                     >
+                        <li class="pb-2 h3 fw-bold">
+
+                            Select your job title:
+                        </li>
+
                         <li
-                            class="col-4 nav-item me-5 me-lg-0"
+                            class="col-4  mb-5 me-lg-0"
                             role="presentation"
                         >
                             <a
-                                href="{%url 'core:join_seller'%} "
+                                href="{%url 'core:join_business'%} "
                                 class="text-decoration-none"
                             >
-                                <button class="nav-link  btn joinbtn  me-5">JOIN AS SELLER</button></a>
+                                <button class="nav-link  btn joinbtn  me-5">ADD BUSINESS</button></a>
                         </li>
                         <li
-                            class="col-4 nav-item "
+                            class="col-4  "
                             role="presentation"
                         ><a
                                 href="{%url 'core:join_driver'%}"

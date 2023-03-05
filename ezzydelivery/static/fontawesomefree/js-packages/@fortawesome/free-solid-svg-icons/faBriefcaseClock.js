@@ -1,6 +1,6 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-var source = require('./faBusinessTime');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var source = require("./fabusinessTime");
 exports.definition = {
   prefix: source.prefix,
   iconName: source.iconName,
@@ -9,8 +9,9 @@ exports.definition = {
     source.height,
     source.aliases,
     source.unicode,
-    source.svgPathData
-  ]};
+    source.svgPathData,
+  ],
+};
 
 exports.faBriefcaseClock = exports.definition;
 exports.prefix = source.prefix;

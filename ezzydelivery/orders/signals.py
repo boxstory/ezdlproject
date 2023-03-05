@@ -11,8 +11,8 @@ import uuid
 def order_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.order_number:
         instance.order_number = str(uuid.uuid4()).replace('-', '').upper()[:10]
-        # instance.order_number = instance.client_id.client_code + \
-        #     '-' + str(instance.clientside_order_code) + '-' + str(instance.id)
+        # instance.order_number = instance.business_id.business_code + \
+        #     '-' + str(instance.businesside_order_code) + '-' + str(instance.id)
         print(instance.order_number)
 
 

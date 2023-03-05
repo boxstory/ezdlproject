@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from product import models as product_models
-from client import models as client_models
+from client import models as business_models
 from product import forms as product_forms
 # Create your views here.
 
@@ -13,7 +13,7 @@ from product import forms as product_forms
 @login_required(login_url='account_login')
 def product_item_list(request):
     products = product_models.Items.objects.filter(
-        client_id=client_models.Client.objects.get(user_id=request.user.id).id)
+        business_id=business_models.Business.objects.get(user_id=request.user.id).id)
     print(products)
     data = {
         'products': products
@@ -51,9 +51,9 @@ def product_item_update(request, product_id):
 
 
 def product_sku_list(request):
-    client_id = client_models.Client.objects.get(user_id=request.user.id).id
+    business_id = business_models.Business.objects.get(user_id=request.user.id).id
     skus = product_models.ItemSku.objects.filter(
-        client_id=client_id)
+        business_id=business_id)
 
     data = {
         'skus': skus

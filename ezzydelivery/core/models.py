@@ -17,6 +17,6 @@ class Profile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
     profile_pic = models.ImageField(
         upload_to='core/user/', default='core/user/avatar.png', blank=True, null=True)
-    is_seller = models.BooleanField(default=False)
+    is_business = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)
     update_time = models.DateTimeField(auto_now=True)

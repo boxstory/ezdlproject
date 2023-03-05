@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from webpages.forms import *
 from django.core.mail import mail_admins
-from client import models as client_models
+from client import models as business_models
 from fleet import models as fleet_models
 # Create your views here.
 
@@ -25,7 +25,7 @@ def delivery_pricing(request):
 
 def about(request):
 
-    brands = list(client_models.Client.objects.all())
+    brands = list(business_models.Business.objects.all())
     # brands = list(fleet_models.Driver.objects.all())
 
     print(len(brands))

@@ -16,37 +16,37 @@ from pytz import timezone
 
 from core import models as core_models
 from fleet import models as fleet_models
-from client import models as client_models
+from client import models as business_models
 from core import forms as core_forms
 from webpages import forms as webpages_forms
 from fleet import forms as fleet_forms
-from client import forms as client_forms
+from client import forms as business_forms
 
 
 # Create your views here.
 
 
 # joins---------------------------------------------------------------------------------------------------------------------
-def join_seller(request):
-    clientjoinform = client_forms.ClinetRegisterForm()
+def join_business(request):
+    businessjoinform = business_forms.businessRegisterForm()
     try:
         print('try')
         profile = core_models.Profile.objects.get(user_id=request.user.id)
-        if profile.is_driver == True or profile.is_seller == True:
+        if profile.is_driver == True or profile.is_business == True:
             print(' already selected')
             return redirect('core:profile', pk=request.user.id)
         joinusform = core_forms.JoinUsForm(
             request.POST or None, instance=core_models.Profile.objects.get(user_id=request.user.id))
         if request.method == 'POST':
-            form = client_forms.ClinetRegisterForm(request.POST)
+            form = business_forms.businessRegisterForm(request.POST)
             if form.is_valid():
-                print("ClientForm full  is valid")
+                print("businessForm full  is valid")
                 f = form.save(commit=False)
                 f.profile = request.user.profile
                 print(f.profile)
 
                 f.user_id = request.user.id
-                f.client_id = request.user.id
+                f.business_id = request.user.id
                 f.save()
                 form1 = joinusform.save(commit=False)
                 user = User.objects.get(id=request.user.id)
@@ -55,29 +55,32 @@ def join_seller(request):
                 print(form1.user_id)
                 form1.user = user
                 form1.is_driver = False
-                form1.is_seller = True
+                form1.is_business = True
                 form1.save()
                 print(form1)
                 return redirect('/')
-    except client_models.Client.DoesNotExist:
-        print('except')
+    except core_models.Profile.DoesNotExist:
+        print("profile not exist")
+        return redirect('core:profile_add')
 
-    form = client_forms.ClinetRegisterForm()
-    print('load ClientRegisterForm form')
+    form = business_forms.businessRegisterForm()
+    print('load businessRegisterForm form')
     context = {
         'form': form,
     }
-    return render(request, 'core/join_us_client.html', context)
+    return render(request, 'core/join_us_business.html', context)
 
 
+@login_required(login_url='account_login')
 def join_driver(request):
     driverjoinform = fleet_forms.DriverJoinForm()
     try:
         # driver = fleet_models.Driver.objects.get(user_id=request.user.id)
         profile = core_models.Profile.objects.get(user_id=request.user.id)
-        if profile.is_driver == True or profile.is_seller == True:
+        if profile.is_driver == True or profile.is_business == True:
             return redirect('core:profile', pk=request.user.id)
-    except fleet_models.Driver.DoesNotExist:
+        else:
+            print("profile not exists")
 
         if request.method == 'POST':
             form = fleet_forms.DriverJoinForm(request.POST)
@@ -89,7 +92,7 @@ def join_driver(request):
                     string.digits) for _ in range(6))
                 f.user_id = request.user.id
                 f.is_driver = True
-                f.is_seller = False
+                f.is_business = False
                 f.driver_rating = 0
                 f.driver_rating_count = 0
                 f.driver_reviews = 0
@@ -98,24 +101,53 @@ def join_driver(request):
                 f.save()
                 return redirect('/')
 
-    form = fleet_forms.DriverJoinForm()
-    print('load DriverJoinForm form')
+        form = fleet_forms.DriverJoinForm()
+        print('load DriverJoinForm form')
+        context = {
+            'form': form,
+            'driverjoinform': driverjoinform,
+        }
+        return render(request, 'core/join_us_driver.html', context)
+    except core_models.Profile.DoesNotExist:
+        print("profile not exist")
+        return redirect('core:profile_add')
+
+# @todo
+@login_required(login_url='account_login')
+def update_driver(request):
+    driver_profile = business_models.Business.objects.filter(business_id=request.user.id)
+    driverjoinform = fleet_forms.DriverJoinForm(request.POST or None, instance=pickup_location)
+        
+
     context = {
-        'form': form,
-        'driverjoinform': driverjoinform,
-    }
+            'driverjoinform': driverjoinform,
+        }
     return render(request, 'core/join_us_driver.html', context)
 
+@login_required(login_url='account_login')
+def update_business(request):
+    business_profile = business_models.Business.objects.filter(business_id=request.user.id)
+    print(business_profile)
+    businessjoinform = business_forms.businessRegisterForm(request.POST or None, instance=business_profile)
+        
+
+    context = {
+            'driverjoinform': driverjoinform,
+        }
+    return render(request, 'core/join_us_driver.html', context)
 
 def join_us(request):
     if core_models.Profile.objects.filter(user_id=request.user.id).exists():
-        instance = get_object_or_404(
+        Profile = get_object_or_404(
             core_models.Profile, user_id=request.user.id)
         joinusform = core_forms.JoinUsForm(
-            request.POST or None, instance=instance)
+            request.POST or None, instance=Profile)
         # instance_driver = get_object_or_404(Driver, user_id=request.user.id)
+        
+
         driverjoinform = fleet_forms.DriverJoinForm()
-        clientjoinform = client_forms.ClinetRegisterForm()
+        
+        businessjoinform = business_forms.businessRegisterForm()
 
         if request.method == 'POST':
             print("join as driver")
@@ -127,7 +159,7 @@ def join_us(request):
                 print(form1.user_id)
                 form1.user = user
                 form1.is_driver = True
-                form1.is_seller = False
+                form1.is_business = False
                 form1.save()
                 print(form1)
                 form = driverjoinform.save(commit=False)
@@ -141,15 +173,15 @@ def join_us(request):
                 print(driverjoinform.cleaned_data)
                 messages.success(
                     request, f'Your Fleet account details has been added!')
-            if clientjoinform.is_valid():
-                print("join as Client")
+            if businessjoinform.is_valid():
+                print("join as business")
                 form1 = joinusform.save(commit=False)
                 user = User.objects.get(id=request.user.id)
                 print(user)
                 print(form1.user_id)
                 form1.user = user
                 form1.is_driver = False
-                form1.is_seller = True
+                form1.is_business = True
                 form1.save()
                 print(form1)
 
@@ -164,17 +196,17 @@ def join_us(request):
             context = {
                 'joinusform': joinusform,
                 'driverjoinform': driverjoinform,
-                'clientjoinform': clientjoinform,
-                'instance': instance
+                'businessjoinform': businessjoinform,
+                'instance': Profile
             }
         return render(request, 'core/join_us.html', context)
     print("load else redirect form")
     return redirect('core:profile_add')
 
 
-def seller_profile(request, pk):
+def business_profile(request, pk):
 
-    return render(request, 'core/seller_profile.html')
+    return render(request, 'core/business_profile.html')
 
 
 @login_required(login_url='/accounts/login/')
@@ -183,8 +215,8 @@ def main_dashboard(request):
         print('EXIST profile')
 
         profile = core_models.Profile.objects.get(user_id=request.user.id)
-        if profile.is_seller:
-            return redirect('client:client_dashboard')
+        if profile.is_business:
+            return redirect('business:business_dashboard')
         elif profile.is_driver:
             return redirect('fleet:fleet_dashboard')
     else:
@@ -233,7 +265,8 @@ def profile_add(request):
             return redirect('core:profile', pk=request.user.id)
         else:
             print("invalid")
-            return HttpResponse(form.errors.values())
+            return redirect('core:profile_add')
+
     else:
         print("load add form")
         context = {

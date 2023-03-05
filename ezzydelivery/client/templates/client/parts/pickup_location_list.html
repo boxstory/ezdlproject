@@ -27,7 +27,7 @@
                         hx-trigger="click"
                         hx-target="#dasboard_div"
                         hx-swap="beforeend swap:1s"
-                        hx-get="{% url 'client:pickup_location_update' loc.id %}"
+                        hx-get="{% url 'business:pickup_location_update' loc.id %}"
                         class="btn pe-3 text-dark"
                     ><i class="fa fa-lg fa-edit"></i></a>
                     <a
@@ -35,7 +35,7 @@
                         hx-confirm="Are you sure you wish to delete?"
                         hx-target="#dasboard_div"
                         hx-swap="innerHTML swap:1s"
-                        hx-delete="{% url 'client:pickup_location_delete' loc.id %}"
+                        hx-delete="{% url 'business:pickup_location_delete' loc.id %}"
                     ><i class="fa fa-lg fa-trash"></i></a>
                 </td>
             </tr>
@@ -55,7 +55,7 @@
                     <a
                         class="btn btn-dark"
                         hx-trigger="click "
-                        hx-get="{% url 'client:pickup_location_add' %}"
+                        hx-get="{% url 'business:pickup_location_add' %}"
                         hx-target="#dasboard_div"
                         hx-swap="beforeend swap:1s"
                     ><i class="fa fa-lg fa-add me-2"></i>

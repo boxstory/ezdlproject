@@ -3,7 +3,7 @@ from django.db import models
 from core import models as core_models
 from orders import models as orders_models
 from delivery import models as delivery_models
-from client import models as client_models
+from client import models as business_models
 from fleet import models as fleet_models
 
 
@@ -54,11 +54,11 @@ class DeliveryTask(models.Model):
     order = models.ForeignKey(orders_models.Order, on_delete=models.CASCADE)
     driver = models.ForeignKey(
         fleet_models.Driver, on_delete=models.CASCADE, blank=True, null=True)
-    client = models.ForeignKey(
-        client_models.Client, on_delete=models.CASCADE, blank=True, null=True)
+    business = models.ForeignKey(
+        business_models.Business, on_delete=models.CASCADE, blank=True, null=True)
 
     pickup_location = models.ForeignKey(
-        client_models.PickupLocation, on_delete=models.CASCADE, blank=True, null=True)
+        business_models.PickupLocation, on_delete=models.CASCADE, blank=True, null=True)
     dl_waight = models.IntegerField(default=1)
     dl_category_choices = (
         ('Food', 'Food'),

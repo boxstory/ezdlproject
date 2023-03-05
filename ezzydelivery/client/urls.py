@@ -4,33 +4,33 @@ from delivery import views as delivery_views
 from orders import views as orders_views
 from core import views as core_views
 from fleet import views as fleet_views
-from client import views as client_views
+from client import views as business_views
 
-app_name = 'client'
+app_name = 'business'
 urlpatterns = [
 
-    path('dashboard/', client_views.client_dashboard, name='client_dashboard'),
+    path('dashboard/', business_views.business_dashboard, name='business_dashboard'),
 
     # PICKUP LOCATIONS
     path('pickup_location/add/',
-         client_views.pickup_location_add, name='pickup_location_add'),
+         business_views.pickup_location_add, name='pickup_location_add'),
     path('pickup_location/<int:pickup_location_id>/update/',
-         client_views.pickup_location_update, name='pickup_location_update'),
+         business_views.pickup_location_update, name='pickup_location_update'),
     path('pickup_location/<int:pickup_location_id>/delete/',
-         client_views.pickup_location_delete, name='pickup_location_delete'),
+         business_views.pickup_location_delete, name='pickup_location_delete'),
     path('pickup_locations/',
-         client_views.pickup_location_list, name='pickup_location_list'),
+         business_views.pickup_location_list, name='pickup_location_list'),
 
     # frontend
-    path('<int:client_id>/', client_views.client_profile, name='client_profile'),
-    path('all', client_views.all_clients, name='all_clients'),
+    path('<int:business_id>/', business_views.business_profile, name='business_profile'),
+    path('all', business_views.all_business, name='all_business'),
 
     # driver contacts list
-    path('driver_contacts/', client_views.regular_driver_contacts_list,
+    path('driver_contacts/', business_views.regular_driver_contacts_list,
          name='regular_driver_contacts_list'),
-    path('driver_contacts/add/', client_views.regular_driver_contacts_add,
+    path('driver_contacts/add/', business_views.regular_driver_contacts_add,
          name='regular_driver_contacts_add'),
     path('driver_contacts/<int:contact_id>/delete/',
-         client_views.regular_driver_contacts_delete, name='regular_driver_contacts_delete'),
+         business_views.regular_driver_contacts_delete, name='regular_driver_contacts_delete'),
 
 ]

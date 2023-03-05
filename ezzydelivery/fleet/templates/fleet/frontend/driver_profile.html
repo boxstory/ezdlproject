@@ -25,8 +25,8 @@ EZZY FLEET {{driver.driver_code}}
                         {% if profile.is_driver == True %}
 
                         <b>Driver</b>
-                        {% elif profile.is_seller == True %}
-                        <b>Seller</b>
+                        {% elif profile.is_business == True %}
+                        <b>Business</b>
                         {% else %}
                         <b>User</b>
                         {% endif %}
@@ -72,8 +72,8 @@ EZZY FLEET {{driver.driver_code}}
                                 {% if profile.is_driver == True %}
 
                                 <p>Driver</p>
-                                {% elif profile.is_seller == True %}
-                                <p>Seller</p>
+                                {% elif profile.is_business == True %}
+                                <p>Business</p>
                                 {% else %}
                                 <p>User</p>
                                 {% endif %}
@@ -108,12 +108,12 @@ EZZY FLEET {{driver.driver_code}}
                         >
                         <input
                             type="text"
-                            name="client_id"
-                            value="{{client.client_id}}"
+                            name="business_id"
+                            value="{{business.business_id}}"
                         >
                         <b>Driver</b>
-                        {% elif profile.is_seller == True %}
-                        <b>Seller</b>
+                        {% elif profile.is_business == True %}
+                        <b>Business</b>
                         {% else %}
                         <b>User</b>
                         {% endif %}

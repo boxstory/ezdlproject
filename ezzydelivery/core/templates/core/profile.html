@@ -43,13 +43,13 @@
                         <p class="text-muted mb-4">Qatar Location: {{profile.zone_name}}</p>
                         <div class="d-flex justify-content-center mb-2">
 
-                            {% if profile.is_seller %}
+                            {% if profile.is_business %}
                             <a
                                 type="button"
                                 class="btn btn-dark"
                                 href="{% url 'core:main_dashboard' %}"
                             >
-                                SELLER DASHBOARD
+                                BUSINESS DASHBOARD
                             </a>
                             {% elif profile.is_driver %}
                             <a

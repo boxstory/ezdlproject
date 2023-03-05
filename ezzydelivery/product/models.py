@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from client import models as client_models
+from client import models as business_models
 from product import models as product_models
 # Create your models here.
 
@@ -70,8 +70,8 @@ class ItemSku(models.Model):
     item_price = models.PositiveIntegerField(_("Price"), default=0)
     created_at = models.DateField(auto_now_add=True)
 
-    client = models.ForeignKey(
-        client_models.Client, on_delete=models.SET_NULL, null=True)
+    business = models.ForeignKey(
+        business_models.Business, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.item_sku
@@ -98,8 +98,8 @@ class Product(models.Model):
     item_name = models.CharField(max_length=100)
     item_sku = models.ForeignKey(
         ItemSku, on_delete=models.SET_NULL, null=True)
-    client = models.ForeignKey(
-        client_models.Client, on_delete=models.SET_NULL, null=True, related_name='product')
+    business = models.ForeignKey(
+        business_models.Business, on_delete=models.SET_NULL, null=True, related_name='product')
     product_category = models.ForeignKey(
         product_models.ProductCategory, on_delete=models.SET_NULL, null=True)
     inventory = models.ForeignKey(

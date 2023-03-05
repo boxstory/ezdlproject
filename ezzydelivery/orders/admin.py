@@ -7,6 +7,6 @@ from orders import models as order_models
 
 @admin.register(order_models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('order_number', 'client', 'order_name', 'order_status')
+    list_display = ('order_number', 'business', 'order_name', 'order_status')
 
 

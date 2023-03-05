@@ -42,15 +42,15 @@
                         <p class="text-muted mb-1">{{joinusform.profile_pic}}</p>
                         <p class="text-muted mb-4">{{joinusform.zone_name}}</p>
                         <div class="d-flex justify-content-center mb-2">
-                            {% if profile.is_seller %}
+                            {% if profile.is_business %}
                             <a
                                 type="button"
                                 class="btn btn-dark"
-                                href="{% url 'client:client_dashboard' %}"
+                                href="{% url 'business:business_dashboard' %}"
                             >
                                 Dashboard
                             </a>
-                            <p>{{profile.is_seller}}</p>
+                            <p>{{profile.is_business}}</p>
 
 
                             {% elif profile.is_driver %}
@@ -88,33 +88,7 @@
             <div class="col-lg-8">
                 <div class="card-body bg-light">
                     <!-- join buttons -->
-                    <ul
-                        class="nav nav-pills mb-3"
-                        id="pills-tab"
-                        role="tablist"
-                    >
-                        <li
-                            class="nav-item"
-                            role="presentation"
-                        >
-                            <a
-                                href="{%url 'core:join_seller'%} "
-                                class="text-decoration-none"
-                            >
-                                <button class="nav-link  btn joinbtn ">JOIN AS SELLER</button></a>
-                        </li>
-                        <li
-                            class="nav-item"
-                            role="presentation"
-                        ><a
-                                href="{%url 'core:join_driver'%}"
-                                class="text-decoration-none"
-                            >
-                                <button class="nav-link  btn joinbtn active">JOIN AS DRIVER</button>
-                            </a>
 
-                        </li>
-                    </ul>
                     <!-- form section -->
                     <div
                         class="tab-content"

@@ -16,10 +16,14 @@ urlpatterns = [
 
     path('join_us/',
          core_views.join_us, name='join_us'),
-    path('join_us/seller/',
-         core_views.join_seller, name='join_seller'),
+    path('join_us/business/',
+         core_views.join_business, name='join_business'),
     path('join_us/driver/',
          core_views.join_driver, name='join_driver'),
+     path('join_us/business/update/',
+         core_views.update_business, name='update_business'),
+    path('join_us/driver/update/',
+         core_views.update_driver, name='update_driver'),
 
     path('driverjobform/', core_views.driverjobform, name='driverjobform'),
 

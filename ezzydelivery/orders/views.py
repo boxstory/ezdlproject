@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from core import models as core_models
 from orders import models as orders_models
-from client import models as client_models
+from client import models as business_models
 from orders import forms as orders_forms
 # Create your views here.
 
@@ -13,9 +13,9 @@ from orders import forms as orders_forms
 
 @login_required(login_url='account_login')
 def orders_list(request):
-    client = client_models.Client.objects.get(user_id=request.user.id)
+    business = business_models.Business.objects.get(user_id=request.user.id)
     orders = orders_models.Order.objects.filter(
-        client_id=client.client_id).order_by('-id')
+        business_id=business.business_id).order_by('-id')
     context = {
         'orders': orders
     }
@@ -27,12 +27,12 @@ def add_order(request):
     if request.method == 'POST':
         form = orders_forms.AddOrderForm(request.POST)
         form.fields['product_list'].queryset = orders_models.Items.objects.filter(
-            client=request.user.client)
+            business=request.user.business)
         if form.is_valid():
             order = form.save(commit=False)
-            order.client_id = client_models.Client.objects.get(
+            order.business_id = business_models.Business.objects.get(
                 user_id=request.user.id).id
-            print(order.client)
+            print(order.business)
             form.save()
             form = orders_forms.AddOrderForm()
             return redirect('/orders/')
@@ -50,7 +50,7 @@ def update_order(request, order_id):
         if form.is_valid():
             print('form valid')
             form.save()
-            return redirect('/client/dashboard/')
+            return redirect('/business/dashboard/')
     else:
         form = orders_forms.UpdateOrderForm(instance=order)
 

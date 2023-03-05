@@ -54,7 +54,8 @@
                     <td>{{ card.dl_task_date }}</td>
                     <td>{{ card.dl_category }}</td>
                     <td>{{ card.dl_speed }}-{{ card.dl_to_address.time_slot }}</td>
-                    <td>{{ card.client.client_business_name }}-{{ card.pickup_location.pickup_location_title }} </td>
+                    <td>{{ card.business.business_business_name }}-{{ card.pickup_location.pickup_location_title }}
+                    </td>
                     <td>{{card.dl_to_address.zone_name}}</td>
                     <td>{{ card.dl_task_status }}</td>
 
@@ -70,11 +71,12 @@
                                             <span class="fw-bold">From:</span>
                                             <tr>
                                                 <th class="fw-light p-0 col-5">Pickup Loc:</th>
-                                                <td class="fw-light p-0">{{ card.order.client.pickup_location}}</td>
+                                                <td class="fw-light p-0">{{ card.order.business.pickup_location}}</td>
                                             </tr>
                                             <tr>
-                                                <th class="fw-light p-0">Seller Name</th>
-                                                <td class="fw-light p-0">{{ card.order.client.client_business_name }}
+                                                <th class="fw-light p-0">Business Name</th>
+                                                <td class="fw-light p-0">{{ card.order.business.business_business_name
+                                                    }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -82,8 +84,8 @@
                                                 <td class="fw-light p-0">{{ card.dl_task_number }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="fw-light p-0">Seller Name</th>
-                                                <td class="fw-light p-0">{{ card.client.pickup_location }}</td>
+                                                <th class="fw-light p-0">Business Name</th>
+                                                <td class="fw-light p-0">{{ card.business.pickup_location }}</td>
                                             </tr>
                                         </table>
                                     </div>

@@ -5,49 +5,49 @@ from crispy_forms.helper import FormHelper
 from django.forms import ModelForm
 from core import models as core_models
 from fleet import models as fleet_models
-from client import models as client_models
+from client import models as business_models
 
 
-# SELLER FORM ---------------------------------------------------------------------------------------------------------------------
+# BUSINESS FORM ---------------------------------------------------------------------------------------------------------------------
 
 
-CLIENT_LANGUAGE_CHOICES = (
+business_LANGUAGE_CHOICES = (
     ('arabic', 'Arabic'),
     ('english', 'English'),
     ('hindi', 'Hindi'),
     ('philipine', 'Philipine'),
     ('other', 'Other'),
 )
-CLIENT_STATUS_CHOICES = (
+business_STATUS_CHOICES = (
     ('aproval pending', 'Aproval Pending'),
     ('active', 'Active'),
     ('inactive', 'Inactive'),
 )
 
-# Client FORM ---------------------------------------------------------------------------------------------------------------------
+# business FORM ---------------------------------------------------------------------------------------------------------------------
 
 
-class ClinetRegisterForm(forms.ModelForm):
+class businessRegisterForm(forms.ModelForm):
     class Meta:
-        model = client_models.Client
+        model = business_models.Business
         fields = '__all__'
-        exclude = ['profile', 'client_id', 'user',
-                   'client_status', 'client_code', 'pickup_location']
+        exclude = ['profile', 'business_id', 'user',
+                   'business_status', 'business_code', 'pickup_location']
         widgets = {
-            'client_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'client_languages': forms.Select(
-                choices=CLIENT_LANGUAGE_CHOICES),
-            'client_status': forms.Select(
-                choices=CLIENT_STATUS_CHOICES),
+            'business_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'business_languages': forms.Select(
+                choices=business_LANGUAGE_CHOICES),
+            'business_status': forms.Select(
+                choices=business_STATUS_CHOICES),
             'brand_name': forms.TextInput(attrs={'placeholder': 'List your major brands'}),
 
         }
         labels = {
-            "client_business_name": "Business Name",
-            "client_phone": "Business Phone No",
-            "client_whatsapp": "Business Whatsapp No",
+            "business_business_name": "business Name",
+            "business_phone": "business Phone No",
+            "business_whatsapp": "business Whatsapp No",
             "brand_name": "Brand Lists",
-            "client_qid": "Passport/QID No",
+            "business_qid": "Passport/QID No",
 
         }
 
@@ -56,13 +56,13 @@ class ClinetRegisterForm(forms.ModelForm):
 
 class PickupLocationsAddForm(forms.ModelForm):
     class Meta:
-        model = client_models.PickupLocation
+        model = business_models.PickupLocation
         fields = '__all__'
-        exclude = ['client']
+        exclude = ['business']
 
 
 class RegularDriverContactsAddForm(forms.ModelForm):
     class Meta:
-        model = client_models.RegularDriverContacts
+        model = business_models.RegularDriverContacts
         fields = '__all__'
-        exclude = ['client']
+        exclude = ['business']

@@ -2,7 +2,7 @@
 
 
 <form
-    hx-post="{% url 'client:pickup_location_add'   %}"
+    hx-post="{% url 'business:pickup_location_add'   %}"
     method="POST"
 >
     {{form|crispy}}
@@ -12,7 +12,7 @@
             class="btn btn-dark w-100 w-md-50"
             hx-trigger="click"
             hx-target="#dasboard_div"
-            hx-post="{% url 'client:pickup_location_add'   %}"
+            hx-post="{% url 'business:pickup_location_add'   %}"
         >
             Submit
         </button>

@@ -7,7 +7,7 @@
 EZZY FLEET {{driver.driver_code}}
 {% endblock title %}
 {% block content %}
-<h2> Seller Profile</h2>
+<h2> BUSINESS Profile</h2>
 
 <!-- Profile pge section -->
 <section
@@ -18,31 +18,31 @@ EZZY FLEET {{driver.driver_code}}
         <div class="row align-items-center flex-row-reverse my-4">
             <div class="col-md-6">
                 <div class="about-text go-to">
-                    <h3 class="dark-color">{{client.brand_name}}
-                        ({{client.client_code}})</h3>
+                    <h3 class="dark-color">{{business.brand_name}}
+                        ({{business.business_code}})</h3>
                     <h6 class="theme-color lead">Freelance :
-                        {% if profile.is_client == True %}
+                        {% if profile.is_business == True %}
 
                         <b>Driver</b>
 
-                        {% elif profile.is_seller == True %}
-                        <b>Seller</b>
+                        {% elif profile.is_business == True %}
+                        <b>BUSINESS</b>
                         {% else %}
                         <b>User</b>
                         {% endif %}
                     </h6>
 
 
-                    <p>Bio: {{client.client_bio}}</p>
+                    <p>Bio: {{business.business_bio}}</p>
                     <div class="row about-list">
                         <div class="col-md-6">
                             <div class="media">
                                 <label>Since</label>
-                                <p>{{client.brand_since}}</p>
+                                <p>{{business.brand_since}}</p>
                             </div>
                             <div class="media">
                                 <label>Category</label>
-                                <p>{{client.brand_product_category}}</p>
+                                <p>{{business.brand_product_category}}</p>
                             </div>
                             <div class="media">
                                 <label>Store Products</label>
@@ -75,8 +75,8 @@ EZZY FLEET {{driver.driver_code}}
                                 {% if profile.is_driver == True %}
 
                                 <p>Driver</p>
-                                {% elif profile.is_seller == True %}
-                                <p>Seller</p>
+                                {% elif profile.is_business == True %}
+                                <p>BUSINESS</p>
                                 {% else %}
                                 <p>User</p>
                                 {% endif %}
@@ -89,13 +89,13 @@ EZZY FLEET {{driver.driver_code}}
                 <div class=" w-sm-50 w-75">
                     {% if profile.profile_pic %}
                     <img
-                        src="{{client.client_logo.url}}"
+                        src="{{business.business_logo.url}}"
                         alt=""
                         class=" img-fluid text-center"
                     />
                     {% else %}
                     <img
-                        src="/media/client/avatar.png"
+                        src="/media/business/avatar.png"
                         title=""
                         alt=""
                         class=" img-fluid text-center"

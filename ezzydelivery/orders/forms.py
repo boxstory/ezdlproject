@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from requests import request
 from orders.models import *
-from client import models as client_models
+from client import models as business_models
 from product import models as product_models
 
 ORDER_STATUS = {
@@ -24,7 +24,7 @@ COD_STATUS = {
     ('fully_paid', 'Fully Collected'),
     ('cod_with_driver', 'COD Collected with Driver'),
     ('cod_with_ezzy', 'COD handover to EZZY'),
-    ('cod_sattled_with_seller', 'COD Sattled with Seller'),
+    ('cod_sattled_with_business', 'COD Sattled with Business'),
 }
 
 
@@ -35,11 +35,11 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['clientside_order_code', 'order_name', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+        fields = ['businesside_order_code', 'order_name', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
                   'costumer_zone_no', 'costumer_address',
                   'pickup_location', 'order_status',
                   ]
-        exclude = ['order_number', 'client', 'delivery_task', 'deadline_date',
+        exclude = ['order_number', 'business', 'delivery_task', 'deadline_date',
                    'pickup_location_id']
         widgets = {
             'order_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -61,7 +61,7 @@ class AddOrderForm(forms.ModelForm):
                 choices=ORDER_STATUS)
             self.fields['cod_status'].widget = forms.RadioSelect(
                 choices=COD_STATUS)
-            # need to specify clients only products
+            # need to specify business only products
 
             self.fields['product_list'].widget = forms.CheckboxSelectMultiple()
 
@@ -76,11 +76,11 @@ class AddOrderForm(forms.ModelForm):
 class UpdateOrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['clientside_order_code', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+        fields = ['businesside_order_code', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
                   'costumer_zone_no', 'costumer_address',
                   'pickup_location', 'order_status', 'order_name',
                   ]
-        exclude = ['order_number', 'client', 'delivery_task', 'order_date',
+        exclude = ['order_number', 'business', 'delivery_task', 'order_date',
                    'pickup_location_id']
         labels = {
             'order_name': 'Order Name / Notes',
@@ -103,6 +103,6 @@ class UpdateOrderForm(forms.ModelForm):
                 choices=ORDER_STATUS)
             self.fields['cod_status'].widget = forms.RadioSelect(
                 choices=COD_STATUS)
-            # need to specify clients only products
+            # need to specify business only products
             self.fields['product_list'].attr = forms.ModelMultipleChoiceField(
                 queryset=product_models.Product.objects.all(), widget=forms.CheckboxSelectMultiple())

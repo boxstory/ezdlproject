@@ -48,7 +48,7 @@ class ProfileForm(forms.ModelForm):
 class JoinUsForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['id', 'is_seller', 'is_driver']
+        fields = ['id', 'is_business', 'is_driver']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

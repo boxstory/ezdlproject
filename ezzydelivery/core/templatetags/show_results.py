@@ -5,5 +5,5 @@ register = template.Library()
 
 @register.inclusion_tag('core/profile.html')
 def show_results(msg=5):
-    choices = {'seller': 'Seller', 'driver': 'Driver'}
+    choices = {'business': 'Business', 'driver': 'Driver'}
     return {'choices': choices}

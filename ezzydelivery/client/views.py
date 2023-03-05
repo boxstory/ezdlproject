@@ -5,75 +5,75 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
-from client import models as client_models
+from client import models as business_models
 from core import models as core_models
 
-from client import forms as client_forms
+from client import forms as business_forms
 
 # Create your views here.
 
 
-def client_dashboard(request):
+def business_dashboard(request):
 
-    return render(request, 'client/client_dashboard.html')
+    return render(request, 'client/business_dashboard.html')
 
 # dashboard---------------------------------------------------------------------------------------------------------------------
 
 
 @login_required(login_url='account_login')
-def client_dashboard(request):
+def business_dashboard(request):
     try:
-        client = client_models.Client.objects.get(user_id=request.user.id)
-        profile = core_models.Profile.objects.get(user_id=client.user_id)
-        location = client_models.PickupLocation.objects.filter(
-            client_id=client.client_id).all()
-        print(client)
+        business = business_models.Business.objects.get(user_id=request.user.id)
+        profile = core_models.Profile.objects.get(user_id=business.user_id)
+        location = business_models.PickupLocation.objects.filter(
+            business_id=business.business_id).all()
+        print(business)
 
         context = {
             'profile': profile,
-            'client': client,
+            'business': business,
             'location': location,
         }
-        return render(request, 'client/client_dashboard.html', context)
-    except client_models.Client.DoesNotExist:
+        return render(request, 'client/business_dashboard.html', context)
+    except business_models.Business.DoesNotExist:
         return redirect('core:main_dashboard')
 
-# Driver contact list of clients---------------------------------------------------------------------------------------------------------------------
+# Driver contact list of business---------------------------------------------------------------------------------------------------------------------
 
 
 def regular_driver_contacts_list(request):
-    if client_models.RegularDriverContacts.objects.filter(
-            client_id=request.user.id).all().exists():
-        regular_driver_contacts = client_models.RegularDriverContacts.objects.filter(
-            client_id=request.user.id).all()
+    if business_models.RegularDriverContacts.objects.filter(
+            business_id=request.user.id).all().exists():
+        regular_driver_contacts = business_models.RegularDriverContacts.objects.filter(
+            business_id=request.user.id).all()
         if not regular_driver_contacts:
-            return redirect('client:regular_driver_contacts_add')
+            return redirect('business:regular_driver_contacts_add')
         context = {
             'contacts': regular_driver_contacts,
         }
         return render(request, 'client/parts/regular_driver_contacts_list.html', context)
     else:
 
-        return redirect('client:regular_driver_contacts_add')
+        return redirect('business:regular_driver_contacts_add')
         # return HttpResponse('No Drivers contacts yet ')
 
 
 def regular_driver_contacts_add(request):
     print('regular_driver_contacts_add')
 
-    form = client_forms.RegularDriverContactsAddForm(request.POST or None)
+    form = business_forms.RegularDriverContactsAddForm(request.POST or None)
     if request.method == 'POST':
         print('regular_driver_contacts_add POST')
         if form.is_valid():
             print('regular_driver_contacts_add valid')
             f = form.save(commit=False)
-            f.client = client_models.Client.objects.get(
-                client_id=request.user.id)
-            print(f.client)
+            f.business = business_models.Business.objects.get(
+                business_id=request.user.id)
+            print(f.business)
             print('RegularDriverContactsAddForm submitted')
             form.save()
             messages.success(request, "Successful Submission")
-            return redirect("client:regular_driver_contacts_list")
+            return redirect("business:regular_driver_contacts_list")
         else:
             print('regular_driver_contacts_add not valid')
             messages.error(request, "Error")
@@ -84,17 +84,17 @@ def regular_driver_contacts_add(request):
 
 
 def regular_driver_contacts_delete(request, contact_id):
-    contact = client_models.RegularDriverContacts.objects.get(id=contact_id)
+    contact = business_models.RegularDriverContacts.objects.get(id=contact_id)
     contact.delete()
-    return redirect("client:regular_driver_contacts_list")
+    return redirect("business:regular_driver_contacts_list")
 
 
 # pickup location add------------------------------------------------------
 def pickup_location_list(request):
-    pickup_location = client_models.PickupLocation.objects.filter(
-        client_id=request.user.id).all()
+    pickup_location = business_models.PickupLocation.objects.filter(
+        business_id=request.user.id).all()
     if not pickup_location:
-        return redirect('client:pickup_location_add')
+        return redirect('business:pickup_location_add')
     print('pickup_location', pickup_location)
     context = {
         'pickup_location': pickup_location,
@@ -104,16 +104,16 @@ def pickup_location_list(request):
 
 def pickup_location_add(request):
     print(request)
-    form = client_forms.PickupLocationsAddForm(request.POST or None)
+    form = business_forms.PickupLocationsAddForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             pickup_location = form.save(commit=False)
-            pickup_location.client_id = client_models.Client.objects.get(
-                user_id=request.user.id).client_id
-            print(pickup_location.client)
+            pickup_location.business_id = business_models.Business.objects.get(
+                user_id=request.user.id).business_id
+            print(pickup_location.business)
             form.save()
             messages.success(request, "Successful Submission")
-            return redirect("client:pickup_location_list")
+            return redirect("business:pickup_location_list")
 
     context = {
         'form': form,
@@ -122,10 +122,10 @@ def pickup_location_add(request):
 
 
 def pickup_location_delete(request, pickup_location_id):
-    pickup_location = client_models.PickupLocation.objects.get(
+    pickup_location = business_models.PickupLocation.objects.get(
         id=pickup_location_id)
     pickup_location.delete()
-    return redirect("client:pickup_location_list")
+    return redirect("business:pickup_location_list")
 
 
 def pickup_location_update(request, pickup_location_id):
@@ -133,16 +133,16 @@ def pickup_location_update(request, pickup_location_id):
     print(pickup_location_id)
     print('pickup_location_update')
     pickup_location = get_object_or_404(
-        client_models.PickupLocation, id=pickup_location_id)
+        business_models.PickupLocation, id=pickup_location_id)
     print(pickup_location)
     print(pickup_location.pickup_zone_no)
-    form = client_forms.PickupLocationsAddForm(
+    form = business_forms.PickupLocationsAddForm(
         request.POST or None, instance=pickup_location)
     if request.method == 'POST':
         if form.is_valid():
             print('pickup_location_update valid')
             form.save()
-            return redirect("client:pickup_location_list")
+            return redirect("business:pickup_location_list")
 
     context = {
         'form': form,
@@ -154,30 +154,30 @@ def pickup_location_update(request, pickup_location_id):
 # frontend ---------------------------------------------------------------------------------------------------------------------
 
 
-def client_profile(request, client_id):
+def business_profile(request, business_id):
     try:
-        client = client_models.Client.objects.get(client_id=client_id)
-        profile = core_models.Profile.objects.get(user_id=client.user_id)
-        location = client_models.PickupLocation.objects.filter(
-            client_id=client.client_id).values_list('pickup_location_title', flat=True)
-        print(client)
+        business = business_models.Business.objects.get(business_id=business_id)
+        profile = core_models.Profile.objects.get(user_id=business.user_id)
+        location = business_models.PickupLocation.objects.filter(
+            business_id=business.business_id).values_list('pickup_location_title', flat=True)
+        print(business)
         print(profile)
         print(location)
 
         context = {
             'profile': profile,
-            'client': client,
+            'business': business,
             'location': location,
         }
-        return render(request, 'client/frontend/client_profile.html', context)
-    except client_models.Client.DoesNotExist:
+        return render(request, 'client/frontend/business_profile.html', context)
+    except business_models.Business.DoesNotExist:
 
         return redirect("/join_us/")
 
 
-def all_clients(request):
-    clients = client_models.Client.objects.all()
+def all_business(request):
+    business = business_models.Business.objects.all()
     context = {
-        'clients': clients,
+        'business': business,
     }
-    return render(request, 'client/frontend/all_clients.html', context)
+    return render(request, 'client/frontend/all_business.html', context)

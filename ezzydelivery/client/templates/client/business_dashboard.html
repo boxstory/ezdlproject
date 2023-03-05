@@ -3,14 +3,14 @@
 {% block extra_css %} {% endblock extra_css %}
 
 <!-- ghghjg -->
-{% block title %}EZZY SELLER DASHBOARD {%endblock title %} {% block dashboard %}
+{% block title %}EZZY BUSINESS DASHBOARD {%endblock title %} {% block dashboard %}
 
 <div class="container bg-light p-0 mx-auto">
     <section class="my-md-3 m-2 p-0">
         <div class="p-3 p-md-3 text-dark">
             <div class="text-center">
                 <h3 class="fw-bolder text-uppercase">
-                    {{client.brand_name}} Dashboard
+                    {{business.brand_name}} Dashboard
                 </h3>
             </div>
             <hr />
@@ -19,7 +19,7 @@
             <div class="col-6 col-md-3 py-2 w-75 bg-light">
                 <a
                     class="btn btn-dark btn-block"
-                    hx-get="{% url 'client:pickup_location_list' %}"
+                    hx-get="{% url 'business:pickup_location_list' %}"
                     hx-trigger="click "
                     hx-target="#dasboard_div"
                 >
@@ -29,7 +29,7 @@
             <div class="col-6 col-md-3 py-2 w-75 bg-light">
                 <a
                     class="btn btn-dark btn-block"
-                    hx-get="{% url 'client:regular_driver_contacts_list' %}"
+                    hx-get="{% url 'business:regular_driver_contacts_list' %}"
                     hx-trigger="click "
                     hx-target="#dasboard_div"
                 >

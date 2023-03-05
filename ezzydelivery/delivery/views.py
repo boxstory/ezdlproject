@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from core import models as core_models
 from fleet import models as fleet_models
-from client import models as client_models
+from client import models as business_models
 from delivery import models as delivery_models
 from orders import models as order_models
 
@@ -85,10 +85,10 @@ def assign_driver_to_task(request, dl_task_number):
 
     return redirect('/delivery/all_delivery_tasks')
 
-# client side delivery data --------------------------------------------------------------
+# business side delivery data --------------------------------------------------------------
 
 
-def delivery_client_update(request):
+def delivery_business_update(request):
     data = {
 
     }

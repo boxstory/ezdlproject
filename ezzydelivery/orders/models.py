@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from delivery import models as delivery_models
 from core import models as core_models
 from fleet import models as fleet_models
-from client import models as client_models
+from client import models as business_models
 from orders import models as orders_models
 from webpages import models as webpages_models
 from product import models as product_models
@@ -32,7 +32,7 @@ COD_STATUS = {
     ('fully_paid', 'Fully Collected'),
     ('cod_with_driver', 'COD Collected with Driver'),
     ('cod_with_ezzy', 'COD handover to EZZY'),
-    ('cod_sattled_with_seller', 'COD Sattled with Seller'),
+    ('cod_sattled_with_business', 'COD Sattled with Business'),
 }
 
 # orders---------------------------------------------------------------------------------------------------------------------
@@ -40,13 +40,13 @@ COD_STATUS = {
 
 class Order(models.Model):
     order_number = models.CharField(max_length=100)
-    client = models.ForeignKey(
-        client_models.Client, on_delete=models.CASCADE, related_name='order')
+    business = models.ForeignKey(
+        business_models.Business, on_delete=models.CASCADE, related_name='order')
 
-    clientside_order_code = models.CharField(max_length=100)
+    businesside_order_code = models.CharField(max_length=100)
     order_name = models.CharField(max_length=100)
     pickup_location = models.ForeignKey(
-        client_models.PickupLocation, on_delete=models.SET_NULL, null=True)
+        business_models.PickupLocation, on_delete=models.SET_NULL, null=True)
 
     order_status = models.CharField(
         max_length=100, choices=ORDER_STATUS, default='ready_to_pickup',

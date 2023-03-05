@@ -11,7 +11,7 @@ class Item_skuAdmin(admin.ModelAdmin):
 
 @admin.register(product_models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('item_name', 'item_sku', 'client',
+    list_display = ('item_name', 'item_sku', 'business',
                     'product_category', 'inventory')
 
 
