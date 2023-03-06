@@ -113,28 +113,34 @@ def join_driver(request):
         return redirect('core:profile_add')
 
 # @todo
+
+
 @login_required(login_url='account_login')
 def update_driver(request):
-    driver_profile = business_models.Business.objects.filter(business_id=request.user.id)
-    driverjoinform = fleet_forms.DriverJoinForm(request.POST or None, instance=pickup_location)
-        
+    driver_profile = business_models.Business.objects.filter(
+        business_id=request.user.id)
+    driverjoinform = fleet_forms.DriverJoinForm(
+        request.POST or None, instance=driver_profile)
 
     context = {
-            'driverjoinform': driverjoinform,
-        }
+        'driverjoinform': driverjoinform,
+    }
     return render(request, 'core/join_us_driver.html', context)
+
 
 @login_required(login_url='account_login')
 def update_business(request):
-    business_profile = business_models.Business.objects.filter(business_id=request.user.id)
+    business_profile = business_models.Business.objects.filter(
+        business_id=request.user.id)
     print(business_profile)
-    businessjoinform = business_forms.businessRegisterForm(request.POST or None, instance=business_profile)
-        
+    businessjoinform = business_forms.businessRegisterForm(
+        request.POST or None, instance=business_profile)
 
     context = {
-            'driverjoinform': driverjoinform,
-        }
+        'driverjoinform': driverjoinform,
+    }
     return render(request, 'core/join_us_driver.html', context)
+
 
 def join_us(request):
     if core_models.Profile.objects.filter(user_id=request.user.id).exists():
@@ -143,10 +149,9 @@ def join_us(request):
         joinusform = core_forms.JoinUsForm(
             request.POST or None, instance=Profile)
         # instance_driver = get_object_or_404(Driver, user_id=request.user.id)
-        
 
         driverjoinform = fleet_forms.DriverJoinForm()
-        
+
         businessjoinform = business_forms.businessRegisterForm()
 
         if request.method == 'POST':
@@ -203,8 +208,10 @@ def join_us(request):
     print("load else redirect form")
     return redirect('core:profile_add')
 
+# @todo make profile and connect
 
-def business_profile(request, pk):
+
+def business_profile(request):
 
     return render(request, 'core/business_profile.html')
 

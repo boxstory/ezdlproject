@@ -12,7 +12,7 @@ urlpatterns = [
          core_views.profile_update, name='profile_update'),
     path('profile/add/',
          core_views.profile_add, name='profile_add'),
-     path('dashboard/', core_views.main_dashboard, name='main_dashboard'),
+    path('dashboard/', core_views.main_dashboard, name='main_dashboard'),
 
     path('join_us/',
          core_views.join_us, name='join_us'),
@@ -20,12 +20,14 @@ urlpatterns = [
          core_views.join_business, name='join_business'),
     path('join_us/driver/',
          core_views.join_driver, name='join_driver'),
-     path('join_us/business/update/',
+    path('join_us/business/update/',
          core_views.update_business, name='update_business'),
     path('join_us/driver/update/',
          core_views.update_driver, name='update_driver'),
 
     path('driverjobform/', core_views.driverjobform, name='driverjobform'),
+
+    path('business/', core_views.business_profile, name='business_profile'),
 
 
 

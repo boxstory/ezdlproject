@@ -13,58 +13,80 @@
             <div class="d-flex flex-wrap">
                 <div class="col-12 col-md-6 p-1">
                     <div class="p-3 p-md-5 bg-light">
-                        <a
-                            href="{%url 'fleet:fleets' %}"
-                            class="text-decoration-none"
-                        >
-                            <div class="text-center">
-                                <img
-                                    class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
-                                    src="{% static 'webpages/img/drivers.png' %}"
-                                    alt=""
+
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/drivers.png' %}"
+                                alt=""
+                            >
+                            <h4 class="fw-bold mb-3 text-dark">PROVIDE DRIVERS LIST</h4>
+                            <p class="text-muted">Find delivery partner for your business. we provide list of
+                                delivery
+                                teams details to get deliver on time and in professionally. it helps to get reorder
+                                and
+                                save your time for focus in marketing. business can find out driver list with
+                                documents
+                            </p>
+
+                            <div class="mb-2 w-md-50 "><a
+                                    href="{%url 'fleet:fleets' %}"
+                                    class="text-decoration-none"
                                 >
-                                <h4 class="fw-bold mb-3 text-dark">PROVIDE DRIVERS LIST</h4>
-                                <p class="text-muted">Find delivery partner for your business. we provide list of
-                                    delivery
-                                    teams details to get deliver on time and in professionally. it helps to get reorder
-                                    and
-                                    save your time for focus in marketing. business can find out driver list with
-                                    documents
-                                </p>
-                                <div class="btn btn-dark w-md-50">
-                                    <i class="fa-solid fa-list me-2 "></i> All Drivers
-                                </div>
+                                    <div class="btn btn-dark  ">
+                                        <i class="fa fa-list me-2 "></i>All Drivers
+                                    </div>
+                                </a>
+                                <a
+                                    href="{%url 'core:join_driver' %}"
+                                    class="text-decoration-none"
+                                >
+                                    <div class="btn btn-dark">
+                                        <i class="fa fa-add me-2 "></i>Join Drivers
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 p-1">
                     <div class="p-3 p-md-5 bg-light">
-                        <a
-                            href="{%url 'business:all_business' %}"
-                            class="text-decoration-none"
-                        >
-                            <div class="text-center">
 
-                                <img
-                                    class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
-                                    src="{% static 'webpages/img/business.png' %}"
-                                    alt=""
+                        <div class="text-center">
+
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/business.png' %}"
+                                alt=""
+                            >
+                            <h4 class="fw-bold mb-3 text-dark">PROVIDE BUSINESS LISTED</h4>
+                            <p class="text-muted"> If you wish to get delivery job from qatar business, you can
+                                <span class="text-muted fw-bold text-uppercase">
+
+                                    REQUEST TO BUSINESS
+                                </span>
+
+
+                                to make delivery deals with list of business available in Qatar.
+                            </p>
+                            <div class="mb-2 w-md-50 "><a
+                                    href="{%url 'business:all_business' %}"
+                                    class="text-decoration-none"
                                 >
-                                <h4 class="fw-bold mb-3 text-dark">PROVIDE BUSINESS LISTED</h4>
-                                <p class="text-muted"> If you wish to get delivery job from qatar business, you can
-                                    <span class="text-muted fw-bold text-uppercase">
-
-                                        REQUEST TO BUSINESS
-                                    </span>
-
-
-                                    to make delivery deals with list of business available in Qatar.
-                                </p>
-                                <div class="btn btn-dark w-md-50 ">
-                                    <i class="fa fa-list me-2 "></i>All business
-                                </div>
+                                    <div class="btn btn-dark  ">
+                                        <i class="fa fa-list me-2 "></i>All business
+                                    </div>
+                                </a>
+                                <a
+                                    href="{%url 'core:join_business' %}"
+                                    class="text-decoration-none"
+                                >
+                                    <div class="btn btn-dark">
+                                        <i class="fa fa-add me-2 "></i>Add business
+                                    </div>
+                                </a>
                             </div>
+                        </div>
                         </a>
                     </div>
                 </div>
