@@ -3,6 +3,7 @@ from webpages import views as webpages_views
 from delivery import views as delivery_views
 from orders import views as orders_views
 
+#/orders/
 app_name = 'orders'
 urlpatterns = [
     path('', orders_views.orders_list, name='orders_list'),

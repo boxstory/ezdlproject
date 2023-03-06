@@ -62,7 +62,7 @@
 
 
     <title>
-        {% block title %}{% endblock title %} | Ezzy Delivery
+        {% block title %}Home{% endblock title %} | Ezzy Delivery
     </title>
 
 </head>
@@ -79,27 +79,21 @@
 
 
 
-    <div class="container   mb-0">
-
-    <div class="container mt-3 mb-3">
+    <div class="container-fluid px-3  p-0 m-0 h-100">
         {% block content %}
         <!-- body content goes here -->
-
-
         {% endblock content %}
-    </div>
 
-    <div class="container   mb-0">
-        <div class="col-11 col-md-8 col-lg-6 mx-auto ">
-            {% block account_content %}
-            <!-- body content goes here -->
-            {% endblock account_content %}
+        <div class="container-fluid mb-0">
+            <div class="col-11 col-md-8 col-lg-6 mx-auto ">
+                {% block account_content %}
+                <!-- body content goes here -->
+                {% endblock account_content %}
+            </div>
         </div>
     </div>
 
     {% include "includes/footer.html" %}
-
-
 
     <script
         type="text/javascript"
@@ -109,13 +103,6 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"
     ></script>
-
-    <!-- <script
-        type="text/javascript"
-        language="JavaScript"
-        charset="UTF-8"
-        src="{% static './webpages/js/bundle.js' %}"
-    ></script> -->
 
 
 

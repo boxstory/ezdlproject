@@ -5,8 +5,8 @@
 <!-- ghghjg -->
 {% block title %}EZZY BUSINESS DASHBOARD {%endblock title %} {% block dashboard %}
 
-<div class="container bg-light p-0 mx-auto">
-    <section class="my-md-3 m-2 p-0">
+<div class="container-fluid">
+    <section class=" m-0 p-0">
         <div class="p-3 p-md-3 text-dark">
             <div class="text-center">
                 <h3 class="fw-bolder text-uppercase">
@@ -15,20 +15,11 @@
             </div>
             <hr />
         </div>
-        <div class="d-flex flex-wrap text-center col-10">
-            <div class="col-6 col-md-3 py-2 w-75 bg-light">
+        <div class="d-flex flex-wrap text-center justify-content-evenly ">
+
+            <div class="  bg-light py-1 py-sm-0">
                 <a
-                    class="btn btn-dark btn-block"
-                    hx-get="{% url 'business:pickup_location_list' %}"
-                    hx-trigger="click "
-                    hx-target="#dasboard_div"
-                >
-                    <i class="d-none d-md-inline fa fa-list me-3"></i> Pickup Locations
-                </a>
-            </div>
-            <div class="col-6 col-md-3 py-2 w-75 bg-light">
-                <a
-                    class="btn btn-dark btn-block"
+                    class="btn btn-light btn-outline-dark btn-block  px-4"
                     hx-get="{% url 'business:regular_driver_contacts_list' %}"
                     hx-trigger="click "
                     hx-target="#dasboard_div"
@@ -36,9 +27,9 @@
                     <i class="d-none d-md-inline fa fa-list me-3"></i> Drivers List
                 </a>
             </div>
-            <div class="col-6 col-md-3 py-2 w-75 bg-light">
+            <div class="   bg-light py-1 py-sm-0">
                 <a
-                    class="btn btn-dark w-100"
+                    class="btn btn-light btn-outline-dark px-4"
                     hx-trigger="click "
                     hx-target="#dasboard_div"
                     hx-get="{% url 'orders:orders_list' %}"
@@ -46,14 +37,14 @@
                     <i class="d-none d-md-inline fa fa-list me-3"></i> List Orders
                 </a>
             </div>
-            <div class="col-6 col-md-3 py-2 w-75 bg-light">
+            <div class="  bg-light py-1 py-sm-0">
                 <a
-                    class="btn btn-dark"
+                    class="btn btn-light btn-outline-dark"
                     hx-trigger="click "
                     hx-target="#dasboard_div"
                     hx-get="{% url 'orders:add_order' %}"
                 >
-                    <i class="d-none d-md-inline fa fa-list me-3"></i> Delivery Status
+                    <i class="d-none d-md-inline fa fa-list me-3"></i> Add Orders
                 </a>
             </div>
         </div>
