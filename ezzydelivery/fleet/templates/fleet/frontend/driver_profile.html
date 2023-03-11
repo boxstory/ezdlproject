@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block extra_css %}
-{% endblock extra_css %}
+
 {% block title %}
 EZZY FLEET {{driver.driver_code}}
 {% endblock title %}
 {% block content %}
-<h2 class="text-center fw-bold"> Driver Profile</h2>
 
 <!-- Profile pge section -->
+<h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> Driver Profile</h2>
 <section
     class="section about-section"
     id="about"
@@ -99,30 +98,36 @@ EZZY FLEET {{driver.driver_code}}
                     {% endif %}
                 </div>
                 <div class="m-3">
-                    <form method="POST">{% csrf_token %}
+                    <form method="POST">
+                        {% csrf_token %}
                         {% if profile.is_driver == True %}
-                        <input
+                        <span
                             type="text"
                             name="driver_id"
                             value="{{driver.driver_id}}"
-                        >
-                        <input
-                            type="text"
-                            name="business_id"
-                            value="{{business.business_id}}"
-                        >
-                        <b>Driver</b>
-                        {% elif profile.is_business == True %}
-                        <b>Business</b>
-                        {% else %}
-                        <b>User</b>
-                        {% endif %}
-
+                        > </span>
                         <div
                             class="btn btn-dark  w-100"
                             type="submit"
                             value="submit"
-                        > Add to Contacts</div>
+                        > Add to Favorite</div>
+
+                        {% elif profile.is_business == True %}
+                        <span
+                            type="text"
+                            name="business_id"
+                            value="{{business.business_id}}"
+                        ></span>
+                        <div
+                            class="btn btn-dark  w-100"
+                            type="submit"
+                            value="submit"
+                        > Add to Favorite</div>
+                        {% else %}
+                        <b>User</b>
+                        {% endif %}
+
+
                     </form>
                 </div>
             </div>
@@ -176,7 +181,7 @@ EZZY FLEET {{driver.driver_code}}
         <div class="counter bg-light p-4">
             <h3 class="fw-bold">
 
-                DOCUMENTS
+                AVAILABLE DOCUMENTS
             </h3>
             <hr>
             {% for doc in driver_documents %}
@@ -215,7 +220,7 @@ EZZY FLEET {{driver.driver_code}}
             <div class="row">
                 <h3 class="fw-bold">
 
-                    VEHICLE DETAILS
+                    OWNED VEHICLE DETAILS
                 </h3>
                 <hr>
                 {% if not driver_vehicle %}

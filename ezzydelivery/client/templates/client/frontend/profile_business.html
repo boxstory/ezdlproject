@@ -20,8 +20,8 @@ EZZY FLEET {{driver.driver_code}}
                 <div class="about-text go-to">
                     <h3 class="dark-color">{{business.brand_name}}
                         ({{business.business_code}})</h3>
-                    <h6 class="theme-color lead">Freelance :
-                        {% if profile.is_business == True %}
+                    <h6 class="theme-color lead">
+                        {% if profile.is_driver == True %}
 
                         <b>Driver</b>
 
@@ -36,10 +36,7 @@ EZZY FLEET {{driver.driver_code}}
                     <p>Bio: {{business.business_bio}}</p>
                     <div class="row about-list">
                         <div class="col-md-6">
-                            <div class="media">
-                                <label>Since</label>
-                                <p>{{business.brand_since}}</p>
-                            </div>
+
                             <div class="media">
                                 <label>Category</label>
                                 <p>{{business.brand_product_category}}</p>
@@ -50,7 +47,12 @@ EZZY FLEET {{driver.driver_code}}
                             </div>
                             <div class="media">
                                 <label>Address</label>
-                                <p>{{profile.address}}</p>
+                                <p>{{business.address}}</p>
+                            </div>
+
+                            <div class="media">
+                                <label>Phone</label>
+                                <p>{{business.business_phone}}</p>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -58,9 +60,11 @@ EZZY FLEET {{driver.driver_code}}
                                 <label>E-mail</label>
                                 <p>{{profile.email}}</p>
                             </div>
+
+
                             <div class="media">
-                                <label>Phone</label>
-                                <p>Click me</p>
+                                <label>Since</label>
+                                <p>{{business.brand_since}}</p>
                             </div>
                             <div class="media">
                                 <label>Store Location</label>

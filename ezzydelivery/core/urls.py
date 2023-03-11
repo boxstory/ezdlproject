@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('join_us/',
          core_views.join_us, name='join_us'),
+    path('update_role/',
+         core_views.update_role, name='update_role'),
     path('join_us/business/',
          core_views.join_business, name='join_business'),
     path('join_us/driver/',
@@ -27,7 +29,7 @@ urlpatterns = [
 
     path('driverjobform/', core_views.driverjobform, name='driverjobform'),
 
-    path('business/', core_views.business_profile, name='business_profile'),
+    path('business/', core_views.profile_business, name='profile_business'),
 
 
 

@@ -32,7 +32,7 @@ class businessRegisterForm(forms.ModelForm):
         model = business_models.Business
         fields = '__all__'
         exclude = ['profile', 'business_id', 'user',
-                   'business_status', 'business_code', 'pickup_location']
+                   'business_status', 'business_code']
         widgets = {
             'business_name': forms.TextInput(attrs={'class': 'form-control'}),
             'business_languages': forms.Select(

@@ -41,9 +41,38 @@
                         <h5 class="my-3">{{profile.first_name}} {{profile.last_name}}</h5>
                         <p class="text-muted mb-1">Nationlity: {{profile.nationlity}}</p>
                         <p class="text-muted mb-4">Qatar Location: {{profile.zone_name}}</p>
+
+
+                        {% if profile.is_business %}
+                        <div class="form-check d-flex justify-content-center form-switch ">
+                            <input
+                                class="form-check-input me-3"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckCheckedDisabled"
+                                checked
+                                disabled
+                            >
+                            <label
+                                class="form-check-label"
+                                for="flexSwitchCheckCheckedDisabled"
+                            >Business Admin</label>
+                        </div>
+                        <div class="form-check form-switch d-flex justify-content-center">
+                            <input
+                                class="form-check-input me-3"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckDisabled"
+                                disabled
+                            >
+                            <label
+                                class="form-check-label"
+                                for="flexSwitchCheckDisabled"
+                            >Driver</label>
+                        </div>
                         <div class="d-flex justify-content-center mb-2">
 
-                            {% if profile.is_business %}
                             <a
                                 type="button"
                                 class="btn btn-dark me-2"
@@ -56,181 +85,210 @@
                             <a
                                 type="button"
                                 class="btn btn-light btn-outline-dark "
-                                href="{% url 'core:business_profile' %}"
+                                href="{% url 'core:profile_business' %}"
                             >BUSINESS PROFILE
                             </a>
                             {% elif profile.is_driver %}
-                            <a
-                                type="button"
-                                class="btn btn-dark "
-                                href="{% url 'core:main_dashboard' %}"
-                            >
-                                DRIVER DASHBOARD
-                            </a>
-
-                            <button
-                                type="button"
-                                class="btn btn-outline-dark ms-1 position-relative"
-                            >Message
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                            <div class="form-check d-flex justify-content-center form-switch ">
+                                <input
+                                    class="form-check-input me-3"
+                                    type="checkbox"
+                                    role="switch"
+                                    id="flexSwitchCheckCheckedDisabled"
+                                    disabled
                                 >
-                                    +
-                                </span>
-                            </button>
-                            {% else %}
-                            <a
-                                type="button"
-                                class="btn btn-dark"
-                                href="{% url 'core:join_us' %}"
-                            >
-                                SELECT ROLE
-                            </a>
-                            <button
-                                type="button"
-                                class="btn btn-outline-dark ms-1 position-relative"
-                            >Message
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                <label
+                                    class="form-check-label"
+                                    for="flexSwitchCheckDisabled"
+                                >Business Admin</label>
+                            </div>
+                            <div class="form-check form-switch d-flex justify-content-center">
+                                <input
+                                    class="form-check-input me-3"
+                                    type="checkbox"
+                                    role="switch"
+                                    id="flexSwitchCheckDisabled"
+                                    disabled
+                                    checked
                                 >
-                                    9+
-                                </span>
-                            </button>
-                            {% endif %}
+                                <label
+                                    class="form-check-label"
+                                    for="flexSwitchCheckCheckedDisabled"
+                                >Driver</label>
+                            </div>
+                            <div class="d-flex justify-content-center mb-2">
+                                <a
+                                    type="button"
+                                    class="btn btn-dark "
+                                    href="{% url 'core:main_dashboard' %}"
+                                >
+                                    DRIVER DASHBOARD
+                                </a>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-dark ms-1 position-relative"
+                                >Message
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    >
+                                        +
+                                    </span>
+                                </button>
+
+                                {% else %}
+                                <a
+                                    type="button"
+                                    class="btn btn-dark"
+                                    href="{% url 'core:join_us' %}"
+                                >
+                                    SELECT ROLE
+                                </a>
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-dark ms-1 position-relative"
+                                >Message
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                    >
+                                        9+
+                                    </span>
+                                </button>
+                                {% endif %}
 
 
 
-                        </div>
-                        <div class="d-flex justify-content-center p-3">
-                            <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
-                            <a href="http://wa.me/974{{profile.whatsapp}}!"><i
-                                    class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"
-                                ></i></a>
-                            <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-8">
-                <div class="card mb-4">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Name:</p>
                             </div>
-                            <div class="col-sm-4">
-                                <p class="text-muted mb-0">
-                                    {{profile.first_name }}
-                                </p>
-                            </div>
-                            <div class="col-sm-5">
-                                <p class="text-muted mb-0">
-                                    {{profile.last_name}}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Email</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{profile.email }}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">nationlity</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{profile.nationlity }}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Birthday</p>
-                            </div>
-                            <div class="col-sm-5">
-                                <p class="text-muted mb-0">
-                                    {{profile.date_of_birth }}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Mobile</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="mb-0">
-                                    {{profile.phone.errors }}
-                                    {{profile.phone }}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Whatsapp</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{profile.whatsapp.errors }}
-                                    {{profile.whatsapp }}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Zone Name</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-
-                                    {{profile.zone_name }}
-                                </p>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p class="mb-0">Address</p>
-                            </div>
-                            <div class="col-sm-9">
-                                <p class="text-muted mb-0">
-                                    {{profile.address }}
-                                </p>
+                            <div class="d-flex justify-content-center p-3">
+                                <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
+                                <a href="http://wa.me/974{{profile.whatsapp}}!"><i
+                                        class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"
+                                    ></i></a>
+                                <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="d-grid gap-2 col-6 align-content-end">
-                    {% if profile.user_id %}
-                    <a
-                        href="/profile/{{profile.user_id}}/update"
-                        class="btn btn-primary btn-dark"
-                    >Edit</a>
-                    {% else %}
-                    <a
-                        href="/profile/add/"
-                        class="btn btn-primary btn-dark"
-                    >Edit</a>
 
-                    {% endif %}
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-body">
 
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Name:</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="text-muted mb-0">
+                                        {{profile.first_name }}
+                                    </p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="text-muted mb-0">
+                                        {{profile.last_name}}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">
+                                        {{profile.email }}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">nationlity</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">
+                                        {{profile.nationlity }}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Birthday</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <p class="text-muted mb-0">
+                                        {{profile.date_of_birth }}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Mobile</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="mb-0">
+                                        {{profile.phone.errors }}
+                                        {{profile.phone }}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Whatsapp</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">
+                                        {{profile.whatsapp.errors }}
+                                        {{profile.whatsapp }}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Zone Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">
+
+                                        {{profile.zone_name }}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Address</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">
+                                        {{profile.address }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-6 align-content-end">
+                        {% if profile.user_id %}
+                        <a
+                            href="/profile/{{profile.user_id}}/update"
+                            class="btn btn-primary btn-dark"
+                        >Edit</a>
+                        {% else %}
+                        <a
+                            href="/profile/add/"
+                            class="btn btn-primary btn-dark"
+                        >Edit</a>
+
+                        {% endif %}
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 {% endblock content %}

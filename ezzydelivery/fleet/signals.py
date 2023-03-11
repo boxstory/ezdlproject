@@ -12,18 +12,18 @@ def fleet_register_pre_save_receiver(sender, instance, created, *args, **kwargs)
     print("Driver post save receiver")
     if created:
         print(instance)
-        if instance.id not in fleet_models.DriverVehicle.objects.values_list('driver_id', flat=True):
+
+        if instance not in fleet_models.DriverVehicle.objects.values_list('driver_id', flat=True):
             fleet_models.DriverVehicle.objects.create(
                 driver=instance,
                 vehicle_type='none',
                 vehicle_status='Inactive',
             )
             instance.save()
-        if instance.id not in fleet_models.DriverDocument.objects.values_list('driver_id', flat=True):
+        if instance not in fleet_models.DriverDocument.objects.values_list('driver_id', flat=True):
             fleet_models.DriverDocument.objects.create(
-                driver_id=instance.id,
-                driver_code=instance.driver_code,
-                qid_expirey_date='31/12/2021',
+                driver=instance,
+                qid_expirey_date='2022-12-31',
 
             )
             instance.save()

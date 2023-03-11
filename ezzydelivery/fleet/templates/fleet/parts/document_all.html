@@ -26,4 +26,13 @@
             {% endfor %}
         </tbody>
     </table>
+    <a
+        href="{% url 'fleet:driver_documents_upload' fleet_id=request.user.id %}"
+        class=""
+    >
+        <div class="btn btn-outline-dark text-decoration-none">
+            ADD DOCUMENTS
+
+        </div>
+    </a>
 </div>

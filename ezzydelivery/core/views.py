@@ -81,28 +81,38 @@ def join_driver(request):
             return redirect('core:profile', pk=request.user.id)
         else:
             print("profile not exists")
-
+        joinusform = core_forms.JoinUsForm(
+            request.POST or None, instance=core_models.Profile.objects.get(user_id=request.user.id))
         if request.method == 'POST':
             form = fleet_forms.DriverJoinForm(request.POST)
             if form.is_valid():
                 print("DriverForm full  is valid")
                 f = form.save(commit=False)
+                f.profile = profile
+                print(f.profile)
+                f.driver_id = profile.id
                 f.driver_status = 'Aproval Pending'
                 f.driver_code = ''.join(random.choice(
                     string.digits) for _ in range(6))
                 f.user_id = request.user.id
-                f.is_driver = True
-                f.is_business = False
                 f.driver_rating = 0
                 f.driver_rating_count = 0
                 f.driver_reviews = 0
                 f.driver_reviews_count = 0
-
                 f.save()
+                form1 = joinusform.save(commit=False)
+                user = User.objects.get(id=request.user.id)
+                print(user)
+                print(form1.user_id)
+                form1.user = user
+                form1.is_driver = True
+                form1.is_business = False
+                form1.save()
                 return redirect('/')
 
         form = fleet_forms.DriverJoinForm()
         print('load DriverJoinForm form')
+        print(profile.id)
         context = {
             'form': form,
             'driverjoinform': driverjoinform,
@@ -111,6 +121,30 @@ def join_driver(request):
     except core_models.Profile.DoesNotExist:
         print("profile not exist")
         return redirect('core:profile_add')
+
+
+def update_role(request):
+    Profile = get_object_or_404(
+        core_models.Profile, user_id=request.user.id)
+    joinusform = core_forms.JoinUsForm(
+        request.POST or None, instance=Profile)
+
+    if request.method == 'POST':
+        print("join as driver")
+        if joinusform.is_valid():
+            print("driver join valid")
+            form1 = joinusform.save(commit=False)
+            user = User.objects.get(id=request.user.id)
+            print(user)
+            print(form1.user_id)
+            form1.user = user
+            form1.save()
+
+        return redirect('core:profile', pk=request.user.id)
+    context = {
+        'form': joinusform,
+    }
+    return render(request, 'core/prodile_role_update.html', context)
 
 # @todo
 
@@ -130,14 +164,14 @@ def update_driver(request):
 
 @login_required(login_url='account_login')
 def update_business(request):
-    business_profile = business_models.Business.objects.filter(
+    profile_business = business_models.Business.objects.filter(
         business_id=request.user.id)
-    print(business_profile)
+    print(profile_business)
     businessjoinform = business_forms.businessRegisterForm(
-        request.POST or None, instance=business_profile)
+        request.POST or None, instance=profile_business)
 
     context = {
-        'driverjoinform': driverjoinform,
+        'businessjoinform': businessjoinform,
     }
     return render(request, 'core/join_us_driver.html', context)
 
@@ -211,9 +245,9 @@ def join_us(request):
 # @todo make profile and connect
 
 
-def business_profile(request):
+def profile_business(request):
 
-    return render(request, 'core/business_profile.html')
+    return render(request, 'core/profile_business.html')
 
 
 @login_required(login_url='/accounts/login/')

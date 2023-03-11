@@ -111,7 +111,7 @@ class DriverVehicle(models.Model):
     vehicle_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.vehicle_no
+        return str(self.vehicle_no)
 
     class Meta:
         verbose_name_plural = "Driver Vehicle"

@@ -23,7 +23,8 @@ def business_dashboard(request):
 @login_required(login_url='account_login')
 def business_dashboard(request):
     try:
-        business = business_models.Business.objects.get(user_id=request.user.id)
+        business = business_models.Business.objects.get(
+            user_id=request.user.id)
         profile = core_models.Profile.objects.get(user_id=business.user_id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).all()
@@ -154,9 +155,10 @@ def pickup_location_update(request, pickup_location_id):
 # frontend ---------------------------------------------------------------------------------------------------------------------
 
 
-def business_profile(request, business_id):
+def profile_business(request, business_id):
     try:
-        business = business_models.Business.objects.get(business_id=business_id)
+        business = business_models.Business.objects.get(
+            business_id=business_id)
         profile = core_models.Profile.objects.get(user_id=business.user_id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
@@ -169,7 +171,7 @@ def business_profile(request, business_id):
             'business': business,
             'location': location,
         }
-        return render(request, 'client/frontend/business_profile.html', context)
+        return render(request, 'client/frontend/profile_business.html', context)
     except business_models.Business.DoesNotExist:
 
         return redirect("/join_us/")

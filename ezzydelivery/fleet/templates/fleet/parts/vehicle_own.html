@@ -21,11 +21,29 @@
                 <td scope="row">{{vehicle.vehicle_status}}</td>
                 <td>
                     <!-- delete link neeeds to setup later ********************************************************* -->
-                    <a href=" #">
-                        <i class="fa-solid fa-delete-left"></i> </a>
+                    <a
+                        href="{% url 'fleet:vehicle_update'  %}"
+                        class="btn btn-outline-dark"
+                    >
+                        <i class="fa-solid fa-pen"></i></a>
+
+                    <a
+                        href="{% url 'fleet:vehicle_delete' fleet_id=request.user.id vehicle_id=vehicle.id %}"
+                        class="btn btn-outline-dark"
+                    >
+                        <i class="fa-solid fa-remove"></i></a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a
+        href="{% url 'fleet:vehicle_add' %}"
+        class=""
+    >
+        <div class="btn btn-outline-dark text-decoration-none">
+            ADD VEHICLE
+
+        </div>
+    </a>
 </div>

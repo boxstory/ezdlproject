@@ -32,7 +32,10 @@ urlpatterns = [
          fleet_views.vehicle_own, name='vehicle_own'),
     path('vehicle_update/',
          fleet_views.vehicle_update, name='vehicle_update'),
-
+    path('vehicle_add/',
+         fleet_views.vehicle_add, name='vehicle_add'),
+    path('vehicle_delete/<int:fleet_id>/<int:vehicle_id>/',
+         fleet_views.vehicle_delete, name='vehicle_delete'),
 
 
     #     path('delivery_tasks/<int:dl_id>/',

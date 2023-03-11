@@ -47,7 +47,6 @@ def fleet_dashboard(request):
         profile = core_models.Profile.objects.get(user_id=driver.user_id)
         driver_vehicle = fleet_models.DriverVehicle.objects.filter(
             driver_id=driver.driver_id)
-        print('vehicle id: ', driver_vehicle)
 
         context = {
             'profile': profile,
@@ -74,7 +73,7 @@ def driver_documents(request):
     return render(request, 'fleet/parts/document_all.html', context)
 
 
-def driver_documents_upload(request):
+def driver_documents_upload(request, fleet_id):
     driver = fleet_models.Driver.objects.get(user_id=request.user.id)
     print('driver_documents_upload', driver.driver_id)
     form = fleet_forms.DriverDocumentForm(
@@ -149,15 +148,17 @@ def vehicle_own(request):
 
 def vehicle_add(request):
     print('vehicle_add')
-    form = fleet_forms.VehicleForm(request.POST or None)
+    driver = fleet_models.Driver.objects.get(user_id=request.user.id)
+    form = fleet_forms.DriverVehicleForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             print("VehicleForm full  is valid")
             f = form.save(commit=False)
+            f.driver_id = driver.driver_id
             f.save()
-            return redirect('/fleet/vehicles/')
+            return redirect('/dashboard/')
     else:
-        form = fleet_forms.VehicleForm()
+        form = fleet_forms.DriverVehicleForm()
         context = {
             'form': form,
         }
@@ -169,9 +170,9 @@ def vehicle_delete(request, fleet_id, vehicle_id):
     print('vehicle_delete', id)
     if fleet_id != request.user.id:
         return redirect('/fleet/vehicles/')
-    vehicle = fleet_models.Vehicle.objects.filter(id=vehicle_id)
+    vehicle = fleet_models.DriverVehicle.objects.filter(id=vehicle_id)
     vehicle.delete()
-    return redirect('/fleet/vehicles/')
+    return redirect('/dashboard/')
 
 
 def vehicle_update(request):
@@ -193,14 +194,14 @@ def vehicle_update(request):
             f.save()
 
         return redirect('/fleet/dashboard/')
-    else:
-        form = fleet_forms.DriverVehicleForm(instance=driver_vehicle)
-        context = {
+    
+    form = fleet_forms.DriverVehicleForm(instance=driver_vehicle)
+    context = {
             'form': form,
             'instance': driver_vehicle,
         }
 
-        return render(request, 'fleet/update_vehicle.html', context)
+    return render(request, 'fleet/parts/vehicle_update.html', context)
 
 
 # delivery tasks ----------------------------------------------------------------------------------------------------------------------------
