@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+EZZY BUSINESS
+{% endblock title %}
+{% block content %}
+<h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> BUSINESS Details Update</h2>
+
+<!--frontend business Profile pge section -->
+<section
+    class="section about-section my-3"
+    id="pickup_location_update"
+>
+    <div class="container">
+        <form method="POST">
+            {{form|crispy}}
+            <div class=" text-end d-block justify-content-evenly">
+                <a
+                    class="btn btn-dark  w-md-50"
+                    href="{% url 'business:profile_business' business_id %}"
+                >
+                    Back
+                </a>
+                <a
+                    type="submit"
+                    class="btn btn-dark  w-md-50"
+                    href="{% url 'business:profile_business' business_id %}"
+                >
+                    Submit
+                </a>
+
+
+            </div>
+        </form>
+
+
+    </div>
+</section>
+
+{% endblock content %}

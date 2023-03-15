@@ -163,17 +163,27 @@ def update_driver(request):
 
 
 @login_required(login_url='account_login')
-def update_business(request):
+def business_profile_update(request):
     profile_business = business_models.Business.objects.filter(
         business_id=request.user.id)
     print(profile_business)
-    businessjoinform = business_forms.businessRegisterForm(
+    form = business_forms.businessRegisterForm(
         request.POST or None, instance=profile_business)
+    if form.is_valid():
+        f = form.save(commit=False)
+        f.user = business_models.Business.objects.get(
+            user_id=request.user.id)
+        f.profile = business_models.Business.objects.get(
+            profile_id=request.user.id)
+        f.save()
+        messages.success(
+            request, f'Your account details has been Updated!')
+        return redirect('business:profile_business', business_id=request.user.id)
 
     context = {
-        'businessjoinform': businessjoinform,
+        'form': form,
     }
-    return render(request, 'core/join_us_driver.html', context)
+    return render(request, 'client/frontend/business_profile_update.html', context)
 
 
 def join_us(request):
@@ -236,7 +246,7 @@ def join_us(request):
                 'joinusform': joinusform,
                 'driverjoinform': driverjoinform,
                 'businessjoinform': businessjoinform,
-                'instance': Profile
+                'profile': Profile
             }
         return render(request, 'core/join_us.html', context)
     print("load else redirect form")

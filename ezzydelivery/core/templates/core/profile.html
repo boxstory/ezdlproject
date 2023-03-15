@@ -42,8 +42,9 @@
                         <p class="text-muted mb-1">Nationlity: {{profile.nationlity}}</p>
                         <p class="text-muted mb-4">Qatar Location: {{profile.zone_name}}</p>
 
-
+                        Joined as
                         {% if profile.is_business %}
+
                         <div class="form-check d-flex justify-content-center form-switch ">
                             <input
                                 class="form-check-input me-3"
@@ -85,7 +86,7 @@
                             <a
                                 type="button"
                                 class="btn btn-light btn-outline-dark "
-                                href="{% url 'core:profile_business' %}"
+                                href="{% url 'business:profile_business' profile.id %}"
                             >BUSINESS PROFILE
                             </a>
                             {% elif profile.is_driver %}
@@ -119,22 +120,18 @@
                             <div class="d-flex justify-content-center mb-2">
                                 <a
                                     type="button"
-                                    class="btn btn-dark "
-                                    href="{% url 'core:main_dashboard' %}"
+                                    class="btn btn-dark me-2"
+                                    href="{% url 'core:main_dashboard'  %}"
                                 >
                                     DRIVER DASHBOARD
                                 </a>
 
-                                <button
+                                <a
                                     type="button"
-                                    class="btn btn-outline-dark ms-1 position-relative"
-                                >Message
-                                    <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                    >
-                                        +
-                                    </span>
-                                </button>
+                                    class="btn btn-light btn-outline-dark "
+                                    href="{% url 'fleet:driver_profile' profile.id %}"
+                                >MY PROFILE
+                                </a>
 
                                 {% else %}
                                 <a
@@ -143,18 +140,13 @@
                                     href="{% url 'core:join_us' %}"
                                 >
                                     SELECT ROLE
-                                </a>
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-dark ms-1 position-relative"
-                                >Message
-                                    <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                    >
-                                        9+
-                                    </span>
-                                </button>
-                                {% endif %}
+                                    <a
+                                        type="button"
+                                        class="btn btn-light btn-outline-dark "
+                                        href="#"
+                                    >MY PROFILE
+                                    </a>
+                                    {% endif %}
 
 
 

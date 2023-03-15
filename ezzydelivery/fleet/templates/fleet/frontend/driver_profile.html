@@ -7,7 +7,7 @@ EZZY FLEET {{driver.driver_code}}
 {% endblock title %}
 {% block content %}
 
-<!-- Profile pge section -->
+<!-- frontend driver Profile pge section -->
 <h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> Driver Profile</h2>
 <section
     class="section about-section"
@@ -20,12 +20,12 @@ EZZY FLEET {{driver.driver_code}}
                     <h3 class="dark-color">{{profile.user.first_name}} {{profile.user.last_name}}
                         ({{driver.driver_code}})</h3>
                     <hr>
-                    <h6 class="theme-color lead">Freelance :
+                    <h6 class="theme-color lead">
                         {% if profile.is_driver == True %}
 
-                        <b>Driver</b>
+                        <b>Role : Driver</b>
                         {% elif profile.is_business == True %}
-                        <b>Business</b>
+                        <b>Business Details</b>
                         {% else %}
                         <b>User</b>
                         {% endif %}

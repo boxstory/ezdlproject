@@ -23,7 +23,7 @@ urlpatterns = [
     path('join_us/driver/',
          core_views.join_driver, name='join_driver'),
     path('join_us/business/update/',
-         core_views.update_business, name='update_business'),
+         core_views.business_profile_update, name='business_profile_update'),
     path('join_us/driver/update/',
          core_views.update_driver, name='update_driver'),
 

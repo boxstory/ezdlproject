@@ -50,9 +50,8 @@
                                 class="btn btn-dark"
                                 href="{% url 'business:business_dashboard' %}"
                             >
-                                Dashboard
+                                Business Dashboard
                             </a>
-                            <p>{{profile.is_business}}</p>
 
 
                             {% elif profile.is_driver %}
@@ -61,7 +60,7 @@
                                 class="btn btn-dark"
                                 href="{% url 'fleet:fleet_dashboard' %}"
                             >
-                                Dashboard
+                                Driver Dashboard
                             </a>
                             {% else %}
                             <a
@@ -76,7 +75,7 @@
                             <button
                                 type="button"
                                 class="btn btn-outline-dark ms-1"
-                            >Message</button>
+                            >Update</button>
                         </div>
                         <div class="d-flex justify-content-center p-3">
                             <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
@@ -112,7 +111,26 @@
 
                             Select your job title:
                         </li>
+                        {% if profile.is_business or profile.is_driver %}
+                        <div>
 
+                            <p> Already joined as</p>
+                            {% if profile.is_business %}
+                            <div class="h4 fw-bold">Business Admin</div>
+                            {% else %}
+                            <div class="h4 fw-bold">Driver</div>
+                            {% endif %}
+                        </div>
+
+                        <a
+                            type="button"
+                            class="btn btn-dark"
+                            href="/dashboard/"
+                        >
+                            Go To Dashboard
+                        </a>
+
+                        {% else %}
                         <li
                             class="col-4  mb-5 me-lg-0"
                             role="presentation"
@@ -134,6 +152,7 @@
                             </a>
 
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

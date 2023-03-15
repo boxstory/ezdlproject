@@ -4,12 +4,24 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block title %}
-EZZY FLEET {{driver.driver_code}}
+EZZY BUSINESS {{business.brand_name}}
 {% endblock title %}
 {% block content %}
-<h2> BUSINESS Profile</h2>
+<h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> BUSINESS Profile
 
-<!-- Profile pge section -->
+
+    <a
+        type="submit"
+        class="btn btn-dark w-100 w-md-50"
+        href="{% url 'business:business_profile_update'   %}"
+    >
+        Update Business
+    </a>
+
+
+</h2>
+
+<!--frontend business Profile pge section -->
 <section
     class="section about-section my-3"
     id="about"
@@ -32,6 +44,7 @@ EZZY FLEET {{driver.driver_code}}
                         {% endif %}
                     </h6>
 
+                    s
 
                     <p>Bio: {{business.business_bio}}</p>
                     <div class="row about-list">

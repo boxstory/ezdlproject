@@ -10,7 +10,8 @@ from fleet import models as fleet_models
 
 
 def upload_path_handler(instance, filename):
-    upload_dir = os.path.join('business', instance.business.business_code, 'logo')
+    upload_dir = os.path.join(
+        'business', instance.business.business_code, 'logo')
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     return os.path.join(upload_dir, filename)
@@ -32,6 +33,9 @@ class Business(models.Model):
     business_whatsapp = models.CharField(
         max_length=100, blank=True, null=True)
     brand_name = models.CharField(max_length=100)
+    brand_facebook_page = models.CharField(
+        max_length=100, blank=True, null=True)
+    brand_instagram = models.CharField(max_length=100, blank=True, null=True)
     brand_since = models.DateField(max_length=100, blank=True, null=True)
     brand_product_category = models.CharField(
         max_length=100, blank=True, null=True)
@@ -67,7 +71,6 @@ class PickupLocation(models.Model):
         verbose_name_plural = "Pickup Location"
 
 
-
 class RegularDriverContacts(models.Model):
     business = models.ForeignKey(
         Business, on_delete=models.CASCADE, related_name='regular_driver_contact')
@@ -79,3 +82,14 @@ class RegularDriverContacts(models.Model):
 
     class Meta:
         verbose_name_plural = "Regular Drivers Contacts"
+
+
+class BusinessSocialInfo(models.Model):
+    business = models.ForeignKey(
+        Business, on_delete=models.CASCADE, related_name='business_social_info')
+    facebook = models.CharField(max_length=100)
+    instagram = models.CharField(max_length=100)
+    whatsapp = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.business

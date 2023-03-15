@@ -13,9 +13,32 @@ from client import forms as business_forms
 # Create your views here.
 
 
-def business_dashboard(request):
+def business_profile_update(request):
+    print('business_profile_update')
+    business = get_object_or_404(
+        business_models.Business, business_id=request.user.id)
+    form = business_forms.businessRegisterForm(
+        request.POST or None, instance=business)
+    if request.method == 'POST':
+        print('businessRegisterForm')
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.user = business_models.Business.objects.get(
+                user_id=request.user.id)
+            f.profile = business_models.Business.objects.get(
+                profile_id=request.user.id)
+            form.save()
+            messages.success(request, "Successful Submission")
+            return redirect("business:regular_driver_contacts_list")
+        else:
+            print('regular_driver_contacts_add not valid')
+            messages.error(request, "Error")
+    context = {
+        'form': form,
+        'business_id': business.business_id
+    }
 
-    return render(request, 'client/business_dashboard.html')
+    return render(request, 'client/frontend/business_profile_update.html', context)
 
 # dashboard---------------------------------------------------------------------------------------------------------------------
 
@@ -162,6 +185,7 @@ def profile_business(request, business_id):
         profile = core_models.Profile.objects.get(user_id=business.user_id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
+
         print(business)
         print(profile)
         print(location)
