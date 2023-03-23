@@ -247,7 +247,7 @@ export const faHamburger: IconDefinition;
 export const faBus: IconDefinition;
 export const faBusSimple: IconDefinition;
 export const faBusAlt: IconDefinition;
-export const fabusinessTime: IconDefinition;
+export const faBusinessTime: IconDefinition;
 export const faBriefcaseClock: IconDefinition;
 export const faC: IconDefinition;
 export const faCakeCandles: IconDefinition;
