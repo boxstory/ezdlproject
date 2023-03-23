@@ -1,4 +1,4 @@
-# Font Awesome 6.0.0
+# Font Awesome 6.2.0
 
 Thanks for downloading Font Awesome! We're so excited you're here.
 

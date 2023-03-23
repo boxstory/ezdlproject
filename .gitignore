@@ -11,7 +11,8 @@ media
 *.env 
 .venv 
 env/ 
-venv/ 
+venv/
+venvezdl/
 
 .DS_Store
 
