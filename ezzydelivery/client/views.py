@@ -185,15 +185,18 @@ def profile_business(request, business_id):
         profile = core_models.Profile.objects.get(user_id=business.user_id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
-
+        business_social_info = business_models.BusinessSocialInfo.objects.get(
+            business_id=business_id)
         print(business)
         print(profile)
         print(location)
+        print(business_social_info)
 
         context = {
             'profile': profile,
             'business': business,
             'location': location,
+            'business_social_info': business_social_info,
         }
         return render(request, 'client/frontend/profile_business.html', context)
     except business_models.Business.DoesNotExist:

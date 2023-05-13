@@ -292,6 +292,7 @@ def profile(request, pk):
     context = {}
     context["profile"] = core_models.Profile.objects.get(
         user_id=request.user.id)
+
     return render(request, 'core/profile.html', context)
 
 

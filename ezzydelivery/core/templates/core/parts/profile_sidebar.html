@@ -1,0 +1,129 @@
+{% load static %}
+
+<!-- <div class="row"> -->
+<!-- profile left side section -->
+<div class="card-body text-center bg-white p-3">
+    <img
+        src="{{profile.profile_pic.url}}"
+        alt="avatar"
+        class="rounded-circle img-fluid"
+        style="width: 180px;"
+    >
+    <h5 class="my-3">{{profile.first_name}} {{profile.last_name}}</h5>
+    <p class="text-muted mb-1">Nationlity: {{profile.nationlity}}</p>
+    <p class="text-muted mb-4">Qatar Location: {{profile.zone_name}}</p>
+
+    {% if profile.is_business %}
+    <div class="form-check d-flex justify-content-center form-switch ">
+        <input
+            class="form-check-input me-3"
+            type="checkbox"
+            role="switch"
+            checked
+            disabled
+        >
+        <label class="form-check-label fw-bold">Business Admin</label>
+    </div>
+    <div class="form-check form-switch d-flex justify-content-center">
+        <input
+            class="form-check-input me-3"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDisabled"
+            disabled
+        >
+        <label
+            class="form-check-label"
+            for="flexSwitchCheckDisabled"
+        >Driver</label>
+    </div>
+    <div class="d-flex justify-content-center mb-2">
+
+        <a
+            type="button"
+            class="btn btn-dark me-2"
+            href="{% url 'core:main_dashboard' %}"
+        >
+            BUSINESS DASHBOARD
+        </a>
+
+
+        <a
+            type="button"
+            class="btn btn-light btn-outline-dark "
+            href="{% url 'business:profile_business' profile.id %}"
+        >BUSINESS PROFILE
+        </a>
+
+    </div>
+
+
+
+    {% elif profile.is_driver %}
+    <div class="form-check d-flex justify-content-center form-switch ">
+        <input
+            class="form-check-input me-3"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckCheckedDisabled"
+            disabled
+        >
+        <label
+            class="form-check-label"
+            for="flexSwitchCheckDisabled"
+        >Business Admin</label>
+    </div>
+    <div class="form-check form-switch d-flex justify-content-center">
+        <input
+            class="form-check-input me-3"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDisabled"
+            disabled
+            checked
+        >
+        <label
+            class="form-check-label"
+            for="flexSwitchCheckCheckedDisabled"
+        >Driver</label>
+    </div>
+    <div class="d-flex justify-content-center mb-2">
+        <a
+            type="button"
+            class="btn btn-dark me-2"
+            href="{% url 'core:main_dashboard'  %}"
+        >
+            DRIVER DASHBOARD
+        </a>
+
+        <a
+            type="button"
+            class="btn btn-light btn-outline-dark "
+            href="{% url 'fleet:driver_profile' profile.id %}"
+        >MY PROFILE
+        </a>
+    </div>
+
+    {% else %}
+
+    <a
+        type="button"
+        class="btn btn-dark pb-2"
+        href="{% url 'core:join_us' %}"
+    >
+        SELECT ROLE</a>
+    <a
+        type="button"
+        class="btn btn-light btn-outline-dark"
+        href="#"
+    >MY PROFILE
+    </a>
+    {% endif %}
+</div>
+<div class="d-flex justify-content-evenly p-3 bg-light">
+    <a href="{{profile.facebook}}"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
+    <a href="http://wa.me/974{{profile.whatsapp}}"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
+    <a href="{{profile.instagram}}"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
+</div>
+
+</div>

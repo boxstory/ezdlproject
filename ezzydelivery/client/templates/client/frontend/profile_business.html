@@ -103,8 +103,8 @@ EZZY BUSINESS {{business.brand_name}}
                 </div>
             </div>
             <div class="col-md-6">
-                <div class=" w-sm-50 w-75">
-                    {% if profile.profile_pic %}
+                <div class="d-flex justify-content-center">
+                    {% if business.business_logo %}
                     <img
                         src="{{business.business_logo.url}}"
                         alt=""
@@ -118,6 +118,15 @@ EZZY BUSINESS {{business.brand_name}}
                         class=" img-fluid text-center"
                     >
                     {% endif %}
+                </div>
+                <div class="d-flex justify-content-evenly p-3 bg-light">
+                    <a href="{{business_social_info.facebook}}"><i
+                            class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
+                    <a href="http://wa.me/974{{business_social_info.whatsapp}}"><i
+                            class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"
+                        ></i></a>
+                    <a href="{{business_social_info.instagram}}"><i
+                            class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
                 </div>
             </div>
         </div>
