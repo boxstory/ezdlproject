@@ -29,7 +29,7 @@ class Business(models.Model):
     business_bio = models.CharField(max_length=225, blank=True, null=True)
     business_phone = models.CharField(max_length=100, blank=True, null=True)
     business_logo = models.ImageField(
-        upload_to=upload_path_handler, default="business/avathar.png", blank=True, null=True)
+        upload_to=upload_path_handler, default="business/avatar.png", blank=True, null=True)
     business_whatsapp = models.CharField(
         max_length=100, blank=True, null=True)
     brand_name = models.CharField(max_length=100)

@@ -35,8 +35,8 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['businesside_order_code', 'order_name', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
-                  'costumer_zone_no', 'costumer_address',
+        fields = ['businesside_order_code', 'order_name', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+                  'customer_zone_no', 'customer_address',
                   'pickup_location', 'order_status',
                   ]
         exclude = ['order_number', 'business', 'delivery_task', 'deadline_date',
@@ -76,8 +76,8 @@ class AddOrderForm(forms.ModelForm):
 class UpdateOrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['businesside_order_code', 'costumer_name', 'costumer_phone', 'costumer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
-                  'costumer_zone_no', 'costumer_address',
+        fields = ['businesside_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+                  'customer_zone_no', 'customer_address',
                   'pickup_location', 'order_status', 'order_name',
                   ]
         exclude = ['order_number', 'business', 'delivery_task', 'order_date',

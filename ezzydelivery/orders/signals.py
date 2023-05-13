@@ -33,10 +33,10 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
             instance.save()
         if instance.order_number not in DlAddressUpdate.objects.values_list('dl_task_number', flat=True):
             DlAddressUpdate.objects.create(
-                full_name=instance.costumer_name,
+                full_name=instance.customer_name,
                 dl_task_number=instance.order_number,
-                mobile_no=instance.costumer_phone,
-                zone_number=instance.costumer_zone_no,
+                mobile_no=instance.customer_phone,
+                zone_number=instance.customer_zone_no,
                 dl_price=instance.dl_amount,
 
             )

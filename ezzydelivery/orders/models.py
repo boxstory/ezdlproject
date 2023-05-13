@@ -64,11 +64,11 @@ class Order(models.Model):
     cod_amount = models.IntegerField(default=0)
     dl_amount = models.IntegerField(default=0)
     # costumner details
-    costumer_name = models.CharField(max_length=100, blank=True)
-    costumer_phone = models.CharField(max_length=100, blank=True)
-    costumer_whatsapp = models.CharField(max_length=100, blank=True)
-    costumer_zone_no = models.PositiveIntegerField(blank=True)
-    costumer_address = models.CharField(max_length=100, blank=True)
+    customer_name = models.CharField(max_length=100, blank=True)
+    customer_phone = models.CharField(max_length=100, blank=True)
+    customer_whatsapp = models.CharField(max_length=100, blank=True)
+    customer_zone_no = models.PositiveIntegerField(blank=True)
+    customer_address = models.CharField(max_length=100, blank=True)
     deadline_date = models.CharField(max_length=100, blank=True)
     order_date = models.DateField(auto_now_add=True)
 

@@ -27,142 +27,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
+            <div class=" col-12 col-lg-4">
 
-                        <img
-                            src="{{profile.profile_pic.url}}"
-                            alt="avatar"
-                            class="rounded-circle img-fluid"
-                            style="width: 180px;"
-                        >
-
-                        <h5 class="my-3">{{profile.first_name}} {{profile.last_name}}</h5>
-                        <p class="text-muted mb-1">Nationlity: {{profile.nationlity}}</p>
-                        <p class="text-muted mb-4">Qatar Location: {{profile.zone_name}}</p>
-
-                        Joined as
-                        {% if profile.is_business %}
-
-                        <div class="form-check d-flex justify-content-center form-switch ">
-                            <input
-                                class="form-check-input me-3"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckCheckedDisabled"
-                                checked
-                                disabled
-                            >
-                            <label
-                                class="form-check-label"
-                                for="flexSwitchCheckCheckedDisabled"
-                            >Business Admin</label>
-                        </div>
-                        <div class="form-check form-switch d-flex justify-content-center">
-                            <input
-                                class="form-check-input me-3"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckDisabled"
-                                disabled
-                            >
-                            <label
-                                class="form-check-label"
-                                for="flexSwitchCheckDisabled"
-                            >Driver</label>
-                        </div>
-                        <div class="d-flex justify-content-center mb-2">
-
-                            <a
-                                type="button"
-                                class="btn btn-dark me-2"
-                                href="{% url 'core:main_dashboard' %}"
-                            >
-                                BUSINESS DASHBOARD
-                            </a>
-
-
-                            <a
-                                type="button"
-                                class="btn btn-light btn-outline-dark "
-                                href="{% url 'business:profile_business' profile.id %}"
-                            >BUSINESS PROFILE
-                            </a>
-                            {% elif profile.is_driver %}
-                            <div class="form-check d-flex justify-content-center form-switch ">
-                                <input
-                                    class="form-check-input me-3"
-                                    type="checkbox"
-                                    role="switch"
-                                    id="flexSwitchCheckCheckedDisabled"
-                                    disabled
-                                >
-                                <label
-                                    class="form-check-label"
-                                    for="flexSwitchCheckDisabled"
-                                >Business Admin</label>
-                            </div>
-                            <div class="form-check form-switch d-flex justify-content-center">
-                                <input
-                                    class="form-check-input me-3"
-                                    type="checkbox"
-                                    role="switch"
-                                    id="flexSwitchCheckDisabled"
-                                    disabled
-                                    checked
-                                >
-                                <label
-                                    class="form-check-label"
-                                    for="flexSwitchCheckCheckedDisabled"
-                                >Driver</label>
-                            </div>
-                            <div class="d-flex justify-content-center mb-2">
-                                <a
-                                    type="button"
-                                    class="btn btn-dark me-2"
-                                    href="{% url 'core:main_dashboard'  %}"
-                                >
-                                    DRIVER DASHBOARD
-                                </a>
-
-                                <a
-                                    type="button"
-                                    class="btn btn-light btn-outline-dark "
-                                    href="{% url 'fleet:driver_profile' profile.id %}"
-                                >MY PROFILE
-                                </a>
-
-                                {% else %}
-                                <a
-                                    type="button"
-                                    class="btn btn-dark"
-                                    href="{% url 'core:join_us' %}"
-                                >
-                                    SELECT ROLE
-                                    <a
-                                        type="button"
-                                        class="btn btn-light btn-outline-dark "
-                                        href="#"
-                                    >MY PROFILE
-                                    </a>
-                                    {% endif %}
+                {% include "core/parts/profile_sidebar.html" %}
 
 
 
-                            </div>
-                            <div class="d-flex justify-content-center p-3">
-                                <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
-                                <a href="http://wa.me/974{{profile.whatsapp}}!"><i
-                                        class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"
-                                    ></i></a>
-                                <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-8">
+                <div class="col-12 col-lg-8">
                     <div class="card mb-4">
                         <div class="card-body">
 
@@ -263,7 +134,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-grid gap-2 col-6 align-content-end">
+                    <div class="d-grid gap-2 col align-content-end">
                         {% if profile.user_id %}
                         <a
                             href="/profile/{{profile.user_id}}/update"
@@ -279,6 +150,7 @@
 
                     </div>
                 </div>
+
             </div>
         </div>
 </section>

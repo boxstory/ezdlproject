@@ -40,7 +40,7 @@ class DeliveryTask(models.Model):
     dl_task_status = (
         ('for_review', 'For Review'),
         ('Pending', 'Pending'),
-        ('Costumer Not Confirmed', 'Costumer Not Confirmed'),
+        ('Customer Not Confirmed', 'Customer Not Confirmed'),
         ('In Transit', 'In Transit'),
         ('Delivered', 'Delivered'),
         ('Cancelled', 'Cancelled'),

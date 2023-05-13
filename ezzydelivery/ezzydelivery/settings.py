@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'fontawesomefree',
     'rest_framework',
+    'import_export',
 
     # local apps
     'core',
