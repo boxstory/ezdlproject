@@ -9,6 +9,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, blank=True, null=True)
+    instagram = models.CharField(max_length=255, blank=True, null=True)
     phone = models.IntegerField(blank=True, null=True)
     whatsapp = models.IntegerField(blank=True, null=True)
     zone_name = models.CharField(max_length=255, blank=True, null=True)

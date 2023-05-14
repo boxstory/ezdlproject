@@ -26,7 +26,7 @@ urlpatterns = [
     path('<int:business_id>/', business_views.profile_business,
          name='profile_business'),
     path('all', business_views.all_business, name='all_business'),
-    path('business_profile_update/', business_views.business_profile_update,
+    path('<int:business_id>/update/', business_views.business_profile_update,
          name='business_profile_update'),
 
     # driver contacts list

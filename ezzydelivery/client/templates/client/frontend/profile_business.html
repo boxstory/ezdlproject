@@ -13,7 +13,7 @@ EZZY BUSINESS {{business.brand_name}}
     <a
         type="submit"
         class="btn btn-dark w-100 w-md-50"
-        href="{% url 'business:business_profile_update'   %}"
+        href="{% url 'business:business_profile_update'  business.business_id %}"
     >
         Update Business
     </a>
