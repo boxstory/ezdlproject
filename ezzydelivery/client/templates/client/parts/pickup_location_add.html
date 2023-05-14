@@ -5,6 +5,7 @@
     hx-post="{% url 'business:pickup_location_add'   %}"
     method="POST"
 >
+    {% csrf_token %}
     {{form|crispy}}
     <div class=" text-end">
         <button
