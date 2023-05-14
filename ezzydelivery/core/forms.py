@@ -29,7 +29,7 @@ class CustomSignupForm(SignupForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'email', 'phone', 'address',
+        fields = ['first_name', 'last_name', 'email', 'phone', 'address', 'instagram',
                   'whatsapp', 'zone_name', 'nationlity', 'date_of_birth', 'profile_pic']
 
     def __init__(self, *args, **kwargs):

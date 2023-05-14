@@ -13,23 +13,29 @@ from client import forms as business_forms
 # Create your views here.
 
 
-def business_profile_update(request):
+def business_profile_update(request, business_id):
+    if request.user.id == business_id:
+        redirect('core:main_dashboard')
     print('business_profile_update')
     business = get_object_or_404(
-        business_models.Business, business_id=request.user.id)
-    form = business_forms.businessRegisterForm(
-        request.POST or None, instance=business)
+        business_models.Business, business_id=business_id)
+    print('business')
+    form = business_forms.businessRegisterForm(instance=business)
+    print('form')
     if request.method == 'POST':
         print('businessRegisterForm')
+        form = business_forms.businessRegisterForm(
+            request.POST, request.FILES, instance=business)
         if form.is_valid():
             f = form.save(commit=False)
-            f.user = business_models.Business.objects.get(
-                user_id=request.user.id)
-            f.profile = business_models.Business.objects.get(
-                profile_id=request.user.id)
+            print('f.user')
+            
+            print(f.user)
+
             form.save()
+            print('ok')
             messages.success(request, "Successful Submission")
-            return redirect("business:regular_driver_contacts_list")
+            return redirect("business:business_dashboard")
         else:
             print('regular_driver_contacts_add not valid')
             messages.error(request, "Error")
@@ -185,7 +191,7 @@ def profile_business(request, business_id):
         profile = core_models.Profile.objects.get(user_id=business.user_id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
-        business_social_info = business_models.BusinessSocialInfo.objects.get(
+        business_social_info = business_models.BusinessSocialInfo.objects.filter(
             business_id=business_id)
         print(business)
         print(profile)

@@ -14,6 +14,7 @@ EZZY BUSINESS
 >
     <div class="container">
         <form method="POST">
+            {% csrf_token %}
             {{form|crispy}}
             <div class=" text-end d-block justify-content-evenly">
                 <a
@@ -22,17 +23,17 @@ EZZY BUSINESS
                 >
                     Back
                 </a>
-                <a
+                <button
                     type="submit"
+                    value="submit"
                     class="btn btn-dark  w-md-50"
-                    href="{% url 'business:profile_business' business_id %}"
                 >
                     Submit
-                </a>
-
-
+                </button>
             </div>
         </form>
+        <hr>
+        sada
 
 
     </div>
