@@ -19,16 +19,16 @@
                 <td>{{contact.driver.driver_code}}</td>
                 <td>{{contact.driver.driver_phone}}</td>
                 <td>{{contact.driver.driver_status}}</td>
-                <td>
+                <!-- <td>
                     <a
                         class="pe-3 text-dark"
                         class="btn pe-3 text-dark"
                         hx-confirm="Are you sure you wish to delete?"
                         hx-target="#dasboard_div"
                         hx-swap="innerHTML swap:1s"
-                        hx-delete="{% url 'business:driver_directory_delete' contact.id %}"
+                        hx-delete="{% url 'business:driver_directory_delete' fleet.id %}"
                     ><i class="fa fa-lg fa-trash"></i></a>
-                </td>
+                </td> -->
             </tr>
             {% endfor %} {% else %}
             <tr>
@@ -43,14 +43,14 @@
                     colspan="5"
                     class="py-2"
                 >
-                    <a
+                    <!-- <a
                         class="btn btn-dark"
-                        hx-get="{% url 'business:driver_directory_add' %}"
+                        hx-get="{% url 'business:driver_directory_add' fleet_id %}"
                         hx-trigger="click "
                         hx-target="#dasboard_div"
                     ><i class="fa fa-lg fa-add me-2"></i>
                         Search
-                    </a>
+                    </a> -->
                 </td>
             </tr>
         </tbody>

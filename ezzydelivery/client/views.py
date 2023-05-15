@@ -72,9 +72,9 @@ def business_dashboard(request):
 
 
 def driver_directory(request):
-    if business_models.RegularDriverContacts.objects.filter(
+    if business_models.DriverDirectory.objects.filter(
             business_id=request.user.id).all().exists():
-        driver_directory = business_models.RegularDriverContacts.objects.filter(
+        driver_directory = business_models.DriverDirectory.objects.filter(
             business_id=request.user.id).all()
         if not driver_directory:
             return redirect('business:driver_directory_add')
@@ -84,13 +84,15 @@ def driver_directory(request):
         return render(request, 'client/parts/driver_directory.html', context)
     else:
 
-        return redirect('business:driver_directory_add')
-        # return HttpResponse('No Drivers contacts yet ')
+        # return redirect('business:driver_directory_add' )
+        return HttpResponse('No Drivers contacts yet Find drivers in directory')
 
 
-def driver_directory_add(request, business_id, fleet_id):
+def driver_directory_add(request, fleet_id):
     print('driver_directory_add')
-
+    fleet_list = get_object_or_404(
+        business_models.DriverDirectory, fleet_id=fleet_id)
+    print(fleet_list)
     form = business_forms.DriverDirectoryAddForm(request.POST or None)
     if request.method == 'POST':
         print('driver_directory_add POST')
@@ -100,6 +102,7 @@ def driver_directory_add(request, business_id, fleet_id):
             f.business = business_models.Business.objects.get(
                 business_id=request.user.id)
             print(f.business)
+
             print('DriverDirectoryAddForm submitted')
             form.save()
             messages.success(request, "Successful Submission")
@@ -113,9 +116,9 @@ def driver_directory_add(request, business_id, fleet_id):
     return render(request, 'client/parts/driver_directory_add.html', context)
 
 
-def driver_directory_delete(request, contact_id):
-    contact = business_models.RegularDriverContacts.objects.get(id=contact_id)
-    contact.delete()
+def driver_directory_delete(request, fleet_id):
+    fleet = business_models.DriverDirectory.objects.get(id=fleet_id)
+    fleet.delete()
     return redirect("business:driver_directory")
 
 

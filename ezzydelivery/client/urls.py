@@ -32,9 +32,9 @@ urlpatterns = [
     # driver_directory
     path('driver_directory/', business_views.driver_directory,
          name='driver_directory'),
-    path('driver_directory/add/', business_views.driver_directory_add,
+    path('driver_directory/<int:fleet_id>/add/', business_views.driver_directory_add,
          name='driver_directory_add'),
-    path('driver_directory/<int:contact_id>/delete/',
+    path('driver_directory/<int:fleet_id>/delete/',
          business_views.driver_directory_delete, name='driver_directory_delete'),
 
 ]
