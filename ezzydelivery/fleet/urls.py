@@ -21,9 +21,9 @@ urlpatterns = [
          fleet_views.driver_documents, name='driver_documents'),
     path('documents/upload/<int:fleet_id>/',
          fleet_views.driver_documents_upload, name='driver_documents_upload'),
-    path('documents/<int:fleet_id>/<int:document_id>/update',
+    path('documents/<int:fleet_id>/<int:doc_id>/update',
          fleet_views.driver_documents_update, name='driver_documents_update'),
-    path('documents/<int:fleet_id>/<int:document_id>/delete',
+    path('documents/<int:fleet_id>/<int:doc_id>/delete',
          fleet_views.driver_documents_delete, name='driver_documents_delete'),
 
     # vehicle

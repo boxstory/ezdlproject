@@ -85,7 +85,7 @@ def driver_documents_upload(request, fleet_id):
             f = form.save(commit=False)
             f.driver_id = driver.driver_id
             f.save()
-            return redirect('/fleet/documents/')
+            return redirect('/fleet/dashboard/')
     else:
         form = fleet_forms.DriverDocumentForm()
         context = {
@@ -111,7 +111,7 @@ def driver_documents_update(request, fleet_id, doc_id):
             f = form.save(commit=False)
             f.driver_id = driver.driver_id
             f.save()
-            return redirect('/fleet/documents/')
+            return redirect('/fleet/dashboard/')
     else:
         form = fleet_forms.DriverDocumentForm(instance=document)
         context = {
@@ -194,12 +194,12 @@ def vehicle_update(request):
             f.save()
 
         return redirect('/fleet/dashboard/')
-    
+
     form = fleet_forms.DriverVehicleForm(instance=driver_vehicle)
     context = {
-            'form': form,
-            'instance': driver_vehicle,
-        }
+        'form': form,
+        'instance': driver_vehicle,
+    }
 
     return render(request, 'fleet/parts/vehicle_update.html', context)
 
