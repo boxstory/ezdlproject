@@ -29,12 +29,12 @@ urlpatterns = [
     path('<int:business_id>/update/', business_views.business_profile_update,
          name='business_profile_update'),
 
-    # driver contacts list
-    path('driver_contacts/', business_views.driver_directory,
+    # driver_directory
+    path('driver_directory/', business_views.driver_directory,
          name='driver_directory'),
-    path('driver_contacts/add/', business_views.regular_driver_contacts_add,
-         name='regular_driver_contacts_add'),
-    path('driver_contacts/<int:contact_id>/delete/',
-         business_views.regular_driver_contacts_delete, name='regular_driver_contacts_delete'),
+    path('driver_directory/add/', business_views.driver_directory_add,
+         name='driver_directory_add'),
+    path('driver_directory/<int:contact_id>/delete/',
+         business_views.driver_directory_delete, name='driver_directory_delete'),
 
 ]

@@ -61,8 +61,8 @@ class PickupLocationsAddForm(forms.ModelForm):
         exclude = ['business']
 
 
-class RegularDriverContactsAddForm(forms.ModelForm):
+class DriverDirectoryAddForm(forms.ModelForm):
     class Meta:
-        model = business_models.RegularDriverContacts
+        model = business_models.DriverDirectory
         fields = '__all__'
         exclude = ['business']

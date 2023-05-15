@@ -37,7 +37,7 @@ def business_profile_update(request, business_id):
             messages.success(request, "Successful Submission")
             return redirect("business:business_dashboard")
         else:
-            print('regular_driver_contacts_add not valid')
+            print('driver_directory_add not valid')
             messages.error(request, "Error")
     context = {
         'form': form,
@@ -74,46 +74,46 @@ def business_dashboard(request):
 def driver_directory(request):
     if business_models.RegularDriverContacts.objects.filter(
             business_id=request.user.id).all().exists():
-        regular_driver_contacts = business_models.RegularDriverContacts.objects.filter(
+        driver_directory = business_models.RegularDriverContacts.objects.filter(
             business_id=request.user.id).all()
-        if not regular_driver_contacts:
-            return redirect('business:regular_driver_contacts_add')
+        if not driver_directory:
+            return redirect('business:driver_directory_add')
         context = {
-            'contacts': regular_driver_contacts,
+            'contacts': driver_directory,
         }
         return render(request, 'client/parts/driver_directory.html', context)
     else:
 
-        return redirect('business:regular_driver_contacts_add')
+        return redirect('business:driver_directory_add')
         # return HttpResponse('No Drivers contacts yet ')
 
 
-def regular_driver_contacts_add(request):
-    print('regular_driver_contacts_add')
+def driver_directory_add(request, business_id, fleet_id):
+    print('driver_directory_add')
 
-    form = business_forms.RegularDriverContactsAddForm(request.POST or None)
+    form = business_forms.DriverDirectoryAddForm(request.POST or None)
     if request.method == 'POST':
-        print('regular_driver_contacts_add POST')
+        print('driver_directory_add POST')
         if form.is_valid():
-            print('regular_driver_contacts_add valid')
+            print('driver_directory_add valid')
             f = form.save(commit=False)
             f.business = business_models.Business.objects.get(
                 business_id=request.user.id)
             print(f.business)
-            print('RegularDriverContactsAddForm submitted')
+            print('DriverDirectoryAddForm submitted')
             form.save()
             messages.success(request, "Successful Submission")
             return redirect("business:driver_directory")
         else:
-            print('regular_driver_contacts_add not valid')
+            print('driver_directory_add not valid')
             messages.error(request, "Error")
     context = {
         'form': form,
     }
-    return render(request, 'client/parts/regular_driver_contacts_add.html', context)
+    return render(request, 'client/parts/driver_directory_add.html', context)
 
 
-def regular_driver_contacts_delete(request, contact_id):
+def driver_directory_delete(request, contact_id):
     contact = business_models.RegularDriverContacts.objects.get(id=contact_id)
     contact.delete()
     return redirect("business:driver_directory")

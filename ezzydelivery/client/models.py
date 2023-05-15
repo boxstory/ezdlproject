@@ -71,9 +71,9 @@ class PickupLocation(models.Model):
         verbose_name_plural = "Pickup Location"
 
 
-class RegularDriverContacts(models.Model):
+class DriverDirectory(models.Model):
     business = models.ForeignKey(
-        Business, on_delete=models.CASCADE, related_name='regular_driver_contact')
+        Business, on_delete=models.CASCADE, related_name='driver_directory')
     driver = models.ForeignKey(
         fleet_models.Driver, on_delete=models.CASCADE)
 
@@ -81,7 +81,7 @@ class RegularDriverContacts(models.Model):
         return self.driver.driver_code
 
     class Meta:
-        verbose_name_plural = "Regular Drivers Contacts"
+        verbose_name_plural = "Drivers Directories"
 
 
 class BusinessSocialInfo(models.Model):
