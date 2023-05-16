@@ -17,10 +17,20 @@
                 <td>{{document.qid_no}} </td>
                 <td>{{document.qid_expirey_date}}</td>
                 <td>{{document.document_type}}</td>
+
                 <td>
                     <!-- delete link neeeds to setup later ********************************************************* -->
-                    <a href=" #">
-                        <i class="fa-solid fa-delete-left"></i> </a>
+                    <a
+                        href="{% url 'fleet:driver_documents_update' fleet_id=request.user.id doc_id=document.id %}"
+                        class="btn btn-outline-dark"
+                    >
+                        <i class="fa-solid fa-pen"></i></a>
+
+                    <a
+                        href="{% url 'fleet:driver_documents_delete' fleet_id=request.user.id doc_id=document.id %}"
+                        class="btn btn-outline-dark"
+                    >
+                        <i class="fa-solid fa-remove"></i></a>
                 </td>
             </tr>
             {% endfor %}

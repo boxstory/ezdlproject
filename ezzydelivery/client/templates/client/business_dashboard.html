@@ -16,15 +16,22 @@
             <hr />
         </div>
         <div class="d-flex flex-wrap text-center justify-content-evenly ">
-
             <div class="  bg-light py-1 py-sm-0">
                 <a
                     class="btn btn-light btn-outline-dark btn-block  px-4"
-                    hx-get="{% url 'business:regular_driver_contacts_list' %}"
+                    href="{% url 'business:business_dashboard' %}"
+                >
+                    <i class="d-none d-md-inline fa fa-list me-3"></i>Dashboard
+                </a>
+            </div>
+            <div class="  bg-light py-1 py-sm-0">
+                <a
+                    class="btn btn-light btn-outline-dark btn-block  px-4"
+                    hx-get="{% url 'business:driver_directory' %}"
                     hx-trigger="click "
                     hx-target="#dasboard_div"
                 >
-                    <i class="d-none d-md-inline fa fa-list me-3"></i> Drivers List
+                    <i class="d-none d-md-inline fa fa-list me-3"></i> Drivers Directory
                 </a>
             </div>
             <div class="   bg-light py-1 py-sm-0">

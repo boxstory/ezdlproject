@@ -29,7 +29,7 @@ def business_profile_update(request, business_id):
         if form.is_valid():
             f = form.save(commit=False)
             print('f.user')
-            
+
             print(f.user)
 
             form.save()
@@ -71,7 +71,7 @@ def business_dashboard(request):
 # Driver contact list of business---------------------------------------------------------------------------------------------------------------------
 
 
-def regular_driver_contacts_list(request):
+def driver_directory(request):
     if business_models.RegularDriverContacts.objects.filter(
             business_id=request.user.id).all().exists():
         regular_driver_contacts = business_models.RegularDriverContacts.objects.filter(
@@ -81,7 +81,7 @@ def regular_driver_contacts_list(request):
         context = {
             'contacts': regular_driver_contacts,
         }
-        return render(request, 'client/parts/regular_driver_contacts_list.html', context)
+        return render(request, 'client/parts/driver_directory.html', context)
     else:
 
         return redirect('business:regular_driver_contacts_add')
@@ -103,7 +103,7 @@ def regular_driver_contacts_add(request):
             print('RegularDriverContactsAddForm submitted')
             form.save()
             messages.success(request, "Successful Submission")
-            return redirect("business:regular_driver_contacts_list")
+            return redirect("business:driver_directory")
         else:
             print('regular_driver_contacts_add not valid')
             messages.error(request, "Error")
@@ -116,7 +116,7 @@ def regular_driver_contacts_add(request):
 def regular_driver_contacts_delete(request, contact_id):
     contact = business_models.RegularDriverContacts.objects.get(id=contact_id)
     contact.delete()
-    return redirect("business:regular_driver_contacts_list")
+    return redirect("business:driver_directory")
 
 
 # pickup location add------------------------------------------------------

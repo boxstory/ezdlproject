@@ -30,8 +30,8 @@ urlpatterns = [
          name='business_profile_update'),
 
     # driver contacts list
-    path('driver_contacts/', business_views.regular_driver_contacts_list,
-         name='regular_driver_contacts_list'),
+    path('driver_contacts/', business_views.driver_directory,
+         name='driver_directory'),
     path('driver_contacts/add/', business_views.regular_driver_contacts_add,
          name='regular_driver_contacts_add'),
     path('driver_contacts/<int:contact_id>/delete/',

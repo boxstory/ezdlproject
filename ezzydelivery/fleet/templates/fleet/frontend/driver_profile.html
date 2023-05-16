@@ -82,7 +82,7 @@ EZZY FLEET {{driver.driver_code}}
                 </div>
             </div>
             <div class="col-md-6 my-3">
-                <div class="about-avatar">
+                <div class="about-avatar  d-flex justify-content-center">
                     {% if profile.profile_pic %}
                     <img
                         src="{{profile.profile_pic.url}}"
@@ -97,38 +97,22 @@ EZZY FLEET {{driver.driver_code}}
                     >
                     {% endif %}
                 </div>
-                <div class="m-3">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {% if profile.is_driver == True %}
-                        <span
-                            type="text"
-                            name="driver_id"
-                            value="{{driver.driver_id}}"
-                        > </span>
-                        <div
-                            class="btn btn-dark  w-100"
-                            type="submit"
-                            value="submit"
-                        > Add to Favorite</div>
+                <div class="m-3  btn-block ">
 
-                        {% elif profile.is_business == True %}
-                        <span
-                            type="text"
-                            name="business_id"
-                            value="{{business.business_id}}"
-                        ></span>
-                        <div
-                            class="btn btn-dark  w-100"
-                            type="submit"
-                            value="submit"
-                        > Add to Favorite</div>
-                        {% else %}
-                        <b>User</b>
-                        {% endif %}
+                    {% if user.profile.is_driver == True %}
 
 
-                    </form>
+                    {% elif user.profile.is_business == True %}
+                    <a
+                        href="{{business.business_id}}"
+                        class="btn btn-dark  w-100"
+                    >
+                        Add to Directory
+                    </a>
+                    {% else %}
+                    <b>User</b>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
@@ -184,95 +168,64 @@ EZZY FLEET {{driver.driver_code}}
                 AVAILABLE DOCUMENTS
             </h3>
             <hr>
-            {% for doc in driver_documents %}
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Doc No</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in driver_documents %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{doc.document_no}}</td>
+                        <td>{{doc.document_type}}</td>
+                        <td>{{doc.document_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-
-            <div class="row">
-                <div class="col-4 col-md-1">
-                    <div class="media">
-                        <label>#</label>
-                        <p>{{forloop.counter}}</p>
-                    </div>
-                </div>
-                <div class="col-8 col-md-4">
-                    <div class="media">
-                        <label>Doc No</label>
-                        <p>{{doc.document_no}}</p>
-                    </div>
-                </div>
-                <div class="col-4 col-md-3">
-                    <div class="media">
-                        <label>Type</label>
-                        <p>{{doc.document_type}}</p>
-                    </div>
-                </div>
-                <div class="col-8 col-md-4">
-                    <div class="media">
-                        <label>Expiry Date</label>
-                        <p>{{doc.document_date}}</p>
-                    </div>
-                </div>
-                <hr>
-            </div>{% endfor %}
         </div>
-        <!-- vehicle section -----------  -->
-        <div class="counter bg-light p-4 mt-5">
+        <!-- vehicle s
+            ection -----------  -->
+        <div class="counter bg-light p-4 my-3">
             <div class="row">
                 <h3 class="fw-bold">
 
                     OWNED VEHICLE DETAILS
                 </h3>
                 <hr>
-                {% if not driver_vehicle %}
-                <div class="col-12">
-                    <div class="media">
-                        <label>No Vehicles Added</label>
-                    </div>
-                </div>
-                {% else %}
-
-
-                {% for vehicle in driver_vehicle %}
-                <div class="col-1 col-md-1">
-                    <div class="media">
-                        <label>#</label>
-                        <p>{{forloop.counter}}</p>
-                    </div>
-                </div>
-                <div class="col-3 col-md-2">
-
-                    <div class="media">
-                        <label>Type</label>
-                        <p>
-                            <b>
-                                {{vehicle.vehicle_type}}
-                            </b>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-8 col-md-3">
-                    <div class="media">
-                        <label>Model</label>
-                        <p>{{vehicle.vehicle_model}}</p>
-                    </div>
-                </div>
-
-                <div class="col-4 col-md-3">
-                    <div class="media">
-                        <label>Status</label>
-                        <p>{{vehicle.vehicle_status}}</p>
-                    </div>
-                </div>
-                <div class="col-8 col-md-3">
-
-                    <div class="media">
-                        <label>Added on</label>
-                        <p>{{vehicle.vehicle_date}}</p>
-                    </div>
-                </div>
-                <hr>
-                {% endfor %}
-                {% endif %}
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Added on</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if not driver_vehicle %}
+                        <th scope="col"></th>
+                        <td>No Vehicles Added</td>
+                        {% else %}
+                        {% for vehicle in driver_vehicle %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{vehicle.vehicle_type}}</td>
+                            <td>{{vehicle.vehicle_model}}</td>
+                            <td>{{vehicle.vehicle_date}}</td>
+                            <td>{{vehicle.vehicle_status}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
 
             </div>
         </div>
