@@ -104,7 +104,7 @@ EZZY FLEET {{driver.driver_code}}
 
                     {% elif user.profile.is_business == True %}
                     <a
-                        href="{{business.business_id}}"
+                        href="{% url 'business:driver_directory_add' driver.driver_id %}"
                         class="btn btn-dark  w-100"
                     >
                         Add to Directory
