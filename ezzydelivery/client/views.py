@@ -87,11 +87,12 @@ def driver_directory(request):
         # return redirect('business:driver_directory_add' )
         return HttpResponse('No Drivers contacts yet Find drivers in directory')
 
-
+# @todo  fleet exists check and save 
 def driver_directory_add(request, fleet_id):
     print('driver_directory_add')
-    fleet_list = get_object_or_404(
-        business_models.DriverDirectory, fleet_id=fleet_id)
+    fleet_list = business_models.DriverDirectory.objects.filter(
+        driver_id=fleet_id)
+
     print(fleet_list)
     form = business_forms.DriverDirectoryAddForm(request.POST or None)
     if request.method == 'POST':
@@ -99,12 +100,18 @@ def driver_directory_add(request, fleet_id):
         if form.is_valid():
             print('driver_directory_add valid')
             f = form.save(commit=False)
-            f.business = business_models.Business.objects.get(
-                business_id=request.user.id)
-            print(f.business)
+            if fleet_list :
+                messages.success(request, "Already added")
+                return redirect("business:driver_directory")
+            else:
+                f.driver = business_models.Business.objects.get(
+                    business_id=request.user.id)
+                f.business = business_models.Business.objects.get(
+                    business_id=request.user.id)
+                print(f.business)
 
-            print('DriverDirectoryAddForm submitted')
-            form.save()
+                print('DriverDirectoryAddForm submitted')
+                form.save()
             messages.success(request, "Successful Submission")
             return redirect("business:driver_directory")
         else:

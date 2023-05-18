@@ -34,7 +34,7 @@ def about(request):
     else:
         brands = random.sample(brands, len(brands))
 
-    print(brands)
+    print('brands', brands)
 
     data = {
         'brands': brands,
