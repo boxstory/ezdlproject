@@ -82,8 +82,14 @@ class Driver(models.Model):
     driver_rating_count = models.IntegerField(default=0)
     driver_reviews = models.TextField(default="")
     driver_reviews_count = models.IntegerField(default=0)
-
-    driver_status = models.CharField(max_length=100)
+    driver_status_choices = (
+        ('Pending on Review', 'Pending on Review'),
+        ('Processing', 'Processing'),
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+        ('Blocked', 'Blocked'),
+    )
+    driver_status = models.CharField(max_length=100, choices=driver_status_choices)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
