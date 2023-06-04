@@ -1,8 +1,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block extra_head %}orders
-{% endblock extra_head %}
+
 
 
 
@@ -21,41 +20,12 @@
 
 <!-- {% include "orders/parts/orders_list.html" %} -->
 
-
+{% include "orders/parts/orders_list.html" %}
 
 
 <!-- bootstap card ---------------------- -->
 
-<section class="container h-100 ">
-    <h1>UpComming Orders</h1>
-    <article class=" d-table-row float-start w-100 d-flex position-relative">
-        <section class="  d-table-cell w-25 d-flex flex-column">
-            <div class="d-flex justify-content-between flex-column bd-highlight mb-3">
-                <div class="p-2 mb-auto bd-highlight"> 1</div>
-                <div class="p-2  mb-auto bd-highlight"> 2</div>
-                <div class="p-2 bd-highlight"> 3</div>
-            </div>
-        </section>
-        <section class="">
-            <small>dj music event</small>
-            <h3>hello dubai festivel</h3>
-            <div class="even-date">
-                <i class="fa fa-calendar"></i>
-                <time>
-                    <span>wednesday 28 december 2014</span>
-                    <span>08:55pm to 12:00 am</span>
-                </time>
-            </div>
-            <div class="even-info">
-                <i class="fa fa-map-marker"></i>
-                <p>
-                    nexen square for people australia, sydney
-                </p>
-            </div>
-            <a href="#">cancel</a>
-        </section>
-    </article>
-</section>
+
 
 
 

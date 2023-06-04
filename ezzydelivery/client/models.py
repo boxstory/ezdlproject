@@ -63,6 +63,8 @@ class PickupLocation(models.Model):
     pickup_street_no = models.PositiveIntegerField(blank=True)
     pickup_building_no = models.PositiveIntegerField(
         blank=True)
+    pickup_lat = models.PositiveIntegerField(blank=True)
+    pickup_lon = models.PositiveIntegerField(blank=True)
 
     def __str__(self):
         return self.pickup_location_title

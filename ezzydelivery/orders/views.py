@@ -14,8 +14,11 @@ from orders import forms as orders_forms
 @login_required(login_url='account_login')
 def orders_list(request):
     business = business_models.Business.objects.get(user_id=request.user.id)
+
+    print(business, "business order list")
     orders = orders_models.Order.objects.filter(
-        business_id=business.business_id).order_by('-id')
+        business=business.business_id).order_by('-id')
+    print(orders)
     context = {
         'orders': orders
     }
@@ -24,20 +27,30 @@ def orders_list(request):
 
 @login_required(login_url='account_login')
 def add_order(request):
-    if request.method == 'POST':
-        form = orders_forms.AddOrderForm(request.POST)
-        form.fields['product_list'].queryset = orders_models.Items.objects.filter(
-            business=request.user.business)
-        if form.is_valid():
-            order = form.save(commit=False)
-            order.business_id = business_models.Business.objects.get(
-                user_id=request.user.id).id
-            print(order.business)
-            form.save()
-            form = orders_forms.AddOrderForm()
-            return redirect('/orders/')
+    pickup_locations = business_models.PickupLocation.objects.filter(
+        business_id=request.user.id).all()
+    print(pickup_locations)
+    if not pickup_locations:
+        print("pickup_locations is None")
+        return redirect('/business/pickup_location/add/')
     else:
-        form = orders_forms.AddOrderForm()
+        if request.method == 'POST':
+            print("POST form")
+            form = orders_forms.AddOrderForm(request.POST)
+            # form.fields['product_list'].queryset = orders_models.Items.objects.filter(
+            #     business=request.user.business)
+            if form.is_valid():
+                print("valid form")
+                order = form.save(commit=False)
+                order.business = business_models.Business.objects.get(
+                    business_id=request.user.id)
+                print(order.business_id)
+                form.save()
+                form = orders_forms.AddOrderForm()
+                return redirect('/orders/')
+        else:
+            print("load form")
+            form = orders_forms.AddOrderForm()
     return render(request, 'orders/add_order.html', {'form': form})
 
 
@@ -63,11 +76,9 @@ def update_order(request, order_id):
 
 
 @login_required(login_url='account_login')
-def delete_order(request):
-    data = {
-
-    }
-    return render(request, 'orders/delete_order.html', data)
+def delete_order(request, order_id):
+    order = orders_models.Order.objects.get(id=order_id).delete()
+    return redirect('/business/dashboard/')
 
 
 @login_required(login_url='account_login')
