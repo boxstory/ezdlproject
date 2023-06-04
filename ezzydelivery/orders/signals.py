@@ -37,7 +37,8 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
                 dl_task_number=instance.order_number,
                 mobile_no=instance.customer_phone,
                 zone_number=instance.customer_zone_no,
-                dl_price=instance.dl_amount,
+                street_no=0,
+                building_no=0,
 
             )
             instance.save()
