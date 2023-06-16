@@ -6,25 +6,17 @@ from client import models as business_models
 from product import models as product_models
 
 ORDER_STATUS = {
-    ('dl_pending_payment', 'Pending Delivery charge Payment'),
-    ('pending_for_item_confirmation', 'Pending for Item Confirmation'),
     ('ready_to_pickup', 'Ready to pickup'),
-    ('custumer_cofirm', 'Customer Confirmation Pending'),
-    ('custumer_delaying', 'Customer make delaying'),
     ('out_for_delivery', 'Out for delivery'),
+    ('customer _cofirm', 'Customer Confirmation Pending'),
     ('delivered', 'Delivered'),
+    ('customer _delaying', 'Customer make delaying'),
     ('cancelled', 'Cancelled'),
 }
 
-COD_STATUS = {
-    ('include', 'Include'),
+COD_STATUS_BY_CLIENT = {
     ('no_cod', 'No COD'),
-    ('not_collected', 'Not Collected'),
-    ('partially_collected', 'Partially Collected'),
-    ('fully_paid', 'Fully Collected'),
-    ('cod_with_driver', 'COD Collected with Driver'),
-    ('cod_with_ezzy', 'COD handover to EZZY'),
-    ('cod_sattled_with_business', 'COD Sattled with Business'),
+    ('include', 'Include'),
 }
 
 
@@ -35,11 +27,11 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['businesside_order_code', 'order_name', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+        fields = ['businesside_order_code', 'order_name', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status_by_client', 'cod_amount',
                   'customer_zone_no', 'customer_address',
                   'pickup_location', 'order_status',
                   ]
-        exclude = ['order_number', 'business', 'delivery_task', 'deadline_date',
+        exclude = ['order_number', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
                    'pickup_location_id']
         widgets = {
             'order_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -59,8 +51,8 @@ class AddOrderForm(forms.ModelForm):
                 attrs={'class': 'form-check-input '})
             self.fields['order_status'].widget = forms.RadioSelect(
                 choices=ORDER_STATUS)
-            self.fields['cod_status'].widget = forms.RadioSelect(
-                choices=COD_STATUS)
+            self.fields['cod_status_by_client'].widget = forms.RadioSelect(
+                choices=COD_STATUS_BY_CLIENT)
             # need to specify business only products
 
             self.fields['product_list'].widget = forms.CheckboxSelectMultiple()

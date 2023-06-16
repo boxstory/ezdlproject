@@ -17,20 +17,22 @@ from product import models as product_models
 
 ORDER_STATUS = {
     ('ready_to_pickup', 'Ready to pickup'),
-    ('custumer_delaying', 'Customer make delaying'),
-    ('custumer_cofirm', 'Customer Confirmation Pending'),
     ('out_for_delivery', 'Out for delivery'),
-    ('cancelled', 'Cancelled'),
     ('delivered', 'Delivered'),
+    ('customer _cofirm', 'Customer Confirmation Pending'),
+    ('customer _delaying', 'Customer make delaying'),
+    ('cancelled', 'Cancelled'),
     ('dl_pending_payment', 'Pending Delivery charge Payment'),
 }
-COD_STATUS = {
-    ('include', 'Include'),
+COD_STATUS_BY_CLIENT = {
     ('no_cod', 'No COD'),
+    ('include', 'Include'),
+}
+COD_STATUS_BY_STAFF = {
     ('not_collected', 'Not Collected'),
     ('partially_collected', 'Partially Collected'),
     ('fully_paid', 'Fully Collected'),
-    ('cod_with_driver', 'COD Collected with Driver'),
+    ('cod_with_driver', 'COD Collected & with Driver'),
     ('cod_with_ezzy', 'COD handover to EZZY'),
     ('cod_sattled_with_business', 'COD Sattled with Business'),
 }
@@ -42,15 +44,15 @@ class Order(models.Model):
     order_number = models.CharField(max_length=100)
     business = models.ForeignKey(
         business_models.Business, on_delete=models.CASCADE, related_name='order')
-
-    businesside_order_code = models.CharField(max_length=100)
-    order_name = models.CharField(max_length=100)
-    pickup_location = models.ForeignKey(
-        business_models.PickupLocation, on_delete=models.SET_NULL, null=True)
-
+    client_order_code = models.CharField(max_length=100)
+    order_notes = models.CharField(max_length=100)
     order_status = models.CharField(
         max_length=100, choices=ORDER_STATUS, default='ready_to_pickup',
     )
+
+    # pickup details
+    pickup_location = models.ForeignKey(
+        business_models.PickupLocation, on_delete=models.SET_NULL, null=True)
 
     # product details
     product_catgory = models.CharField(max_length=100, blank=True)
@@ -59,11 +61,15 @@ class Order(models.Model):
 
     # cod details
     cash_on_delivery = models.BooleanField(default=False)
-    cod_status = models.CharField(
-        max_length=100, choices=COD_STATUS, blank=True)
+    cod_status_by_client = models.CharField(
+        max_length=100, choices=COD_STATUS_BY_CLIENT, blank=True)
+    cod_status_by_staff = models.CharField(
+        max_length=100, choices=COD_STATUS_BY_STAFF, blank=True)
     cod_amount = models.IntegerField(default=0)
     dl_amount = models.IntegerField(default=0)
-    # costumner details
+    dl_included = models.BooleanField(defaul="True")
+
+    # Delivery customer details
     customer_name = models.CharField(max_length=100, blank=True)
     customer_phone = models.CharField(max_length=100, blank=True)
     customer_whatsapp = models.CharField(max_length=100, blank=True)
