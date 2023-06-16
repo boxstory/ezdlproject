@@ -27,18 +27,18 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['businesside_order_code', 'order_name', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status_by_client', 'cod_amount',
+        fields = ['client_order_code', 'order_notes', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status_by_client', 'cod_amount',
                   'customer_zone_no', 'customer_address',
                   'pickup_location', 'order_status',
                   ]
         exclude = ['order_number', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
                    'pickup_location_id']
         widgets = {
-            'order_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'order_notes': forms.TextInput(attrs={'class': 'form-control'}),
             'order_status': forms.Select(attrs={'class': 'form-control'}, choices=ORDER_STATUS),
         }
         labels = {
-            'order_name': _('Order Title/Short description'),
+            'order_notes': _('Order Title/Short description'),
             'cod_amount': 'Balance COD with Delivery charge'
         }
 
@@ -68,18 +68,18 @@ class AddOrderForm(forms.ModelForm):
 class UpdateOrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['businesside_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status', 'cod_amount',
+        fields = ['client_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status_by_client', 'cod_amount',
                   'customer_zone_no', 'customer_address',
-                  'pickup_location', 'order_status', 'order_name',
+                  'pickup_location', 'order_status', 'order_notes',
                   ]
         exclude = ['order_number', 'business', 'delivery_task', 'order_date',
                    'pickup_location_id']
         labels = {
-            'order_name': 'Order Name / Notes',
+            'order_notes': 'Order Name / Notes',
             'cod_amount': 'Balance COD with Delivery charge'
         }
         widgets = {
-            'order_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'order_notes': forms.TextInput(attrs={'class': 'form-control'}),
             'cod_amount': forms.TextInput(attrs={'class': 'form-control'}),
             'order_status': forms.Select(attrs={'class': 'form-control'}, choices=ORDER_STATUS),
         }
@@ -93,8 +93,8 @@ class UpdateOrderForm(forms.ModelForm):
                 attrs={'class': 'form-check-input '})
             self.fields['order_status'].widget = forms.RadioSelect(
                 choices=ORDER_STATUS)
-            self.fields['cod_status'].widget = forms.RadioSelect(
-                choices=COD_STATUS)
+            self.fields['cod_status_by_client'].widget = forms.RadioSelect(
+                choices=COD_STATUS_BY_CLIENT)
             # need to specify business only products
             self.fields['product_list'].attr = forms.ModelMultipleChoiceField(
                 queryset=product_models.Product.objects.all(), widget=forms.CheckboxSelectMultiple())

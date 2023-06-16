@@ -8,4 +8,4 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(order_models.Order)
 class OrderAdmin(ImportExportModelAdmin):
-    list_display = ('order_number', 'business', 'order_name', 'order_status')
+    list_display = ('order_number', 'business', 'order_notes', 'order_status')

@@ -67,7 +67,7 @@ class Order(models.Model):
         max_length=100, choices=COD_STATUS_BY_STAFF, blank=True)
     cod_amount = models.IntegerField(default=0)
     dl_amount = models.IntegerField(default=0)
-    dl_included = models.BooleanField(defaul="True")
+    dl_included = models.BooleanField(default="True")
 
     # Delivery customer details
     customer_name = models.CharField(max_length=100, blank=True)
@@ -79,7 +79,7 @@ class Order(models.Model):
     order_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.order_name
+        return self.order_notes
 
     class Meta:
         verbose_name_plural = "Order"
