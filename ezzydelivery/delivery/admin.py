@@ -11,4 +11,4 @@ class DeliveryTaskAdmin(admin.ModelAdmin):
 
 @admin.register(delivery_models.DlAddressUpdate)
 class DlAddressUpdateAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'zone_name', 'zone_number', 'street_no')
+    list_display = ('full_name', 'dl_zone', 'dl_street', 'dl_building')

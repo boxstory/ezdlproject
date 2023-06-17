@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from orders import views as orders_views
 
 
+admin.site.site_header = 'Ezzy Delivery Admin'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -13,8 +15,6 @@ urlpatterns = [
 
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('ezzy_api.urls')),
-
-
 
     path('', include('core.urls', namespace='core')),
     path('', include('webpages.urls', namespace='webpages')),
@@ -26,7 +26,6 @@ urlpatterns = [
 
     path('fleet/', include('fleet.urls', namespace='fleet')),
     path('delivery/', include('delivery.urls', namespace='delivery')),
-
 
 ]
 

@@ -73,10 +73,12 @@ class Order(models.Model):
     customer_name = models.CharField(max_length=100, blank=True)
     customer_phone = models.CharField(max_length=100, blank=True)
     customer_whatsapp = models.CharField(max_length=100, blank=True)
-    customer_zone_no = models.PositiveIntegerField(blank=True)
     customer_address = models.CharField(max_length=100, blank=True)
     deadline_date = models.CharField(max_length=100, blank=True)
     order_date = models.DateField(auto_now_add=True)
+    dl_zone = models.PositiveIntegerField(blank=True)
+    dl_building = models.PositiveIntegerField(blank=True)
+    dl_street = models.PositiveIntegerField(blank=True)
 
     def __str__(self):
         return self.order_notes
