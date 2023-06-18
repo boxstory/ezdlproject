@@ -12,7 +12,7 @@ def order_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.order_number:
         instance.order_number = str(uuid.uuid4()).replace('-', '').upper()[:10]
         # instance.order_number = instance.business_id.business_code + \
-        #     '-' + str(instance.businesside_order_code) + '-' + str(instance.id)
+        #     '-' + str(instance.client_order_code) + '-' + str(instance.id)
         print(instance.order_number)
 
 
@@ -25,7 +25,7 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
             DeliveryTask.objects.create(
                 order_id=instance.id,
                 dl_task_number=instance.order_number,
-                dl_task_name=instance.order_name,
+                dl_task_name=instance.order_notes,
                 dl_task_description="na",
                 dl_task_status='for_review',
                 pickup_location_id=instance.pickup_location.id,

@@ -17,15 +17,18 @@ from fleet import models as fleet_models
 class DlAddressUpdate(models.Model):
     full_name = models.CharField(max_length=100)
     mobile_no = models.CharField(max_length=11)
-    zone_name = models.CharField(max_length=100)
-    zone_number = models.PositiveIntegerField()
-    street_no = models.PositiveIntegerField()
-    building_no = models.PositiveIntegerField()
-    unit_no = models.CharField(max_length=2)
+    area_name = models.CharField(max_length=100)
+    dl_zone = models.PositiveIntegerField(blank=True)
+    dl_building = models.PositiveIntegerField(blank=True)
+    dl_street = models.PositiveIntegerField(blank=True)
+    dl_latitude = models.PositiveIntegerField(blank=True)
+    dl_longitude = models.PositiveIntegerField(blank=True)
+    dl_unit = models.CharField(max_length=2)
     is_villa_compound = models.BooleanField(default=False)
     is_flat = models.BooleanField(default=False)
     is_office = models.BooleanField(default=False)
     dl_task_number = models.CharField(max_length=100)
+    dms_id = models.CharField(max_length=100)
     time_slot = models.CharField(max_length=100)
 
     def __str__(self):
@@ -37,19 +40,49 @@ class DlAddressUpdate(models.Model):
 
 
 class DeliveryTask(models.Model):
+    dl_task_status_client = (
+        ('for_review', 'For Review'),
+        ('customer_confiration_pending', 'Customer Confirmation Pending'),
+        ('0', 'Assigned to Driver'),
+        ('2', 'Delivered'),
+        ('rejected', 'Rejected'),
+        ('9', 'Cancelled'),
+    )
     dl_task_status = (
         ('for_review', 'For Review'),
-        ('Pending', 'Pending'),
-        ('Customer Not Confirmed', 'Customer Not Confirmed'),
-        ('In Transit', 'In Transit'),
-        ('Delivered', 'Delivered'),
-        ('Cancelled', 'Cancelled'),
+        ('pending', 'Pending'),
+        ('address_pending', 'Address Pending'),
+        ('customer_confiration_pending', 'Customer Confirmation Pending'),
+        ('customer_delaying', 'Customer make delaying'),
+        ('dl_pending_payment', 'Pending Delivery charge Payment'),
+        ('publish_to_dms', 'Publish to DMS'),
+        ('in_transit', 'In Transit'),
+        ('delivered', 'Delivered'),
+        ('rejected', 'Rejected'),
+        ('cancelled', 'Cancelled'),
     )
+    dl_task_status_dms = (
+        ('0', 'Assigned'),
+        ('1', 'Started'),
+        ('2', 'Successful'),
+        ('3', 'Failed'),
+        ('4', 'InProgress/Arrived'),
+        ('6', 'Unassigned'),
+        ('7', 'Accepted/Acknowledged'),
+        ('8', 'Decline'),
+        ('9', 'Cancel'),
+        ('10', 'Deleted'),
+    )
+
     dl_task_publish = models.BooleanField(default=False)
     dl_task_number = models.CharField(max_length=100)
-    dl_task_name = models.CharField(max_length=100)
+    dl_task_number_dms = models.CharField(max_length=100)
     dl_task_description = models.CharField(max_length=100)
+    dl_task_status_client = models.CharField(
+        max_length=100, choices=dl_task_status_client)
     dl_task_status = models.CharField(max_length=100, choices=dl_task_status)
+    dl_task_status_dms = models.CharField(
+        max_length=100, default=6, choices=dl_task_status_dms)
     dl_task_date = models.DateField(auto_now_add=True)
     order = models.ForeignKey(orders_models.Order, on_delete=models.CASCADE)
     driver = models.ForeignKey(
@@ -59,6 +92,7 @@ class DeliveryTask(models.Model):
 
     pickup_location = models.ForeignKey(
         business_models.PickupLocation, on_delete=models.CASCADE, blank=True, null=True)
+   
     dl_waight = models.IntegerField(default=1)
     dl_category_choices = (
         ('Food', 'Food'),

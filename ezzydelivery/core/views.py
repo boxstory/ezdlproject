@@ -355,6 +355,18 @@ def profile_delete(request, pk):
     return redirect('core:profile_update', pk=pk)
 
 
+# profile_completion_test ---------------------------------------------------------------------------------------------------------------------
+def profile_completion_test(request, pk):
+    profile = get_object_or_404(core_models.Profile, user_id=pk)
+
+
+    context = {
+        'profile': profile,
+    }
+    return render(request, 'core/profile_completion_test.html', context)
+
+
+
 # driverjob ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -373,3 +385,7 @@ def driverjobform(request):
     else:
         driverjobform = core_forms.DriverVacancyAplicationForm()
     return render(request, 'core/driverjobform.html', {'driverjobform': driverjobform})
+
+
+
+

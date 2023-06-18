@@ -29,7 +29,8 @@ def orders_list(request):
 def add_order(request):
     pickup_locations = business_models.PickupLocation.objects.filter(
         business_id=request.user.id).all()
-    print(pickup_locations)
+
+    print('pickup_locations : ', pickup_locations)
     if not pickup_locations:
         print("pickup_locations is None")
         return redirect('/business/pickup_location/add/')
