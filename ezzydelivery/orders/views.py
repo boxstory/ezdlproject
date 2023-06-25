@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 from core import models as core_models
 from orders import models as orders_models
@@ -20,13 +22,31 @@ def orders_list(request):
         business=business.business_id).order_by('-id')
     print(orders)
     context = {
-        'orders': orders
+        'orders': orders,
+        'business': business,
+    }
+    return render(request, 'orders/orders_list.html', context)
+
+
+@login_required(login_url='account_login')
+def latest_orders_list(request):
+    business = business_models.Business.objects.get(user_id=request.user.id)
+
+    print(business, "latest 10 order list")
+    orders = orders_models.Order.objects.filter(
+        business=business.business_id).order_by('-id')
+    print(orders)
+    context = {
+        'orders': orders,
+        'business': business,
     }
     return render(request, 'orders/orders_list.html', context)
 
 
 @login_required(login_url='account_login')
 def add_order(request):
+    business = business_models.Business.objects.get(
+        user_id=request.user.id)
     pickup_locations = business_models.PickupLocation.objects.filter(
         business_id=request.user.id).all()
 
@@ -52,7 +72,7 @@ def add_order(request):
         else:
             print("load form")
             form = orders_forms.AddOrderForm()
-    return render(request, 'orders/add_order.html', {'form': form})
+    return render(request, 'orders/add_order.html', {'form': form, 'business': business, })
 
 
 @login_required(login_url='account_login')
@@ -89,3 +109,37 @@ def order_details(request, order_id):
         'order': order
     }
     return render(request, 'orders/order_details.html', data)
+
+
+# operation links
+
+@require_POST
+def update_order_status3(request):
+    order_id = request.POST.get('order_id')
+    new_status = request.POST.get('new_status')
+
+    try:
+        review = orders_models.Order.objects.get(id=order_id)
+        review.order_status = new_status
+        review.save()
+        return JsonResponse({'success': True})
+    except (orders_models.Order.DoesNotExist, Exception):
+        return JsonResponse({'success': False})
+
+
+def update_order_status(request):
+    if request.method == 'POST' and request.is_ajax():
+        # Assuming you have a model named "YourModel" with a "status" field
+        order_id = request.POST.get('order_id')
+        print(order_id)
+        status=request.POST.get('status')
+        order = orders_models.Order.objects.get(pk=order_id)
+        order.order_status = status
+        print(order.order_status)
+        order.save()
+
+        # Return a JSON response indicating success
+        return JsonResponse({'status': 'success'})
+
+    # Return a JSON response indicating failure
+    return JsonResponse({'status': 'error'})

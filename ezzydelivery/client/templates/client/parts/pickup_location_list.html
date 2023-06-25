@@ -1,6 +1,12 @@
-{% load static %}
+{% extends "client/business_dashboard.html" %}
 
-<h2>list of locations</h2>
+
+
+{% load static %}
+{% block widget %}
+
+
+<h2>list of store locations</h2>
 <div class="table-responsive">
     <table class="table table-striped table-hover my-3">
         <thead>
@@ -53,11 +59,8 @@
                     class="py-2"
                 >
                     <a
-                        class="btn btn-dark"
-                        hx-trigger="click "
-                        hx-get="{% url 'business:pickup_location_add' %}"
-                        hx-target="#dasboard_div"
-                        hx-swap="beforeend swap:1s"
+                        class="btn pe-3 text-dark"
+                        href="{% url 'business:pickup_location_add' %}"
                     ><i class="fa fa-lg fa-add me-2"></i>
                         Pickup Locations
                     </a>
@@ -66,3 +69,5 @@
         </tbody>
     </table>
 </div>
+
+{% endblock widget %}

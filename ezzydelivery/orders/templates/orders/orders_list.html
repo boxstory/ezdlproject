@@ -1,3 +1,4 @@
+{% extends "client/business_dashboard.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -16,7 +17,7 @@
 {% endblock extra_css %}
 
 
-{% block content %}
+{% block widget %}
 
 <!-- {% include "orders/parts/orders_list.html" %} -->
 
@@ -30,8 +31,3 @@
 
 
 {% endblock %}
-
-
-{% block extra_js %}
-<!-- extra js -->
-{% endblock extra_js %}

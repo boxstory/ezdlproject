@@ -9,7 +9,7 @@ from orders import views as orders_views
 admin.site.site_header = 'Ezzy Delivery Admin'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('dj-admin/', admin.site.urls),
 
     path('accounts/', include('allauth.urls')),
 
