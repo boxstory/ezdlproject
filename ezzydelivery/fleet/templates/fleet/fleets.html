@@ -4,56 +4,61 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block title %}
-EZZY FLEET DASHBOARD
+FLEETS
 {% endblock title %}
 {% block content %}
-<h1> Drivers</h1>
-<div class="p-3">
+<section class="m-2 m-md-5">
 
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Name</th>
-                <th scope="col">Languages</th>
-                <th scope="col">QID</th>
-                <th scope="col">Driver Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for fleet in fleets %}
-            <tr
-                class="clickable "
-                onclick="window.location='/fleet/{{fleet.driver_id}}/'"
-            >
-                <td scope="row">{{forloop.counter}}</td>
-                <td scope="row">{{fleet.user.first_name}} {{fleet.user.last_name}}</td>
-                <td scope="row">{{fleet.driver_languages}}</td>
-                <td scope="row">{{fleet.driver_qid}}</td>
+    <h1 class="m-2"> Drivers</h1>
+    <div class="">
 
-                <td scope="row">{{fleet.driver_status}}</td>
-            </tr>
 
-            {% endfor %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Languages</th>
+                    <th scope="col">QID</th>
+                    <th scope="col">Driver Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fleet in fleets %}
+                <tr
+                    class="clickable "
+                    onclick="window.location='/fleet/{{fleet.driver_id}}/'"
+                >
+                    <td scope="row">{{forloop.counter}}</td>
+                    <td scope="row">{{fleet.user.first_name}} {{fleet.user.last_name}}</td>
+                    <td scope="row">{{fleet.driver_languages}}</td>
+                    <td scope="row">{{fleet.driver_qid}}</td>
 
-        </tbody>
-    </table>
-</div>
+                    <td scope="row">{{fleet.driver_status}}</td>
+                </tr>
 
-<a href="{%url 'fleet:fleets' %}">
-    <div class="btn btn-dark">
-        <i class="fa-solid fa-chevron-left me-2"></i> Back
+                {% endfor %}
+
+            </tbody>
+        </table>
     </div>
-</a>
-<a href="{% url 'core:main_dashboard' %}">
-    <div class="btn btn-dark">
-        <i class="fa-solid fa-chart-line"></i> Dashboard
-    </div>
-</a>
-<a href="{%url 'core:join_driver' %}">
-    <div class="btn btn-dark">
-        <i class="fa fa-add me-2"></i> join As Driver
-    </div>
-</a>
+
+
+    <a href="{%url 'fleet:fleets' %}">
+        <div class="btn btn-dark btn-md-2 ">
+            <i class="fa-solid fa-chevron-left me-2"></i> Back
+        </div>
+    </a>
+    <a href="{% url 'core:main_dashboard' %}">
+        <div class="btn btn-dark">
+            <i class="fa-solid fa-chart-line"></i> Dashboard
+        </div>
+    </a>
+    <a href="{%url 'core:join_driver' %}">
+        <div class="btn btn-dark">
+            <i class="fa fa-add me-2"></i> join As Driver
+        </div>
+    </a>
+</section>
 {% endblock content %}

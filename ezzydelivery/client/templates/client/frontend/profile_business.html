@@ -4,7 +4,7 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block title %}
-EZZY BUSINESS {{business.brand_name}}
+BUSINESS {{business.brand_name}}
 {% endblock title %}
 {% block content %}
 <h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> BUSINESS Profile
@@ -44,7 +44,7 @@ EZZY BUSINESS {{business.brand_name}}
                         {% endif %}
                     </h6>
 
-                    
+
 
                     <p>Bio: {{business.business_bio}}</p>
                     <div class="row about-list">
@@ -80,7 +80,9 @@ EZZY BUSINESS {{business.brand_name}}
                                 <p>{{business.brand_since}}</p>
                             </div>
                             <div class="media">
-                                <label>Store Location</label><a href="{% url 'business:pickup_location_list' %}"><i class="fa-solid fa-location-plus"></i></a>
+                                <label>Store Location</label><a href="{% url 'business:pickup_location_list' %}"><i
+                                        class="fa-solid fa-location-plus"
+                                    ></i></a>
                                 {% for loc in location %}
 
 

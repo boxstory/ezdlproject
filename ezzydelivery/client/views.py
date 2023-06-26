@@ -1,5 +1,5 @@
 from multiprocessing import context
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from client import models as business_models
 from core import models as core_models
+from orders import models as orders_models
 
 from client import forms as business_forms
 
@@ -57,12 +58,17 @@ def business_dashboard(request):
         profile = core_models.Profile.objects.get(user_id=business.user_id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).all()
+        print(business, "latest 10 order list")
+        orders = orders_models.Order.objects.filter(
+            business=business.business_id).order_by('-id')[:1]
+
         print(business)
 
         context = {
             'profile': profile,
             'business': business,
             'location': location,
+            'orders': orders,
         }
         return render(request, 'client/business_dashboard.html', context)
     except business_models.Business.DoesNotExist:
@@ -72,65 +78,58 @@ def business_dashboard(request):
 
 
 def driver_directory(request):
-    if business_models.DriverDirectory.objects.filter(
-            business_id=request.user.id).all().exists():
-        driver_directory = business_models.DriverDirectory.objects.filter(
-            business_id=request.user.id).all()
-        if not driver_directory:
-            return redirect('business:driver_directory_add')
-        context = {
-            'contacts': driver_directory,
-        }
-        return render(request, 'client/parts/driver_directory.html', context)
-    else:
+    business = business_models.Business.objects.get(
+        user_id=request.user.id)
+    driver_directory = business_models.DriverDirectory.objects.filter(
+        business_id=request.user.id).all()
 
-        # return redirect('business:driver_directory_add' )
-        return HttpResponse('No Drivers contacts yet Find drivers in directory')
+    context = {
+        'contacts': driver_directory,
+        'business': business,
+    }
+    return render(request, 'client/parts/driver_directory.html', context)
 
-# @todo  fleet exists check and save 
-def driver_directory_add(request, fleet_id):
-    print('driver_directory_add')
-    fleet_list = business_models.DriverDirectory.objects.filter(
-        driver_id=fleet_id)
 
-    print(fleet_list)
+# @todo  fleet exists check and save
+def driver_directory_add(request):
+
     form = business_forms.DriverDirectoryAddForm(request.POST or None)
     if request.method == 'POST':
-        print('driver_directory_add POST')
-        if form.is_valid():
-            print('driver_directory_add valid')
-            f = form.save(commit=False)
-            if fleet_list :
-                messages.success(request, "Already added")
-                return redirect("business:driver_directory")
-            else:
-                f.driver = business_models.Business.objects.get(
-                    business_id=request.user.id)
-                f.business = business_models.Business.objects.get(
-                    business_id=request.user.id)
-                print(f.business)
-
-                print('DriverDirectoryAddForm submitted')
-                form.save()
-            messages.success(request, "Successful Submission")
-            return redirect("business:driver_directory")
+        # Process the form data and save to the database
+        # Example: Assuming the contact information is in the request.POST['contact_info']
+        driver_id = request.POST['driver_id']
+        print('driver_info', driver_id)
+        business_id = request.user.id
+        print('business_id', business_id)
+        business_ids = request.user.profile.business
+        print('businesssss_id', business_ids)
+        # Save the contact to the database or perform any other necessary actions
+        if not business_models.DriverDirectory.objects.filter(business_id=business_id, driver_id=driver_id).exists():
+            # Create a new FavoriteItem record
+            business_models.DriverDirectory.objects.create(
+                business_id=business_id, driver_id=driver_id)
+            return JsonResponse({'success': True, 'success': 'Driver Added'})
+            # Return a JSON response indicating success
         else:
-            print('driver_directory_add not valid')
-            messages.error(request, "Error")
-    context = {
-        'form': form,
-    }
-    return render(request, 'client/parts/driver_directory_add.html', context)
+            pass
+            print('already exists')
+            return JsonResponse({'success': False, 'error': 'Driver Already Added'})
+
+    # If the request method is not POST, return an error
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
-def driver_directory_delete(request, fleet_id):
-    fleet = business_models.DriverDirectory.objects.get(id=fleet_id)
+def driver_directory_delete(request, id):
+    fleet = business_models.DriverDirectory.objects.get(id=id)
+    print(fleet)
     fleet.delete()
-    return redirect("business:driver_directory")
+    return redirect('core:main_dashboard')
 
 
 # pickup location add------------------------------------------------------
 def pickup_location_list(request):
+    business = business_models.Business.objects.get(
+        user_id=request.user.id)
     pickup_location = business_models.PickupLocation.objects.filter(
         business_id=request.user.id).all()
     if not pickup_location:
@@ -138,12 +137,13 @@ def pickup_location_list(request):
     print('pickup_location', pickup_location)
     context = {
         'pickup_location': pickup_location,
-    }
+        'business': business, }
     return render(request, 'client/parts/pickup_location_list.html', context)
 
 
 def pickup_location_add(request):
-    print(request)
+    business = business_models.Business.objects.get(
+        user_id=request.user.id)
     form = business_forms.PickupLocationsAddForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
@@ -157,6 +157,7 @@ def pickup_location_add(request):
 
     context = {
         'form': form,
+        'business': business,
     }
     return render(request, 'client/parts/pickup_location_add.html', context)
 

@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-EZZY FLEET {{driver.driver_code}}
+FLEET {{driver.driver_code}}
 {% endblock title %}
 {% block content %}
 
@@ -92,27 +92,55 @@ EZZY FLEET {{driver.driver_code}}
                     {% else %}
                     <img
                         src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                        title=""
-                        alt=""
+                        title="avatar"
+                        alt="avatar"
                     >
                     {% endif %}
                 </div>
                 <div class="m-3  btn-block ">
 
-                    {% if user.profile.is_driver == True %}
+                    {% if user.profile.is_business == True %}
 
-
-                    {% elif user.profile.is_business == True %}
-                    <a
-                        href="{% url 'business:driver_directory_add' driver.driver_id %}"
-                        class="btn btn-dark  w-100"
+                    <!-- #chatgpt -->
+                    <form
+                        id="favorite-form"
+                        action="{% url 'business:driver_directory_add'  %}"
+                        method="POST"
                     >
-                        Add to Directory
-                    </a>
-                    {% else %}
-                    <b>User</b>
-                    {% endif %}
+                        {% csrf_token %}
+                        <input
+                            type="hidden"
+                            name="driver_id"
+                            value="{{ profile.id }}"
+                        >
+                        <input
+                            type="hidden"
+                            name="business_id"
+                            value="{{ user.id }}"
+                        >
+                        <button
+                            type="submit"
+                            class="btn btn-dark  w-100"
+                        >Add to
+                            directory</button>
+                    </form>
+                    <div
+                        id="form-messages"
+                        class="alert  py-1"
+                        style="display: none;"
+                    ></div>
 
+                    <div
+                        id="success-message"
+                        class="alert alert-success py-1"
+                        style="display: none;"
+                    ></div>
+                    <div
+                        id="error-message"
+                        class="alert alert-danger py-1"
+                        style="display: none;"
+                    ></div>
+                    {%endif%}
                 </div>
             </div>
         </div>
@@ -172,8 +200,8 @@ EZZY FLEET {{driver.driver_code}}
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Doc No</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Doc No</th>
                         <th scope="col">Expiry Date</th>
                     </tr>
                 </thead>
@@ -181,8 +209,8 @@ EZZY FLEET {{driver.driver_code}}
                     {% for doc in driver_documents %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
-                        <td>{{doc.document_no}}</td>
                         <td>{{doc.document_type}}</td>
+                        <td>{{doc.document_no}}</td>
                         <td>{{doc.document_date}}</td>
                     </tr>
                     {% endfor %}
@@ -234,3 +262,48 @@ EZZY FLEET {{driver.driver_code}}
 
 
 {% endblock content %}
+{% block extra_js %}
+<script>
+    document.getElementById('favorite-form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var form = this;
+        var formData = new FormData(form);
+
+        // Make an asynchronous request to the server
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+
+        })
+            .then(function (response) {
+                if (response.data.status = True) {
+                    // Handle successful response
+                    var successMsg = document.getElementById('success-message');
+                    successMsg.textContent = 'Contact added successfully!';
+                    successMsg.style.display = 'block';
+                    document.getElementById('form-messages').textContent = 'Contact form submitted successfully!'; // Update a message element with the success message
+
+                    console.log('Added to directory!');
+                }
+                else {
+                    // Handle error response
+                    var errorMsg = document.getElementById('error-message');
+                    errorMsg.textContent = 'Error: ' + response.error;
+                    errorMsg.style.display = 'block';
+                    document.getElementById('form-messages').textContent = 'Error occurred while submitting the contact form.'; // Update a message element with the error messa
+                    console.log(response.status + ": " + response.statusText);
+                }
+            })
+            .catch(function (error) {
+                console.error('An error occurred:', error);
+            });
+    });
+</script>
+
+
+{% endblock extra_js %}

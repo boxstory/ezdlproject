@@ -1,0 +1,8 @@
+sidebar {
+  height: calc(
+    100vh - (headerHeight + footerHeight)
+  ); /* Adjust the header and footer height if needed */
+  overflow-y: auto;
+  position: sticky;
+  bottom: 0;
+}

@@ -16,6 +16,7 @@ from product import models as product_models
 # Create your models here.
 
 ORDER_STATUS = {
+    ('to_review', 'To Review'),
     ('ready_to_pickup', 'Ready to pickup'),
     ('out_for_delivery', 'Out for delivery'),
     ('delivered', 'Delivered'),
@@ -47,7 +48,7 @@ class Order(models.Model):
     client_order_code = models.CharField(max_length=100)
     order_notes = models.CharField(max_length=100)
     order_status = models.CharField(
-        max_length=100, choices=ORDER_STATUS, default='ready_to_pickup',
+        max_length=100, choices=ORDER_STATUS, default='to_review',
     )
 
     # pickup details

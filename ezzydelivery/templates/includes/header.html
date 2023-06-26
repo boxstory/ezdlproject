@@ -55,12 +55,12 @@
                             href="{% url 'webpages:contactus' %}"
                         >Contact</a>
                     </li>
-                    {% if user.is_authenticated %}
                     <div
                         class="btn-group"
                         role="group"
                         aria-label="Button group with nested dropdown"
                     >
+                        {% if user.is_authenticated %}
                         <div
                             class="btn-group"
                             role="group"
@@ -105,21 +105,46 @@
                                     > Log Out</a></li>
                             </ul>
                         </div>
+                        {% else %}
+                        <div
+                            class="btn-group"
+                            role="group"
+                        >
+                            <button
+                                id="btnGroupDrop1"
+                                type="button"
+                                class="btn bg-light bg-check dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <img
+                                    src="{% static 'webpages/img/avatar.png' %}"
+                                    alt=""
+                                    width="30"
+                                    height="30"
+                                    title="join"
+                                >
+                            </button>
+                            <ul
+                                class="dropdown-menu bg-light bg-check dropdown-menu-end  ms-3 border-1 text-center"
+                                aria-labelledby="btnGroupDrop1"
+                            >
+                                <li class="nav-item"><a
+                                        class="btn btn-outline-dark   fw-bold  me-2 my-1"
+                                        aria-current="page"
+                                        href="{% url 'account_login' %}"
+                                    >Log In</a>
+                                <li class="nav-item">
+                                    <a
+                                        class="btn btn-outline-dark   fw-bold  me-2 my-1"
+                                        aria-current="page"
+                                        href="{% url 'account_signup' %}"
+                                    >Sign Up</a>
+                                </li>
+                            </ul>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% else %}
-                    <li class="nav-item"><a
-                            class="btn btn-outline-dark   fw-bold  me-2 my-1"
-                            aria-current="page"
-                            href="{% url 'account_login' %}"
-                        >Log In</a>
-                    <li class="nav-item">
-                        <a
-                            class="btn btn-outline-dark   fw-bold  me-2 my-1"
-                            aria-current="page"
-                            href="{% url 'account_signup' %}"
-                        >Sign Up</a>
-                    </li>
-                    {% endif %}
                 </ul>
             </div>
         </div>

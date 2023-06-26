@@ -1,4 +1,10 @@
+{% extends "client/business_dashboard.html" %}
+
+
+
 {% load static %}
+{% block widget %}
+{% load crispy_forms_tags %}
 
 <h2>list of Driver Contacts</h2>
 <div class="table-responsive">
@@ -17,18 +23,23 @@
             <tr>
                 <td>{{contact.driver.user}}</td>
                 <td>{{contact.driver.driver_code}}</td>
-                <td>{{contact.driver.driver_phone}}</td>
+                <td>{{contact.driver.driver_phone}}<a
+                        href="https://wa.me/974{{contact.driver.driver_phone}}"
+                        class="btn pe-3 text-dark p-0 ms-3"
+                    ><i class="fa-xl fa-brands fa-whatsapp"></i></a></td>
                 <td>{{contact.driver.driver_status}}</td>
-                <!-- <td>
+                <td class="p-0">
                     <a
-                        class="pe-3 text-dark"
+                        href="/fleet/{{contact.driver_id}}/"
+                        class="btn pe-3 text-dark p-0"
+                    ><i class="fa-solid fa-circle-info fa-xl"></i></i></a>
+                    <a
                         class="btn pe-3 text-dark"
                         hx-confirm="Are you sure you wish to delete?"
-                        hx-target="#dasboard_div"
-                        hx-swap="innerHTML swap:1s"
-                        hx-delete="{% url 'business:driver_directory_delete' fleet.id %}"
+                        href="{% url 'business:driver_directory_delete' contact.id %}"
                     ><i class="fa fa-lg fa-trash"></i></a>
-                </td> -->
+                </td>
+
             </tr>
             {% endfor %} {% else %}
             <tr>
@@ -43,16 +54,19 @@
                     colspan="5"
                     class="py-2"
                 >
-                    <!-- <a
-                        class="btn btn-dark"
-                        hx-get="{% url 'business:driver_directory_add' fleet_id %}"
-                        hx-trigger="click "
-                        hx-target="#dasboard_div"
-                    ><i class="fa fa-lg fa-add me-2"></i>
-                        Search
-                    </a> -->
+
+                    <a
+                        class="btn pe-3 text-dark w-100"
+                        hx-confirm="Are you sure you wish to delete?"
+                        href="{% url 'fleet:fleets' %}"
+                    >
+                        <i class="fa fa-lg fa-search me-3"></i> Search Drivers
+                    </a>
                 </td>
+
             </tr>
         </tbody>
     </table>
 </div>
+
+{% endblock widget %}

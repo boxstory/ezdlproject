@@ -1,0 +1,64 @@
+{% load crispy_forms_tags %}
+<div class="container  align-content-center">
+    <div class="row">
+        <div class="col-md-12 pb-3 d-flex justify-content-between">
+            <div class="col p-2">
+
+                <h2 class="m-0">Add Order</h2>
+            </div>
+            <div class="col d-flex justify-content-end">
+
+
+                <a
+                    class='text-decoration-none text-light pe-3'
+                    hx-trigger="click "
+                    hx-target="#dasboard_div"
+                    hx-get="{% url 'business:pickup_location_list' %}"
+                >
+                    <div class="btn btn-dark my-2">
+                        Pickup locations
+                    </div>
+                </a>
+                <a
+                    class='text-decoration-none text-light'
+                    hx-trigger="click "
+                    hx-target="#dasboard_div"
+                    hx-get="{% url 'orders:orders_list' %}"
+                >
+                    <div class="btn btn-dark my-2">
+                        Back
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <form method="POST">
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <div>
+                    {{error}}
+
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class=" text-end">
+                    <button
+                        type="submit"
+                        class="btn btn-dark w-100 w-md-50"
+                        hx-trigger="click"
+                        hx-target="#dasboard_div"
+                        hx-post="{% url 'orders:add_order'   %}"
+                    >
+                        Submit
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -27,7 +27,7 @@ class AddOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['pickup_location', 'client_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cod_status_by_client', 'cod_amount',
-                  'dl_building', 'dl_street', 'dl_zone', 'customer_address',  'order_status', 'order_notes', ]
+                  'dl_building', 'dl_street', 'dl_zone', 'customer_address', 'order_notes', ]
         exclude = ['order_number', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
                    'pickup_location_id']
         widgets = {
