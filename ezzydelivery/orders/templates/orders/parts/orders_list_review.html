@@ -12,35 +12,35 @@
                 <th>Ref No</th>
 
                 <th>Status</th>
+                <th>DMS Status</th>
                 <th>COD</th>
 
 
-                <th>Action</th>
 
             </tr>
             {% for order in orders %}
-            <tr>
+            <tr
+                data-order-id="{{ order.id }}"
+                class="data-order-row"
+            >
                 <td>{{ order.id }}</td>
                 <td>{{ order.order_date }}</td>
                 <td>{{ order.client_order_code }}</td>
                 <td>
-                    <select id="status-dropdown">
-                        <option value="{{ order.order_status }}">{{ order.order_status }}</option>
+                    <select
+                        class="status-dropdown form-select form-select-md "
+                        id="floatingSelectGrid"
+                    >
+                        <option value="{{ order.order_status }} ">{{ order.order_status }}</option>
                         <option value="ready_to_pickup">Ready to pickup</option>
                         <option value="cancelled">Cancelled</option>
                     </select>
+
+
                 </td>
                 <td>{{ order.cash_on_delivery }}</td>
-                <td>
-                    <a
-                        class="btn btn-dark"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapse-{{ order.id }}"
-                        aria-expanded="false"
-                        aria-controls="collapse-{{ order.id }}"
-                    >More</a>
-                </td>
+                <td>{{ order.cash_on_delivery }}</td>
+
 
             </tr>
 

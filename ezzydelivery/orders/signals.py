@@ -25,8 +25,7 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
             DeliveryTask.objects.create(
                 order_id=instance.id,
                 dl_task_number=instance.order_number,
-                dl_task_name=instance.order_notes,
-                dl_task_description="na",
+                dl_task_description=instance.order_notes,
                 dl_task_status='for_review',
                 pickup_location_id=instance.pickup_location.id,
             )
@@ -36,9 +35,11 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
                 full_name=instance.customer_name,
                 dl_task_number=instance.order_number,
                 mobile_no=instance.customer_phone,
-                zone_number=instance.customer_zone_no,
-                street_no=0,
-                building_no=0,
+                dl_zone=instance.dl_zone,
+                dl_street=instance.dl_street,
+                dl_building=instance.dl_building,
+                dl_longitude='0',
+                dl_latitude = '0',
 
             )
             instance.save()

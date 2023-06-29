@@ -7,9 +7,9 @@
 BUSINESS {{business.brand_name}}
 {% endblock title %}
 {% block content %}
-<h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> BUSINESS Profile
+<h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> BUSINESS Profile {{profile.id}}{{business.business_id}}
 
-
+    {% if profile.id == business.business_id %}
     <a
         type="submit"
         class="btn btn-dark w-100 w-md-50"
@@ -17,6 +17,7 @@ BUSINESS {{business.brand_name}}
     >
         Update Business
     </a>
+    {% endif %}
 
 
 </h2>

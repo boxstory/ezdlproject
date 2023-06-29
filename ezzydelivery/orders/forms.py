@@ -49,8 +49,7 @@ class AddOrderForm(forms.ModelForm):
             self.fields[field].widget.attrs.update(
                 {'class': 'form-control'})
 
-            self.fields['order_status'].widget = forms.RadioSelect(
-                choices=ORDER_STATUS)
+            
             self.fields['cod_status_by_client'].widget = forms.RadioSelect(
                 choices=COD_STATUS_BY_CLIENT)
 

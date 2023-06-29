@@ -92,7 +92,7 @@ class DeliveryTask(models.Model):
 
     pickup_location = models.ForeignKey(
         business_models.PickupLocation, on_delete=models.CASCADE, blank=True, null=True)
-   
+
     dl_waight = models.IntegerField(default=1)
     dl_category_choices = (
         ('Food', 'Food'),
@@ -115,7 +115,7 @@ class DeliveryTask(models.Model):
         delivery_models.DlAddressUpdate, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
-        return self.dl_task_name
+        return self.dl_task_number
 
     class Meta:
         verbose_name_plural = "Delivery Task"

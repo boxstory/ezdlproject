@@ -14,39 +14,6 @@ from client import forms as business_forms
 # Create your views here.
 
 
-def business_profile_update(request, business_id):
-    if request.user.id == business_id:
-        redirect('core:main_dashboard')
-    print('business_profile_update')
-    business = get_object_or_404(
-        business_models.Business, business_id=business_id)
-    print('business')
-    form = business_forms.businessRegisterForm(instance=business)
-    print('form')
-    if request.method == 'POST':
-        print('businessRegisterForm')
-        form = business_forms.businessRegisterForm(
-            request.POST, request.FILES, instance=business)
-        if form.is_valid():
-            f = form.save(commit=False)
-            print('f.user')
-
-            print(f.user)
-
-            form.save()
-            print('ok')
-            messages.success(request, "Successful Submission")
-            return redirect("business:business_dashboard")
-        else:
-            print('driver_directory_add not valid')
-            messages.error(request, "Error")
-    context = {
-        'form': form,
-        'business_id': business.business_id
-    }
-
-    return render(request, 'client/frontend/business_profile_update.html', context)
-
 # dashboard---------------------------------------------------------------------------------------------------------------------
 
 
@@ -60,7 +27,7 @@ def business_dashboard(request):
             business_id=business.business_id).all()
         print(business, "latest 10 order list")
         orders = orders_models.Order.objects.filter(
-            business=business.business_id).order_by('-id')[:1]
+            business=business.business_id).order_by('-id')[:10]
 
         print(business)
 
@@ -199,7 +166,7 @@ def profile_business(request, business_id):
     try:
         business = business_models.Business.objects.get(
             business_id=business_id)
-        profile = core_models.Profile.objects.get(user_id=business.user_id)
+        profile = core_models.Profile.objects.get(user_id=request.user.id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
         business_social_info = business_models.BusinessSocialInfo.objects.filter(
@@ -219,6 +186,44 @@ def profile_business(request, business_id):
     except business_models.Business.DoesNotExist:
 
         return redirect("/join_us/")
+
+
+def business_profile_update(request, business_id):
+    if request.user.id == business_id:
+        print(':matched')
+        redirect('core:main_dashboard')
+        print('business_profile_update', business_id)
+        print('request.user.id', request.user.id)
+        business = get_object_or_404(
+            business_models.Business, business_id=business_id)
+        print('business')
+        form = business_forms.businessRegisterForm(instance=business)
+        print('form')
+        if request.method == 'POST':
+            print('businessRegisterForm')
+            form = business_forms.businessRegisterForm(
+                request.POST, request.FILES, instance=business)
+            if form.is_valid():
+                f = form.save(commit=False)
+                print('f.user')
+
+                print(f.user)
+
+                form.save()
+                print('ok')
+                messages.success(request, "Successful Submission")
+                return redirect("business:business_dashboard")
+            else:
+                print('driver_directory_add not valid')
+                messages.error(request, "Error")
+        context = {
+            'form': form,
+            'business_id': business.business_id
+        }
+
+        return render(request, 'client/frontend/business_profile_update.html', context)
+    else:
+        return redirect("business:business_dashboard")
 
 
 def all_business(request):

@@ -15,7 +15,7 @@
         <p> No orders</p>
         {%else%}
 
-        <table class="table table-striped table-hover my-3">
+        <table class="table table-striped table-hover0 my-3">
             <tr>
                 <th>Date</th>
                 <th>Ref No</th>
@@ -49,7 +49,8 @@
                 </td>
 
             </tr>
-            <div class="table table-hover my-3">
+            <div class="table   my-3">
+
                 <tr
                     class="collapse"
                     id="collapse-{{ order.id }}"
@@ -63,7 +64,7 @@
                     <th>Actions</th>
                 </tr>
                 <tr
-                    class="collapse"
+                    class="collapse table-secondary"
                     id="collapse-{{ order.id }}"
                 >
                     <td>{{ order.order_number }}</td>
@@ -93,4 +94,5 @@
         </table>
         {% endif %}
     </div>
+
 </div>
