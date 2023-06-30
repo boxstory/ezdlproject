@@ -12,6 +12,8 @@ class ProductCategory(models.Model):
         'self', on_delete=models.SET_NULL, null=True, blank=True)
     discription = models.CharField(max_length=100)
     product_category_date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.category_name
@@ -25,6 +27,8 @@ class ColorVariant(models.Model):
     short_code = models.CharField(max_length=5, null=True, blank=True)
     discription = models.CharField(max_length=100)
     color_variants_date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.color_variant
@@ -38,6 +42,8 @@ class SizeVariant(models.Model):
     short_code = models.CharField(max_length=5, null=True, blank=True)
     discription = models.CharField(max_length=100)
     size_variants_date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.size_variant
@@ -50,7 +56,8 @@ class UnitVariant(models.Model):
     unit_variant = models.CharField(max_length=100)
     short_code = models.CharField(max_length=5, null=True, blank=True)
     discription = models.CharField(max_length=100)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.uni_variant
@@ -68,7 +75,8 @@ class ItemSku(models.Model):
     unit = models.ForeignKey(
         UnitVariant, on_delete=models.SET_NULL, null=True, blank=True)
     item_price = models.PositiveIntegerField(_("Price"), default=0)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     business = models.ForeignKey(
         business_models.Business, on_delete=models.SET_NULL, null=True)
@@ -84,7 +92,7 @@ class ProductInventory(models.Model):
     item_sku = models.ForeignKey(
         product_models.ItemSku, on_delete=models.SET_NULL, null=True, related_name='product_inventory')
     item_quantity = models.IntegerField(default=0)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -104,6 +112,8 @@ class Product(models.Model):
         product_models.ProductCategory, on_delete=models.SET_NULL, null=True)
     inventory = models.ForeignKey(
         product_models.ProductInventory, on_delete=models.SET_NULL, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.item_name

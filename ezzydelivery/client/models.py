@@ -65,6 +65,8 @@ class PickupLocation(models.Model):
         blank=True)
     pickup_lat = models.PositiveIntegerField(blank=True)
     pickup_lon = models.PositiveIntegerField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.pickup_location_title
@@ -78,6 +80,8 @@ class DriverDirectory(models.Model):
         Business, on_delete=models.CASCADE, related_name='driver_directory')
     driver = models.ForeignKey(
         fleet_models.Driver, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.driver.driver_code
@@ -92,6 +96,8 @@ class BusinessSocialInfo(models.Model):
     facebook = models.CharField(max_length=100)
     instagram = models.CharField(max_length=100)
     whatsapp = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.business

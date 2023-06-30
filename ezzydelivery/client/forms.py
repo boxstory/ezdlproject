@@ -32,7 +32,7 @@ class businessRegisterForm(forms.ModelForm):
         model = business_models.Business
         fields = '__all__'
         exclude = ['profile', 'business_id', 'user',
-                   'business_status', 'business_code']
+                   'business_status', 'business_code', 'updated_at', 'created_at']
         widgets = {
             'business_name': forms.TextInput(attrs={'class': 'form-control'}),
             'business_languages': forms.Select(
@@ -58,11 +58,11 @@ class PickupLocationsAddForm(forms.ModelForm):
     class Meta:
         model = business_models.PickupLocation
         fields = '__all__'
-        exclude = ['business']
+        exclude = ['business', 'updated_at', 'created_at']
 
 
 class DriverDirectoryAddForm(forms.ModelForm):
     class Meta:
         model = business_models.DriverDirectory
         fields = '__all__'
-        exclude = ['business']
+        exclude = ['business', 'updated_at', 'created_at']

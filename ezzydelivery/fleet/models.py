@@ -90,8 +90,8 @@ class Driver(models.Model):
         ('Blocked', 'Blocked'),
     )
     driver_status = models.CharField(max_length=100, choices=driver_status_choices)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.driver_code
@@ -115,6 +115,8 @@ class DriverVehicle(models.Model):
     vehicle_status = models.CharField(
         max_length=100, choices=VEHICLE_STATUS, default='Inactive')
     vehicle_date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.vehicle_no)
@@ -147,6 +149,8 @@ class DriverDocument(models.Model):
     document_update_date = models.DateField(auto_now=True)
     document_file = models.ImageField(
         upload_to=upload_path_handler, default='core/driver/licence_default.jpg', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.document_no

@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save, pre_save
@@ -80,6 +79,9 @@ class Order(models.Model):
     dl_zone = models.PositiveIntegerField(blank=True)
     dl_building = models.PositiveIntegerField(blank=True)
     dl_street = models.PositiveIntegerField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.order_notes

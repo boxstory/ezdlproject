@@ -29,7 +29,7 @@ class AddOrderForm(forms.ModelForm):
         fields = ['pickup_location', 'client_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cod_status_by_client', 'cod_amount',
                   'dl_building', 'dl_street', 'dl_zone', 'customer_address', 'order_notes', ]
         exclude = ['order_number', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
-                   'pickup_location_id']
+                   'pickup_location_id', 'updated_at', 'created_at']
         widgets = {
             'order_notes': forms.TextInput(attrs={'class': 'form-control'}),
             'order_status': forms.Select(attrs={'class': 'form-control'}, choices=ORDER_STATUS),
@@ -73,7 +73,7 @@ class UpdateOrderForm(forms.ModelForm):
                   'pickup_location', 'order_status', 'order_notes',
                   ]
         exclude = ['order_number', 'business', 'delivery_task', 'order_date',
-                   'pickup_location_id']
+                   'pickup_location_id', 'updated_at', 'created_at']
         labels = {
             'order_notes': 'Order Name / Notes',
             'cod_amount': 'Balance COD with Delivery charge'

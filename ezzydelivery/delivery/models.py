@@ -30,6 +30,8 @@ class DlAddressUpdate(models.Model):
     dl_task_number = models.CharField(max_length=100)
     dms_id = models.CharField(max_length=100)
     time_slot = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.full_name
@@ -114,6 +116,8 @@ class DeliveryTask(models.Model):
     dl_to_address = models.ForeignKey(
         delivery_models.DlAddressUpdate, on_delete=models.DO_NOTHING, blank=True, null=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.dl_task_number
 
@@ -124,6 +128,8 @@ class DeliveryTask(models.Model):
 class ZoneName(models.Model):
     zone_name = models.CharField(max_length=100)
     zone_number = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.zone_name
