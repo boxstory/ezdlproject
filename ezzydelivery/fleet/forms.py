@@ -49,7 +49,7 @@ class DriverVehicleForm(forms.ModelForm):
     class Meta:
         model = fleet_models.DriverVehicle
         fields = '__all__'
-        exclude = ['driver', 'vehicle_date', 'updated_at', 'created_at']
+        exclude = ['driver', 'vehicle_date', 'updated_at', 'created_at','driver_code_dms']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

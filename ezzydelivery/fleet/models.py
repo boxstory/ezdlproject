@@ -64,7 +64,8 @@ class Driver(models.Model):
         core_models.Profile, on_delete=models.SET_NULL, blank=True, null=True, related_name='driver')
     driver_id = models.PositiveSmallIntegerField(primary_key=True)
 
-    driver_code = models.CharField(max_length=100)
+    driver_code = models.CharField(max_length=100, blank=True, null=True)
+    driver_code_dms = models.CharField(max_length=100, blank=True, null=True)
     driver_phone = models.CharField(max_length=100)
     driver_whatsapp = models.CharField(max_length=100)
     driver_bio = models.CharField(max_length=225, blank=True, null=True)
