@@ -1,4 +1,13 @@
+{% extends "fleet/fleet_dashboard.html" %}
 {% load static %}
+
+
+{% block title %} FLEET DASHBOARD
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block widget %}
 <div class="table-responsive">
     <table class="table table-striped table-hover my-3">
         <thead>
@@ -46,3 +55,4 @@
         </div>
     </a>
 </div>
+{% endblock widget %}

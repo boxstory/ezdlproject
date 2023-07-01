@@ -43,8 +43,6 @@ def join_business(request):
                 print("businessForm full  is valid")
                 f = form.save(commit=False)
                 f.profile = request.user.profile
-                print(f.profile)
-
                 f.user_id = request.user.id
                 f.business_id = request.user.id
                 f.save()
