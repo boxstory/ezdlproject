@@ -7,7 +7,12 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block account_content %}
-<h1>{% trans "Sign Out" %}</h1>
+<div class="container mx-auto">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="card mt-5">
+        <div class="card-body text-center">
+<h1  class="mb-4">{% trans "Sign Out" %}</h1>
 
 <p>{% trans 'Are you sure you want to sign out?' %}</p>
 
@@ -21,10 +26,17 @@
     type="hidden"
     name="{{ redirect_field_name }}"
     value="{{ redirect_field_value }}"
+    
   />
   {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
+  <button type="submit" class="btn btn-danger btn-lg">{% trans 'Sign Out' %}</button>
 </form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 {% endblock %}
