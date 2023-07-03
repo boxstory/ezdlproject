@@ -31,10 +31,11 @@
                 <td class=" text-center p-0">
                     <!-- delete link neeeds to setup later ********************************************************* -->
                     <a
-                        href="{% url 'fleet:vehicle_update'  %}"
-                        class="btn btn-outline-dark btn-sm "
+                        href="{% url 'fleet:vehicle_update'  vehicle_id=vehicle.id %}"
+                        
+                        class="btn btn-outline-dark btn-sm me-1"
                     >
-                        <i class="fa-solid fa-pen"></i></a>
+                        <i class="fa-solid fa-pen"></i></>
 
                     <a
                         href="{% url 'fleet:vehicle_delete' fleet_id=request.user.id vehicle_id=vehicle.id %}"
