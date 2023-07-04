@@ -22,25 +22,31 @@
 
         </tr>
         {% for card in cards %}
-        <tr> 
-        
+        <tr
+            data-order-id="{{ card.id }}"
+            class="data-order-row"
+        >
+
             <td>{{ card.dl_task_date }}</td>
             <td>{{ card.dl_speed }}-{{ card.dl_to_address.time_slot }}</td>
             <td>{{ card.business.business_business_name }}-{{ card.pickup_location.pickup_location_title }} </td>
             <td>{{card.dl_to_address.zone_name}}</td>
             <td>{{ card.dl_task_status }}</td>
             <td><a
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse-{{ card.id }}"
-            aria-expanded="false"
-            aria-controls="collapse-{{ card.id }}"
-            class="my-5"><i class=" fa-solid fa-angles-right text-secondary "></i>
-            </a></td>
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse-{{ card.id }}"
+                    aria-expanded="false"
+                    aria-controls="collapse-{{ card.id }}"
+                    class="my-5"
+                ><i class=" fa-solid fa-angles-right text-secondary "></i>
+                </a></td>
 
 
         </tr>
-        <tr class="collapse"
-        id="collapse-{{ card.id }}">
+        <tr
+            class="collapse"
+            id="collapse-{{ card.id }}"
+        >
             <td colspan="9">
                 <div class="card h-100 w-100 m-0">
                     <div class="card-body ">
@@ -70,7 +76,10 @@
                             <div class="col-12 col-md-4">
                                 <table class="table ">
                                     <span class="fw-bold">To:</span>
-                                    <tr class="" id="collapse-{{ card.id }}">
+                                    <tr
+                                        class=""
+                                        id="collapse-{{ card.id }}"
+                                    >
                                         <th class="fw-light p-0 col-5">Zone No & Place:</th>
                                         <td class="fw-light p-0">{{ card.dl_to_address.zone_number}}-
                                             {{card.dl_to_address.zone_name}}</td>
@@ -113,24 +122,27 @@
                                     </tr>
                                 </table>
                             </div>
+                        </div></div>    
+                </div >
+                        <div class="col-12 p-3  d-flex justify-content-end">
+                            <a href="#">
+                                <button class="btn btn-success accept-order-btn">Accept Order</button>
+                            </a>
                         </div>
-
-                    </div>
-                    <div class="col-12 p-3  d-flex justify-content-end">
-
-                        
-                        <a href="{% url 'core:main_dashboard' %}">
-                            <div class="btn btn-dark ">
-                                <i class="fa-solid fa-tick"></i> Accept Task
-                            </div>
-                        </a>
-                        
-                    </div>
-                </div>
+               
             </td>
         </tr>
 
         {% endfor %}
     </table>
 </div>
+
+
 {% endblock widget %}
+{% block extra_js %}
+
+
+
+
+
+{% endblock extra_js %}
