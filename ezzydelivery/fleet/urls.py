@@ -30,7 +30,7 @@ urlpatterns = [
 
     path('vehicle_own/',
          fleet_views.vehicle_own, name='vehicle_own'),
-    path('vehicle_update/',
+    path('vehicle/<int:vehicle_id>/update/',
          fleet_views.vehicle_update, name='vehicle_update'),
     path('vehicle_add/',
          fleet_views.vehicle_add, name='vehicle_add'),

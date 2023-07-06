@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('fullfillment/', webpages_views.fullfillment, name='fullfillment'),
     path('3pl/pricing/', webpages_views.delivery_pricing, name='delivery_pricing'),
+    path('affiliate/', webpages_views.affiliate, name='affiliate_marketing'),
 
 
 

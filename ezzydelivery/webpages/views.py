@@ -71,6 +71,13 @@ def fullfillment(request):
     return render(request, 'webpages/fullfillment.html', data)
 
 
+def affiliate(request):
+    data = {
+
+    }
+    return render(request, 'webpages/affiliate.html', data)
+
+
 def fleets(request):
     data = {
 

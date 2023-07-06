@@ -29,6 +29,21 @@ def orders_list(request):
 
 
 @login_required(login_url='account_login')
+def business_orders_list(request):
+    business = business_models.Business.objects.get(user_id=request.user.id)
+
+    print(business, "business order list")
+    orders = orders_models.Order.objects.filter(
+        business=business.business_id).order_by('-id')
+    print(orders)
+    context = {
+        'orders': orders,
+        'business': business,
+    }
+    return render(request, 'orders/orders_list.html', context)
+
+
+@login_required(login_url='account_login')
 def latest_orders_list(request):
     business = business_models.Business.objects.get(user_id=request.user.id)
 
@@ -113,26 +128,15 @@ def order_details(request, order_id):
 
 # operation links
 
+
 @require_POST
-def update_order_status3(request):
-    order_id = request.POST.get('order_id')
-    new_status = request.POST.get('new_status')
-
-    try:
-        review = orders_models.Order.objects.get(id=order_id)
-        review.order_status = new_status
-        review.save()
-        return JsonResponse({'success': True})
-    except (orders_models.Order.DoesNotExist, Exception):
-        return JsonResponse({'success': False})
-
-
 def update_order_status(request):
     if request.method == 'POST' and request.is_ajax():
         # Assuming you have a model named "YourModel" with a "status" field
         order_id = request.POST.get('order_id')
-        print(order_id)
-        status=request.POST.get('status')
+        print('update_order_status - view', order_id)
+        status = request.POST.get('status')
+        print(status)
         order = orders_models.Order.objects.get(pk=order_id)
         order.order_status = status
         print(order.order_status)

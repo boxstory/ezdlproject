@@ -64,7 +64,8 @@ class Driver(models.Model):
         core_models.Profile, on_delete=models.SET_NULL, blank=True, null=True, related_name='driver')
     driver_id = models.PositiveSmallIntegerField(primary_key=True)
 
-    driver_code = models.CharField(max_length=100)
+    driver_code = models.CharField(max_length=100, blank=True, null=True)
+    driver_code_dms = models.CharField(max_length=100, blank=True, null=True)
     driver_phone = models.CharField(max_length=100)
     driver_whatsapp = models.CharField(max_length=100)
     driver_bio = models.CharField(max_length=225, blank=True, null=True)
@@ -90,8 +91,8 @@ class Driver(models.Model):
         ('Blocked', 'Blocked'),
     )
     driver_status = models.CharField(max_length=100, choices=driver_status_choices)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.driver_code
@@ -115,6 +116,8 @@ class DriverVehicle(models.Model):
     vehicle_status = models.CharField(
         max_length=100, choices=VEHICLE_STATUS, default='Inactive')
     vehicle_date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.vehicle_no)
@@ -147,6 +150,8 @@ class DriverDocument(models.Model):
     document_update_date = models.DateField(auto_now=True)
     document_file = models.ImageField(
         upload_to=upload_path_handler, default='core/driver/licence_default.jpg', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.document_no

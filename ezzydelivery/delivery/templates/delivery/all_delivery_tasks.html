@@ -1,13 +1,11 @@
-{% extends "base.html" %}
+{% extends "fleet/fleet_dashboard.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 
 
-{% block title %} orders
+{% block title %} FLEET DASHBOARD
 {% endblock title %}
-
-{% block extra_css %}
-<!-- extra css -->
+{% block extra_css %}<!-- extra css -->
 <link
     type="text/css"
     rel="stylesheet"
@@ -15,8 +13,8 @@
 >
 {% endblock extra_css %}
 
+{% block widget %}
 
-{% block dashboard %}
 <div class="container">
     <div class="row table-responsive">
         <div class=" col-md-12 d-flex flex-row justify-content-between">
@@ -105,7 +103,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="fw-light p-0">Custumer Name:</th>
-                                                <td class="fw-light p-0">{{ card.dl_task_name }}</td>
+                                                <td class="fw-light p-0">{{ card.dl_task_number }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="fw-light p-0">Order Title:</th>
@@ -168,7 +166,7 @@
     </div>
 </div>
 
-{% endblock %}
+{% endblock widget %}
 
 {% block extra_js %}
 <!-- extra js -->

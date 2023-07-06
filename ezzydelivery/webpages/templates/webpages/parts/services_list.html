@@ -11,8 +11,60 @@
                 </div>
             </div>
             <div class="d-flex flex-wrap">
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light h-100">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/delivery.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">3PL Delivery Partner</h5>
+                            <p class="text-muted">Make us your <span class="text-muted fs-6 fw-bolder">delivery partner for your business.</span> we take care of
+                                your all orders delivery on time and in professionally. it helps to get reorder and save
+                                your time for focus in
+                                marketing</p>
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="{% url 'webpages:delivery_pricing' %}"
+                            >
+                                <div class="btn btn-dark w-md-50">
+                                    <i class="fa-solid fa-money-check-dollar me-2"></i>
+                                    Pricing
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 p-1">
+                    <div class="p-3 p-md-5 bg-light h-100">
+                        <div class="text-center">
+                            <img
+                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
+                                src="{% static 'webpages/img/fullfillment.png' %}"
+                                alt=""
+                            >
+                            <h5 class="fw-bold mb-3">Fullfillment Service</h5>
+                            <p class="text-muted mb-1">We Handle your bulk order shippment to our store and we repack,
+                                deliver to
+                                your business according to orders</p>
+                            <p class="text-muted fw-bold">with keeping invontery stock managment system</p>
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="{% url 'webpages:fullfillment' %}"
+                            >
+                                <div class="btn btn-dark w-md-50">
+                                    <i class="fa fa-info me-2 "></i>Know More
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-12 col-md-6 p-1">
-                    <div class="p-3 p-md-5 bg-light">
+                    <div class="p-3 p-md-5 bg-light h-100">
 
                         <div class="text-center">
                             <img
@@ -20,8 +72,9 @@
                                 src="{% static 'webpages/img/drivers.png' %}"
                                 alt=""
                             >
-                            <h4 class="fw-bold mb-3 text-dark">PROVIDE DRIVERS LIST</h4>
-                            <p class="text-muted">Find delivery partner for your business. we provide list of
+                            <h4 class="fw-bold mb-3 text-dark">GET VERIFIED DRIVERS</h4>
+                            <p class="text-muted">Find delivery driver for your business for ondemnd delivery. we
+                                provide list of
                                 delivery
                                 teams details to get deliver on time and in professionally. it helps to get reorder
                                 and
@@ -50,7 +103,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 p-1">
-                    <div class="p-3 p-md-5 bg-light">
+                    <div class="p-3 p-md-5 bg-light h-100">
 
                         <div class="text-center">
 
@@ -59,15 +112,11 @@
                                 src="{% static 'webpages/img/shop.png' %}"
                                 alt=""
                             >
-                            <h4 class="fw-bold mb-3 text-dark">PROVIDE BUSINESS LISTED</h4>
-                            <p class="text-muted"> If you wish to get delivery job from qatar business, you can
-                                <span class="text-muted fw-bold text-uppercase">
-
-                                    REQUEST TO BUSINESS
-                                </span>
-
-
-                                to make delivery deals with list of business available in Qatar.
+                            <h4 class="fw-bold mb-3 text-dark">FEATURING YOUR BUSINESS</h4>
+                            <p class="text-muted"> Promote your business effortlessly with Ezzy Delivery! We're here to
+                                help small and medium-scale businesses in Qatar grow. Our website and social media
+                                campaigns are designed to boost your brand and reach more customers. Join us
+                                today and experience the power of Ezzy Delivery's promotional strategies.
                             </p>
                             <div class="mb-2 w-md-50 "><a
                                     href="{%url 'business:all_business' %}"
@@ -90,62 +139,10 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex flex-wrap">
+
+
                 <div class="col-12 col-lg-6 p-1">
-                    <div class="p-3 p-md-5 bg-light">
-                        <div class="text-center">
-                            <img
-                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
-                                src="{% static 'webpages/img/fullfillment.png' %}"
-                                alt=""
-                            >
-                            <h5 class="fw-bold mb-3">Fullfillment Service</h5>
-                            <p class="text-muted mb-1">We Handle your bulk order shippment to our store and we repack,
-                                deliver to
-                                your business according to orders</p>
-                            <p class="text-muted fw-bold">with keeping invontery stock managment system</p>
-                            <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="{% url 'webpages:fullfillment' %}"
-                            >
-                                <div class="btn btn-dark w-md-50">
-                                    <i class="fa-solid fa-box-open me-2"></i>
-                                    Fullfillment
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 p-1">
-                    <div class="p-3 p-md-5 bg-light">
-                        <div class="text-center">
-                            <img
-                                class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
-                                src="{% static 'webpages/img/delivery.png' %}"
-                                alt=""
-                            >
-                            <h5 class="fw-bold mb-3">3PL Delivery Partner</h5>
-                            <p class="text-muted">Make us your delivery partner for your business. we take care of
-                                your all orders delivery on time and in professionally. it helps to get reorder and save
-                                your time for focus in
-                                marketing</p>
-                            <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="{% url 'webpages:delivery_pricing' %}"
-                            >
-                                <div class="btn btn-dark w-md-50">
-                                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                                    Pricing
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 p-1">
-                    <div class="p-3 p-md-5 bg-light">
+                    <div class="p-3 p-md-5 bg-light h-100">
                         <div class="text-center">
 
                             <img
@@ -153,26 +150,36 @@
                                 src="{% static 'webpages/img/affiliate-marketing.png' %}"
                                 alt=""
                             >
-                            <h5 class="fw-bold mb-3">Affiliate Marketing Model</h5>
+                            <h5 class="fw-bold mb-3">Affiliate Marketing Program</h5>
                             <p class="text-muted">Are you agent, blogger or influncer and wish to marketing products
                                 available in
-                                Qatar, join us as Affiliate Marketing exicutives. we provide verity of products to
-                                get pyment by selling through your business channel.</p>
+                                Qatar, join us as Affiliate Marketing Program. we provide verity of products to
+                                get payment by selling through your business channel.</p>
+                            <div class="mb-2 w-md-50 "><a
+                                    href="/affiliate/"
+                                    class="text-decoration-none"
+                                >
+                                    <div class="btn btn-dark  ">
+                                        <i class="fa fa-info me-2 "></i>Know More
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 p-1">
-                    <div class="p-3 p-md-5 bg-light">
+                    <div class="p-3 p-md-5 bg-light h-100">
                         <div class="text-center">
                             <img
                                 class="d-inline-block d-flex justify-content-center align-items-center mx-auto mb-4 rounded-3 bg-light text-light w-25"
                                 src="{% static 'webpages/img/c2c.png' %}"
                                 alt=""
                             >
-                            <h5 class="fw-bold mb-3">Peer-to-Peer Model</h5>
-                            <p class="text-muted">customer  to customer delivery services, The actual handling of the
-                                task or the delivery is left up to the
-                                people involved in the transaction.</p>
+                            <h5 class="fw-bold mb-3">Peer-to-Peer Delivery</h5>
+                            <p class="text-muted">Our P2P delivery service provides an efficient, affordable, and
+                                community-driven approach to package delivery. Whether you need to send a small item
+                                across town or require a more extensive logistics solution, our network of independent
+                                drivers is ready to assist. </p>
                         </div>
                     </div>
                 </div>

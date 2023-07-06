@@ -1,20 +1,14 @@
-{% extends "base.html" %}
-
-
+{% extends "fleet/fleet_dashboard.html" %}
 {% load static %}
-
 {% load crispy_forms_tags %}
 
 
+{% block title %} FLEET DASHBOARD
+{% endblock title %}
 {% block extra_css %}
-<!-- extra css -->
 {% endblock extra_css %}
 
-{% block title %}
-FLEET DASHBOARD
-{% endblock title %}
-
-{% block content %}
+{% block widget %}
 <div class="container col-8 align-content-center">
     <div class="row">
         <div class="col-md-12 text-center ">
@@ -23,11 +17,15 @@ FLEET DASHBOARD
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form method="post">
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
                 {% csrf_token %}
                 {{form | crispy}}
                 <button
-                    type="submit"
+                type="submit"
+                value="submit"
                     class="btn btn-dark align-content-center"
                 >Update Vehicle </button>
 
@@ -35,4 +33,4 @@ FLEET DASHBOARD
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock widget %}

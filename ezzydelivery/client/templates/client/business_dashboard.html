@@ -34,7 +34,6 @@
                             {{business.business_business_name}} - Dashboard
                         </h3>
                     </div>
-                    <hr />
                 </div>
                 <div
                     class="p-3 p-md-3"
@@ -108,6 +107,7 @@
 
                         <section class="p-3 m-3 fw-medium fs-4 bg-light">
                             <p class=" pb-2 m-0 fw-bolder fs-5 text-center text-md-start">Latest updated Orders list</p>
+                            <p>{{ order.id }}</p>
                             {% include "orders/parts/orders_list_review.html" %}
 
 
@@ -115,8 +115,8 @@
                         </section>
                     </div>
                     {% endblock widget %}
-
                 </div>
+            </section>
         </div>
     </div>
 </div>
@@ -140,45 +140,51 @@
 
 
 <script>
-    const dropdown = document.getElementById('status-dropdown');
-    dropdown.addEventListener('change', () => {
-        const selectedOption = dropdown.value;
-        const order_id = 11;
-        // Replace with the actual object ID
-        const csrftoken = getCookie('csrftoken');
+    const dropdowns = document.querySelectorAll('.status-dropdown');
+    dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener('change', () => {
+            const selectedOption = dropdown.options[dropdown.selectedIndex].value;
+            const selectedRow = dropdown.closest('tr');
+            const order_id = selectedRow.dataset.orderId;
 
-        // Send a POST request to the server using AJAX
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/orders/update_order_status/', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.setRequestHeader('X-CSRFToken', csrftoken);
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                if (response.status === 'success') {
-                    // Update the UI to reflect the changed status
-                    // For example, you can update a label or display a success message
-                    console.log('Status changed successfully.');
+
+
+            // get with the csrf
+            const csrftoken = getCookie('csrftoken');
+
+            // Send a POST request to the server using AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/orders/update_order_status/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.status === 'success') {
+                        console.log('Status changed successfully.');
+                    } else {
+                        // Handle the error response
+                        console.error('Error changing status:', response.error);
+                    }
                 } else {
-                    // Handle the error response
-                    console.error('Error changing status:', response.error);
+                    // Handle non-200 HTTP status
+                    console.error('Unexpected HTTP status:', xhr.status);
                 }
-            } else {
-                // Handle non-200 HTTP status
-                console.error('Unexpected HTTP status:', xhr.status);
-            }
-        };
+            };
 
-        // Send the request with the selected option and object ID
-        const data = `status=${selectedOption}&order_id=${order_id}`;
-        xhr.send(data);
+            // Send the request with the selected option and object ID
+            const data = `status=${selectedOption}&order_id=${order_id}`;
+            xhr.send(data);
+        });
     });
+
     // Helper function to get the CSRF token value from the cookie
     function getCookie(name) {
         const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
         return cookieValue ? cookieValue.pop() : '';
     }
 </script>
+
 
 {% endblock extra_js %}

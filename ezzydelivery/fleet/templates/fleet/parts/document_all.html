@@ -1,12 +1,21 @@
+{% extends "fleet/fleet_dashboard.html" %}
 {% load static %}
-<div class="table-responsive">
-    <table class="table table-striped table-hover my-3">
+
+
+{% block title %} FLEET DASHBOARD
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block widget %}
+<div class="table-responsive m-2 m-md-3">
+    <table class="table table-responsive table-striped table-hover ">
         <thead>
-            <tr>
+            <tr class="bg-dark text-light">
                 <th scope="col">#</th>
+                <th scope="col">Type</th>
                 <th scope="col">No</th>
                 <th scope="col">Expirey Date</th>
-                <th scope="col">Type</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -14,9 +23,9 @@
             {% for document in documents %}
             <tr class="">
                 <td>{{document.id}}</td>
+                <td>{{document.document_type}}</td>
                 <td>{{document.qid_no}} </td>
                 <td>{{document.qid_expirey_date}}</td>
-                <td>{{document.document_type}}</td>
 
                 <td>
                     <!-- delete link neeeds to setup later ********************************************************* -->
@@ -46,3 +55,4 @@
         </div>
     </a>
 </div>
+{% endblock widget %}

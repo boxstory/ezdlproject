@@ -9,12 +9,14 @@ from fleet import models as fleet_models
 class ContactForm(forms.Form):
     DELIVERY_REQUEST = 'dr'
     FULLFILLMENT = 'fl'
+    AFFLILIATE = 'af'
     DRIVER_JOB = 'd'
     FEEDBACK = 'fb'
     OTHER = 'o'
     purpose_choices = (
         (DELIVERY_REQUEST, 'Delivery Request'),
         (FULLFILLMENT, 'Fullfillment Request'),
+        (AFFLILIATE, 'Affiliate Marketing Program'),
         (DRIVER_JOB, 'Driver Jobs'),
         (FEEDBACK, 'Feedback'),
         (OTHER, 'Other'),

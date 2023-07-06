@@ -1,11 +1,18 @@
-{% extends "base.html" %}
+{% extends "fleet/fleet_dashboard.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block extra_css %}
-{% endblock extra_css %}
+
+
 {% block title %} FLEET DASHBOARD
 {% endblock title %}
-{% block content %}
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block widget %}
+
+
+
+
 <div class="container col-12 col-md-8  bg-light">
     <div class="row">
         <div class="col-12 px-4">
@@ -36,6 +43,6 @@
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock widget %}
 {% block extra_js %}
 {% endblock extra_js %}
