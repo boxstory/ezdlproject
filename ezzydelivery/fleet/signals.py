@@ -7,7 +7,7 @@ import uuid
 from fleet import models as fleet_models
 
 
-@receiver(post_save, sender=fleet_models.Driver)
+#@receiver(post_save, sender=fleet_models.Driver)
 def fleet_register_pre_save_receiver(sender, instance, created, *args, **kwargs):
     print("Driver post save receiver")
     if created:

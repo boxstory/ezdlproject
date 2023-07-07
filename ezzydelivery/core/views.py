@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from pytz import timezone
+from datetime import datetime
 
 
 from core import models as core_models
@@ -97,6 +97,8 @@ def join_driver(request):
                 f.driver_rating_count = 0
                 f.driver_reviews = 0
                 f.driver_reviews_count = 0
+
+                f.created_at = datetime.now()
                 f.save()
                 form1 = joinusform.save(commit=False)
                 user = User.objects.get(id=request.user.id)
@@ -114,6 +116,7 @@ def join_driver(request):
         context = {
             'form': form,
             'driverjoinform': driverjoinform,
+            'profile': profile,
         }
         return render(request, 'core/join_us_driver.html', context)
     except core_models.Profile.DoesNotExist:
