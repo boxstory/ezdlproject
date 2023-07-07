@@ -24,8 +24,8 @@ class DriverJoinForm(forms.ModelForm):
     class Meta:
         model = fleet_models.Driver
         fields = '__all__'
-        exclude = ['user', 'driver_id', 'profile', 'driver_code', 'driver_status', 'driver_rating',
-                   'driver_rating_count', 'driver_reviews', 'driver_reviews_count', 'updated_at', 'created_at' ]
+        exclude = ['user', 'driver_id', 'profile', 'driver_code', 'driver_status', 'driver_rating', 'driver_code_dms',
+                   'driver_rating_count', 'driver_reviews', 'driver_reviews_count', 'updated_at', 'created_at']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,7 +49,8 @@ class DriverVehicleForm(forms.ModelForm):
     class Meta:
         model = fleet_models.DriverVehicle
         fields = '__all__'
-        exclude = ['driver', 'vehicle_date', 'updated_at', 'created_at','driver_code_dms']
+        exclude = ['driver', 'vehicle_date',
+                   'updated_at', 'created_at', 'driver_code_dms']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,23 +65,10 @@ class DriverDocumentForm(forms.ModelForm):
     class Meta:
         model = fleet_models.DriverDocument
         fields = '__all__'
-        exclude = ['driver', 'doc_date', 'updated_at', 'created_at' ]
+        exclude = ['driver', 'doc_date', 'updated_at', 'created_at']
         widgets = {
             'qid_expirey_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_show_labels = True
-
-
-class DriverVehicleForm(forms.ModelForm):
-
-    class Meta:
-        model = fleet_models.DriverVehicle
-        fields = '__all__'
-        exclude = ['driver', 'updated_at', 'created_at' ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

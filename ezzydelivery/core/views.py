@@ -144,7 +144,7 @@ def update_role(request):
     }
     return render(request, 'core/prodile_role_update.html', context)
 
-# @todo
+# @todo:
 
 
 @login_required(login_url='account_login')
@@ -250,7 +250,7 @@ def join_us(request):
     print("load else redirect form")
     return redirect('core:profile_add')
 
-# @todo make profile and connect
+# @todo: make profile and connect
 
 
 def profile_business(request):
@@ -357,12 +357,10 @@ def profile_delete(request, pk):
 def profile_completion_test(request, pk):
     profile = get_object_or_404(core_models.Profile, user_id=pk)
 
-
     context = {
         'profile': profile,
     }
     return render(request, 'core/profile_completion_test.html', context)
-
 
 
 # driverjob ---------------------------------------------------------------------------------------------------------------------
@@ -383,7 +381,3 @@ def driverjobform(request):
     else:
         driverjobform = core_forms.DriverVacancyAplicationForm()
     return render(request, 'core/driverjobform.html', {'driverjobform': driverjobform})
-
-
-
-

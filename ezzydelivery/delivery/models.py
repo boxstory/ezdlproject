@@ -108,6 +108,7 @@ class DeliveryTask(models.Model):
         ('Normal', 'Normal'),
         ('Same Day', 'Same Day'),
         ('On Demand',   'On Demand'),
+        ('White Glove',   'White Glove'),
 
     )
     dl_speed = models.CharField(

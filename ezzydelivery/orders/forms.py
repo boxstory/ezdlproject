@@ -49,11 +49,10 @@ class AddOrderForm(forms.ModelForm):
             self.fields[field].widget.attrs.update(
                 {'class': 'form-control'})
 
-            
             self.fields['cod_status_by_client'].widget = forms.RadioSelect(
                 choices=COD_STATUS_BY_CLIENT)
 
-            # @todo need to specify business only products
+            # @todo: need to specify business only products
 
             self.fields['product_list'].widget = forms.CheckboxSelectMultiple()
 
@@ -95,6 +94,6 @@ class UpdateOrderForm(forms.ModelForm):
                 choices=ORDER_STATUS)
             self.fields['cod_status_by_client'].widget = forms.RadioSelect(
                 choices=COD_STATUS_BY_CLIENT)
-            # @todo need to specify business only products
+            # @todo: need to specify business only products
             self.fields['product_list'].attr = forms.ModelMultipleChoiceField(
                 queryset=product_models.Product.objects.all(), widget=forms.CheckboxSelectMultiple())

@@ -1,0 +1,49 @@
+<section class="mb-3">
+
+
+    <div
+        class="row rounded-3 m-1"
+        style="background-color: #f1d100; "
+    >
+        <nav
+            aria-label="breadcrumb"
+            class=" rounded-3 p-3 "
+            style="--bs-breadcrumb-divider: '_'"
+            aria-label="breadcrumb"
+        >
+            <ol class="breadcrumb mb-0 ">
+                <li class="breadcrumb-item  "><a
+                        class=" btn btn-small  text-decoration-none text-black fw-bold px-4 "
+                        href="/"
+                    >Home</a></li>
+                <li class="breadcrumb-item ">
+                    <a
+                        href="#"
+                        class="btn btn-small text-decoration-none  fw-bold px-4 btn-dark"
+                    >
+                        User
+                    </a>
+                </li>
+                <li class="breadcrumb-item"><a
+                        href="{% url 'core:profile_view' %}"
+                        class="btn btn-small text-decoration-none text-black fw-bold px-4 "
+                    >
+                        Profile
+                    </a>
+                </li>
+                <li class="breadcrumb-item"><a
+                        class="btn  text-decoration-none text-black fw-bold px-4 "
+                        href="{% url 'core:join_us' %}"
+                    >Role select</a></li>
+                <li class="breadcrumb-item ">
+                    <a
+                        href="{% url 'core:update_role' %}"
+                        class="btn btn-small  text-decoration-none text-black fw-bold px-4 "
+                    >
+                        Add service
+                    </a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
