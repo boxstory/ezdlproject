@@ -90,7 +90,8 @@ class Driver(models.Model):
         ('Rejected', 'Rejected'),
         ('Blocked', 'Blocked'),
     )
-    driver_status = models.CharField(max_length=100, choices=driver_status_choices)
+    driver_status = models.CharField(
+        max_length=100, choices=driver_status_choices)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -142,9 +143,7 @@ class DriverDocument(models.Model):
         upload_to=upload_path_handler, default='core/driver/qid_default.jpg', blank=True, null=True)
     license_photo = models.ImageField(
         upload_to=upload_path_handler, default='core/driver/licence_default.jpg', blank=True, null=True)
-
     document_no = models.CharField(max_length=100)
-
     document_type = models.CharField(max_length=100)
     document_date = models.DateField(auto_now_add=True)
     document_update_date = models.DateField(auto_now=True)

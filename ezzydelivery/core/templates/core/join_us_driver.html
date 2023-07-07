@@ -2,90 +2,37 @@
 {% block content %}
 
 
-<section style="background-color: #eee;">
-    <div class="container py-3">
+<section
+    style="background-color: #eee;"
+    class="h-100"
+>
+    <div class="container py-3 h-100">
         <!-- file path section -->
-        <{%
-            include "core/parts/filepath.html"
-            %}
-            <div
-            class="row"
-        >
-            <!-- profile left side section -->
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
-                        <img
-                            src="/media/core/user/avatar.png"
-                            alt="avatar"
-                            class="rounded-circle img-fluid"
-                            style="width: 180px;"
+        {% include "core/parts/filepath.html" %}
+        <div class="row">
+            <div class=" col-12 col-lg-4">
+
+                {% include "core/parts/profile_sidebar.html" %}
+
+                <!-- profile join form section -->
+                <div class="col-lg-8">
+                    <div class="card-body bg-light">
+                        <!-- join buttons -->
+
+                        <!-- form section -->
+                        <div
+                            class="tab-content"
+                            id="pills-tabContent"
                         >
-                        <h5 class="my-3">{{joinusform.first_name}} {{joinusform.last_name}}</h5>
-                        <p class="text-muted mb-1">{{joinusform.profile_pic}}</p>
-                        <p class="text-muted mb-4">{{joinusform.zone_name}}</p>
-                        <div class="d-flex justify-content-center mb-2">
-                            {% if profile.is_business %}
-                            <a
-                                type="button"
-                                class="btn btn-dark"
-                                href="{% url 'business:business_dashboard' %}"
-                            >
-                                Dashboard
-                            </a>
-                            <p>{{profile.is_business}}</p>
 
-
-                            {% elif profile.is_driver %}
-                            <a
-                                type="button"
-                                class="btn btn-dark"
-                                href="{% url 'fleet:fleet_dashboard' %}"
-                            >
-                                Dashboard
-                            </a>
-                            {% else %}
-                            <a
-                                type="button"
-                                class="btn btn-dark"
-                                href="{% url 'core:join_us' %}"
-                            >
-                                SELECT ROLE
-                            </a>
-                            {% endif %}
-
-                            <button
-                                type="button"
-                                class="btn btn-outline-dark ms-1"
-                            >Message</button>
-                        </div>
-                        <div class="d-flex justify-content-center p-3">
-                            <a href="#!"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
-                            <a href="#!"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
-                            <a href="#!"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
+                            <div class="tab-pane fade active show p-0 ">
+                                {% include "core/parts/join_driver_form.html" %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- profile join form section -->
-            <div class="col-lg-8">
-                <div class="card-body bg-light">
-                    <!-- join buttons -->
-
-                    <!-- form section -->
-                    <div
-                        class="tab-content"
-                        id="pills-tabContent"
-                    >
-
-                        <div class="tab-pane fade active show p-0 ">{% include "core/join_driver_form.html" %}</div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    </div>
+        </div>
 </section>
 
 {% endblock content %}
-{% block extra_js %}
-{% endblock extra_js %}

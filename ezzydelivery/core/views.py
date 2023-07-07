@@ -124,6 +124,9 @@ def join_driver(request):
 def update_role(request):
     Profile = get_object_or_404(
         core_models.Profile, user_id=request.user.id)
+    print(Profile)
+    driver = fleet_models.Driver.objects.get(user_id=request.user.id)
+
     joinusform = core_forms.JoinUsForm(
         request.POST or None, instance=Profile)
 
@@ -141,6 +144,8 @@ def update_role(request):
         return redirect('core:profile', pk=request.user.id)
     context = {
         'form': joinusform,
+        'profile': Profile,
+        'driver': driver,
     }
     return render(request, 'core/prodile_role_update.html', context)
 
@@ -149,15 +154,19 @@ def update_role(request):
 
 @login_required(login_url='account_login')
 def update_driver(request):
-    driver_profile = business_models.Business.objects.filter(
-        business_id=request.user.id)
+    driver_profile = get_object_or_404(fleet_models.Driver,
+                                       driver_id=request.user.id)
+    Profile = get_object_or_404(
+        core_models.Profile, user_id=request.user.id)
+    print(Profile)
     driverjoinform = fleet_forms.DriverJoinForm(
         request.POST or None, instance=driver_profile)
 
     context = {
         'driverjoinform': driverjoinform,
+        'profile': Profile,
     }
-    return render(request, 'core/join_us_driver.html', context)
+    return render(request, 'core/update_driver.html', context)
 
 
 @login_required(login_url='account_login')
