@@ -3,9 +3,7 @@
         <h2 class="m-0">Orders list</h2>
         <a
             class="btn btn-dark pe-3 text-white"
-            hx-trigger="click "
-            hx-target="#dasboard_div"
-            hx-get="{% url 'orders:add_order' %}"
+            href="{% url 'orders:add_order' %}"
         >
             <i class="fa fa-add me-3"></i> Add Orders
         </a>
