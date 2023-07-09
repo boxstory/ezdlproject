@@ -79,7 +79,7 @@
             <li class="nav-item">
                 <a
                     class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'business:profile_business' profile.id %}"
+                    href="{% url 'business:profile_business' request.user.profile.id %}"
                 >
                     business Profile
 
