@@ -29,7 +29,7 @@ BUSINESS {{business.brand_name}}
 >
     <div class="container">
         <div class="row align-items-center flex-row-reverse my-4">
-            <div class="col-md-6">
+            <div class="col-md-6 order-2 order-md-1">
                 <div class="about-text go-to">
                     <h3 class="dark-color">{{business.business_business_name}}
                         ({{business.business_code}})</h3>
@@ -90,22 +90,14 @@ BUSINESS {{business.brand_name}}
                                 <p>{{forloop.counter}}: {{loc}}</p>
                                 {% endfor %}
                             </div>
-                            <div class="media">
-                                {% if profile.is_driver == True %}
-                                <label>Freelance</label>
-                                <p>Driver</p>
-                                {% elif profile.is_business == True %}
-                                <p>BUSINESS</p>
-                                {% else %}
-                                <p>User</p>
-                                {% endif %}
-                            </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="d-flex justify-content-center">
+            <div class="col-md-6 order-0 order-md-2 mb-3">
+                <div class="d-flex justify-content-center p-3">
                     {% if business.business_logo %}
                     <img
                         src="{{business.business_logo.url}}"
@@ -132,47 +124,54 @@ BUSINESS {{business.brand_name}}
                 </div>
             </div>
         </div>
-        <div class="counter">
+
+        <div class="row">
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6
+                        class="count h2"
+                        data-to="500"
+                        data-speed="500"
+                    >200</h6>
+                    <p class="m-0px font-w-600">Tasks Listed</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6
+                        class="count h2"
+                        data-to="150"
+                        data-speed="150"
+                    >170</h6>
+                    <p class="m-0px font-w-600">Tasks Completed</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6
+                        class="count h2"
+                        data-to="850"
+                        data-speed="850"
+                    >2</h6>
+                    <p class="m-0px font-w-600">Products</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6
+                        class="count h2"
+                        data-to="190"
+                        data-speed="190"
+                    >68 (M)</h6>
+                    <p class="m-0px font-w-600">Running</p>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="500"
-                            data-speed="500"
-                        >200</h6>
-                        <p class="m-0px font-w-600">Tasks Listed</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="150"
-                            data-speed="150"
-                        >170</h6>
-                        <p class="m-0px font-w-600">Tasks Completed</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="850"
-                            data-speed="850"
-                        >2</h6>
-                        <p class="m-0px font-w-600">Products</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="190"
-                            data-speed="190"
-                        >68 (M)</h6>
-                        <p class="m-0px font-w-600">Running</p>
-                    </div>
+                <div class="media">
+                    {% if profile.is_business == True %}
+                    <p>Brand Photos</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

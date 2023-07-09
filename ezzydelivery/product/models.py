@@ -75,6 +75,8 @@ class ItemSku(models.Model):
     unit = models.ForeignKey(
         UnitVariant, on_delete=models.SET_NULL, null=True, blank=True)
     item_price = models.PositiveIntegerField(_("Price"), default=0)
+    image = models.ImageField(
+        upload_to='product_images', null=True, blank=True, default="product_images/default.jpg")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -120,3 +122,20 @@ class Product(models.Model):
 
     class Meta:
         verbose_name_plural = "Items"
+
+
+class services(models.Model):
+    service_name = models.CharField(max_length=100)
+    discription = models.CharField(max_length=100)
+    image = models.ImageField(
+        upload_to='services_images', null=True, blank=True, default="services_images/default.jpg")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    business = models.ForeignKey(
+        business_models.Business, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.service_name
+
+    class Meta:
+        verbose_name_plural = "Services"
