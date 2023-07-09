@@ -56,7 +56,7 @@ def join_business(request):
                 form1.is_business = True
                 form1.save()
                 print(form1)
-                return redirect('/')
+                return redirect('core:profile_view')
     except core_models.Profile.DoesNotExist:
         print("profile not exist")
         return redirect('core:profile_add')
@@ -97,7 +97,6 @@ def join_driver(request):
                 f.driver_rating_count = 0
                 f.driver_reviews = 0
                 f.driver_reviews_count = 0
-
                 f.created_at = datetime.now()
                 f.save()
                 form1 = joinusform.save(commit=False)
@@ -108,7 +107,7 @@ def join_driver(request):
                 form1.is_driver = True
                 form1.is_business = False
                 form1.save()
-                return redirect('/')
+                return redirect('core:profile_view')
 
         form = fleet_forms.DriverJoinForm()
         print('load DriverJoinForm form')
