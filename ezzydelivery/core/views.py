@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from pytz import timezone
+from datetime import datetime
 
 
 from core import models as core_models
@@ -97,6 +97,8 @@ def join_driver(request):
                 f.driver_rating_count = 0
                 f.driver_reviews = 0
                 f.driver_reviews_count = 0
+
+                f.created_at = datetime.now()
                 f.save()
                 form1 = joinusform.save(commit=False)
                 user = User.objects.get(id=request.user.id)
@@ -114,6 +116,7 @@ def join_driver(request):
         context = {
             'form': form,
             'driverjoinform': driverjoinform,
+            'profile': profile,
         }
         return render(request, 'core/join_us_driver.html', context)
     except core_models.Profile.DoesNotExist:
@@ -124,6 +127,9 @@ def join_driver(request):
 def update_role(request):
     Profile = get_object_or_404(
         core_models.Profile, user_id=request.user.id)
+    print(Profile)
+    driver = fleet_models.Driver.objects.get(user_id=request.user.id)
+
     joinusform = core_forms.JoinUsForm(
         request.POST or None, instance=Profile)
 
@@ -141,23 +147,29 @@ def update_role(request):
         return redirect('core:profile', pk=request.user.id)
     context = {
         'form': joinusform,
+        'profile': Profile,
+        'driver': driver,
     }
     return render(request, 'core/prodile_role_update.html', context)
 
-# @todo
+# @todo:
 
 
 @login_required(login_url='account_login')
 def update_driver(request):
-    driver_profile = business_models.Business.objects.filter(
-        business_id=request.user.id)
+    driver_profile = get_object_or_404(fleet_models.Driver,
+                                       driver_id=request.user.id)
+    Profile = get_object_or_404(
+        core_models.Profile, user_id=request.user.id)
+    print(Profile)
     driverjoinform = fleet_forms.DriverJoinForm(
         request.POST or None, instance=driver_profile)
 
     context = {
         'driverjoinform': driverjoinform,
+        'profile': Profile,
     }
-    return render(request, 'core/join_us_driver.html', context)
+    return render(request, 'core/update_driver.html', context)
 
 
 @login_required(login_url='account_login')
@@ -250,7 +262,7 @@ def join_us(request):
     print("load else redirect form")
     return redirect('core:profile_add')
 
-# @todo make profile and connect
+# @todo: make profile and connect
 
 
 def profile_business(request):
@@ -357,12 +369,10 @@ def profile_delete(request, pk):
 def profile_completion_test(request, pk):
     profile = get_object_or_404(core_models.Profile, user_id=pk)
 
-
     context = {
         'profile': profile,
     }
     return render(request, 'core/profile_completion_test.html', context)
-
 
 
 # driverjob ---------------------------------------------------------------------------------------------------------------------
@@ -383,7 +393,3 @@ def driverjobform(request):
     else:
         driverjobform = core_forms.DriverVacancyAplicationForm()
     return render(request, 'core/driverjobform.html', {'driverjobform': driverjobform})
-
-
-
-

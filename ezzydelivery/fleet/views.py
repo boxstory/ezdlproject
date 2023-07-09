@@ -178,7 +178,7 @@ def vehicle_delete(request, fleet_id, vehicle_id):
 def vehicle_update(request, vehicle_id):
     driver = fleet_models.Driver.objects.get(user_id=request.user.id)
     print('update_vehicle', driver.driver_id)
-    
+
     driver_vehicle = fleet_models.DriverVehicle.objects.get(id=vehicle_id)
     print(driver_vehicle)
     form = fleet_forms.DriverVehicleForm(

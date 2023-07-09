@@ -54,6 +54,30 @@ class Business(models.Model):
     def __str__(self):
         return self.user.username
 
+# @todo: link staff profile with business
+
+
+class StaffProfile(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='staff_profile')
+    profile = models.ForeignKey(
+        core_models.Profile, on_delete=models.SET_NULL, blank=True, null=True, related_name='staff_profile')
+    business = models.ForeignKey(
+        Business, on_delete=models.CASCADE, related_name='staff_profile')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    staff_code = models.CharField(max_length=100, blank=True, null=True)
+    staff_name = models.CharField(max_length=100, blank=True, null=True)
+    staff_phone = models.CharField(max_length=100, blank=True, null=True)
+    staff_email = models.CharField(max_length=100, blank=True, null=True)
+    staff_bio = models.CharField(max_length=225, blank=True, null=True)
+    staff_logo = models.ImageField(
+        upload_to=upload_path_handler, default="business/avatar.png", blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = "Staff Profile"
+        unique_together = ('business', 'staff_code')
+
 
 class PickupLocation(models.Model):
     business = models.ForeignKey(

@@ -2,33 +2,13 @@
 {% block content %}
 
 
-<section style="background-color: #eee;">
-    <div class="container py-5">
+<section
+    style="background-color: #eee; "
+    class="h-100"
+>
+    <div class="container py-3">
         <!-- file path section -->
-        <div class="row">
-            <div class="col">
-                <nav
-                    aria-label="breadcrumb"
-                    class="bg-light rounded-3 p-3 mb-4"
-                >
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li
-                            class="breadcrumb-item active"
-                            aria-current="page"
-                        >
-                            <a href="#">
-                                User
-                            </a>
-                        </li>
-                        <li
-                            class="breadcrumb-item active"
-                            aria-current="page"
-                        >Join_us</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+        {% include "core/parts/filepath.html" %}
         <div class="row">
             <!-- profile left side section -->
             <div class="col-lg-4">
@@ -87,7 +67,7 @@
             </div>
             <!-- profile join form section -->
             <div class="col-lg-8">
-                <div class="card-body bg-light ">
+                <div class="card-body bg-light  p-3">
                     <!-- join buttons -->
                     {% if form.errors %}
 
@@ -107,30 +87,33 @@
                         style="list-style: none;"
                         role="tablist"
                     >
-                        <li class="pb-2 h3 fw-bold">
 
-                            Select your job title:
-                        </li>
                         {% if profile.is_business or profile.is_driver %}
-                        <div>
+                        <div class="">
 
-                            <p> Already joined as</p>
+                            <span class="h4 fw-bold mb-3"> Already joined as</span>
+                            <hr>
                             {% if profile.is_business %}
                             <div class="h4 fw-bold">Business Admin</div>
                             {% else %}
                             <div class="h4 fw-bold">Driver</div>
                             {% endif %}
+
+
+                            <a
+                                type="button"
+                                class="btn btn-dark mt-3"
+                                href="/dashboard/"
+                            >
+                                Go To Dashboard
+                            </a>
                         </div>
 
-                        <a
-                            type="button"
-                            class="btn btn-dark"
-                            href="/dashboard/"
-                        >
-                            Go To Dashboard
-                        </a>
-
                         {% else %}
+                        <li class="pb-2 h3 fw-bold">
+
+                            Select your job title:
+                        </li>
                         <li
                             class="col-4  mb-5 me-lg-0"
                             role="presentation"

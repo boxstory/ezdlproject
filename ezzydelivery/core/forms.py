@@ -34,11 +34,9 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         self.fields['profile_pic'].required = False
         self.helper = FormHelper()
         self.helper.form_show_labels = False
-
         self.fields['date_of_birth'].widget = forms.SelectDateWidget(
             years=YEARS)
         self.fields['date_of_birth'].widget.attrs = {

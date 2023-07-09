@@ -57,7 +57,7 @@ def driver_directory(request):
     return render(request, 'client/parts/driver_directory.html', context)
 
 
-# @todo  fleet exists check and save
+# @todo:  fleet already added warning not showing
 def driver_directory_add(request):
 
     form = business_forms.DriverDirectoryAddForm(request.POST or None)
