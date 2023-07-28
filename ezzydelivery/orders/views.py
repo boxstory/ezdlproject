@@ -86,7 +86,7 @@ def add_order(request):
                 return redirect('/orders/')
         else:
             print("load form")
-            form = orders_forms.AddOrderForm()
+            form = orders_forms.AddOrderForm(business_id = business.business_id)
     return render(request, 'orders/add_order.html', {'form': form, 'business': business, })
 
 
@@ -99,7 +99,7 @@ def update_order(request, order_id):
         if form.is_valid():
             print('form valid')
             form.save()
-            return redirect('/business/dashboard/')
+            return redirect('/orders/')
     else:
         form = orders_forms.UpdateOrderForm(instance=order)
 
@@ -113,8 +113,13 @@ def update_order(request, order_id):
 
 @login_required(login_url='account_login')
 def delete_order(request, order_id):
-    order = orders_models.Order.objects.get(id=order_id).delete()
-    return redirect('/business/dashboard/')
+    order = orders_models.Order.objects.get(id=order_id)
+    print(order.business.user_id)
+    if request.user.id == order.business.user_id:
+        print("true")
+        order.delete
+    # order.delete()
+    return redirect('/orders/')
 
 
 @login_required(login_url='account_login')

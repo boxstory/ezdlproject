@@ -30,10 +30,7 @@
                 <td>{{loc.pickup_building_no}}</td>
                 <td>
                     <a
-                        hx-trigger="click"
-                        hx-target="#dasboard_div"
-                        hx-swap="beforeend swap:1s"
-                        hx-get="{% url 'business:pickup_location_update' loc.id %}"
+                        href="{% url 'business:pickup_location_update' loc.id %}"
                         class="btn pe-3 text-dark"
                     ><i class="fa fa-lg fa-edit"></i></a>
                     <a

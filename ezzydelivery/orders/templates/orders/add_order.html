@@ -54,9 +54,7 @@
                         <button
                             type="submit"
                             class="btn btn-dark w-100 w-md-50"
-                            hx-trigger="click"
-                            hx-target="#dasboard_div"
-                            hx-post="{% url 'orders:add_order'   %}"
+                            href="{% url 'orders:add_order'   %}"
                         >
                             Submit
                         </button>
@@ -68,3 +66,19 @@
     </div>
 </div>
 {% endblock widget %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function () {
+        // Get references to the input fields
+        const id_customer_phone = $('#id_customer_phone');
+        const id_customer_whatsapp = $('#id_customer_whatsapp');
+
+        // Add event listeners for the driverIdField
+        id_customer_phone.on('input', function () {
+            const phoneNumberValue = id_customer_phone.val();
+            id_customer_whatsapp.val(974 + phoneNumberValue);
+        });
+    });
+</script>
+{% endblock extra_js %}
