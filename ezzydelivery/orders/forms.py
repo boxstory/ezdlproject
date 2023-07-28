@@ -26,10 +26,10 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['pickup_location', 'client_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cod_status_by_client', 'cod_amount',
+        fields = ['pickup_location', 'order_number', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cod_status_by_client', 'cod_amount',
                   'dl_building', 'dl_street', 'dl_zone', 'customer_address', 'order_notes', ]
-        exclude = ['order_number', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
-                   'pickup_location_id', 'updated_at', 'created_at']
+        exclude = ['client_order_code', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
+                   'updated_at', 'created_at']
         widgets = {
             'order_notes': forms.TextInput(attrs={'class': 'form-control'}),
             'order_status': forms.Select(attrs={'class': 'form-control'}, choices=ORDER_STATUS),
@@ -43,7 +43,7 @@ class AddOrderForm(forms.ModelForm):
             'dl_zone': 'Customer Zone No',
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, business_id=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update(
@@ -55,6 +55,11 @@ class AddOrderForm(forms.ModelForm):
             # @todo: need to specify business only products
 
             self.fields['product_list'].widget = forms.CheckboxSelectMultiple()
+
+        # Access the form data to filter pickup_location choices
+        if business_id is not None:
+            self.fields['pickup_location'].queryset = business_models.PickupLocation.objects.filter(
+                business_id=business_id)
 
     def save(self, commit=True):
         order = super().save(commit=False)

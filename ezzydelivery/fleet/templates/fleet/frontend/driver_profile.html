@@ -141,90 +141,66 @@ FLEET {{driver.driver_code}}
                         style="display: none;"
                     ></div>
                     {%endif%}
-                </div>
-            </div>
-        </div>
-        <!-- countersssss----------------  -->
-        <div class="counter p-3">
-            <div class="row">
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="500"
-                            data-speed="500"
-                        >200</h6>
-                        <p class="m-0px font-w-600">Rides Requested</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="150"
-                            data-speed="150"
-                        >170</h6>
-                        <p class="m-0px font-w-600">Rides Completed</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="850"
-                            data-speed="850"
-                        >2{{driver_vehicle.id}}</h6>
-                        <p class="m-0px font-w-600">Vehicles</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6
-                            class="count h2"
-                            data-to="190"
-                            data-speed="190"
-                        >68 (M)</h6>
-                        <p class="m-0px font-w-600">Qatar Experiance</p>
+                    <div
+                        id="alert-message"
+                        style="display: none;"
+                        class="alert alert-info mt-3  py-2 text-center "
+                    >
+
+
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- documents section -----------  -->
-        <div class="counter bg-light p-4">
-            <h3 class="fw-bold">
-
-                AVAILABLE DOCUMENTS
-            </h3>
-            <hr>
-            <table class="table table-borderless">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Doc No</th>
-                        <th scope="col">Expiry Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for doc in driver_documents %}
-                    <tr>
-                        <th scope="row">{{forloop.counter}}</th>
-                        <td>{{doc.document_type}}</td>
-                        <td>{{doc.document_no}}</td>
-                        <td>{{doc.document_date}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-        </div>
-        <!-- vehicle s
-            ection -----------  -->
-        <div class="counter bg-light p-4 my-3">
-            <div class="row">
+            <!-- countersssss----------------  -->
+            <div class="counter p-3">
+                <div class="row">
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6
+                                class="count h2"
+                                data-to="500"
+                                data-speed="500"
+                            >200</h6>
+                            <p class="m-0px font-w-600">Rides Requested</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6
+                                class="count h2"
+                                data-to="150"
+                                data-speed="150"
+                            >170</h6>
+                            <p class="m-0px font-w-600">Rides Completed</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6
+                                class="count h2"
+                                data-to="850"
+                                data-speed="850"
+                            >2{{driver_vehicle.id}}</h6>
+                            <p class="m-0px font-w-600">Vehicles</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6
+                                class="count h2"
+                                data-to="190"
+                                data-speed="190"
+                            >68 (M)</h6>
+                            <p class="m-0px font-w-600">Qatar Experiance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- documents section -----------  -->
+            <div class="counter bg-light p-4">
                 <h3 class="fw-bold">
 
-                    OWNED VEHICLE DETAILS
+                    AVAILABLE DOCUMENTS
                 </h3>
                 <hr>
                 <table class="table table-borderless">
@@ -232,78 +208,100 @@ FLEET {{driver.driver_code}}
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Type</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">Added on</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Doc No</th>
+                            <th scope="col">Expiry Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% if not driver_vehicle %}
-                        <th scope="col"></th>
-                        <td>No Vehicles Added</td>
-                        {% else %}
-                        {% for vehicle in driver_vehicle %}
+                        {% for doc in driver_documents %}
                         <tr>
                             <th scope="row">{{forloop.counter}}</th>
-                            <td>{{vehicle.vehicle_type}}</td>
-                            <td>{{vehicle.vehicle_model}}</td>
-                            <td>{{vehicle.vehicle_date}}</td>
-                            <td>{{vehicle.vehicle_status}}</td>
+                            <td>{{doc.document_type}}</td>
+                            <td>{{doc.document_no}}</td>
+                            <td>{{doc.document_date}}</td>
                         </tr>
                         {% endfor %}
-                        {% endif %}
                     </tbody>
                 </table>
 
             </div>
+            <!-- vehicle s
+            ection -----------  -->
+            <div class="counter bg-light p-4 my-3">
+                <div class="row">
+                    <h3 class="fw-bold">
+
+                        OWNED VEHICLE DETAILS
+                    </h3>
+                    <hr>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Added on</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if not driver_vehicle %}
+                            <th scope="col"></th>
+                            <td>No Vehicles Added</td>
+                            {% else %}
+                            {% for vehicle in driver_vehicle %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{vehicle.vehicle_type}}</td>
+                                <td>{{vehicle.vehicle_model}}</td>
+                                <td>{{vehicle.vehicle_date}}</td>
+                                <td>{{vehicle.vehicle_status}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </div>
-    </div>
 </section>
 
 
 {% endblock content %}
 {% block extra_js %}
+
 <script>
-    document.getElementById('favorite-form').addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent default form submission
+    $(document).ready(function () {
+        $('#favorite-form').submit(function (e) {
+            e.preventDefault(); // Prevent the default form submission
 
-        var form = this;
-        var formData = new FormData(form);
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        // Show the success message in the alert div
+                        $('#alert-message').removeClass('alert-danger').addClass('alert-success').text('Driver successfully added to the directory!').fadeIn();
 
-        // Make an asynchronous request to the server
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': '{{ csrf_token }}'
-            }
-
-        })
-            .then(function (response) {
-                if (response.data.status = True) {
-                    // Handle successful response
-                    var successMsg = document.getElementById('success-message');
-                    successMsg.textContent = 'Contact added successfully!';
-                    successMsg.style.display = 'block';
-                    document.getElementById('form-messages').textContent = 'Contact form submitted successfully!'; // Update a message element with the success message
-
-                    console.log('Added to directory!');
+                        // Optional: Hide the form after successful submission
+                        $('#favorite-form').hide();
+                    } else {
+                        // Show an error message in the alert div
+                        $('#alert-message').removeClass('alert-success').addClass('alert-danger').text(response.error).fadeIn();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log('An error occurred during form submission.');
                 }
-                else {
-                    // Handle error response
-                    var errorMsg = document.getElementById('error-message');
-                    errorMsg.textContent = 'Error: ' + response.error;
-                    errorMsg.style.display = 'block';
-                    document.getElementById('form-messages').textContent = 'Error occurred while submitting the contact form.'; // Update a message element with the error messa
-                    console.log(response.status + ": " + response.statusText);
-                }
-            })
-            .catch(function (error) {
-                console.error('An error occurred:', error);
             });
+        });
     });
 </script>
+
+
+
 
 
 {% endblock extra_js %}
