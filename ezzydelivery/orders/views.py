@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.utils import timezone
 
 from core import models as core_models
 from orders import models as orders_models
@@ -71,8 +72,11 @@ def add_order(request):
         return redirect('/business/pickup_location/add/')
     else:
         if request.method == 'POST':
-            print("POST form")
+            print("POST form in views")
             form = orders_forms.AddOrderForm(request.POST)
+            print(form)
+
+            # @todo
             # form.fields['product_list'].queryset = orders_models.Items.objects.filter(
             #     business=request.user.business)
             if form.is_valid():
@@ -80,13 +84,14 @@ def add_order(request):
                 order = form.save(commit=False)
                 order.business = business_models.Business.objects.get(
                     business_id=request.user.id)
+
                 print(order.business_id)
                 form.save()
                 form = orders_forms.AddOrderForm()
                 return redirect('/orders/')
         else:
             print("load form")
-            form = orders_forms.AddOrderForm(business_id = business.business_id)
+            form = orders_forms.AddOrderForm(business_id=business.business_id)
     return render(request, 'orders/add_order.html', {'form': form, 'business': business, })
 
 

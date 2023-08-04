@@ -20,14 +20,11 @@
                 <p>Start -Pickup</p>
                 <p>End -Dropoff</p>
             </th>
-            <th>
-                <p>Task Status </p>
-                <p> Assigned </p>
-            </th>
+            <th>Task Status</th>
             <th></th>
 
         </tr>
-        {% for card in cards %}
+        {% for card in tasks %}
         <tr
             data-order-id="{{ card.id }}"
             class="data-order-row "
@@ -45,17 +42,14 @@
                 <p>{{ card.pickup_location.pickup_location_title }}</p>
                 <p>{{card.dl_to_address.zone_name}} </p>
             </td>
-            <td>
-                <p>{{ card.dl_task_status }}</p>
-                <p> Assigned </p>
-            </td>
-            <td class=" align-content-end"><a
+            <td>{{ card.dl_task_status }}</td>
+            <td><a
                     data-bs-toggle="collapse"
                     data-bs-target="#collapse-{{ card.id }}"
                     aria-expanded="false"
                     aria-controls="collapse-{{ card.id }}"
-                    class=" bg-light btn py-5 text-center"
-                ><i class=" fa-solid fa-angles-right text-secondary  "></i>
+                    class="my-5"
+                ><i class=" fa-solid fa-angles-right text-secondary "></i>
                 </a></td>
 
 
@@ -142,14 +136,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 p-3  d-flex justify-content-end">
-
-
-
+                <div class="col-12 p-3  d-flex justify-content-between">
                     <button
                         class="btn btn-success  assign-driver-btn"
                         data-task-id="{{ card.id }}"
-                    >Accept Order</button>
+                    >Reject</button>
+                    <button
+                        class="btn btn-success  assign-driver-btn"
+                        data-task-id="{{ card.id }}"
+                    >start</button>
+                    <button
+                        class="btn btn-success  assign-driver-btn"
+                        data-task-id="{{ card.id }}"
+                    >Delivered</button> <button
+                        class="btn btn-success  assign-driver-btn"
+                        data-task-id="{{ card.id }}"
+                    >Failed</button>
 
                 </div>
 

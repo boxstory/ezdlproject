@@ -1,5 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+
 from orders.models import *
 from client import models as business_models
 from product import models as product_models
@@ -26,9 +28,9 @@ class AddOrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['pickup_location', 'order_number', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cod_status_by_client', 'cod_amount',
+        fields = ['pickup_location', 'client_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cod_status_by_client', 'cod_amount',
                   'dl_building', 'dl_street', 'dl_zone', 'customer_address', 'order_notes', ]
-        exclude = ['client_order_code', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
+        exclude = ['order_number', 'business', 'delivery_task', 'deadline_date', 'cod_status_by_staff',
                    'updated_at', 'created_at']
         widgets = {
             'order_notes': forms.TextInput(attrs={'class': 'form-control'}),
@@ -43,14 +45,20 @@ class AddOrderForm(forms.ModelForm):
             'dl_zone': 'Customer Zone No',
         }
 
-    def __init__(self, business_id=None, *args, **kwargs):
+    def __init__(self,  *args, **kwargs):
+        business_id = kwargs.pop('business_id', None)
+
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update(
                 {'class': 'form-control'})
+            
+            self.fields['dl_building'].initial = '0'
+            self.fields['dl_street'].initial = '0'
+            self.fields['dl_zone'].initial = '0'
 
             self.fields['cod_status_by_client'].widget = forms.RadioSelect(
-                choices=COD_STATUS_BY_CLIENT)
+                choices=COD_STATUS_BY_CLIENT, attrs={'checked': 'checked'})
 
             # @todo: need to specify business only products
 
@@ -73,9 +81,8 @@ class UpdateOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['client_order_code', 'customer_name', 'customer_phone', 'customer_whatsapp', 'product_list',  'cash_on_delivery', 'cod_status_by_client', 'cod_amount',
-                  'dl_zone', 'customer_address',
-                  'pickup_location', 'order_status', 'order_notes',
-                  ]
+                  'dl_zone', 'customer_address', 'pickup_location', 'order_status', 'order_notes', ]
+
         exclude = ['order_number', 'business', 'delivery_task', 'order_date',
                    'pickup_location_id', 'updated_at', 'created_at']
         labels = {

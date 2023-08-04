@@ -10,6 +10,7 @@ class DlAddressUpdateForm(forms.ModelForm):
     class Meta:
         model = delivery_models.DlAddressUpdate
         fields = '__all__'
+        exclude = [' dl_pluscode ', ]
         widget = {
             'time_slot': forms.CheckboxSelectMultiple(choices=[
                 ('Morning', 'Morning'),

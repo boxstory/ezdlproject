@@ -21,8 +21,9 @@ class DlAddressUpdate(models.Model):
     dl_zone = models.PositiveIntegerField(blank=True)
     dl_building = models.PositiveIntegerField(blank=True)
     dl_street = models.PositiveIntegerField(blank=True)
-    dl_latitude = models.PositiveIntegerField(blank=True)
-    dl_longitude = models.PositiveIntegerField(blank=True)
+    dl_latitude = models.DecimalField(max_digits=19, decimal_places=15,blank=True)
+    dl_longitude = models.DecimalField(max_digits=19, decimal_places=15,blank=True)
+    dl_pluscode = models.PositiveIntegerField(blank=True)
     dl_unit = models.CharField(max_length=2)
     is_villa_compound = models.BooleanField(default=False)
     is_flat = models.BooleanField(default=False)
@@ -87,6 +88,8 @@ class DeliveryTask(models.Model):
         max_length=100, default=6, choices=dl_task_status_dms)
     dl_task_date = models.DateField(auto_now_add=True)
     order = models.ForeignKey(orders_models.Order, on_delete=models.CASCADE)
+    dl_address_update = models.ForeignKey(
+        DlAddressUpdate, on_delete=models.CASCADE, blank=True, null=True, related_name='dl_task')
     driver = models.ForeignKey(
         fleet_models.Driver, on_delete=models.CASCADE, blank=True, null=True)
     business = models.ForeignKey(
@@ -119,6 +122,7 @@ class DeliveryTask(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.dl_task_number
 

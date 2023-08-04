@@ -1,7 +1,10 @@
 from multiprocessing import context
 from django.forms.fields import DateTimeField
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from decouple import config
+import geocoder
 
 from core import models as core_models
 from fleet import models as fleet_models
@@ -80,10 +83,58 @@ def all_delivery_tasks(request):
     # return render(request, 'delivery/all_delivery_tasks.html', context)
 
 
-def assign_driver_to_task(request, dl_task_number):
-    print("assign_driver_to_task")
+def assign_driver(request):
 
-    return redirect('/delivery/all_delivery_tasks')
+    if request.method == "POST" and request.is_ajax():
+        task_id = request.POST.get("task_id")
+        if task_id and delivery_models.AssignedDriver.objects.filter(dl_task_id=task_id).exists():
+            print(' already assigned')
+        else:
+            driver_id = request.user.id
+            print(task_id, "task_id -  driver_id", driver_id)
+            try:
+                task = delivery_models.DeliveryTask.objects.get(id=task_id)
+                print(task)
+                driver = fleet_models.Driver.objects.get(driver_id=driver_id)
+                print(driver)
+                assigned_driver = delivery_models.AssignedDriver(
+                    driver=driver, dl_task=task)
+                assigned_driver.save()
+
+                return JsonResponse({"success": True})
+            except Exception as e:
+                print('error')
+                return JsonResponse({"success": False, "error": str(e)})
+
+    return JsonResponse({"success": False, "error": "Invalid request"})
+
+
+def assigned_tasks(request):
+    try:
+        # Get the driver associated with the current user
+        driver = fleet_models.Driver.objects.get(user_id=request.user.id)
+        print('assigned_tasks Driver', driver.driver_id)
+
+        assidned_tasks_ids = delivery_models.AssignedDriver.objects.filter(
+            driver_id=driver.driver_id).values_list('dl_task_id', flat=True)
+        print(assidned_tasks_ids)
+        # Get the list of delivery tasks assigned to the driver
+        assigned_tasks = delivery_models.DeliveryTask.objects.filter(
+            id__in=assidned_tasks_ids)
+        print('Assigned Tasks', assigned_tasks)
+
+        context = {
+            'tasks': assigned_tasks,  # Change 'cards' to 'tasks' for consistency
+        }
+        return render(request, 'delivery/parts/assigned_tasks.html', context)
+    except fleet_models.Driver.DoesNotExist:
+        # Handle the case where the driver does not exist
+        print('Driver does not exist')
+        # You might want to redirect the user or provide an appropriate response here
+
+    # Handle other exceptions or provide a default response
+    return render(request, 'delivery/parts/assigned_tasks.html', {})
+
 
 # business side delivery data --------------------------------------------------------------
 
@@ -91,5 +142,36 @@ def assign_driver_to_task(request, dl_task_number):
 def delivery_business_update(request):
     data = {
 
+
     }
     return render(request, 'delivery/delivery_list.html', data)
+
+
+# customer address link  create and updates --------------------------------------------------------------
+
+
+def dl_address_link(request, dl_task_code):
+    task = get_object_or_404(
+        delivery_models.DlAddressUpdate, dl_task_number=dl_task_code)
+    MAPBOX_API_KEY = config("MAPBOX_API_KEY")
+    address = f'{task.dl_latitude},{task.dl_longitude}'
+    address2 = f'{task.dl_longitude},{task.dl_latitude}'
+    print(address)
+    g = geocoder.mapbox(address2, key=MAPBOX_API_KEY)
+    print(g.json)
+    data = {
+        'task': task,
+        'address': address2,
+        'g': g,
+        'MAPBOX_API_KEY': MAPBOX_API_KEY
+
+    }
+    return render(request, 'delivery/frontend/dl_address_link.html', data)
+
+
+def dl_address_link_update(request, dl_task_code):
+
+    data = {
+
+    }
+    return render(request, 'delivery/frontend/dl_address_link_update.html', data)
