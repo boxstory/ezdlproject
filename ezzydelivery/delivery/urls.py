@@ -17,8 +17,18 @@ urlpatterns = [
     #path('delivery_list/', delivery_views.delivery_list, name='delivery_list'),
     path('delivery_tasks/all/', delivery_views.all_delivery_tasks,
          name='all_delivery_tasks'),
+    path('assigned_tasks/all/', delivery_views.assigned_tasks,
+         name='assigned_tasks'),
 
     # asign driver to delivery task
-    # path('assign_driver/<str:dl_task_number>/',
-    #     delivery_views.assign_driver, name='assign_driver'),
+    path("delivery_task/assign_driver/",
+         delivery_views.assign_driver, name="assign_driver"),
+
+    # ADDRESS LINK CREATE AND UPDATE FOR CUSTUMERS
+    path("delivery_tasks/dl_address_link/<str:dl_task_code>/",
+         delivery_views.dl_address_link, name="dl_address_link"),
+    path("delivery_tasks/dl_address_link/<str:dl_task_code>/update/",
+         delivery_views.dl_address_link_update, name="dl_address_link_update"),
+
+         
 ]
