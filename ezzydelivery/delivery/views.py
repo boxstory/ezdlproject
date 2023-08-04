@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from decouple import config
-import geocoder
+#import geocoder
 
 from core import models as core_models
 from fleet import models as fleet_models
@@ -157,12 +157,12 @@ def dl_address_link(request, dl_task_code):
     address = f'{task.dl_latitude},{task.dl_longitude}'
     address2 = f'{task.dl_longitude},{task.dl_latitude}'
     print(address)
-    g = geocoder.mapbox(address2, key=MAPBOX_API_KEY)
-    print(g.json)
+    #g = geocoder.mapbox(address2, key=MAPBOX_API_KEY)
+    #print(g.json)
     data = {
         'task': task,
         'address': address2,
-        'g': g,
+        
         'MAPBOX_API_KEY': MAPBOX_API_KEY
 
     }
