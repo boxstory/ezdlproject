@@ -4,7 +4,10 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from decouple import config
-#import geocoder
+from django.views.decorators.csrf import csrf_exempt
+import geocoder
+import json
+
 
 from core import models as core_models
 from fleet import models as fleet_models
@@ -157,12 +160,12 @@ def dl_address_link(request, dl_task_code):
     address = f'{task.dl_latitude},{task.dl_longitude}'
     address2 = f'{task.dl_longitude},{task.dl_latitude}'
     print(address)
-    #g = geocoder.mapbox(address2, key=MAPBOX_API_KEY)
-    #print(g.json)
+    g = geocoder.mapbox(address2, key=MAPBOX_API_KEY)
     data = {
         'task': task,
         'address': address2,
-        
+        'g': g,
+
         'MAPBOX_API_KEY': MAPBOX_API_KEY
 
     }
@@ -175,3 +178,26 @@ def dl_address_link_update(request, dl_task_code):
 
     }
     return render(request, 'delivery/frontend/dl_address_link_update.html', data)
+
+
+@csrf_exempt
+def save_location_data(request, dl_task_code):
+    print("vide save_location_data", dl_task_code)
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))  # Parse JSON data from request body
+        dl_latitude = data.get('dl_latitude')
+        dl_longitude = data.get('dl_longitude')
+
+        try:
+            instance = delivery_models.DlAddressUpdate.objects.get(dl_task_number=dl_task_code)
+            print(instance)
+        except delivery_models.DlAddressUpdate.DoesNotExist:
+            return JsonResponse({'error': 'Instance not found'}, status=404)
+
+        instance.dl_latitude = dl_latitude
+        instance.dl_longitude = dl_longitude
+        instance.save()
+
+        return JsonResponse({'message': 'Data saved successfully'})
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)

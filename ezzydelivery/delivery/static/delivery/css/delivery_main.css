@@ -7,9 +7,6 @@
 
 .card-glassmorphic {
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 20px;
   box-shadow: 0 4px 6px rgba(254, 195, 0, 0.1);
   transition: all 0.3s ease;
 }
@@ -21,5 +18,4 @@
 
 .addressboard {
   background: rgba(42, 110, 245, 0.822);
-  border-radius: 30px;
 }

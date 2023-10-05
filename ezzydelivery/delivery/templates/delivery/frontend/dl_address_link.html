@@ -42,17 +42,18 @@
 
                     <hr class="p-0 m-0">
                     <li class="list-group-item"><strong>Area Name : </strong> {{ task.area_name }}</li>
-                    <div class="card card-glassmorphic addressboard m-0 mt-1">
+                    <div class="card card-glassmorphic addressboard p-3 m-2 mt-1 rounded-3">
 
 
-                        <div class="row justify-content-between m-0">
+                        <div class="row justify-content-between m-0 ">
                             <div class="col-6 col-md-6 m-0 ps-0">
-                                <p class="list-group-item "><strong>Zone : </strong> {{ task.dl_zone }}</p>
-                                <p class="list-group-item  m-0"><strong>Building : </strong> {{ task.dl_building }}</p>
+                                <p class="list-group-item rounded-3"><strong>Zone : </strong> {{ task.dl_zone }}</p>
+                                <p class="list-group-item  m-0 rounded-3"><strong>Building : </strong>
+                                    {{ task.dl_building }}</p>
                             </div>
                             <div class="col-6 col-md-6 pe-0">
-                                <p class="list-group-item"><strong>Street : </strong> {{ task.dl_street }}</p>
-                                <p class="list-group-item m-0"><strong>Unit : </strong> {{ task.dl_unit }}</p>
+                                <p class="list-group-item rounded-3"><strong>Street : </strong> {{ task.dl_street }}</p>
+                                <p class="list-group-item m-0 rounded-3"><strong>Unit : </strong> {{ task.dl_unit }}</p>
                             </div>
                         </div>
                     </div>
@@ -87,33 +88,23 @@
                             style="color: #a80000;"
                         ></i>
                         {% endif %}
-                    <li class="list-group-item"><strong>Time Slot:</strong> {{ task.time_slot }}</li>
+                    <li class="list-group-item"><strong>Time Slot:</strong> {{ task.time_slot }}</li> <button
+                        class="btn btn-success  assign-driver-btn"
+                        data-task-id="{{ task.id }}"
+                    >Updae</button>
                 </ul>
             </div>
             <div class="col-12 p-3  d-flex justify-content-center">
-                <button
-                    class="btn btn-success  assign-driver-btn me-3"
-                    data-task-id="{{ task.id }}"
-                >Find</button>
-                <button
-                    class="btn btn-success assign-driver-btn me-3"
-                    data-task-id="{{ task.id }}"
-                    onclick="getLocation()"
-                >Find my palce</button>
 
-                <button
-                    class="btn btn-success  assign-driver-btn me-3"
-                    data-task-id="{{ task.id }}"
-                >Confirm</button>
-                <button
-                    class="btn btn-success  assign-driver-btn"
-                    data-task-id="{{ task.id }}"
-                >Updae</button>
+
+
+
 
             </div>
-
             <div class="p-0 m-0">
-                <div class="p-2">Address: {{address}}</div>
+                <div class="px-2">LongLat: {{address}}--------------{{ task.dl_latitude }}{{ task.dl_longitude }}</div>
+                <div class="px-2">Address: {{g.json.address}}</div>
+                <div class="px-2 updatedlatlong"></div>
 
 
 
@@ -123,6 +114,24 @@
                 ></div>
 
             </div>
+            <div class="col-12 p-3  d-flex justify-content-center">
+
+                <button
+                    class="btn btn-success assign-driver-btn me-3"
+                    data-task-id="{{ task.id }}"
+                    onclick="getLocation()"
+                >Find my palce</button>
+
+                <button
+                    class="btn btn-success  assign-driver-btn me-3"
+                    data-task-id="confirm-loc-{{ task.id }}"
+                >Confirm</button>
+
+
+            </div>
+
+
+
         </div>
     </div>
 </section>
@@ -131,6 +140,8 @@
 {% block extra_js %}
 <!-- extra css -->
 <script>
+    const centerLatitude = {{ task.dl_latitude }};
+    const centerLongitude = {{ task.dl_longitude }};
     // Define the getLocation function in the global scope
     function getLocation() {
         if (navigator.geolocation) {
@@ -148,6 +159,13 @@
         // Update the map and marker with the user's current location
         map.setCenter([longitude, latitude]);
         marker1.setLngLat([longitude, latitude]);
+
+        // Update the content of the div with the new latitude and longitude
+        const updatedLatLongDiv = document.querySelector('.updatedlatlong');
+        updatedLatLongDiv.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+        // Save the data to the Django database
+        saveToDatabase(latitude, longitude);
     }
 
     // Rest of your existing JavaScript code here
@@ -155,14 +173,63 @@
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v12',
-        center: [51.495181276328864, 25.28160807011584],
+        center: [centerLongitude, centerLatitude],
         zoom: 14,
     });
 
     const marker1 = new mapboxgl.Marker({ color: 'black', rotation: 20 })
-        .setLngLat([51.495181276328864, 25.28160807011584])
+        .setLngLat([centerLongitude, centerLatitude])
         .addTo(map);
-</script>
 
+    // Add a click event listener to the map
+    map.on('click', function (event) {
+        // Get the clicked coordinates
+        const clickedLngLat = event.lngLat;
+
+        // Update the marker's position
+        marker1.setLngLat(clickedLngLat);
+
+        // Update the content of the div with the new latitude and longitude
+        const updatedLatLongDiv = document.querySelector('.updatedlatlong');
+        updatedLatLongDiv.textContent = `Latitude: ${clickedLngLat.lat}, Longitude: ${clickedLngLat.lng}`;
+
+        // Save the data to the Django database
+        saveToDatabase(clickedLngLat.lat, clickedLngLat.lng);
+    });
+
+    function saveToDatabase(latitude, longitude) {
+        // Make an AJAX request to save the data
+        const csrfToken = '{{ csrf_token }}';
+        const dl_task_number = '{{ task.dl_task_number }}';
+
+        // Construct the URL with dl_task_number
+        const url = `/delivery/address_link/${dl_task_number}/update/`;
+
+        const data = {
+            dl_latitude: latitude,
+            dl_longitude: longitude,
+            csrfmiddlewaretoken: csrfToken,
+        };
+        console.log(JSON.stringify(data))
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                console.log('Data saved to database:', data);
+            })
+            .catch(error => {
+                console.error('Error saving data:', error);
+            });
+    }
+
+
+</script>
 
 {% endblock extra_js %}

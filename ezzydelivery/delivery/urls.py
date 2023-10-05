@@ -25,10 +25,10 @@ urlpatterns = [
          delivery_views.assign_driver, name="assign_driver"),
 
     # ADDRESS LINK CREATE AND UPDATE FOR CUSTUMERS
-    path("delivery_tasks/dl_address_link/<str:dl_task_code>/",
+    path("address_link/<str:dl_task_code>/",
          delivery_views.dl_address_link, name="dl_address_link"),
-    path("delivery_tasks/dl_address_link/<str:dl_task_code>/update/",
-         delivery_views.dl_address_link_update, name="dl_address_link_update"),
 
-         
+    path('address_link/<str:dl_task_code>/update/',
+         delivery_views.save_location_data, name='save_location_data'),
+
 ]
