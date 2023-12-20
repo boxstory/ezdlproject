@@ -13,6 +13,7 @@ urlpatterns = [
     path('join_driver/', core_views.join_driver, name='join_driver'),
     path('privacy/', webpages_views.privacy, name='privacy'),
     path('contactus/', webpages_views.contactus, name='contactus'),
+    path('careers/', webpages_views.careers, name='careers'),
 
     path('fullfillment/', webpages_views.fullfillment, name='fullfillment'),
     path('3pl/pricing/', webpages_views.delivery_pricing, name='delivery_pricing'),

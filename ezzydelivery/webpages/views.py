@@ -1,6 +1,7 @@
 import random
 from django.forms.fields import DateTimeField
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from webpages.forms import *
 from django.core.mail import mail_admins
@@ -101,6 +102,17 @@ def contactus(request):
         f = ContactForm()
 
     return render(request, 'webpages/contactus.html', {'form': f})
+
+def careers(request):
+    f = CareersForm(request.POST or None)
+    if request.method == 'POST':
+        f = CareersForm(request.POST)
+        if f.is_valid():
+            f.save()
+            messages.success(request, "Successful Submission")
+            return redirect('/')
+    
+    return render(request, 'webpages/careers.html', {'form': f})
 
 
 def privacy(request):

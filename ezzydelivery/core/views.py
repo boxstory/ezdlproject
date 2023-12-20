@@ -279,6 +279,8 @@ def main_dashboard(request):
             return redirect('business:business_dashboard')
         elif profile.is_driver:
             return redirect('fleet:fleet_dashboard')
+        elif profile.is_staff:
+            return redirect('workforce:wf_dashboard')
     else:
         print('NOT EXIST profile')
         return redirect('core:join_us')

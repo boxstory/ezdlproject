@@ -18,6 +18,7 @@ urlpatterns = [
 
     path('', include('core.urls', namespace='core')),
     path('', include('webpages.urls', namespace='webpages')),
+    path('workforce/', include('workforce.urls', namespace='workforce')),
 
     path('product/', include('product.urls', namespace='product')),
 

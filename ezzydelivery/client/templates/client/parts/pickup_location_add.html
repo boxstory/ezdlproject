@@ -4,7 +4,7 @@
 
 
 <form
-    hx-post="{% url 'business:pickup_location_add'   %}"
+    
     method="POST"
 >
     {% csrf_token %}
@@ -13,9 +13,9 @@
         <button
             type="submit"
             class="btn btn-dark w-100 w-md-50"
-            hx-trigger="click"
-            hx-target="#dasboard_div"
-            hx-post="{% url 'business:pickup_location_add'   %}"
+            
+          
+            
         >
             Submit
         </button>

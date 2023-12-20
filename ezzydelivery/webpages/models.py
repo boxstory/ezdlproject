@@ -17,3 +17,19 @@ class ContactUs(models.Model):
 
     class Meta:
         verbose_name_plural = "Contact Us"
+
+
+class Careers(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    mobile = models.IntegerField()
+    qid = models.IntegerField()
+    job = models.CharField(max_length=100)
+    self_intro = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Contact Us"

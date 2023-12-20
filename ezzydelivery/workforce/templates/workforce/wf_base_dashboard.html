@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% load static %} {% load crispy_forms_tags %}
+<!-- extra css -->
+{% block extra_css %} {% endblock extra_css %}
+
+<!-- title -->
+{% block title %} BUSINESS DASHBOARD {% endblock title %} {% block dashboard %}
+<!-- wf_nav_mob -->
+{% include "workforce/parts/wf_nav_mob.html" %}
+
+<!-- sidebar -->
+<div class="d-flex">
+  {% include "workforce/parts/wf_dashboard_sidebar.html" %}
+
+  <!-- Your content here -->
+  {% include "workforce/parts/wf_dashboard.html" %}
+</div>
+{% endblock dashboard %}
+<!-- extra js -->
+{% block extra_js %} {% endblock extra_js %}

@@ -1,5 +1,6 @@
 from urllib import request
 from django import forms
+from django.forms import ModelForm
 from webpages.models import *
 from crispy_forms.helper import FormHelper, Layout
 from crispy_forms.bootstrap import InlineCheckboxes
@@ -39,3 +40,7 @@ class ContactForm(forms.Form):
         return contactus
 
 
+class CareersForm(ModelForm):
+    class Meta:
+        model = Careers
+        fields = '__all__'

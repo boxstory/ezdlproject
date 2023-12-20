@@ -1,0 +1,161 @@
+{% load static %}
+<!-- ...header... -->
+
+<div class="container-fluid navbar-default-css">
+  <nav class="navbar navbar-expand-md">
+    <div class="container-fluid">
+      <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+      <a class="navbar-brand m-0" href="{% url 'webpages:index' %}">
+        <img
+          src="{% static 'webpages/img/ezzy-logo-long-white.png' %}"
+          alt=""
+          width="200"
+          height="50"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a
+              class="btn btn-outline-dark fw-bold px-3 me-2 my-1"
+              aria-current="page"
+              href="{% url 'webpages:index' %}"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="fw-bold btn btn-outline-dark px-3 me-2 my-1"
+              aria-current="page"
+              href="{% url 'webpages:services' %}"
+              >Services</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="btn btn-outline-dark fw-bold me-2 my-1"
+              aria-current="page"
+              href="{% url 'webpages:contactus' %}"
+              >Contact</a
+            >
+          </li>
+          <div
+            class="btn-group btn-primary"
+            role="group"
+            aria-label="Button group with nested dropdown"
+          >
+            {% if user.is_authenticated %}
+            <div class="btn-group bg-dark" role="group">
+              <button
+                id="btnGroupDrop1"
+                type="button"
+                class="btn bg-light dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="{% static 'webpages/img/avatar.png' %}"
+                  alt=""
+                  width="30"
+                  height="30"
+                  title="{{ user.username }}"
+                />
+              </button>
+              <ul
+                class="dropdown-menu bg-light dropdown-menu-end ms-3 border-1 text-center"
+                aria-labelledby="btnGroupDrop1"
+              >
+                <li>
+                  <a
+                    class="nav-link active border-bottom-1 border-dark"
+                    aria-current="page"
+                    href="{% url 'core:profile_view' %}"
+                  >
+                    Profile</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="{% url 'core:main_dashboard' %}"
+                  >
+                    Dashboard</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    href="{% url 'account_logout' %}"
+                  >
+                    Log Out</a
+                  >
+                </li>
+              </ul>
+            </div>
+            {% else %}
+            <div class="btn-group" role="group">
+              <button
+                id="btnGroupDrop1"
+                type="button"
+                class="btn btn-outline-dark fw-bold dropdown-toggle btn-light"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {% comment %} #@todo add prodile pic {% endcomment %}
+                <img
+                  src="{% static 'webpages/img/avatar.png' %}"
+                  alt=""
+                  width="30"
+                  height="25"
+                  title="join"
+                />
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end ms-3 border-1 text-center"
+                aria-labelledby="btnGroupDrop1"
+              >
+                <li class="nav-item">
+                  <a
+                    class="btn btn-outline-dark fw-bold me-2 my-1"
+                    aria-current="page"
+                    href="{% url 'account_login' %}"
+                    >Log In</a
+                  >
+                </li>
+
+                <li class="nav-item">
+                  <a
+                    class="btn btn-outline-dark fw-bold me-2 my-1"
+                    aria-current="page"
+                    href="{% url 'account_signup' %}"
+                    >Sign Up</a
+                  >
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+{% block extra_js %}
+<script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+{% endblock %}

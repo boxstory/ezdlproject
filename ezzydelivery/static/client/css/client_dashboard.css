@@ -1,5 +1,22 @@
 tr.htmx-swapping td {
-    opacity: 0;
-    transition: opacity 1s ease-out;
-  }
-  
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+sidebar {
+  height: calc(
+    100vh - (headerHeight + footerHeight)
+  ); /* Adjust the header and footer height if needed */
+  overflow-y: auto;
+  position: sticky;
+  bottom: 0;
+}
+
+input[type="radio"] + label {
+  color: black;
+}
+
+.form-check-input:checked {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}

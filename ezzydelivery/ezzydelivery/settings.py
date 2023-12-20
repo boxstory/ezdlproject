@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'fleet',
     'delivery',
     'orders',
+    'workforce',
 
 
 ]
