@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from client import models as business_models
@@ -15,6 +16,7 @@ def index(request):
     return render(request, 'workforce/index.html', data)
 
 
+@login_required(login_url='/accounts/login/')
 def wf_dashboard(request):
     profile = core_models.Profile.objects.get(user_id=request.user.id)
     data = {
