@@ -1,192 +1,185 @@
 {% extends "base.html" %} {% load static %} {% load crispy_forms_tags %}
 <!-- extra css -->
-{% block extra_css %}
-<link
-    rel="stylesheet"
-    href="{% static 'volte/css/volte.css' %}"
->
-<link
-    rel="stylesheet"
-    href="{% static 'client/css/client_dashboard.css' %}"
->
-<script
-    src="https://code.jquery.com/jquery-3.6.4.js"
-    integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-    crossorigin="anonymous"
-></script>
-{% endblock extra_css %}
+{% block extra_css %} {% endblock extra_css %}
 
-<!-- ghghjg -->
-{% block title %}BUSINESS DASHBOARD {%endblock title %}
-{% block dashboard %}
+<!-- title -->
+{% block title %}BUSINESS DASHBOARD {%endblock title %} {% block dashboard %}
 
 <!-- Main content area -->
 {% include "client/parts/dashboard_mob_nav.html" %}
-<div class="main h-100"><!-- sidebar -->
-    <div class="d-flex h-100">
-        {% include "client/parts/dashboard_sidebar.html" %}
+<div class="main h-100">
+  <div class="d-flex h-100">
+    <!-- sidebar -->
+    {% include "client/parts/dashboard_sidebar.html" %}
 
-        <!-- Your content here -->
-        <div class="col-12 col-md-10 pb-2">
-            <section class=" m-0 p-0">
-                <div class="p-3 p-md-3 text-dark d-none d-md-block">
-                    <div class="text-center">
-                        <h3 class="fw-bolder text-uppercase">
-                            {{business.business_business_name}} - Dashboard
-                        </h3>
-                    </div>
-                </div>
-                <div
-                    class="p-3 p-md-3"
-                    id="dasboard_div"
-                >
-                    {% block widget %}
-                    <div class="d-flex mb-3">
-
-
-                        <section class="col-12 col-md-5 p-3 px-md-5 mx-3 flex-fill fw-medium fs-4  bg-light">
-                            <p class=" pt-2 m-0 fw-bolder fs-5 text-center text-md-start">Total orders</p>
-                            <p class=" pb-0 m-0 d-flex justify-content-center  justify-content-md-end fw-bold ">10</p>
-
-                        </section>
-                        <section class="
-                                col-12
-                                col-md-5
-                                p-3  px-md-5
-                                mx-3
-                                flex-fill
-                                fw-medium
-                                fs-4
-                                bg-light">
-                            <p class=" pt-2 m-0 fw-bolder fs-5 text-center text-md-start">No of Delivered</p>
-                            <p class=" pb-0 m-0 d-flex justify-content-center  justify-content-md-end fw-bold ">10</p>
-
-
-                        </section>
-                    </div>
-                    <div class="d-flex mb-3">
-
-
-                        <section class="col-12 col-md-5 p-3 px-md-5 mx-3 flex-fill fw-medium fs-4  bg-light">
-                            <p class=" pt-2 m-0 fw-bolder fs-5 text-center text-md-start">Total Amount COD</p>
-                            <p class=" pb-0 m-0 d-flex justify-content-center  justify-content-md-end fw-bold ">10</p>
-
-                        </section>
-                        <section class="
-                                col-12
-                                col-md-5
-                                p-3  px-md-5
-                                mx-3
-                                flex-fill
-                                fw-medium
-                                fs-4
-                                bg-light">
-                            <p class=" pt-2 m-0 fw-bolder fs-5 text-center text-md-start">No of COD collected</p>
-                            <p class=" pb-0 m-0 d-flex justify-content-center  justify-content-md-end fw-bold ">10</p>
-
-
-                        </section>
-                    </div>
-                    <div class="d-flex mb-3">
-
-
-                        <section class="col-12 col-md-5 flex-fill p-3  px-md-5 mx-3 fw-medium fs-4 bg-light">
-                            <p class=" pt-2 m-0 fw-bolder fs-5 text-center text-md-start">No of To be Reconfirm</p>
-                            <p class=" pb-0 m-0 d-flex justify-content-center  justify-content-md-end fw-bold ">10</p>
-
-
-                        </section>
-                        <section class="col-12 col-md-5 flex-fill p-3 px-md-5 mx-3 fw-medium fs-4 bg-light">
-                            <p class=" pt-2 m-0 fw-bolder fs-5 text-center text-md-start">No of To be FollowUp</p>
-                            <p class=" pb-0 m-0 d-flex justify-content-center  justify-content-md-end fw-bold ">10</p>
-
-
-                        </section>
-                    </div>
-                    <div>
-
-
-                        <section class="p-3 m-3 fw-medium fs-4 bg-light">
-                            <p class=" pb-2 m-0 fw-bolder fs-5 text-center text-md-start">Latest updated Orders list</p>
-                            <p>{{ order.id }}</p>
-                            {% include "orders/parts/orders_list_review.html" %}
-
-
-
-                        </section>
-                    </div>
-                    {% endblock widget %}
-                </div>
-            </section>
+    <!-- Your content here -->
+    <div class="col-12 col-md-10 pb-2">
+      <section class="m-0 p-0">
+        <div class="p-3 p-md-3 text-dark d-none d-md-block">
+          <div class="text-center">
+            <h3 class="fw-bolder text-uppercase">
+              {{business.business_business_name}} - Dashboard
+            </h3>
+          </div>
         </div>
+        <div class="p-3 p-md-3" id="dasboard_div">
+          {% block widget %}
+          <div class="d-flex mb-3">
+            <section
+              class="col-12 col-md-5 p-3 px-md-5 mx-3 flex-fill fw-medium fs-4 bg-light"
+            >
+              <p class="pt-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                All orders
+              </p>
+              <p
+                class="pb-0 m-0 d-flex justify-content-center justify-content-md-end fw-bold"
+              >
+                10
+              </p>
+            </section>
+            <section
+              class="col-12 col-md-5 p-3 px-md-5 mx-3 flex-fill fw-medium fs-4 bg-light"
+            >
+              <p class="pt-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                No of Delivered
+              </p>
+              <p
+                class="pb-0 m-0 d-flex justify-content-center justify-content-md-end fw-bold"
+              >
+                10
+              </p>
+            </section>
+          </div>
+          <div class="d-flex mb-3">
+            <section
+              class="col-12 col-md-5 p-3 px-md-5 mx-3 flex-fill fw-medium fs-4 bg-light"
+            >
+              <p class="pt-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                Total Amount COD
+              </p>
+              <p
+                class="pb-0 m-0 d-flex justify-content-center justify-content-md-end fw-bold"
+              >
+                10
+              </p>
+            </section>
+            <section
+              class="col-12 col-md-5 p-3 px-md-5 mx-3 flex-fill fw-medium fs-4 bg-light"
+            >
+              <p class="pt-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                No of COD collected
+              </p>
+              <p
+                class="pb-0 m-0 d-flex justify-content-center justify-content-md-end fw-bold"
+              >
+                10
+              </p>
+            </section>
+          </div>
+          <div class="d-flex mb-3">
+            <section
+              class="col-12 col-md-5 flex-fill p-3 px-md-5 mx-3 fw-medium fs-4 bg-light"
+            >
+              <p class="pt-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                No of To be Reconfirm
+              </p>
+              <p
+                class="pb-0 m-0 d-flex justify-content-center justify-content-md-end fw-bold"
+              >
+                10
+              </p>
+            </section>
+            <section
+              class="col-12 col-md-5 flex-fill p-3 px-md-5 mx-3 fw-medium fs-4 bg-light"
+            >
+              <p class="pt-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                No of To be FollowUp
+              </p>
+              <p
+                class="pb-0 m-0 d-flex justify-content-center justify-content-md-end fw-bold"
+              >
+                10
+              </p>
+            </section>
+          </div>
+          <div>
+            <section class="p-3 m-3 fw-medium fs-4 bg-light">
+              <p class="pb-2 m-0 fw-bolder fs-5 text-center text-md-start">
+                Latest updated Orders list
+              </p>
+              <p>{{ order.id }}</p>
+              {% include "orders/parts/orders_list_review.html" %}
+            </section>
+          </div>
+          {% endblock widget %}
+        </div>
+      </section>
     </div>
+  </div>
 </div>
 {% endblock dashboard %} {% block extra_js %}
 <!-- extra js -->
 <script
-    src="https://unpkg.com/htmx.org@1.7.0"
-    integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo"
-    crossorigin="anonymous"
-    defer
+  src="https://unpkg.com/htmx.org@1.7.0"
+  integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo"
+  crossorigin="anonymous"
+  defer
 ></script>
 
 <script>
-    document.body.addEventListener("htmx:configRequest", (event) => {
-        event.detail.headers["X-CSRFToken"] = "{{ csrf_token }}"; //insert csrf token when performing AJAX request
-    });
+  document.body.addEventListener("htmx:configRequest", (event) => {
+    event.detail.headers["X-CSRFToken"] = "{{ csrf_token }}"; //insert csrf token when performing AJAX request
+  });
 </script>
 <script src="{% static 'volte/js/volte.js' %}"></script>
 
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
 <script>
-    const dropdowns = document.querySelectorAll('.status-dropdown');
-    dropdowns.forEach((dropdown) => {
-        dropdown.addEventListener('change', () => {
-            const selectedOption = dropdown.options[dropdown.selectedIndex].value;
-            const selectedRow = dropdown.closest('tr');
-            const order_id = selectedRow.dataset.orderId;
+  const dropdowns = document.querySelectorAll(".status-dropdown");
+  dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("change", () => {
+      const selectedOption = dropdown.options[dropdown.selectedIndex].value;
+      const selectedRow = dropdown.closest("tr");
+      const order_id = selectedRow.dataset.orderId;
 
+      // get with the csrf
+      const csrftoken = getCookie("csrftoken");
 
+      // Send a POST request to the server using AJAX
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/orders/update_order_status/", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          if (response.status === "success") {
+            console.log("Status changed successfully.");
+          } else {
+            // Handle the error response
+            console.error("Error changing status:", response.error);
+          }
+        } else {
+          // Handle non-200 HTTP status
+          console.error("Unexpected HTTP status:", xhr.status);
+        }
+      };
 
-            // get with the csrf
-            const csrftoken = getCookie('csrftoken');
-
-            // Send a POST request to the server using AJAX
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/orders/update_order_status/', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('X-CSRFToken', csrftoken);
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.status === 'success') {
-                        console.log('Status changed successfully.');
-                    } else {
-                        // Handle the error response
-                        console.error('Error changing status:', response.error);
-                    }
-                } else {
-                    // Handle non-200 HTTP status
-                    console.error('Unexpected HTTP status:', xhr.status);
-                }
-            };
-
-            // Send the request with the selected option and object ID
-            const data = `status=${selectedOption}&order_id=${order_id}`;
-            xhr.send(data);
-        });
+      // Send the request with the selected option and object ID
+      const data = `status=${selectedOption}&order_id=${order_id}`;
+      xhr.send(data);
     });
+  });
 
-    // Helper function to get the CSRF token value from the cookie
-    function getCookie(name) {
-        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-        return cookieValue ? cookieValue.pop() : '';
-    }
+  // Helper function to get the CSRF token value from the cookie
+  function getCookie(name) {
+    const cookieValue = document.cookie.match(
+      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
+    );
+    return cookieValue ? cookieValue.pop() : "";
+  }
 </script>
-
 
 {% endblock extra_js %}
