@@ -7,7 +7,7 @@ from django.db import models
 class ContactUs(models.Model):
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
-    mobile = models.IntegerField()
+    mobile = models.BigIntegerField()
     purpose = models.CharField(max_length=100)
     message = models.TextField()
     date = models.DateField(auto_now_add=True)
@@ -22,8 +22,8 @@ class ContactUs(models.Model):
 class Careers(models.Model):
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
-    mobile = models.IntegerField()
-    qid = models.IntegerField()
+    mobile = models.BigIntegerField()
+    qid = models.BigIntegerField()
     job = models.CharField(max_length=100)
     self_intro = models.TextField()
     date = models.DateField(auto_now_add=True)

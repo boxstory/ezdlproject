@@ -44,3 +44,17 @@ class CareersForm(ModelForm):
     class Meta:
         model = Careers
         fields = '__all__'
+
+    def clean_qid(self):
+        qid = self.cleaned_data.get('qid')
+        print(type(qid))
+        qid = str(qid)
+        # Check if qid is 10 digits and starts with 2 or 3
+        if not (len(qid) == 11 and qid.isdigit() and (qid.startswith('2') or qid.startswith('3'))):
+            raise forms.ValidationError("The qid should be real")
+
+        return qid
+
+    
+
+  
