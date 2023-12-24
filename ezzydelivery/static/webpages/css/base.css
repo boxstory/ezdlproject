@@ -122,7 +122,7 @@ body {
   }
 }
 
-.navbar-default {
-  background-color: #11d885; /* Background color */
+.navbar-default-css {
+  background-color: #f3eeda; /* Background color */
   border-color: #c51313; /* Border color */
 }

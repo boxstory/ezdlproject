@@ -13,7 +13,7 @@ class ContactUs(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.full_name
 
     class Meta:
         verbose_name_plural = "Contact Us"
@@ -29,7 +29,7 @@ class Careers(models.Model):
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.full_name
 
     class Meta:
         verbose_name_plural = "Careers"
