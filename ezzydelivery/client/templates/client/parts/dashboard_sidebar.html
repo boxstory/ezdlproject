@@ -2,90 +2,137 @@
 
 
 
-<div class="d-none d-md-flex flex-column flex-shrink-0 p-3 text-white bg-dark col-2">
-    <a
-        href="{% url 'business:profile_business' 3 %}"
-        class="fw-bold fs-3 text-center mb-3 mb-md-0 me-md-auto ms-auto text-white text-decoration-none"
-    >
-
-
-        {{business.business_business_name}}
-
-    </a>
+<div class="d-none d-md-flex flex-column flex-shrink-0 p-3 bg-light  col-2">
+    <div class="text-center fw-bold">
+        <a class="nav-link p-3  my-0 btn btn-outline-dark  " href="{% url 'business:business_dashboard' %}">
+            Clients Dashboard
+        </a>
+    </div>
     <hr>
 
-    <div
-        class=" navbar-collapse sidebar"
-        id="navbarNav2"
-    >
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+    <div class=" navbar-collapse " id="navbarNav">
+        <ul class="navbar-nav ms-auto  text-center">
+            <li class="nav-item ">
+            </li>
 
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'business:business_dashboard' %}"
-                >
-                    Dashboard
+            <li class="nav-item  ">
+                <div class="nav-link  btn btn-outline-dark collapsed d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" data-bs-target="#submenu-pages">
+                    <a class=" nav-link my-0  flex-fill  " href="{% url 'business:business_dashboard' %}">
+                        Orders
+                    </a><i class="flex-fill fa-solid fa-caret-down"></i>
+                </div>
+                <div class="multi-level collapse bg-white rounded-3" role="list" id="submenu-pages"
+                    aria-expanded="false">
+                    <ul class="flex-column nav text-black">
+                        <li>
+                            <a class="nav-link p-3 my-0 btn btn-dark collapsed " href="{% url 'orders:orders_list' %}">
+                                All List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-3  my-0 btn btn-outline-dark" href="{% url 'orders:add_order' %}">
+                                Add Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link p-3 btn-dark my-0 btn  btn-outline-dark"
+                                href="{% url 'business:business_dashboard' %}">
+                                Success Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link p-3 btn-dark my-0 btn   btn-outline-dark"
+                                href="{% url 'orders:orders_list' %}">
+                                Pending Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link p-3 btn-dark my-0 btn  " href="{% url 'business:business_dashboard' %}">
+                                Failed Orders
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a class="nav-link p-3 btn-dark my-0 btn  " href="{% url 'product:product_inventory' %}">
+                    Inventory Report
                 </a>
+            </li>
+            <li class="nav-item  ">
+                <div class="nav-link  btn btn-outline-dark collapsed d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" data-bs-target="#submenu-product">
+                    <a class=" nav-link my-0  flex-fill  " href="{% url 'business:business_dashboard' %}">
+                        Products
+                    </a><i class="flex-fill fa-solid fa-caret-down"></i>
+                </div>
+                <div class="multi-level collapse bg-white rounded-3" role="list" id="submenu-product"
+                    aria-expanded="false">
+                    <ul class="flex-column nav text-black">
+                        <li>
+                            <a class="nav-link p-3 my-0 btn btn-dark collapsed "
+                                href="{% url 'product:product_list' %}">
+                                All Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-3  my-0 btn btn-outline-dark" href="{% url 'product:product_add' %}">
+                                Add Products
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link p-3 btn-dark my-0 btn  btn-outline-dark"
+                                href="{% url 'product:product_categories' %}">
+                                Catagories
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link p-3 btn-dark my-0 btn   btn-outline-dark"
+                                href="{% url 'product:product_sku_list' %}">
+                                SKUs
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
             <hr>
             <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'business:driver_directory' %}"
-                >
-                    Drivers Directory
+                <a class="nav-link p-3  my-2 btn btn-outline-dark" href="{% url 'business:driver_directory' %}">
+                    Fleet List
                 </a>
             </li>
-            <hr>
             <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'orders:orders_list' %}"
-                >
-                    List Orders
+                <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+                    href="{% url 'business:pickup_location_list' %}">
+                    Stores
+
                 </a>
             </li>
-            <hr>
             <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'orders:add_order' %}"
-                >
-                    Add Orders
+                <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark" href="{% url 'product:product_sku_list' %}">
+                    SKUs
+
                 </a>
             </li>
-            <hr>
+
             <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'orders:orders_list' %}"
-                >
-                    FollowUp List
+                <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark" href="{% url 'product:product_list' %}">
+                    Products
 
                 </a>
             </li>
             <hr>
             <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'business:pickup_location_list' %}"
-                >
-                    Pickup locations
+                <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+                    href="{% url 'business:profile_business' request.user.profile.id %}">
+                    Business Profile
 
                 </a>
             </li>
-            <hr>
-            <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'business:profile_business' request.user.profile.id %}"
-                >
-                    business Profile
 
-                </a>
-            </li>
-            <hr>
         </ul>
     </div>
 </div>

@@ -20,3 +20,15 @@ input[type="radio"] + label {
   background-color: #ffc107;
   border-color: #ffc107;
 }
+
+
+.nav-link {
+  --bs-nav-link-color:#111111 !important;
+  --bs-nav-link-hover-color:white !important;
+  --text-decoration-color: aliceblue;
+}
+
+.nav-item:hover {
+  --bs-nav-link-color:#b3b3b3 !important;
+  --bs-nav-link-hover-color:white !important;
+}

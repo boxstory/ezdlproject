@@ -11,49 +11,51 @@ from product import forms as product_forms
 
 
 @login_required(login_url='account_login')
-def product_item_list(request):
-    products = product_models.Items.objects.filter(
-        business_id=business_models.Business.objects.get(user_id=request.user.id).id)
+def product_list(request):
+    business=business_models.Business.objects.get(user_id=request.user.id)
+    print(business)
+    products = product_models.Product.objects.all()
     print(products)
     data = {
         'products': products
     }
-    return render(request, 'product/product_item_list.html', data)
+    return render(request, 'product/product_list.html', data)
 
 
 @login_required(login_url='account_login')
-def product_item_add(request):
+def product_add(request):
     form = product_forms.AddItemsForm()
 
     data = {
         'form': form,
     }
-    return render(request, 'product/product_item_add.html', data)
+    return render(request, 'product/product_add.html', data)
 
 
 @login_required(login_url='account_login')
-def product_item_delete(request, product_id):
+def product_delete(request, product_id):
     data = {
 
     }
-    return render(request, 'product/product_item_delete.html', data)
+    return render(request, 'product/product_delete.html', data)
 
 
 @login_required(login_url='account_login')
-def product_item_update(request, product_id):
+def product_update(request, product_id):
     product = product_models.Items.objects.get(id=product_id)
     data = {
         'product': product
     }
-    return render(request, 'product/product_item_update.html', data)
+    return render(request, 'product/product_update.html', data)
 
 # SKU
 
 
 def product_sku_list(request):
-    business_id = business_models.Business.objects.get(user_id=request.user.id).id
+    business=business_models.Business.objects.get(user_id=request.user.id)
+    print(business)
     skus = product_models.ItemSku.objects.filter(
-        business_id=business_id)
+        business_id=business)
 
     data = {
         'skus': skus
@@ -89,3 +91,19 @@ def product_sku_delete(request, sku_id):
 
     }
     return render(request, 'product/product_sku_delete.html', data)
+
+
+
+def product_inventory(request, sku_id):
+    data = {
+
+    }
+    return render(request, 'product/product_inventory.html', data)
+
+
+
+def product_categories(request):
+    data = {
+
+    }
+    return render(request, 'product/product_categories.html', data)

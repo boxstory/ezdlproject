@@ -1,5 +1,11 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% block extra_head %}
 Products {% endblock extra_head %} {% block content %}
+<!-- Main content area -->
+{% include "client/parts/dashboard_mob_nav.html" %}
+<div class="main h-100">
+  <div class="d-flex h-100">
+    <!-- sidebar -->
+    {% include "client/parts/dashboard_sidebar.html" %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -37,6 +43,8 @@ Products {% endblock extra_head %} {% block content %}
         </tbody>
       </table>
     </div>
+  </div>
+  </div>
   </div>
 </div>
 {% endblock %} {% block extra_js %}

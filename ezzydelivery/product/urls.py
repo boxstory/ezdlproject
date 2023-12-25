@@ -8,13 +8,13 @@ app_name = 'product'
 urlpatterns = [
     # ITEMS
     path('all/',
-         product_views.product_item_list, name='product_item_list'),
-    path('<int:product_id>/add_item/',
-         product_views.product_item_add, name='product_item_add'),
-    path('<int:product_id>/delete_item/',
-         product_views.product_item_delete, name='product_item_delete'),
-    path('<int:product_id>/update_item/',
-         product_views.product_item_update, name='product_item_update'),
+         product_views.product_list, name='product_list'),
+    path('add/',
+         product_views.product_add, name='product_add'),
+    path('<int:product_id>/delete/',
+         product_views.product_delete, name='product_delete'),
+    path('<int:product_id>/update/',
+         product_views.product_update, name='product_update'),
     # SKUS
     path('skus/all/', product_views.product_sku_list,
          name='product_sku_list'),
@@ -25,5 +25,10 @@ urlpatterns = [
     path('delete_item_sku/<int:sku_id>/',
          product_views.product_sku_delete, name='product_sku_delete'),
 
+     # Product categories
+     path('product_categories_list/', product_views.product_categories, name='product_categories'),
+
+     # Product Inventory
+     path('product_inventory/', product_views.product_inventory, name='product_inventory'),
 
 ]

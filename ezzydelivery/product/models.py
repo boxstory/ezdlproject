@@ -60,10 +60,10 @@ class UnitVariant(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.uni_variant
+        return self.unit_variant
 
     class Meta:
-        verbose_name_plural = "Uni Variants"
+        verbose_name_plural = "Unit Variants"
 
 
 class ItemSku(models.Model):
@@ -81,13 +81,14 @@ class ItemSku(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     business = models.ForeignKey(
-        business_models.Business, on_delete=models.SET_NULL, null=True)
+        business_models.Business, on_delete=models.SET_NULL, null=True, related_name='item_skus')
 
     def __str__(self):
         return self.item_sku
 
+
     class Meta:
-        verbose_name_plural = "Item SKU"
+        verbose_name_plural = "Item SKUs"
 
 
 class ProductInventory(models.Model):
@@ -98,7 +99,7 @@ class ProductInventory(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.item_sku
+        return f"{self.item_sku} - Qty: {self.item_quantity}"
 
     class Meta:
         verbose_name_plural = "Product Inventory"
@@ -121,7 +122,7 @@ class Product(models.Model):
         return self.item_name
 
     class Meta:
-        verbose_name_plural = "Items"
+        verbose_name_plural = "item_name"
 
 
 class services(models.Model):
