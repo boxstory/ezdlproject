@@ -1,10 +1,9 @@
 {% load static %}
-<!-- ...header... -->
+<!-- ... navbar ... -->
 
 <div class="container-fluid navbar-default-css">
   <nav class="navbar navbar-expand-md">
     <div class="container-fluid">
-      <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
       <a class="navbar-brand m-0" href="{% url 'webpages:index' %}">
         <img
           src="{% static 'webpages/img/ezzy-logo-long-white.png' %}"
@@ -156,6 +155,3 @@
     </div>
   </nav>
 </div>
-{% block extra_js %}
-<script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-{% endblock %}

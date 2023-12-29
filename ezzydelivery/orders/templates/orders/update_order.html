@@ -1,56 +1,38 @@
-{% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% extends "base.html" %} {% load crispy_forms_tags %}
 
 <head>
-    <title>{% block head_title %}Update Orders{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
+  <title>{% block head_title %}Update Orders{% endblock %}</title>
+  {% block extra_head %} {% endblock %}
 </head>
-
 
 {% block content %}
 <div class="container col-8 align-content-center">
-    <div class="row">
-        <div class="col-md-12 pb-3 d-flex justify-content-between ">
-            <h2>Update Order</h2>
-            <a
-                class='text-decoration-none text-light'
-                href="{% url 'business:business_dashboard' %}"
-            >
-                <div class="btn btn-dark my-2">
-                    Back
-                </div>
-            </a>
-        </div>
+  <div class="row">
+    <div class="col-md-12 pb-3 d-flex justify-content-between">
+      <h2>Update Order</h2>
+      <a
+        class="text-decoration-none text-light"
+        href="{% url 'business:business_dashboard' %}">
+        <div class="btn btn-dark my-2">Back</div>
+      </a>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-
-            <form method="POST">
-                {% csrf_token %}
-                {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                <div>
-                    {{error}}
-
-                </div>
-                {% endfor %}
-                {% endif %}
-                {{ form | crispy }}
-                <div class="submit my-3  text-center">
-
-                    <button
-                        type="submit"
-                        class="btn btn-dark w-50  align-content-center"
-                    >Update Order</button>
-                </div>
-            </form>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form method="POST">
+        {% csrf_token %} {% if form.non_field_errors %} {% for error in
+        form.non_field_errors %}
+        <div>{{error}}</div>
+        {% endfor %} {% endif %} {{ form | crispy }}
+        <div class="submit my-3 text-center">
+          <button type="submit" class="btn btn-dark w-50 align-content-center">
+            Update Order
+          </button>
         </div>
+      </form>
     </div>
+  </div>
 </div>
-{% endblock %}
-
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <!-- extra js -->
 {% endblock extra_js %}

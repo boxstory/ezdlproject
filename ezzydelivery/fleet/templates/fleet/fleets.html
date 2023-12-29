@@ -1,106 +1,100 @@
-{% extends "base.html" %} {% load static %} {% load crispy_forms_tags %} {%
-block extra_css %} {% endblock extra_css %} {% block title %} FLEETS {% endblock
-title %} {% block content %}
-<section class="m-2 m-md-5">
-  <h1 class="m-2">Drivers</h1>
-  <div class="">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">No</th>
-          <th scope="col">Name</th>
-          <th scope="col">Languages</th>
-          <th scope="col">QID</th>
-          <th scope="col">Driver Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for fleet in fleets %}
-        <tr
-          class="clickable"
-          onclick="window.location='/fleet/{{fleet.driver_id}}/'"
-        >
-          <td scope="row">{{forloop.counter}}</td>
-          <td scope="row">
-            {{fleet.user.first_name}} {{fleet.user.last_name}}
-          </td>
-          <td scope="row">{{fleet.driver_languages}}</td>
-          <td scope="row">{{fleet.driver_qid}}</td>
-
-          <td scope="row">{{fleet.driver_status}}</td>
-        </tr>
-
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="col-xl-4 col-md-6">
-    <div class="card">
-      <div class="card-block p-0">
-        <div class="text-center project-main">
-          <img
-            class="img-fluid rounded-circle"
-            src="https://appsrv1-147a1.kxcdn.com/django-datta-able-enh/images/user/avatar-3.jpg"
-            alt="dashboard-user"
-          />
-          <h5 class="mt-4">Alma Christensen</h5>
-          <span>UX Designer</span>
-          <div class="row m-t-30">
-            <div class="col-6 p-r-0">
-              <div class="d-grid">
-                <a href="#!" class="btn btn-primary text-uppercase"
-                  >add friend</a
-                >
-              </div>
+{% extends "base.html" %}
+{% load static %}
+<!-- title -->
+{% block title %}
+  FLEETS
+{% endblock title %}
+<!-- title -->
+{% block content %}
+  <section class="m-2 mx-md-5">
+    <h1 class="m-2">Drivers</h1>
+    <div class="fleet-table">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Languages</th>
+            <th scope="col">QID</th>
+            <th scope="col">Driver Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fleet in fleets %}
+            <tr class="clickable"
+                onclick="window.location='/fleet/{{ fleet.driver_id }}/'">
+              <td scope="row">{{ forloop.counter }}</td>
+              <td scope="row">{{ fleet.user.first_name }} {{ fleet.user.last_name }}</td>
+              <td scope="row">{{ fleet.driver_languages }}</td>
+              <td scope="row">{{ fleet.driver_qid }}</td>
+              <td scope="row">{{ fleet.driver_status }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xl-4 col-md-6 mt-5">
+      <div class="card">
+        <div class="card-block p-0">
+          <div class="text-center project-main">
+            <div class="imgBox h-50 w-50">
+              <img class="img-fluid rounded-circle"
+                   src="https://appsrv1-147a1.kxcdn.com/django-datta-able-enh/images/user/avatar-3.jpg"
+                   alt="dashboard-user" />
             </div>
-            <div class="col-6">
-              <div class="d-grid">
-                <a
-                  href="#!"
-                  class="btn text-uppercase border btn-outline-secondary"
-                  >message</a
-                >
+            <h5 class="mt-4">Alma Christensen</h5>
+            <span>UX Designer</span>
+            <div class="row m-t-30">
+              <div class="col-6 p-r-0">
+                <div class="d-grid">
+                  <a href="#!" class="btn btn-primary text-uppercase">add friend</a>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-grid">
+                  <a href="#!" class="btn text-uppercase border btn-outline-secondary">message</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="border-top"></div>
-        <div class="project-main">
-          <div class="row text-center">
-            <div class="col-md-4 col-6">
-              <h6 class="text-muted"><i class="fas fa-star m-r-5"></i> 4.8</h6>
-            </div>
-            <div class="col-md-4 col-6">
-              <h6 class="text-muted">
-                <i class="fas fa-map-marker-alt m-r-5"></i>USA
-              </h6>
-            </div>
-            <div class="col-md-4 col-12">
-              <h6 class="text-muted m-0">
-                <i class="fas fa-file-alt m-r-5"></i> 28 Task
-              </h6>
+          <div class="project-main pt-3">
+            <div class="row text-center">
+              <div class="col-md-4 col-6">
+                <h6 class="text-muted">
+                  <i class="fas fa-star m-r-5"></i> 4.8
+                </h6>
+              </div>
+              <div class="col-md-4 col-6">
+                <h6 class="text-muted">
+                  <i class="fas fa-map-marker-alt m-r-5"></i>USA
+                </h6>
+              </div>
+              <div class="col-md-4 col-12">
+                <h6 class="text-muted m-0">
+                  <i class="fas fa-file-alt m-r-5"></i> 28 Task
+                </h6>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <a href="{%url 'fleet:fleets' %}">
-    <div class="btn btn-dark btn-md-2">
-      <i class="fa-solid fa-chevron-left me-2"></i> Back
+    <div class="d-flex justify-content-evenly pt-4">
+      <a href="{% url 'fleet:fleets' %}">
+        <div class="btn btn-dark btn-md-2">
+          <i class="fa-solid fa-chevron-left me-2"></i> Back
+        </div>
+      </a>
+      <a href="{% url 'core:main_dashboard' %}">
+        <div class="btn btn-dark">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </div>
+      </a>
+      <a href="{% url 'core:join_driver' %}">
+        <div class="btn btn-dark">
+          <i class="fa fa-add me-2"></i> join As Driver
+        </div>
+      </a>
     </div>
-  </a>
-  <a href="{% url 'core:main_dashboard' %}">
-    <div class="btn btn-dark">
-      <i class="fa-solid fa-chart-line"></i> Dashboard
-    </div>
-  </a>
-  <a href="{%url 'core:join_driver' %}">
-    <div class="btn btn-dark">
-      <i class="fa fa-add me-2"></i> join As Driver
-    </div>
-  </a>
-</section>
+  </section>
 {% endblock content %}

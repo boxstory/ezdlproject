@@ -1,83 +1,41 @@
 {% load static %}
-
-
-
 <div class="d-none d-md-flex flex-column flex-shrink-0 p-3 text-white bg-dark col-2">
-    <a
-        href="{% url 'business:profile_business' 3 %}"
-        class="fw-bold fs-3 text-center mb-3 mb-md-0 me-md-auto ms-auto text-white text-decoration-none"
-    >
-
-
-        {{business.business_business_name}}
-
-    </a>
-    <hr>
-
-    <div
-        class=" navbar-collapse sidebar"
-        id="navbarNav2"
-    >
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'fleet:fleet_dashboard' %}"
-                >
-                    Dashboard
-                </a>
-            </li>
-            <hr>
-            <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'delivery:assigned_tasks' %}"
-                >
-                    Assigned Jobs
-                </a>
-            </li>
-            <hr>
-            <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'delivery:all_delivery_tasks' %}"
-                >
-                    All Tasks List
-                </a>
-            </li>
-            <hr>
-            <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'fleet:vehicle_own'  %}"
-                >
-                    Vehicle Details
-                </a>
-            </li>
-            <hr>
-            <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="#"
-                >
-                    FollowUp List
-
-                </a>
-            </li>
-            <hr>
-            <li class="nav-item">
-                <a
-                    class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
-                    href="{% url 'fleet:driver_documents' %}"
-                >
-                    Documents
-
-                </a>
-            </li>
-            <hr>
-        </ul>
-    </div>
+  <a href="{% url 'business:profile_business' 3 %}"
+     class="fw-bold fs-3 text-center mb-3 mb-md-0 me-md-auto ms-auto text-white text-decoration-none">
+    {{ business.business_business_name }}
+  </a>
+  <hr />
+  <div class="navbar-collapse sidebar" id="navbarNav2">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+           href="{% url 'fleet:fleet_dashboard' %}">Dashboard</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+           href="{% url 'delivery:assigned_tasks' %}">Assigned Jobs</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+           href="{% url 'delivery:all_delivery_tasks' %}">All Tasks List</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+           href="{% url 'fleet:vehicle_own' %}">Vehicle Details</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark" href="#">FollowUp List</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-3 btn-dark my-2 btn btn-outline-dark"
+           href="{% url 'fleet:driver_documents' %}">Documents</a>
+      </li>
+      <hr />
+    </ul>
+  </div>
 </div>
-{% block extra_js %}
-<script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>{% endblock %}

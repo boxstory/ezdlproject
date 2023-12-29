@@ -1,25 +1,14 @@
-{% extends "fleet/fleet_dashboard.html" %}
+{% extends "fleet_dashboard_base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
-
-{% block title %} FLEET DASHBOARD
-{% endblock title %}
-{% block extra_css %}
-{% endblock extra_css %}
-
-{% block widget %}
-<h1> driver document delete</h1>
-<div class="p-3">
-    {{document.id}}
-    {{document.qid_no}}
-
-
-</div>
-<!-- delete link neeeds to setup later ********************************************************* -->
-<a href="">
+{% block content %} <div class="flex-fill p-2">
+  <h1>driver document delete</h1>
+  <div class="p-3">{{ document.id }} {{ document.qid_no }}</div>
+  <!-- delete link neeeds to setup later ********************************************************* -->
+  <a href="">
     <div class="btn btn-dark">
-        <i class="fa fa-add"></i> driver_documents_upload
+      <i class="fa fa-add"></i> driver_documents_upload
     </div>
-</a>
-{% endblock widget %}
+  </a>
+</div>
+{% endblock content %}

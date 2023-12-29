@@ -4,15 +4,13 @@ from product import models as product_models
 # Register your models here.
 
 
-@admin.register(product_models.ItemSku)
-class Item_skuAdmin(admin.ModelAdmin):
-    list_display = ('item_sku', 'color', 'size', 'unit', 'item_price')
+
 
 
 @admin.register(product_models.Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('item_name', 'item_sku', 'business',
-                    'product_category', 'inventory')
+                    'product_category')
 
 
 @admin.register(product_models.ProductInventory)

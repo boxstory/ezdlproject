@@ -1,0 +1,169 @@
+{% load static %}
+{% block extra_css %}
+{% endblock extra_css %}
+<div class="min-vh-100 d-none d-md-flex flex-column flex-shrink-0 p-3 bg-light col-md-2 the-sidebar">
+  <div class="text-center fw-bold">
+    <a class="nav-link p-3 my-0 btn btn-outline-dark"
+       href="{% url 'fleet:fleet_dashboard' %}">Fleet Dashboard {{ request.resolver_match.url_name }}</a>
+  </div>
+  <hr />
+  <div class="navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto text-center">
+      <li class="nav-item"></li>
+      <li class="nav-item {% if request.resolver_match.url_name == 'assigned_tasks' or request.resolver_match.url_name == 'all_delivery_tasks' %}active{% endif %}">
+        <a class="nav-link  flex-fill "
+           data-bs-toggle="collapse"
+           data-bs-target="#submenu-deliveries"
+           href="{% url 'fleet:fleet_dashboard' %}">
+          <div class="nav-link btn btn-outline-dark collapsed d-flex justify-content-evenly align-items-center py-3">
+            <i class="fa-solid fa-box-open p-2"></i>
+            Deliveries<i class="flex-fill fa-solid fa-caret-down ps-1"></i>
+          </div>
+        </a>
+        <div class="multi-level collapse bg-white rounded-3"
+             role="list"
+             id="submenu-deliveries"
+             aria-expanded="false">
+          <ul class="flex-column nav text-black">
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'delivery:assigned_tasks' %}"> <i class="fa-solid fa-spinner my-2 pt-1 pe-2"></i>Assigned Jobs</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'delivery:all_delivery_tasks' %}"> <i class="fa-solid fa-hourglass-half my-2 pt-1 pe-2"></i>All Tasks List</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'delivery:assigned_tasks' %}"> <i class="fa-solid fa-check my-2 pt-1 pe-2"></i>Accepted List</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'delivery:assigned_tasks' %}"> <i class="fa-solid fa-road my-2 pt-1 pe-2"></i>InTransit</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'delivery:assigned_tasks' %}"> <i class="fa-solid fa-xmark my-2 pt-1 pe-2"></i>UnSuccesful</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item {% if request.resolver_match.url_name == 'product_list' or request.resolver_match.url_name == 'product_add' %}active{% endif %}">
+        <a class="nav-link  flex-fill "
+           data-bs-toggle="collapse"
+           data-bs-target="#submenu-accounts"
+           href="{% url 'fleet:fleet_dashboard' %}">
+          <div class="nav-link btn btn-outline-dark collapsed d-flex justify-content-evenly align-items-center py-3">
+            <i class="fa-solid fa-box-open p-2"></i>
+            Accounts<i class="flex-fill fa-solid fa-caret-down ps-1"></i>
+          </div>
+        </a>
+        <div class="multi-level collapse bg-white rounded-3"
+             role="list"
+             id="submenu-accounts"
+             aria-expanded="false">
+          <ul class="flex-column nav text-black ps-2">
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'fleet:fleet_dashboard' %}"><i class="fa-solid fa-bars my-2 pt-1 pe-2"></i>Total CODs</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'fleet:fleet_dashboard' %}"> <i class="fa-solid fa-add my-2 pt-1 pe-2"></i>Total DLs</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'fleet:fleet_dashboard' %}"> <i class="fa-solid fa-layer-group my-2 pt-1 pe-2"></i>All Accounts</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'fleet:fleet_dashboard' %}"> <i class="fa-solid fa-layer-group my-2 pt-1 pe-2"></i>Trnsactions</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item {% if request.resolver_match.url_name == 'product_list' or request.resolver_match.url_name == 'product_add' %}active{% endif %}">
+        <a class="nav-link  flex-fill "
+           data-bs-toggle="collapse"
+           data-bs-target="#submenu-documents"
+           href="{% url 'fleet:fleet_dashboard' %}">
+          <div class="nav-link btn btn-outline-dark collapsed d-flex justify-content-evenly align-items-center py-3">
+            <i class="fa-solid fa-box-open p-2"></i>
+            Documents<i class="flex-fill fa-solid fa-caret-down ps-1"></i>
+          </div>
+        </a>
+        <div class="multi-level collapse bg-white rounded-3"
+             role="list"
+             id="submenu-documents"
+             aria-expanded="false">
+          <ul class="flex-column nav text-black ps-2">
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'fleet:fleet_dashboard' %}"><i class="fa-solid fa-bars my-2 pt-1 pe-2"></i>ID Cards</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex btn btn-outline-dark nav-link justify-content-start ps-3 p-0">
+                <a class="nav-link flex-fill p-0 py-2 text-start"
+                   href="{% url 'fleet:fleet_dashboard' %}"><i class="fa-solid fa-add my-2 pt-1 pe-2"></i>Vehicels</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'product:product_inventory' %}">
+          <div class="d-flex btn btn-outline-dark nav-link justify-content-start">
+            <span class="pt-1"> <i class="fa-solid fa-chart-bar m-2 pe-2 pb-1"></i>Inventory Report</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'business:driver_directory' %}">
+          <div class="d-flex btn btn-outline-dark nav-link justify-content-start">
+            <i class="fa-solid fa-address-book m-2 pe-2 pb-1"></i>
+            <span class="pt-1">Fleet List</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'business:pickup_location_list' %}">
+          <div class="d-flex btn btn-outline-dark nav-link justify-content-start">
+            <i class="fa-solid fa-store m-2 pe-2 pb-1"></i>
+            <span class="pt-1">Stores</span>
+          </div>
+        </a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link"
+           href="{% url 'business:profile_business' request.user.profile.id %}">
+          <div class="d-flex btn btn-outline-dark nav-link justify-content-start">
+            <i class="fa-solid fa-store m-2 pe-2 pb-1"></i>
+            <span class="pt-1">Business Profile</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

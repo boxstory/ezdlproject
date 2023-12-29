@@ -1,33 +1,13 @@
-{% extends "client/business_dashboard.html" %}
+{% extends "dashboard_base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-
-
-
-
-
-
 <!-- extra css -->
 {% block extra_css %}
-<link
-    href="{% static 'orders/css/orders_main.css' %}"
-    rel="stylesheet"
-    type="text/css"
->
+  <link href="{% static 'orders/css/orders_main.css' %}"
+        rel="stylesheet"
+        type="text/css" />
 {% endblock extra_css %}
-
-
-{% block widget %}
-
-<!-- {% include "orders/parts/orders_list.html" %} -->
-
-{% include "orders/parts/orders_list.html" %}
-
-
-<!-- bootstap card ---------------------- -->
-
-
-
-
-
-{% endblock widget %}
+{% block content %}
+  <!-- orders_list.html -->
+  {% include "orders/parts/orders_list.html" %}
+{% endblock content %}

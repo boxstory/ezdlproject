@@ -66,7 +66,11 @@ class UnitVariant(models.Model):
         verbose_name_plural = "Unit Variants"
 
 
-class ItemSku(models.Model):
+
+
+
+class Product(models.Model):
+    item_name = models.CharField(max_length=100)
     item_sku = models.CharField(max_length=100)
     color = models.ForeignKey(
         ColorVariant, on_delete=models.SET_NULL, null=True, blank=True)
@@ -77,23 +81,25 @@ class ItemSku(models.Model):
     item_price = models.PositiveIntegerField(_("Price"), default=0)
     image = models.ImageField(
         upload_to='product_images', null=True, blank=True, default="product_images/default.jpg")
+    business = models.ForeignKey(
+        business_models.Business, on_delete=models.SET_NULL, null=True, related_name='product')
+    product_category = models.ForeignKey(
+        product_models.ProductCategory, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    business = models.ForeignKey(
-        business_models.Business, on_delete=models.SET_NULL, null=True, related_name='item_skus')
-
     def __str__(self):
-        return self.item_sku
-
+        return self.item_name
 
     class Meta:
-        verbose_name_plural = "Item SKUs"
+        verbose_name_plural = "item_name"
+
+
 
 
 class ProductInventory(models.Model):
     item_sku = models.ForeignKey(
-        product_models.ItemSku, on_delete=models.SET_NULL, null=True, related_name='product_inventory')
+        product_models.Product, on_delete=models.SET_NULL, null=True, related_name='product_inventory')
     item_quantity = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -103,26 +109,6 @@ class ProductInventory(models.Model):
 
     class Meta:
         verbose_name_plural = "Product Inventory"
-
-
-class Product(models.Model):
-    item_name = models.CharField(max_length=100)
-    item_sku = models.ForeignKey(
-        ItemSku, on_delete=models.SET_NULL, null=True)
-    business = models.ForeignKey(
-        business_models.Business, on_delete=models.SET_NULL, null=True, related_name='product')
-    product_category = models.ForeignKey(
-        product_models.ProductCategory, on_delete=models.SET_NULL, null=True)
-    inventory = models.ForeignKey(
-        product_models.ProductInventory, on_delete=models.SET_NULL, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.item_name
-
-    class Meta:
-        verbose_name_plural = "item_name"
 
 
 class services(models.Model):

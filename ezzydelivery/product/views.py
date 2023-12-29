@@ -54,7 +54,7 @@ def product_update(request, product_id):
 def product_sku_list(request):
     business=business_models.Business.objects.get(user_id=request.user.id)
     print(business)
-    skus = product_models.ItemSku.objects.filter(
+    skus = product_models.Product.objects.filter(
         business_id=business)
 
     data = {
@@ -94,7 +94,7 @@ def product_sku_delete(request, sku_id):
 
 
 
-def product_inventory(request, sku_id):
+def product_inventory(request):
     data = {
 
     }
