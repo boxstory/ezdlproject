@@ -85,7 +85,7 @@ def driver_documents_upload(request, fleet_id):
             f = form.save(commit=False)
             f.driver_id = driver.driver_id
             f.save()
-            return redirect('/fleet/dashboard/')
+            return redirect('/fleet/documents/')
     else:
         form = fleet_forms.DriverDocumentForm()
         context = {
@@ -111,7 +111,7 @@ def driver_documents_update(request, fleet_id, doc_id):
             f = form.save(commit=False)
             f.driver_id = driver.driver_id
             f.save()
-            return redirect('/fleet/dashboard/')
+            return redirect('/fleet/documents/')
     else:
         form = fleet_forms.DriverDocumentForm(instance=document)
         context = {
@@ -129,7 +129,7 @@ def driver_documents_delete(request, fleet_id, doc_id):
     print('fleet', driver.driver_id)
     document = fleet_models.DriverDocument.objects.filter(id=doc_id)
     document.delete()
-    return redirect('/fleet/dashboard/')
+    return redirect('/fleet/documents/')
 
 
 # vehicle---------------------------------------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ def vehicle_add(request):
             f = form.save(commit=False)
             f.driver_id = driver.driver_id
             f.save()
-            return redirect('/dashboard/')
+            return redirect('/fleet/vehicle_own/')
     else:
         form = fleet_forms.DriverVehicleForm()
         context = {
@@ -172,7 +172,7 @@ def vehicle_delete(request, fleet_id, vehicle_id):
         return redirect('/fleet/vehicles/')
     vehicle = fleet_models.DriverVehicle.objects.filter(id=vehicle_id)
     vehicle.delete()
-    return redirect('/dashboard/')
+    return redirect('/fleet/vehicle_own/')
 
 
 def vehicle_update(request, vehicle_id):
@@ -193,7 +193,7 @@ def vehicle_update(request, vehicle_id):
 
             f.save()
 
-        return redirect('/fleet/dashboard/')
+        return redirect('/fleet/vehicle_own/')
 
     form = fleet_forms.DriverVehicleForm(instance=driver_vehicle)
     context = {

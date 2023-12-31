@@ -3,8 +3,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <div class="flex-fill p-2">
+    <div class=" h4 p-3">All Tasks lists</div>
     <div class="table-responsive">
-      <table class="table table-striped table-hover my-3 fw-lighter">
+      <table class="table table-striped table-hover  fw-lighter">
         <tr>
           <th>
             Date &
@@ -16,7 +17,7 @@
             <p>End -Dropoff</p>
           </th>
           <th>
-            <p>Task Status</p>
+            <p>PickUp Status</p>
             <p>Assigned</p>
           </th>
           <th></th>
@@ -43,7 +44,7 @@
                data-bs-target="#collapse-{{ card.id }}"
                aria-expanded="false"
                aria-controls="collapse-{{ card.id }}"
-               class="bg-light btn py-5 text-center"><i class="fa-solid fa-angles-right text-secondary"></i>
+               class="bg-light btn  text-center"><i class="fa-solid fa-angles-right text-secondary"></i>
           </a>
         </td>
       </tr>
