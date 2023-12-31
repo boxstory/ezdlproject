@@ -15,12 +15,17 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 @admin.register(business_models.Business)
-class businessAdmin(admin.ModelAdmin):
-    list_display = ('business_business_name', 'business_phone', 'business_whatsapp',
+class BusinessAdmin(admin.ModelAdmin):
+    list_display = ('business_name', 'business_phone', 'business_whatsapp',
                     'brand_name', 'brand_since', 'brand_product_category', 'business_code', 'created_at', 'updated_at')
     list_filter = ('created_at', 'updated_at')
     list_per_page = 10
 
+@admin.register(business_models.BusinessLogo)
+class BusinessLogoAdmin(admin.ModelAdmin):
+    list_display = ('business', 'business_logo', 'created_at', 'updated_at')
+    list_filter = ('business', 'created_at', 'updated_at')
+    list_per_page = 10
 
 @admin.register(business_models.PickupLocation)
 class PickupLocationAdmin(admin.ModelAdmin):

@@ -24,12 +24,10 @@ class Business(models.Model):
     profile = models.ForeignKey(
         core_models.Profile, on_delete=models.SET_NULL, blank=True, null=True, related_name='business')
     business_id = models.PositiveIntegerField(primary_key=True)
-    business_business_name = models.CharField(
+    business_name = models.CharField(
         max_length=100, blank=True, null=True)
     business_bio = models.CharField(max_length=225, blank=True, null=True)
     business_phone = models.CharField(max_length=100, blank=True, null=True)
-    business_logo = models.ImageField(
-        upload_to=upload_path_handler, default="business/avatar.png", blank=True, null=True)
     business_whatsapp = models.CharField(
         max_length=100, blank=True, null=True)
     brand_name = models.CharField(max_length=100)
@@ -53,6 +51,22 @@ class Business(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class BusinessLogo(models.Model):
+    business = models.ForeignKey(
+        Business, on_delete=models.CASCADE, blank=True, null=True, related_name='business_logo')
+    business_logo = models.ImageField(
+        upload_to=upload_path_handler, default="business/avatar.png", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name_plural = "Business Logo"
+
+    def __str__(self):
+        return str(self.business)
+
 
 # @todo: link staff profile with business
 

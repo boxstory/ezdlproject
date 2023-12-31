@@ -13,7 +13,7 @@ BUSINESS
 >
     <h2 class="text-center  fw-bolder bg-light py-3 m-0"> BUSINESS Details Update</h2>
     <div class="container ">
-        <form method="POST">
+        <form method="POST"  enctype="multipart/form-data">
             {% csrf_token %}
             {{form|crispy}}
             <div class=" text-end d-block justify-content-evenly">

@@ -4,178 +4,144 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block title %}
-BUSINESS {{business.brand_name}}
+    BUSINESS {{ business.brand_name }}
 {% endblock title %}
 {% block content %}
-<h2 class="text-center  fw-bolder bg-light py-3 m-0 w-100"> BUSINESS Profile {{profile.id}}{{business.business_id}}
-
     {% if profile.id == business.business_id %}
-    <a
-        type="submit"
-        class="btn btn-dark w-100 w-md-50"
-        href="{% url 'business:business_profile_update'  business.business_id %}"
-    >
-        Update Business
-    </a>
+        <div class="d-flex justify-content-end px-3 m-3 bg-light">
+            <h2 class="fw-bolder w-100 my-3">BUSINESS Profile {{ profile.id }}</h2>
+            <a type="submit"
+               class="btn btn-dark m-2 w-25 py-3"
+               href="{% url 'business:business_profile_update'  business.business_id %}">Update Info</a>
+            <a type="submit"
+               class="btn btn-dark m-2 w-25 py-3"
+               href="{% url 'business:business_profile_update'  business.business_id %}">Update Logo</a>
+        </div>
+    {% else %}
+        <div class="d-flex justify-content-end px-3 m-3 bg-light">
+            <h2 class=" text-center fw-bolder w-100 my-3">Business Profile</h2>
+        </div>
     {% endif %}
-
-
-</h2>
-
-<!--frontend business Profile pge section -->
-<section
-    class="section about-section my-3"
-    id="about"
->
-    <div class="container">
-        <div class="row align-items-center flex-row-reverse my-4">
-            <div class="col-md-6 order-2 order-md-1">
-                <div class="about-text go-to">
-                    <h3 class="dark-color">{{business.business_business_name}}
-                        ({{business.business_code}})</h3>
-                    <h6 class="theme-color lead">
-                        {% if profile.is_driver == True %}
-
-                        <b>Driver</b>
-
-                        {% elif profile.is_business == True %}
-                        <b>BUSINESS</b>
+    <!--frontend business Profile pge section -->
+    <section class="section about-section my-3" id="about">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse my-4">
+                <div class="col-md-6 order-2 order-md-1">
+                    <div class="about-text go-to">
+                        <h3 class="dark-color">{{ business.business_name }} ({{ business.business_code }})</h3>
+                        <h6 class="theme-color lead">
+                            {% if profile.is_driver == True %}
+                                <b>Driver</b>
+                            {% elif profile.is_business == True %}
+                                <b>BUSINESS</b>
+                            {% else %}
+                                <b>User</b>
+                            {% endif %}
+                        </h6>
+                        <p>Bio: {{ business.business_bio }}</p>
+                        <div class="row about-list">
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>Category</label>
+                                    <p>{{ business.brand_product_category }}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Store Products</label>
+                                    <p>{{ profile.brand_name }}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Address</label>
+                                    <p>{{ business.address }}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Phone</label>
+                                    <p>{{ business.business_phone }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>E-mail</label>
+                                    <p>{{ profile.email }}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Since</label>
+                                    <p>{{ business.brand_since }}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Store Location</label>
+                                    <a href="{% url 'business:pickup_location_list' %}"><i class="fa-solid fa-location-plus"></i></a>
+                                    {% for loc in location %}<p>{{ forloop.counter }}: {{ loc }}</p>{% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-0 order-md-2 mb-3">
+                    <div class="d-flex justify-content-center p-3">
+                        {% if business_logo %}
+                            <img src="{{ business_logo.business_logo.url }}"
+                                 alt=""
+                                 class="img-fluid text-center" />
                         {% else %}
-                        <b>User</b>
+                            <img src="/media/business/avatar.png"
+                                 title=""
+                                 alt=""
+                                 class="img-fluid text-center" />
                         {% endif %}
-                    </h6>
-
-
-
-                    <p>Bio: {{business.business_bio}}</p>
-                    <div class="row about-list">
-                        <div class="col-md-6">
-
-                            <div class="media">
-                                <label>Category</label>
-                                <p>{{business.brand_product_category}}</p>
-                            </div>
-                            <div class="media">
-                                <label>Store Products</label>
-                                <p>{{profile.brand_name}}</p>
-                            </div>
-                            <div class="media">
-                                <label>Address</label>
-                                <p>{{business.address}}</p>
-                            </div>
-
-                            <div class="media">
-                                <label>Phone</label>
-                                <p>{{business.business_phone}}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="media">
-                                <label>E-mail</label>
-                                <p>{{profile.email}}</p>
-                            </div>
-
-
-                            <div class="media">
-                                <label>Since</label>
-                                <p>{{business.brand_since}}</p>
-                            </div>
-                            <div class="media">
-                                <label>Store Location</label><a href="{% url 'business:pickup_location_list' %}"><i
-                                        class="fa-solid fa-location-plus"
-                                    ></i></a>
-                                {% for loc in location %}
-
-
-                                <p>{{forloop.counter}}: {{loc}}</p>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-
+                    </div>
+                    <div class="d-flex justify-content-evenly p-3 bg-light">
+                        <a href="https://www.facebook.com/{{ business.brand_facebook_page }}"
+                           target="_blank"><i class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
+                        <a href="https://wa.me/974{{ business.business_whatsapp }}"
+                           target="_blank"><i class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"></i></a>
+                        <a href="https://www.instagram.com/{{ business.brand_instagram }}"
+                           target="_blank"><i class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 order-0 order-md-2 mb-3">
-                <div class="d-flex justify-content-center p-3">
-                    {% if business.business_logo %}
-                    <img
-                        src="{{business.business_logo.url}}"
-                        alt=""
-                        class=" img-fluid text-center"
-                    />
-                    {% else %}
-                    <img
-                        src="/media/business/avatar.png"
-                        title=""
-                        alt=""
-                        class=" img-fluid text-center"
-                    >
-                    {% endif %}
-                </div>
-                <div class="d-flex justify-content-evenly p-3 bg-light">
-                    <a href="{{business_social_info.facebook}}"><i
-                            class="fa-brands fa-facebook fa-2xl me-3 text-dark"></i></a>
-                    <a href="http://wa.me/974{{business_social_info.whatsapp}}"><i
-                            class="fa-brands fa-whatsapp fa-2xl me-3 text-dark"
-                        ></i></a>
-                    <a href="{{business_social_info.instagram}}"><i
-                            class="fa-brands fa-instagram fa-2xl text-dark"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6 col-lg-3">
-                <div class="count-data text-center">
-                    <h6
-                        class="count h2"
-                        data-to="500"
-                        data-speed="500"
-                    >200</h6>
-                    <p class="m-0px font-w-600">Tasks Listed</p>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="count-data text-center">
-                    <h6
-                        class="count h2"
-                        data-to="150"
-                        data-speed="150"
-                    >170</h6>
-                    <p class="m-0px font-w-600">Tasks Completed</p>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="count-data text-center">
-                    <h6
-                        class="count h2"
-                        data-to="850"
-                        data-speed="850"
-                    >2</h6>
-                    <p class="m-0px font-w-600">Products</p>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="count-data text-center">
-                    <h6
-                        class="count h2"
-                        data-to="190"
-                        data-speed="190"
-                    >68 (M)</h6>
-                    <p class="m-0px font-w-600">Running</p>
-                </div>
-            </div>
-
             <div class="row">
-                <div class="media">
-                    {% if profile.is_business == True %}
-                    <p>Brand Photos</p>
-                    {% endif %}
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="500" data-speed="500">200</h6>
+                        <p class="m-0px font-w-600">Tasks Listed</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="150" data-speed="150">170</h6>
+                        <p class="m-0px font-w-600">Tasks Completed</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="850" data-speed="850">2</h6>
+                        <p class="m-0px font-w-600">Products</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="190" data-speed="190">68 (M)</h6>
+                        <p class="m-0px font-w-600">Running</p>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="media">
+                        <h1>Instagram Feed</h1>
+                        <div id="instafeed-container"></div>
+                        <script src="https://cdn.jsdelivr.net/gh/stevenschobert/instafeed.js@2.0.0rc1/src/instafeed.min.js"></script>
+                        <script type="text/javascript">
+	var userFeed = new Instafeed({
+		get: 'user',
+		target: "instafeed-container",
+    	resolution: 'low_resolution',
+		accessToken: '{{instakey}}'
+	});
+	userFeed.run();
+	
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 {% endblock content %}

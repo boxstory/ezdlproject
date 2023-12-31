@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from decouple import config
 
 from client import models as business_models
 from core import models as core_models
@@ -169,18 +169,21 @@ def profile_business(request, business_id):
         profile = core_models.Profile.objects.get(user_id=request.user.id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
-        business_social_info = business_models.BusinessSocialInfo.objects.filter(
-            business_id=business_id)
+        business_logo = business_models.BusinessLogo.objects.get(
+            business_id=business.business_id)
+        instakey = config("INSTAGRAM_TOKEN_FEEDS_KEY")
         print(business)
         print(profile)
         print(location)
-        print(business_social_info)
+        print(business.business_id)
+        print(business_logo.business_logo)
 
         context = {
             'profile': profile,
             'business': business,
             'location': location,
-            'business_social_info': business_social_info,
+            'business_logo': business_logo,
+            'instakey': instakey,
         }
         return render(request, 'client/frontend/profile_business.html', context)
     except business_models.Business.DoesNotExist:
@@ -194,9 +197,10 @@ def business_profile_update(request, business_id):
         redirect('core:main_dashboard')
         print('business_profile_update', business_id)
         print('request.user.id', request.user.id)
-        business = get_object_or_404(
-            business_models.Business, business_id=business_id)
-        print('business')
+        business =  business_models.Business.objects.filter(business_id=business_id)
+        print('business', business)
+        business = get_object_or_404(business_models.Business, business_id=business_id)
+        print('business', business)
         form = business_forms.businessRegisterForm(instance=business)
         print('form')
         if request.method == 'POST':
@@ -229,6 +233,6 @@ def business_profile_update(request, business_id):
 def all_business(request):
     business = business_models.Business.objects.all()
     context = {
-        'business': business,
+        'all_business': business,
     }
     return render(request, 'client/frontend/all_business.html', context)

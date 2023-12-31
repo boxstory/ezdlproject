@@ -43,7 +43,7 @@ class businessRegisterForm(forms.ModelForm):
 
         }
         labels = {
-            "business_business_name": "business Name",
+            "business_name": "business Name",
             "business_phone": "business Phone No",
             "business_whatsapp": "business Whatsapp No",
             "brand_name": "Brand Lists",
