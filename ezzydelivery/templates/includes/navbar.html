@@ -44,6 +44,7 @@
                   <div class="nav-link btn  collapsed d-flex justify-content-evenly align-items-center p-1"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
+                    {% comment %} #@todo add prodile pic {% endcomment %}
                     <img src="{% static 'webpages/img/avatar.png' %}"
                          class="p-1"
                          alt=""
@@ -76,38 +77,43 @@
                   </ul>
                 </div>
               {% else %}
-                <div class="btn-group" role="group">
-                  <button id="btnGroupDrop1"
-                          type="button"
-                          class="btn btn-outline-dark fw-bold dropdown-toggle btn-light"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false">
+                <div class="btn-group d-flex" role="group">
+                  <div class="nav-link btn  collapsed d-flex justify-content-evenly align-items-center p-1"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
                     {% comment %} #@todo add prodile pic {% endcomment %}
                     <img src="{% static 'webpages/img/avatar.png' %}"
+                         class="p-1"
                          alt=""
-                         width="30"
-                         height="25"
-                         title="join" />
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end ms-3 border-1 text-center"
+                         width="50"
+                         height="48"
+                         title="{{ user.username }}" />
+                    <p class=" my-0 text-start  d-md-none px-4">{{ user.username }}</p>
+                    <i class=" fa-solid fa-caret-down pe-2"></i>
+                  </div>
+                  <ul class="dropdown-menu   dropdown-menu-end ms-3 border-0  text-center"
+                      style="width:15rem"
                       aria-labelledby="btnGroupDrop1">
-                    <li class="nav-item">
-                      <a class="btn btn-outline-dark fw-bold me-2 my-1"
+                    <li>
+                      <a class="nav-link active border-bottom-1 border-2"
                          aria-current="page"
                          href="{% url 'account_login' %}">Log In</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="btn btn-outline-dark fw-bold me-2 my-1"
+                    <hr class="p-0 m-0">
+                    <li>
+                      <a class="nav-link active"
                          aria-current="page"
                          href="{% url 'account_signup' %}">Sign Up</a>
                     </li>
                   </ul>
                 </div>
-              {% endif %}
+              </ul>
             </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
 </div>
