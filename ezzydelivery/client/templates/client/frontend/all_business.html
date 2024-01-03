@@ -27,7 +27,7 @@
                   {{ business.business_languages }}
                 </h6>
               </div>
-              <h6 >
+              <h6>
                 <span class="fw-bold">Category :</span>
                 {{ business.brand_product_category }}
               </h6>
@@ -42,14 +42,16 @@
                    class="btn btn-dark btn-sm">More</a>
               </div>
             </div>
+            {{ business.business_logo }}
             <div class="col-4">
               {% if business.business_logo %}
                 <img src="{{ business.business_logo.url }}"
                      alt=""
+                     title="{{ business.brand_name }}"
                      class="img-fluid text-center" />
               {% else %}
                 <img src="/media/business/avatar.png"
-                     title=""
+                     title="{{ business.brand_name }}"
                      alt=""
                      class="img-fluid text-center" />
               {% endif %}

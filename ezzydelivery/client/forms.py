@@ -66,3 +66,9 @@ class DriverDirectoryAddForm(forms.ModelForm):
         model = business_models.DriverDirectory
         fields = '__all__'
         exclude = ['business', 'updated_at', 'created_at']
+
+class BusinessLogoForm(forms.ModelForm):
+    class Meta:
+        model = business_models.BusinessLogo
+        fields = '__all__'
+        exclude = ['business', 'updated_at', 'created_at']

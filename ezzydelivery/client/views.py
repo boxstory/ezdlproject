@@ -166,17 +166,18 @@ def profile_business(request, business_id):
     try:
         business = business_models.Business.objects.get(
             business_id=business_id)
-        profile = core_models.Profile.objects.get(user_id=request.user.id)
+        profile = core_models.Profile.objects.filter(user_id=request.user.id)
         location = business_models.PickupLocation.objects.filter(
             business_id=business.business_id).values_list('pickup_location_title', flat=True)
+        print("business_id = %s" % business_id)
         business_logo = business_models.BusinessLogo.objects.get(
-            business_id=business.business_id)
+            business_id=business_id)
         instakey = config("INSTAGRAM_TOKEN_FEEDS_KEY")
         print(business)
         print(profile)
         print(location)
         print(business.business_id)
-        print(business_logo.business_logo)
+        print(business_logo)
 
         context = {
             'profile': profile,
@@ -232,7 +233,33 @@ def business_profile_update(request, business_id):
 
 def all_business(request):
     business = business_models.Business.objects.all()
+    
+
     context = {
         'all_business': business,
     }
     return render(request, 'client/frontend/all_business.html', context)
+
+
+def business_logo_update(request , business_id):
+    business =  business_models.Business.objects.filter(business_id=business_id).first()
+    form = business_forms.BusinessLogoForm(instance=business)
+    if request.method == 'POST':
+            print('BusinessLogoForm')
+            form = business_forms.BusinessLogoForm(
+                request.POST, request.FILES, instance=business)
+            if form.is_valid():
+                f = form.save(commit=False)
+                print('f.user')
+
+                print(f.user)
+
+                form.save()
+                print('ok')
+                messages.success(request, "Successful Submission")
+                return redirect("business:all_business")
+
+    context = {
+        'business': business,
+    }
+    return render(request, 'client/parts/business_logo_update.html', context)

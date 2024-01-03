@@ -7,7 +7,7 @@
     BUSINESS {{ business.brand_name }}
 {% endblock title %}
 {% block content %}
-    {% if profile.id == business.business_id %}
+    {% if request.user.id == business.business_id %}
         <div class="d-flex justify-content-end px-3 m-3 bg-light">
             <h2 class="fw-bolder w-100 my-3">BUSINESS Profile {{ profile.id }}</h2>
             <a type="submit"
@@ -15,7 +15,7 @@
                href="{% url 'business:business_profile_update'  business.business_id %}">Update Info</a>
             <a type="submit"
                class="btn btn-dark m-2 w-25 py-3"
-               href="{% url 'business:business_profile_update'  business.business_id %}">Update Logo</a>
+               href="{% url 'business:business_logo_update'  business.business_id %}">Update Logo</a>
         </div>
     {% else %}
         <div class="d-flex justify-content-end px-3 m-3 bg-light">
@@ -30,13 +30,7 @@
                     <div class="about-text go-to">
                         <h3 class="dark-color">{{ business.business_name }} ({{ business.business_code }})</h3>
                         <h6 class="theme-color lead">
-                            {% if profile.is_driver == True %}
-                                <b>Driver</b>
-                            {% elif profile.is_business == True %}
-                                <b>BUSINESS</b>
-                            {% else %}
-                                <b>User</b>
-                            {% endif %}
+                            <b>BUSINESS</b>
                         </h6>
                         <p>Bio: {{ business.business_bio }}</p>
                         <div class="row about-list">

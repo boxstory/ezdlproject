@@ -28,6 +28,8 @@ urlpatterns = [
     path('all', business_views.all_business, name='all_business'),
     path('<int:business_id>/update/', business_views.business_profile_update,
          name='business_profile_update'),
+    path('logo/<int:business_id>/update/',
+         business_views.business_logo_update, name='business_logo_update'),
 
     # driver_directory
     path('driver_directory/', business_views.driver_directory,
