@@ -122,9 +122,9 @@ def privacy(request):
     return render(request, 'webpages/privacy.html', data)
 
 
-def page_not_found(request, exception):
+def handler404(request, exception):
     return render(request, 'webpages/page_not_found.html', status=404)
 
 
-def server_error(request):
+def handler500(request):
     return render(request, 'webpages/server_error.html', status=500)

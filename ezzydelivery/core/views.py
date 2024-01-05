@@ -294,6 +294,7 @@ def profile_view(request):
     user_id = request.user.id
     if core_models.Profile.objects.filter(user_id=user_id).exists():
         # pk = request.user.id
+        
 
         return redirect('core:profile', pk=user_id)
     else:
@@ -302,10 +303,16 @@ def profile_view(request):
 
 def profile(request, pk):
     profile = get_object_or_404(core_models.Profile, user_id=request.user.id)
-    profile_picture = core_models.ProfilePicture.objects.get(user=request.user.id)
+    try:
+        profile_picture = core_models.ProfilePicture.objects.get(user=request.user.id)
+        
+    except core_models.ProfilePicture.DoesNotExist:
+        obj = core_models.ProfilePicture(user=request.user,profile_id=request.user.id, profile_picture='core/user/avatar.png')
+        obj.save()
+        profile_picture = core_models.ProfilePicture.objects.get(user_id=request.user.id)
     context = {
+        "profile": profile,
         "profile_picture": profile_picture,
-        "profile": profile
     }
     
     return render(request, 'core/profile.html', context)

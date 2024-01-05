@@ -31,8 +31,8 @@ urlpatterns = [
 
 ]
 
-handler404 = 'webpages.views.page_not_found'
-handler500 = 'webpages.views.server_error'
+handler404 = 'webpages.views.handler404'
+handler500 = 'webpages.views.handler500'
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
