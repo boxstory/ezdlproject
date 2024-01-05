@@ -62,9 +62,9 @@ class Order(models.Model):
     # cod details
     cash_on_delivery = models.BooleanField(default=False)
     cod_status_by_client = models.CharField(
-        max_length=100, choices=COD_STATUS_BY_CLIENT, blank=True)
+        max_length=100, choices=COD_STATUS_BY_CLIENT, blank=True, null=True)
     cod_status_by_staff = models.CharField(
-        max_length=100, choices=COD_STATUS_BY_STAFF, blank=True)
+        max_length=100, choices=COD_STATUS_BY_STAFF, blank=True, null=True)
     cod_amount = models.IntegerField(default=0)
     dl_amount = models.IntegerField(default=0)
     dl_included = models.BooleanField(default="True")

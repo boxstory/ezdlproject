@@ -9,8 +9,13 @@ from core import models as core_models
 @admin.register(core_models.Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'email',
-                    'whatsapp', 'is_business', 'is_driver', 'update_time')
-    list_filter = ('is_business', 'is_driver', 'update_time')
+                    'whatsapp', 'is_business', 'is_driver', 'created_at', 'updated_at')
+    list_filter = ('is_business', 'is_driver', 'created_at', 'updated_at')
+    list_per_page = 10
+
+@admin.register(core_models.ProfilePicture)
+class ProfilePictureAdmin(admin.ModelAdmin):
+    list_display = ( 'user', 'profile_picture')
     list_per_page = 10
 
 

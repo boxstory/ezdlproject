@@ -14,7 +14,8 @@ urlpatterns = [
          core_views.profile_update, name='profile_update'),
     path('profile/add/',
          core_views.profile_add, name='profile_add'),
-
+     path('profile/photo/update/',
+         core_views.profile_picture_update, name='profile_picture_update'),
 
     path('dashboard/', core_views.main_dashboard, name='main_dashboard'),
 

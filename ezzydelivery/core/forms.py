@@ -30,17 +30,22 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'email', 'phone', 'address', 'instagram',
-                  'whatsapp', 'zone_name', 'nationlity', 'date_of_birth', 'profile_pic']
+                  'whatsapp', 'zone_name', 'nationlity', 'date_of_birth']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['profile_pic'].required = False
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         self.fields['date_of_birth'].widget = forms.SelectDateWidget(
             years=YEARS)
         self.fields['date_of_birth'].widget.attrs = {
             'class': 'form-control d-flex justify-content-center'}
+
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = ProfilePicture
+        fields = ['profile_picture',]
 
 
 class JoinUsForm(forms.ModelForm):

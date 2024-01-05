@@ -1,18 +1,20 @@
 
 from datetime import timedelta
 from genericpath import exists
+import io
+import os
 import random
 import re
 import string
 from unicodedata import name
 from django.contrib.auth.models import User
-from PIL import Image
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from datetime import datetime
-
+from django.core.files.storage import FileSystemStorage
+from PIL import Image
 
 from core import models as core_models
 from fleet import models as fleet_models
@@ -300,10 +302,12 @@ def profile_view(request):
 
 def profile(request, pk):
     profile = get_object_or_404(core_models.Profile, user_id=request.user.id)
-    context = {}
-    context["profile"] = core_models.Profile.objects.get(
-        user_id=request.user.id)
-
+    profile_picture = core_models.ProfilePicture.objects.get(user=request.user.id)
+    context = {
+        "profile_picture": profile_picture,
+        "profile": profile
+    }
+    
     return render(request, 'core/profile.html', context)
 
 
@@ -365,6 +369,38 @@ def profile_delete(request, pk):
         request, f'Your account details has been Deleted!')
     return redirect('core:profile_update', pk=pk)
 
+
+def profile_picture_update(request):
+    instance = get_object_or_404(core_models.ProfilePicture, user_id=request.user.id)
+    print(instance)
+    form = core_forms.ProfilePictureForm()
+    print(form)
+    if request.method == 'POST':
+            print('ProfilePictureForm')
+            form = core_forms.ProfilePictureForm(
+                request.POST, request.FILES, instance=instance)
+            if form.is_valid():
+                f = form.save(commit=False)
+                f.user_id = request.user.id
+                f.profile_id = request.user.id
+                f.save()
+                # Open the original image using Pillow
+                original_image = Image.open(f.profile_picture.path)
+                print(original_image)
+                filename = f.profile_picture.url.split('/')[-1]
+                print(filename)
+                new_width  = 200
+                new_height = 300
+                img = original_image.resize((new_width, new_height), Image.ANTIALIAS)
+                print(img)
+                img.save(filename)
+                messages.success(request, "Updated Profile Picture")
+                return redirect("core:profile_view")
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'core/parts/profile_picture_update.html', context)
 
 # profile_completion_test ---------------------------------------------------------------------------------------------------------------------
 def profile_completion_test(request, pk):
