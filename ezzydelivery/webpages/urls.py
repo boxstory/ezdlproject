@@ -3,6 +3,9 @@ from webpages import views as webpages_views
 from delivery import views as delivery_views
 from orders import views as orders_views
 from core import views as core_views
+from django.views.generic import TemplateView
+
+
 
 app_name = 'webpages'
 urlpatterns = [
@@ -23,6 +26,7 @@ urlpatterns = [
 
     path('terms/', webpages_views.terms, name='terms'),
     path('test/', webpages_views.test, name='test'),
+    path('500/', TemplateView.as_view(template_name='page_not_found.html')),
 
 
 

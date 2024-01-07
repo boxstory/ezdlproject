@@ -134,6 +134,7 @@ def upload_path_handler(instance, filename):
     return os.path.join(upload_dir, filename)
 
 
+
 class DriverDocument(models.Model):
     driver = models.ForeignKey(
         Driver, on_delete=models.CASCADE, related_name='driver_document')

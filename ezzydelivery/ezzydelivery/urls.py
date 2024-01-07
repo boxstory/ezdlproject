@@ -29,6 +29,8 @@ urlpatterns = [
     path('fleet/', include('fleet.urls', namespace='fleet')),
     path('delivery/', include('delivery.urls', namespace='delivery')),
 
+    
+
 ]
 
 handler404 = 'webpages.views.handler404'

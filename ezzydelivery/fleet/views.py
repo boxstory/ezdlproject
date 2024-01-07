@@ -213,6 +213,7 @@ def vehicle_update(request, vehicle_id):
 def driver_profile(request, fleet_id):
     try:
         driver = fleet_models.Driver.objects.get(driver_id=fleet_id)
+        profile_picture = fleet_models.Driver.objects.get(driver_id=fleet_id)
 
     except fleet_models.Driver.DoesNotExist:
         print('driver does not exist')
@@ -220,7 +221,9 @@ def driver_profile(request, fleet_id):
     print('driver_profile', driver.driver_id)
 
     profile = core_models.Profile.objects.get(user_id=driver.user_id)
-    print(driver)
+    print(driver, ' profile')
+    profile_picture = core_models.ProfilePicture.objects.get(user_id=driver.user_id)
+    print(profile_picture, 'profile picture')
 
     driver_vehicle = driver.driver_vehicle.all()
     print('vehicle id: ', driver_vehicle)
@@ -232,5 +235,6 @@ def driver_profile(request, fleet_id):
         'driver': driver,
         'driver_documents': driver_documents,
         'driver_vehicle': driver_vehicle,
+        'profile_picture' : profile_picture
     }
     return render(request, 'fleet/frontend/driver_profile.html', context)

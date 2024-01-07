@@ -126,6 +126,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'ezzydelivery.urls'
@@ -245,3 +246,6 @@ DEBUG_TOOLBAR_CONFIG = {
 'INTERCEPT_REDIRECTS': False,
 'RENDER_PANELS': True,
 }
+
+
+
