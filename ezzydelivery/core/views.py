@@ -175,11 +175,11 @@ def update_driver(request):
 
 @login_required(login_url='account_login')
 def business_profile_update(request):
-    profile_business = business_models.Business.objects.filter(
+    business_profile = business_models.Business.objects.filter(
         business_id=request.user.id)
-    print(profile_business)
+    print(business_profile)
     form = business_forms.businessRegisterForm(
-        request.POST or None, instance=profile_business)
+        request.POST or None, instance=business_profile)
     if form.is_valid():
         f = form.save(commit=False)
         f.user = business_models.Business.objects.get(
@@ -189,7 +189,7 @@ def business_profile_update(request):
         f.save()
         messages.success(
             request, f'Your account details has been Updated!')
-        return redirect('business:profile_business', business_id=request.user.id)
+        return redirect('business:business_profile', business_id=request.user.id)
 
     context = {
         'form': form,
@@ -266,9 +266,9 @@ def join_us(request):
 # @todo: make profile and connect
 
 
-def profile_business(request):
+def business_profile(request):
 
-    return render(request, 'core/profile_business.html')
+    return render(request, 'core/business_profile.html')
 
 
 @login_required(login_url='/accounts/login/')

@@ -1,8 +1,12 @@
-{% extends "dashboard_base.html" %} {% load static %}
+{% extends "dashboard_base.html" %}
+{% load static %}
 <!-- extra title -->
-{% block extra_head %}Products {% endblock extra_head %}
+{% block extra_head %}
+Products
+{% endblock extra_head %}
 <!-- extra css -->
-{% load crispy_forms_tags %} {% block content %}
+{% load crispy_forms_tags %}
+{% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-12 pb-3 d-flex justify-content-between">
@@ -16,13 +20,12 @@
     <div class="col-md-12">
       {{ form | crispy }}
       <div class="submit my-3 text-center">
-        <button type="submit" value="submit" class="btn btn-primary-fill">
-          Submit
-        </button>
+        <button type="submit" value="submit" class="btn btn-primary-fill">Submit</button>
       </div>
     </div>
   </div>
 </div>
-{% endblock %} {% block extra_js %}
+{% endblock %}
+{% block extra_js %}
 <!-- extra js -->
 {% endblock extra_js %}

@@ -1,12 +1,17 @@
 from multiprocessing import context
-from django.http import HttpResponse, JsonResponse
+import os
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from decouple import config
+from django.core.files.storage import default_storage
+from PIL import Image
+import numpy as np
 
 from client import models as business_models
 from core import models as core_models
+from ezzydelivery.settings import BASE_DIR
 from orders import models as orders_models
 
 from client import forms as business_forms
@@ -162,22 +167,17 @@ def pickup_location_update(request, pickup_location_id):
 # frontend ---------------------------------------------------------------------------------------------------------------------
 
 
-def profile_business(request, business_id):
+def business_profile(request, business_id):
     try:
         business = business_models.Business.objects.get(
             business_id=business_id)
         profile = core_models.Profile.objects.filter(user_id=request.user.id)
         location = business_models.PickupLocation.objects.filter(
-            business_id=business.business_id).values_list('pickup_location_title', flat=True)
-        print("business_id = %s" % business_id)
-        business_logo = business_models.BusinessLogo.objects.get(
-            business_id=business_id)
+            business_id=business.business_id).values_list('pickup_location_title', flat=True)[:2]
+        business_logo = business_models.BusinessLogo.objects.select_related('business').get_or_create(business_id = business.business_id )
         instakey = config("INSTAGRAM_TOKEN_FEEDS_KEY")
-        print(business)
-        print(profile)
-        print(location)
-        print(business.business_id)
-        print(business_logo)
+        business_logo = business_logo[0].business_logo.url
+
 
         context = {
             'profile': profile,
@@ -186,7 +186,7 @@ def profile_business(request, business_id):
             'business_logo': business_logo,
             'instakey': instakey,
         }
-        return render(request, 'client/frontend/profile_business.html', context)
+        return render(request, 'client/frontend/business_profile.html', context)
     except business_models.Business.DoesNotExist:
 
         return redirect("/join_us/")
@@ -198,9 +198,7 @@ def business_profile_update(request, business_id):
         redirect('core:main_dashboard')
         print('business_profile_update', business_id)
         print('request.user.id', request.user.id)
-        business =  business_models.Business.objects.filter(business_id=business_id)
-        print('business', business)
-        business = get_object_or_404(business_models.Business, business_id=business_id)
+        business =  business_models.Business.objects.filter(business_id=business_id).first()
         print('business', business)
         form = business_forms.businessRegisterForm(instance=business)
         print('form')
@@ -242,24 +240,47 @@ def all_business(request):
 
 
 def business_logo_update(request , business_id):
-    business =  business_models.Business.objects.filter(business_id=business_id).first()
-    form = business_forms.BusinessLogoForm(instance=business)
+    business_logos =  business_models.BusinessLogo.objects.get(business_id=business_id)
+    
+    # Check if the request user matches the business user
+    if request.user.id != business_logos.business_id:
+        return HttpResponseForbidden("You don't have permission to update this business logo.")
+    form = business_forms.BusinessLogoForm()
     if request.method == 'POST':
+            print(business_logos)
+            print('business_id', business_logos.business_id)
             print('BusinessLogoForm')
             form = business_forms.BusinessLogoForm(
-                request.POST, request.FILES, instance=business)
+                    request.POST, request.FILES, instance=business_logos)
             if form.is_valid():
                 f = form.save(commit=False)
-                print('f.user')
-
-                print(f.user)
-
-                form.save()
+                logo = business_logos.business_logo
+                print(logo)
+                # Delete the old logo file
+                if business_logos.business_logo and business_logos.business_logo != 'business/avatar.png':
+                    print('if BusinessLogo', business_logos.business_logo.path)
+                    #os.remove(business_logo.business_logo.path)
+                f.business_id = request.user.id
+                print( business_id, f.business_id)
+                f.save()
+               
                 print('ok')
-                messages.success(request, "Successful Submission")
-                return redirect("business:all_business")
+                original_image = Image.open(f.business_logo.path)
+                print(original_image)
+                new_width  = 200
+                new_height = 300
+                img = original_image.resize((new_width, new_height), Image.ANTIALIAS)
+                print(img)
+                filename = f.business_logo.url.split('/')[-1]
 
+                img.save(logo)
+                messages.success(request, "Successful Submission")
+                return redirect("business:business_profile", business_id)
     context = {
-        'business': business,
-    }
+            'form': form,
+        }   
+  
+        
+        
     return render(request, 'client/parts/business_logo_update.html', context)
+

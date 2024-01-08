@@ -31,7 +31,7 @@ class Profile(models.Model):
 
 
 def user_directory_path(instance, filename):
-   return 'media/%s/%s' % (instance.profile.username, filename)
+   return 'core/user/%s/%s' % (instance.profile.username, filename)
 
 
 class ProfilePicture(models.Model):
@@ -39,7 +39,7 @@ class ProfilePicture(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile_picture')
     profile = models.ForeignKey(Profile,  on_delete=models.CASCADE, related_name='profile_picture')
     profile_picture = models.ImageField(
-        upload_to=user_directory_path , default='core/user/avatar.png', blank=True, null=True)
+        upload_to=user_directory_path , default='user/avatar.png', blank=True, null=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

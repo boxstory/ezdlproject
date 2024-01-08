@@ -23,8 +23,8 @@ urlpatterns = [
          business_views.pickup_location_list, name='pickup_location_list'),
 
     # frontend
-    path('<int:business_id>/', business_views.profile_business,
-         name='profile_business'),
+    path('<int:business_id>/', business_views.business_profile,
+         name='business_profile'),
     path('all', business_views.all_business, name='all_business'),
     path('<int:business_id>/update/', business_views.business_profile_update,
          name='business_profile_update'),

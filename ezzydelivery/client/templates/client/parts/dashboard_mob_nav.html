@@ -5,13 +5,8 @@
       <p class="fw-bolder fs-sm text-uppercase">{{ business.business_name }} Dashboard</p>
     </div>
     <hr />
-    <button class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav2"
-            aria-controls="navbarNav2"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav2"
+      aria-controls="navbarNav2" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
@@ -20,37 +15,34 @@
     <ul class="navbar-nav ms-auto">
       <li class="nav-item">
         <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'business:business_dashboard' %}">Dashboard</a>
+          href="{% url 'business:business_dashboard' %}">Dashboard</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-1 btn-dark btn btn-outline-dark" href="{% url 'business:driver_directory' %}">Drivers
+          Directory</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-1 btn-dark btn btn-outline-dark" href="{% url 'orders:orders_list' %}">List Orders</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-1 btn-dark btn btn-outline-dark" href="{% url 'orders:add_order' %}">Add Orders</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-1 btn-dark btn btn-outline-dark" href="{% url 'business:pickup_location_list' %}">Pickup
+          locations</a>
+      </li>
+      <hr />
+      <li class="nav-item">
+        <a class="nav-link p-1 btn-dark btn btn-outline-dark" href="{% url 'orders:orders_list' %}">FollowUp List</a>
       </li>
       <hr />
       <li class="nav-item">
         <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'business:driver_directory' %}">Drivers Directory</a>
-      </li>
-      <hr />
-      <li class="nav-item">
-        <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'orders:orders_list' %}">List Orders</a>
-      </li>
-      <hr />
-      <li class="nav-item">
-        <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'orders:add_order' %}">Add Orders</a>
-      </li>
-      <hr />
-      <li class="nav-item">
-        <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'business:pickup_location_list' %}">Pickup locations</a>
-      </li>
-      <hr />
-      <li class="nav-item">
-        <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'orders:orders_list' %}">FollowUp List</a>
-      </li>
-      <hr />
-      <li class="nav-item">
-        <a class="nav-link p-1 btn-dark btn btn-outline-dark"
-           href="{% url 'business:profile_business' request.user.profile.id %}">business Profile</a>
+          href="{% url 'business:business_profile' request.user.profile.id %}">business Profile</a>
       </li>
       <hr class="mb-0" />
     </ul>

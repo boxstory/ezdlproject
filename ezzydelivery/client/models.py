@@ -11,10 +11,12 @@ from fleet import models as fleet_models
 
 def upload_path_handler(instance, filename):
     upload_dir = os.path.join(
-        'business', instance.business.business_code, 'logo')
+        'business', str(instance.business), 'logo')
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     return os.path.join(upload_dir, filename)
+
+
 # business---------------------------------------------------------------------------------------------------------------------
 
 
@@ -30,12 +32,12 @@ class Business(models.Model):
     business_phone = models.CharField(max_length=100, blank=True, null=True)
     business_whatsapp = models.CharField(
         max_length=100, blank=True, null=True)
-    brand_name = models.CharField(max_length=100)
-    brand_facebook_page = models.CharField(
+    
+    business_facebook_page = models.CharField(
         max_length=100, blank=True, null=True)
-    brand_instagram = models.CharField(max_length=100, blank=True, null=True)
-    brand_since = models.DateField(max_length=100, blank=True, null=True)
-    brand_product_category = models.CharField(
+    business_instagram = models.CharField(max_length=100, blank=True, null=True)
+    business_since = models.DateField(max_length=100, blank=True, null=True)
+    business_product_category = models.CharField(
         max_length=100, blank=True, null=True)
     business_code = models.CharField(max_length=100, blank=True, null=True)
     business_languages = models.CharField(
@@ -47,10 +49,10 @@ class Business(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "business"
+        verbose_name_plural = "Business"
 
     def __str__(self):
-        return self.user.username
+        return self.business_name
 
 
 class BusinessLogo(models.Model):
@@ -65,7 +67,7 @@ class BusinessLogo(models.Model):
         verbose_name_plural = "Business Logo"
 
     def __str__(self):
-        return str(self.business)
+        return str(self.business.business_name)
 
 
 # @todo: link staff profile with business

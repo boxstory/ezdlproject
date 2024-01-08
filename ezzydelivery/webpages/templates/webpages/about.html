@@ -21,19 +21,13 @@
 
                 <div class="h-50 d-flex justify-content-evenly">
                     {% for brand in brands %}
-                    <a
-                        href="/business/{{brand.business_id}}/"
-                        class="text-decoration-none"
-                    >
+                    <a href="/business/{{brand.business_id}}/" class="text-decoration-none">
 
-                        <img
-                            src="{{brand.business_logo.url}}"
-                            alt=""
-                            class="avatar d-block mx-auto img-fluid rounded-circle h-50 border border-dark-subtle border-3"
-                        />
+                        <img src="{{brand.business_logo.url}}" alt=""
+                            class="avatar d-block mx-auto img-fluid rounded-circle h-50 border border-dark-subtle border-3" />
                         <h5 class="fw-bold text-dark pt-2">
 
-                            {{brand.brand_name}}
+                            {{brand.business_name}}
                         </h5>
                     </a>
                     {% endfor %}

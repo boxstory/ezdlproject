@@ -8,22 +8,16 @@ app_name = 'product'
 urlpatterns = [
     # ITEMS
     path('all/',
-         product_views.product_list, name='product_list'),
+         product_views.product_all_list, name='product_all_list'),
+    path('all/cards/',
+         product_views.product_all_list_card, name='product_all_list_card'),
     path('add/',
-         product_views.product_add, name='product_add'),
+         product_views.product_single_add, name='product_single_add'),
     path('<int:product_id>/delete/',
-         product_views.product_delete, name='product_delete'),
+         product_views.product_single_delete, name='product_single_delete'),
     path('<int:product_id>/update/',
-         product_views.product_update, name='product_update'),
-    # SKUS
-    path('skus/all/', product_views.product_sku_list,
-         name='product_sku_list'),
-    path('add_item_sku/',
-         product_views.product_sku_add, name='product_sku_add'),
-    path('update_item_sku/<int:sku_id>/',
-         product_views.product_sku_update, name='product_sku_update'),
-    path('delete_item_sku/<int:sku_id>/',
-         product_views.product_sku_delete, name='product_sku_delete'),
+         product_views.product_single_update, name='product_single_update'),
+  
 
      # Product categories
      path('product_categories_list/', product_views.product_categories, name='product_categories'),

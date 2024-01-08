@@ -9,7 +9,7 @@ from product import models as product_models
 
 @admin.register(product_models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('item_name', 'item_sku', 'business',
+    list_display = ('brand_name', 'item_name', 'item_sku', 'business',
                     'product_category')
 
 
@@ -28,9 +28,6 @@ class Color_variantAdmin(admin.ModelAdmin):
     list_display = ('color_variant', 'short_code', 'discription')
 
 
-@admin.register(product_models.SizeVariant)
-class Size_variantAdmin(admin.ModelAdmin):
-    list_display = ('size_variant', 'short_code', 'discription')
 
 
 @admin.register(product_models.UnitVariant)

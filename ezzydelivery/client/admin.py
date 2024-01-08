@@ -22,7 +22,7 @@ class ProfilePictureAdmin(admin.ModelAdmin):
 @admin.register(business_models.Business)
 class BusinessAdmin(admin.ModelAdmin):
     list_display = ('business_name', 'business_phone', 'business_whatsapp',
-                    'brand_name', 'brand_since', 'brand_product_category', 'business_code', 'created_at', 'updated_at')
+                     'business_since', 'business_product_category', 'business_code', 'created_at', 'updated_at')
     list_filter = ('created_at', 'updated_at')
     list_per_page = 10
 

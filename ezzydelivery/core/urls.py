@@ -35,7 +35,7 @@ urlpatterns = [
 
     path('driverjobform/', core_views.driverjobform, name='driverjobform'),
 
-    path('business/', core_views.profile_business, name='profile_business'),
+    path('business/', core_views.business_profile, name='business_profile'),
 
 
 

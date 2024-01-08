@@ -39,15 +39,14 @@ class businessRegisterForm(forms.ModelForm):
                 choices=business_LANGUAGE_CHOICES),
             'business_status': forms.Select(
                 choices=business_STATUS_CHOICES),
-            'brand_name': forms.TextInput(attrs={'placeholder': 'List your major brands'}),
+            
 
         }
         labels = {
             "business_name": "business Name",
             "business_phone": "business Phone No",
             "business_whatsapp": "business Whatsapp No",
-            "brand_name": "Brand Lists",
-            "business_qid": "Passport/QID No",
+            "business_qid": "Passport/QID/CR No",
 
         }
 

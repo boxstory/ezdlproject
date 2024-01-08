@@ -37,20 +37,6 @@ class ColorVariant(models.Model):
         verbose_name_plural = "Color Variants"
 
 
-class SizeVariant(models.Model):
-    size_variant = models.CharField(max_length=100)
-    short_code = models.CharField(max_length=5, null=True, blank=True)
-    discription = models.CharField(max_length=100)
-    size_variants_date = models.DateField(auto_now_add=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.size_variant
-
-    class Meta:
-        verbose_name_plural = "Size Variants"
-
 
 class UnitVariant(models.Model):
     unit_variant = models.CharField(max_length=100)
@@ -70,17 +56,20 @@ class UnitVariant(models.Model):
 
 
 class Product(models.Model):
+    brand_name = models.CharField(max_length=100)
     item_name = models.CharField(max_length=100)
     item_sku = models.CharField(max_length=100)
     color = models.ForeignKey(
         ColorVariant, on_delete=models.SET_NULL, null=True, blank=True)
-    size = models.ForeignKey(
-        SizeVariant, on_delete=models.SET_NULL, null=True, blank=True)
+    size = models.CharField(max_length=100, null=True, blank=True)
     unit = models.ForeignKey(
         UnitVariant, on_delete=models.SET_NULL, null=True, blank=True)
     item_price = models.PositiveIntegerField(_("Price"), default=0)
-    image = models.ImageField(
-        upload_to='product_images', null=True, blank=True, default="product_images/default.jpg")
+
+    brang_logo = models.ImageField(
+        upload_to='product_images/brang_logo', null=True, blank=True, default="product_images/brang_logo_default.jpg")
+    product_image = models.ImageField(
+        upload_to='product_images/product_images', null=True, blank=True, default="product_images/product_image_default.jpg")
     business = models.ForeignKey(
         business_models.Business, on_delete=models.SET_NULL, null=True, related_name='product')
     product_category = models.ForeignKey(
@@ -89,10 +78,10 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.item_name
+        return self.brand_name + " " + self.item_name
 
     class Meta:
-        verbose_name_plural = "item_name"
+        verbose_name_plural = "Products items"
 
 
 
