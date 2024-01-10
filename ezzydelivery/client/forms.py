@@ -31,6 +31,7 @@ class businessRegisterForm(forms.ModelForm):
     class Meta:
         model = business_models.Business
         fields = '__all__'
+        
         exclude = ['profile', 'business_id', 'user',
                    'business_status', 'business_code', 'updated_at', 'created_at']
         widgets = {
@@ -39,6 +40,7 @@ class businessRegisterForm(forms.ModelForm):
                 choices=business_LANGUAGE_CHOICES),
             'business_status': forms.Select(
                 choices=business_STATUS_CHOICES),
+            'business_since' : forms.TextInput(attrs={'type': 'date'}),
             
 
         }

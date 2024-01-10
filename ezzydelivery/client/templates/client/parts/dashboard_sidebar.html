@@ -55,7 +55,7 @@
       </li>
       <hr />
       <li
-        class="nav-item {% if request.resolver_match.url_name == 'product_list' or request.resolver_match.url_name == 'product_add' %}active{% endif %}">
+        class="nav-item {% if request.resolver_match.url_name == 'product_all_list' or request.resolver_match.url_name == 'product_single_add' or request.resolver_match.url_name == 'product_categories' or request.resolver_match.url_name == 'product_all_list_card' %}active{% endif %}">
         <div class="nav-link btn btn-outline-dark collapsed d-flex justify-content-start align-items-center"
           data-bs-toggle="collapse" data-bs-target="#submenu-product">
           <i class="fa-solid fa-box-open p-2"></i>

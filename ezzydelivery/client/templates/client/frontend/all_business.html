@@ -16,32 +16,32 @@ Cateloges
       <div class="d-flex border border-1 bg-light rounded-3">
         <!-- Add your card image here -->
         <div class="col-8 p-3">
-          <h5 class="card-title fw-bold pb-2">{{ business.business_name }}</h5>
+          <h5 class="card-title fw-bold pb-3">{{ business.business_name }}</h5>
           <div class="d-flex justify-content-between">
             <h6 class="card-text">{{ business.business_code }}</h6>
             <h6 class="card-text">
-              <span class="fw-bold">Speaks:</span>
+              <span class="fw-bold">Speaks : </span>
               {{ business.business_languages }}
             </h6>
           </div>
           <h6>
-            <span class="fw-bold">Category :</span>
+            <span class="fw-bold">Category : </span>
             {{ business.business_product_category }}
           </h6>
           <h6 class="card-text">
-            <span class="fw-bold">Bio:</span>{{ business.business_bio }}
+            <span class="fw-bold">Bio : </span>{{ business.business_bio }}
           </h6>
-          <div class="d-flex justify-content-between">
-            <div class="align-baseline pt-1">
-              <span class="fw-bold">Status:</span>{{ business.business_status }}
+          <div class="d-flex justify-content-between mt-auto">
+            <div class="align-bottom pt-1">
+              <span class="fw-bold">Status : </span>{{ business.business_status }}
             </div>
             <a href="/business/{{ business.business_id }}/" class="btn btn-dark btn-sm">More</a>
           </div>
         </div>
-        {{ business.business_logo }}
+
         <div class="col-4">
-          {% if business.business_logo %}
-          <img src="{{ business.business_logo.url }}" alt="" title="{{ business.business_name }}"
+          {% if business.business_logo is not None %}
+          <img src="{{ business.business_logo.all.0.business_logo.url }}" alt="" title="{{ business.business_name }}"
             class="img-fluid text-center" />
           {% else %}
           <img src="/media/business/avatar.png" title="{{ business.business_name }}" alt=""

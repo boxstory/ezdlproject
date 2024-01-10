@@ -232,6 +232,7 @@ def business_profile_update(request, business_id):
 def all_business(request):
     business = business_models.Business.objects.all()
     
+    
 
     context = {
         'all_business': business,
