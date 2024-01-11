@@ -18,10 +18,7 @@ from fleet import forms as fleet_forms
 @login_required(login_url='/accounts/login/')
 def fleets(request):
     fleets = fleet_models.Driver.objects.all()
-    print(fleets)
     driver_vehicle = fleet_models.DriverVehicle.objects.all()
-    ft = fleet_models.Driver.objects.raw('''SELECT fleet_driver.driver_id, fleet_driver.driver_code, fleet_drivervehicle.id, fleet_drivervehicle.vehicle_type FROM fleet_driver INNER JOIN fleet_drivervehicle
-ON fleet_driver.driver_id = fleet_drivervehicle.driver_id;''')
     vehicle_list = []
 
     for driver in fleets:
@@ -30,12 +27,10 @@ ON fleet_driver.driver_id = fleet_drivervehicle.driver_id;''')
         print('driver_vehicle ', driver_vehicle)
         vehicle_list.append(driver_vehicle)
     print(vehicle_list)
-    print(driver_vehicle)
     # print(connection.queries)
     context = {
         'fleets': fleets,
         'vehicle_list': vehicle_list,
-        'driver_vehicle': driver_vehicle,
     }
     return render(request, 'fleet/fleets.html', context)
 
@@ -76,8 +71,7 @@ def driver_documents(request):
 def driver_documents_upload(request, fleet_id):
     driver = fleet_models.Driver.objects.get(user_id=request.user.id)
     print('driver_documents_upload', driver.driver_id)
-    form = fleet_forms.DriverDocumentForm(
-        request.POST or None, request.FILES or None)
+    form = fleet_forms.DriverDocumentForm()
     if request.method == 'POST':
         form = fleet_forms.DriverDocumentForm(request.POST, request.FILES)
         if form.is_valid():
@@ -92,7 +86,7 @@ def driver_documents_upload(request, fleet_id):
             'form': form,
         }
 
-        return render(request, 'fleet/parts/document_upload.html', context)
+        return render(request, 'fleet/parts/document_add.html', context)
 
 
 def driver_documents_update(request, fleet_id, doc_id):
@@ -105,16 +99,15 @@ def driver_documents_update(request, fleet_id, doc_id):
     form = fleet_forms.DriverDocumentForm(
         request.POST or None, instance=document)
     if request.method == 'POST':
-
+        form = fleet_forms.DriverDocumentForm(request.POST, request.FILES, instance=document)
         if form.is_valid():
             print("DriverDocumentForm full  is valid")
             f = form.save(commit=False)
             f.driver_id = driver.driver_id
             f.save()
             return redirect('/fleet/documents/')
-    else:
-        form = fleet_forms.DriverDocumentForm(instance=document)
-        context = {
+    
+    context = {
             'form': form,
         }
 
@@ -204,6 +197,18 @@ def vehicle_update(request, vehicle_id):
     return render(request, 'fleet/parts/vehicle_update.html', context)
 
 
+# cod_collection ----------------------------------------------------------------------------------------------------------------------------
+def cod_collection(request):
+    print('cod_collection')
+    driver = fleet_models.Driver.objects.get(user_id=request.user.id)
+    
+    context = {
+            'driver': driver,
+        }
+
+    return render(request, 'fleet/parts/cod_collection.html', context)
+
+
 # delivery tasks ----------------------------------------------------------------------------------------------------------------------------
 
 
@@ -221,7 +226,6 @@ def driver_profile(request, fleet_id):
     print('driver_profile', driver.driver_id)
 
     profile = core_models.Profile.objects.get(user_id=driver.user_id)
-    print(driver, ' profile')
     profile_picture = core_models.ProfilePicture.objects.get(user_id=driver.user_id)
     print(profile_picture, 'profile picture')
 

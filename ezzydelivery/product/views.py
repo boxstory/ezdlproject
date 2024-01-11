@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 from product import models as product_models
 from client import models as business_models
@@ -63,9 +65,19 @@ def product_single_delete(request, product_id):
 
 @login_required(login_url='account_login')
 def product_single_update(request, product_id):
-    product = product_models.Items.objects.get(id=product_id)
+    product = product_models.Product.objects.get(id=product_id)
+    form = product_forms.AddItemsForm(instance= product)
+    if request.method == 'POST':
+        form = product_forms.AddItemsForm( request.POST, request.FILES, instance= product)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, f'Your product details has been Updated!')
+            return redirect('business:business_dashboard' )
+
     data = {
-        'product': product
+        'form': form,
+        'product': product,
     }
     return render(request, 'product/product_single_update.html', data)
 

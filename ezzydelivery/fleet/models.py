@@ -96,10 +96,10 @@ class Driver(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.driver_code
+        return self.profile.username
 
     class Meta:
-        verbose_name_plural = "Driver"
+        verbose_name_plural = "Drivers"
 
 
 class DriverVehicle(models.Model):
@@ -124,11 +124,13 @@ class DriverVehicle(models.Model):
         return str(self.vehicle_no)
 
     class Meta:
-        verbose_name_plural = "Driver Vehicle"
+        verbose_name_plural = "Driver Vehicles"
 
 
 def upload_path_handler(instance, filename):
-    upload_dir = os.path.join('documents', instance.user.id)
+    upload_dir = os.path.join('core/driver', str(instance.driver_id), 'documents', instance.document_type)
+    extension = os.path.splitext(filename)[1]
+    filename = f'{instance.document_type}_{instance.driver_id}.{extension}'
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     return os.path.join(upload_dir, filename)
@@ -138,23 +140,23 @@ def upload_path_handler(instance, filename):
 class DriverDocument(models.Model):
     driver = models.ForeignKey(
         Driver, on_delete=models.CASCADE, related_name='driver_document')
-    qid_no = models.CharField(max_length=100)
-    qid_expirey_date = models.DateField()
-    qid_photo = models.ImageField(
-        upload_to=upload_path_handler, default='core/driver/qid_default.jpg', blank=True, null=True)
-    license_photo = models.ImageField(
-        upload_to=upload_path_handler, default='core/driver/licence_default.jpg', blank=True, null=True)
+    document_choices = (
+        ('QID', 'QID'),
+        ('Driving License' , 'Driving License'),
+        ('Passport', 'Passport'),
+        ('National Identification', 'National Identification'),
+    )
+    document_type = models.CharField(max_length=100, null=True, choices=document_choices, blank=True)
     document_no = models.CharField(max_length=100)
-    document_type = models.CharField(max_length=100)
-    document_date = models.DateField(auto_now_add=True)
-    document_update_date = models.DateField(auto_now=True)
+    document_issued_from = models.CharField( max_length=100, blank=True, null=True)
+    document_expiry_date = models.DateField( blank=True, null=True)
     document_file = models.ImageField(
-        upload_to=upload_path_handler, default='core/driver/licence_default.jpg', blank=True, null=True)
+        upload_to=upload_path_handler, default='core/driver/default/doc_default.png', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.document_no
+        return str(self.document_no)
 
     class Meta:
-        verbose_name_plural = "Driver Document"
+        verbose_name_plural = "Driver Documents"

@@ -26,41 +26,41 @@ FLEET {{ driver.driver_code }}
                         <b>User</b>
                         {% endif %}
                     </h6>
-                    <p>{{ driver.driver_bio }}</p>
-                    <div class="row about-list">
+
+                    <div class="row about-list pt-3">
                         <div class="col-6 col-md-6">
                             <div class="media">
-                                <label>Birthday</label>
+                                <i class="fa-solid fa-cake-candles  pe-2"></i><label>Birthday</label>
                                 <p>{{ profile.date_of_birth }}</p>
                             </div>
                             <div class="media">
-                                <label>Age</label>
+                                <i class="fa-solid fa-gauge pe-2"></i><label>Birth year</label>
                                 <p>22 Yr</p>
                             </div>
                             <div class="media">
-                                <label>Location</label>
+                                <i class="fa-solid fa-location-pin pe-2"></i><label>Location</label>
                                 <p>{{ profile.zone_name }}</p>
                             </div>
                             <div class="media">
-                                <label>Address</label>
+                                <i class="fa-solid fa-address-book pe-2"></i><label>Address</label>
                                 <p>{{ profile.address }}</p>
                             </div>
                         </div>
                         <div class="col-6 col-md-6">
                             <div class="media">
-                                <label>E-mail</label>
-                                <p>{{ profile.email }}</p>
+                                <i class="fa-solid fa-envelope pe-2"></i><label>E-mail</label>
+                                <p>Add me to see</p>
                             </div>
                             <div class="media">
-                                <label>Phone</label>
-                                <p>Click me</p>
+                                <i class="fa-solid fa-phone pe-2"></i><label>Phone</label>
+                                <p>Add me to see</p>
                             </div>
                             <div class="media">
-                                <label>Nationality</label>
+                                <i class="fa-solid fa-globe pe-2"></i><label>Nationality</label>
                                 <p>{{ profile.nationlity }}</p>
                             </div>
                             <div class="media">
-                                <label>Freelance</label>
+                                <i class="fa-solid fa-layer-group pe-2"></i><label>Freelance</label>
                                 {% if profile.is_driver == True %}
                                 <p>Driver</p>
                                 {% elif profile.is_business == True %}
@@ -71,6 +71,7 @@ FLEET {{ driver.driver_code }}
                             </div>
                         </div>
                     </div>
+                    <p>{{ driver.driver_bio }}</p>
                 </div>
             </div>
             <div class="col-md-6 my-3">

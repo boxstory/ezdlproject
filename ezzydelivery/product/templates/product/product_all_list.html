@@ -25,10 +25,10 @@
             <td>{{product.item_sku}}</td>
             <td>{{product.item_price}}</td>
             <td>
-              <a href="{% url 'product:product_single_update' product_id=product.id %}" class="pe-3"><i
+              <a href="{% url 'product:product_single_update' product_id=product.id %}" class="pe-3 text-dark"><i
                   class="fa fa-lg fa-edit"></i></a>
-              <a href="{% url 'product:product_single_delete' product_id=product.id %}"><i
-                  class="fa fa-lg fa-trash"></i></a>
+              <a href="{% url 'product:product_single_delete' product_id=product.id %}" class="text-danger"><i
+                  class="fa fa-lg fa-trash  "></i></a>
             </td>
           </tr>
           {% endfor %}{% endif %}

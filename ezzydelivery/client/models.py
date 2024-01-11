@@ -30,6 +30,7 @@ class Business(models.Model):
         max_length=100, blank=True, null=True)
     business_bio = models.CharField(max_length=225, blank=True, null=True)
     business_phone = models.CharField(max_length=100, blank=True, null=True)
+    business_email = models.CharField(max_length=100, blank=True, null=True)
     business_whatsapp = models.CharField(
         max_length=100, blank=True, null=True)
     
@@ -119,7 +120,7 @@ class DriverDirectory(models.Model):
     business = models.ForeignKey(
         Business, on_delete=models.CASCADE, related_name='driver_directory')
     driver = models.ForeignKey(
-        fleet_models.Driver, on_delete=models.CASCADE)
+        fleet_models.Driver, on_delete=models.CASCADE, related_name='driver_directory')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

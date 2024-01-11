@@ -65,8 +65,10 @@ class Product(models.Model):
     unit = models.ForeignKey(
         UnitVariant, on_delete=models.SET_NULL, null=True, blank=True)
     item_price = models.PositiveIntegerField(_("Price"), default=0)
+    item_price = models.PositiveIntegerField(_("Price"), default=0)
+    item_discription = models.CharField(max_length=100, null=True, blank=True)
 
-    brang_logo = models.ImageField(
+    brand_logo = models.ImageField(
         upload_to='product_images/brang_logo', null=True, blank=True, default="product_images/brang_logo_default.jpg")
     product_image = models.ImageField(
         upload_to='product_images/product_images', null=True, blank=True, default="product_images/product_image_default.jpg")

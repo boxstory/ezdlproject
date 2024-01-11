@@ -63,12 +63,13 @@ class DriverDocumentForm(forms.ModelForm):
     class Meta:
         model = fleet_models.DriverDocument
         fields = '__all__'
-        exclude = ['driver', 'doc_date', 'updated_at', 'created_at']
+        exclude = ['driver', 'updated_at', 'created_at']
         widgets = {
-            'qid_expirey_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'document_expiry_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = True
+        self.fields['document_issued_from'].initial = "Qatar"

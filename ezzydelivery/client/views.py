@@ -73,13 +73,14 @@ def driver_directory_add(request):
         print('driver_info', driver_id)
         business_id = request.user.id
         print('business_id', business_id)
-        business_ids = request.user.profile.business
-        print('businesssss_id', business_ids)
+        dict = business_models.DriverDirectory.objects.filter(business=business_id)
+        print('dict')
+        print(dict)
         # Save the contact to the database or perform any other necessary actions
         if not business_models.DriverDirectory.objects.filter(business_id=business_id, driver_id=driver_id).exists():
+
             # Create a new FavoriteItem record
-            business_models.DriverDirectory.objects.create(
-                business_id=business_id, driver_id=driver_id)
+            business_models.DriverDirectory.objects.create( business_id=business_id, driver_id=driver_id)
             return JsonResponse({'success': True, 'success': 'Driver Added'})
             # Return a JSON response indicating success
         else:

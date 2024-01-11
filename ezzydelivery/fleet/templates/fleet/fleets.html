@@ -19,69 +19,72 @@ FLEETS
           <i class="fa fa-add me-2"></i> join As Driver
         </div>
       </a>
-
     </div>
-
   </div>
+  <div class="d-flex ">
+    {% for fleet in fleets %}
+    <div class="col-12 col-md-6 mt-5 ms-3 ">
+      <div class="card">
+        <div class="card-block p-0">
+          <div class=" project-main">
+            <div class="d-flex p-3">
+              <div class=" w-25 w-md-50">
+                {% if fleet.profile.profile_picture.all.0 != None %}
+                <img class="img-fluid rounded-circle"
+                  src="{{ fleet.profile.profile_picture.all.0.profile_picture.url }}" alt="dashboard-user" />
+                {% else %}
+                <img class="img-fluid rounded-circle w-100" src="{% static 'webpages/img/avatar.png' %}"
+                  alt="dashboard-user" />
+                {% endif %}
 
-  {% for fleet in fleets %}
-  <div class="col-xl-4 col-md-6 mt-5">
-    <div class="card">
-      <div class="card-block p-0">
-        <div class=" project-main">
-          <div class="d-flex p-3">
-            <div class="imgBox ">
-              <img class="img-fluid rounded-circle"
-                src="https://appsrv1-147a1.kxcdn.com/django-datta-able-enh/images/user/avatar-3.jpg"
-                alt="dashboard-user" />
-            </div>
-            <div class="text-left ms-2">
-              <h5 class="mt-4">{{ fleet.user.first_name }} {{ fleet.user.last_name }}</h5>
-              <span>{{ fleet.driver_languages }}</span>
-            </div>
-          </div>
-          <div class="project-main pt-3">
-            <div class="row text-center">
-              <div class="col-md-4 col-6">
-                <h6 class="text-muted">
-                  <i class="fas fa-star m-r-5"></i> 4.8
-                </h6>
               </div>
-              <div class="col-md-4 col-6">
-                <h6 class="text-muted">
-                  <i class="fas fa-map-marker-alt m-r-5"></i>USA
-                </h6>
-              </div>
-              <div class="col-md-4 col-12">
-                <h6 class="text-muted m-0">
-                  <i class="fas fa-file-alt m-r-5"></i> 28 Task
-                </h6>
+              <div class="text-left ps-3">
+                <h5 class="pt-2">{{ fleet.user.first_name }} {{ fleet.user.last_name }}</h5>
+                <span>{{ fleet.driver_languages }}</span>
               </div>
             </div>
-          </div>
-          <div class="row m-t-30 px-2 my-2">
-            <div class="col-6 p-r-0">
-              <form id="favorite-form" action="{% url 'business:driver_directory_add' %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="driver_id" value="{{ fleet.profile.id }}">
-                <input type="hidden" name="business_id" value="{{ user.id }}">
-                <button type="submit" class="btn btn-dark  w-100">
-                  Add to
-                  directory
-                </button>
-              </form>
+            <div class="project-main pt-3">
+              <div class="row text-center">
+                <div class="col-md-4 col-6">
+                  <h6 class="text-muted">
+                    <i class="fas fa-star me-2"></i> 4.8
+                  </h6>
+                </div>
+                <div class="col-md-4 col-6">
+                  <h6 class="text-muted">
+                    <i class="fas fa-map-marker-alt me-2"></i>{{ fleet.profile.zone_name }}
+                  </h6>
+                </div>
+                <div class="col-md-4 col-12">
+                  <h6 class="text-muted m-0">
+                    <i class="fas fa-file-alt me-2"></i> 28 Task
+                  </h6>
+                </div>
+              </div>
             </div>
-            <div class="col-6">
-              <div class="d-grid">
-                <a href="/fleet/{{ fleet.driver_id }}/" class="btn text-uppercase border btn-outline-secondary">View
-                  Profile</a>
+            <div class="row m-t-30 px-2 my-2">
+              <div class="col-6 p-r-0">
+                <form id="favorite-form" action="{% url 'business:driver_directory_add' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="driver_id" value="{{ fleet.profile.id }}">
+                  <input type="hidden" name="business_id" value="{{ user.id }}">
+                  <button type="submit" class="btn btn-dark  w-100">
+                    Add to
+                    directory
+                  </button>
+                </form>
+              </div>
+              <div class="col-6">
+                <div class="d-grid">
+                  <a href="/fleet/{{ fleet.driver_id }}/" class="btn text-uppercase border btn-outline-secondary">View
+                    Profile</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  {% endfor %}
+    {% endfor %}
 </section>
 {% endblock content %}

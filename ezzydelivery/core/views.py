@@ -89,7 +89,7 @@ def join_driver(request):
                 print("DriverForm full  is valid")
                 f = form.save(commit=False)
                 f.profile = profile
-                print(f.profile)
+                #print(f.profile)
                 f.driver_id = profile.id
                 f.driver_status = 'Aproval Pending'
                 f.driver_code = ''.join(random.choice(
@@ -162,7 +162,7 @@ def update_driver(request):
                                        driver_id=request.user.id)
     Profile = get_object_or_404(
         core_models.Profile, user_id=request.user.id)
-    print(Profile)
+    
     driverjoinform = fleet_forms.DriverJoinForm(
         request.POST or None, instance=driver_profile)
 
