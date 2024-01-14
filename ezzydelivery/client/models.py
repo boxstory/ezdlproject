@@ -29,6 +29,7 @@ class Business(models.Model):
     business_name = models.CharField(
         max_length=100, blank=True, null=True)
     business_bio = models.CharField(max_length=225, blank=True, null=True)
+    business_code = models.CharField(max_length=225, blank=True, null=True)
     business_phone = models.CharField(max_length=100, blank=True, null=True)
     business_email = models.CharField(max_length=100, blank=True, null=True)
     business_whatsapp = models.CharField(

@@ -165,7 +165,9 @@ def update_driver(request):
     
     driverjoinform = fleet_forms.DriverJoinForm(
         request.POST or None, instance=driver_profile)
-
+    if driverjoinform.is_valid():
+        f=driverjoinform.save()
+        return redirect('core:profile', pk=request.user.id)
     context = {
         'driverjoinform': driverjoinform,
         'profile': Profile,

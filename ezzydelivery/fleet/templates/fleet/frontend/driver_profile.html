@@ -35,7 +35,7 @@ FLEET {{ driver.driver_code }}
                             </div>
                             <div class="media">
                                 <i class="fa-solid fa-gauge pe-2"></i><label>Birth year</label>
-                                <p>22 Yr</p>
+                                <p>{{ profile.date_of_birth|date:'Y' }}</p>
                             </div>
                             <div class="media">
                                 <i class="fa-solid fa-location-pin pe-2"></i><label>Location</label>
@@ -71,6 +71,7 @@ FLEET {{ driver.driver_code }}
                             </div>
                         </div>
                     </div>
+                    <p class="p-0 m-0">Bio : </p>
                     <p>{{ driver.driver_bio }}</p>
                 </div>
             </div>
@@ -148,8 +149,8 @@ FLEET {{ driver.driver_code }}
                         <tr>
                             <th>{{ forloop.counter }}</th>
                             <td>{{ doc.document_type }}</td>
-                            <td>{{ doc.document_no }}</td>
-                            <td>{{ doc.document_date }}</td>
+                            <td>***{{ doc.document_no|slice:"-5:" }}</td>
+                            <td>{{ doc.document_expiry_date|date:'M-y' }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

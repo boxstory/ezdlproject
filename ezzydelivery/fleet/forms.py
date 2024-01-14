@@ -26,12 +26,15 @@ class DriverJoinForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['user', 'driver_id', 'profile', 'driver_code', 'driver_status', 'driver_rating', 'driver_code_dms',
                    'driver_rating_count', 'driver_reviews', 'driver_reviews_count', 'updated_at', 'created_at', ]
+        labels = {
+                "driver_bio": "About Skill and Experiance",
+            }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_show_labels = True
-
+        
 
 VEHICLE_CHOICES = [
     ('none', 'None'),
@@ -67,6 +70,7 @@ class DriverDocumentForm(forms.ModelForm):
         widgets = {
             'document_expiry_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
+        
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
