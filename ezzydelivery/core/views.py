@@ -381,9 +381,7 @@ def profile_delete(request, pk):
 
 def profile_picture_update(request):
     instance = get_object_or_404(core_models.ProfilePicture, user_id=request.user.id)
-    print(instance)
     form = core_forms.ProfilePictureForm()
-    print(form)
     if request.method == 'POST':
             print('ProfilePictureForm')
             form = core_forms.ProfilePictureForm(
