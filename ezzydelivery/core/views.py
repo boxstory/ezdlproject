@@ -381,6 +381,8 @@ def profile_delete(request, pk):
 
 def profile_picture_update(request):
     instance = get_object_or_404(core_models.ProfilePicture, user_id=request.user.id)
+    username = core_models.Profile.objects.get(user_id=instance.profile_id).username
+    
     form = core_forms.ProfilePictureForm()
     if request.method == 'POST':
             print('ProfilePictureForm')
@@ -390,17 +392,32 @@ def profile_picture_update(request):
                 f = form.save(commit=False)
                 f.user_id = request.user.id
                 f.profile_id = request.user.id
+                print('f.profile_picture')
+                print(f.profile_picture)
+                f.path = f'core/user/{username}'
+                print(f.path)
+                print(f.profile_picture.url)
+
+                print('ProfilePicture filename: %s' % f)
                 f.save()
                 # Open the original image using Pillow
                 original_image = Image.open(f.profile_picture.path)
-                print(original_image)
-                filename = f.profile_picture.url.split('/')[-1]
-                print(filename)
+                outfile = os.path.splitext(f.profile_picture.path)[0] + ".thumbnail"
+                size = (128, 128)
+                with Image.open(f.profile_picture.path) as im:
+                    print(f.profile_picture.path, im.format, f"{im.size}x{im.mode}")
+                    im.thumbnail(size)
+                    im.save(outfile, "JPEG")
+                print(outfile)
+                title, ext = os.path.splitext(f.profile_picture.path)
+                final_filepath = os.path.join(f.path, title + '_sm' + ext)
+                print(final_filepath)
                 new_width  = 200
-                new_height = 300
+                new_height = 200
                 img = original_image.resize((new_width, new_height), Image.ANTIALIAS)
                 print(img)
-                img.save(filename)
+                img.save(final_filepath)
+
                 messages.success(request, "Updated Profile Picture")
                 return redirect("core:profile_view")
 
@@ -408,6 +425,7 @@ def profile_picture_update(request):
         'form': form,
     }
     return render(request, 'core/parts/profile_picture_update.html', context)
+
 
 # profile_completion_test ---------------------------------------------------------------------------------------------------------------------
 def profile_completion_test(request, pk):

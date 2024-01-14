@@ -31,7 +31,7 @@ class Profile(models.Model):
 
 
 def user_directory_path(instance, filename):
-   return 'core/user/%s/%s' % (instance.profile.username, filename)
+   return '%s/%s' % (instance.path, filename)
 
 
 class ProfilePicture(models.Model):
