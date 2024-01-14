@@ -221,7 +221,7 @@ def driver_profile(request, fleet_id):
 
     except fleet_models.Driver.DoesNotExist:
         print('driver does not exist')
-        return redirect('/fleet/')
+        return redirect('/fleets/')
     print('driver_profile', driver.driver_id)
 
     profile = core_models.Profile.objects.get(user_id=driver.user_id)
