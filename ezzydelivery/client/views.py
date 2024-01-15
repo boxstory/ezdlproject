@@ -184,7 +184,7 @@ def business_profile(request, business_id):
             'profile': profile,
             'business': business,
             'location': location,
-            'business_logo': business_logo,
+            'business_logo_img': business_logo,
             'instakey': instakey,
         }
         return render(request, 'client/frontend/business_profile.html', context)
@@ -243,6 +243,7 @@ def all_business(request):
 
 def business_logo_update(request , business_id):
     business_logos =  business_models.BusinessLogo.objects.get(business_id=business_id)
+    business_code = business_models.Business.objects.get(business_id=business_id)
     
     # Check if the request user matches the business user
     if request.user.id != business_logos.business_id:
@@ -258,27 +259,30 @@ def business_logo_update(request , business_id):
                 f = form.save(commit=False)
                 logo = business_logos.business_logo
                 print(logo)
+
                 # Delete the old logo file
                 if business_logos.business_logo and business_logos.business_logo != 'business/avatar.png':
                     print('if BusinessLogo', business_logos.business_logo.path)
                     #os.remove(business_logo.business_logo.path)
                 f.business_id = request.user.id
                 print( business_id, f.business_id)
+                f.path = f'business/{business_code}'
+                print(f.path)
                 f.save()
                
                 print('ok')
                 original_image = Image.open(f.business_logo.path)
-                print(original_image)
+                title, ext = os.path.splitext(f.business_logo.path)
+                final_filepath = os.path.join(f.path, title + '_sm' + ext)
+                print(final_filepath)
                 new_width  = 200
-                new_height = 300
+                new_height = 200
                 img = original_image.resize((new_width, new_height), Image.ANTIALIAS)
-                img = img.convert('RGB')
                 print(img)
-                filename = f.business_logo.url.split('/')[-1]
-
-                img.save(logo)
+                img.save(final_filepath)
                 messages.success(request, "Successful Submission")
                 return redirect("business:business_profile", business_id)
+            
     context = {
             'form': form,
         }   

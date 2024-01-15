@@ -11,7 +11,7 @@ from fleet import models as fleet_models
 
 def upload_path_handler(instance, filename):
     upload_dir = os.path.join(
-        'business', str(instance.business), 'logo')
+        str(instance.path), 'logo')
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
     return os.path.join(upload_dir, filename)
