@@ -272,6 +272,7 @@ def business_logo_update(request , business_id):
                 new_width  = 200
                 new_height = 300
                 img = original_image.resize((new_width, new_height), Image.ANTIALIAS)
+                img = img.convert('RGB')
                 print(img)
                 filename = f.business_logo.url.split('/')[-1]
 
