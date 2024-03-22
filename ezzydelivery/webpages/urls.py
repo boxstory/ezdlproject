@@ -28,7 +28,4 @@ urlpatterns = [
     path('test/', webpages_views.test, name='test'),
     path('500/', TemplateView.as_view(template_name='page_not_found.html')),
 
-
-
-
 ]

@@ -17,11 +17,12 @@ urlpatterns = [
          orders_views.delete_order, name='delete_order'),
     path('order_details/<int:order_id>/',
          orders_views.order_details, name='order_details'),
+    # Products add to order list
+    path('add_order_product/<int:order_id>/', 
+         orders_views.add_order_product, name='add_order_product'),
     # operation links
-    path('update_order_status/', orders_views.update_order_status,
-         name='update_order_status'),
-
-
+    path('update_order_status/', 
+         orders_views.update_order_status, name='update_order_status'),
 
 ]
 

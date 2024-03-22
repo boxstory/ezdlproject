@@ -17,7 +17,7 @@ diff-match-patch==20230430
 distlib==0.3.7
 Django==3.2.9
 django-admin-volt==1.0.10
-django-allauth==0.60.0
+django-allauth==0.61.1
 django-cors-headers==4.3.1
 django-crispy-forms==1.13.0
 django-debug-toolbar==4.2.0

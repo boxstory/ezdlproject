@@ -23,7 +23,7 @@ class DlAddressUpdate(models.Model):
     dl_street = models.PositiveIntegerField(blank=True)
     dl_latitude = models.DecimalField(max_digits=19, decimal_places=15,blank=True)
     dl_longitude = models.DecimalField(max_digits=19, decimal_places=15,blank=True)
-    dl_pluscode = models.PositiveIntegerField(blank=True)
+    dl_pluscode = models.PositiveIntegerField(blank=True, null=True)
     dl_unit = models.CharField(max_length=2)
     is_villa_compound = models.BooleanField(default=False)
     is_flat = models.BooleanField(default=False)

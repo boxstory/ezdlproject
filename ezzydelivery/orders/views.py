@@ -86,9 +86,11 @@ def add_order(request):
                     business_id=request.user.id)
 
                 print(order.business_id)
-                form.save()
-                form = orders_forms.AddOrderForm()
-                return redirect('/orders/')
+                order = form.save()
+                print('order.id')
+                print(order.id)
+                
+                return  redirect('orders:add_order_product', order_id=order.id)
         else:
             print("load form")
             form = orders_forms.AddOrderForm(business_id=business.business_id)
@@ -136,8 +138,34 @@ def order_details(request, order_id):
     return render(request, 'orders/order_details.html', data)
 
 
-# operation links
+# add products to order
+@login_required(login_url='account_login')
+def add_order_product(request, order_id):
+    order = orders_models.Order.objects.get(id=order_id)
+    try:
+        order_product_list = orders_models.OrderProductList.objects.get(order_id=order_id)
+    except:
+        order_product_list = orders_models.OrderProductList.objects.create(order_id=order_id)
+    if request.method == 'POST':
+            print("POST form in views")
+            form = orders_forms.AddOrderProductsForm(request.POST, instance=order_product_list)
+            print(form)
+            if form.is_valid():
+                print("valid form")
+                form.save()
+                return redirect('/orders/')
+    else:
+        form = orders_forms.AddOrderProductsForm(instance=order_product_list)
+        print('else form')
+    data = {
+        'order': order,
+        'form': form
+    }
+    return render(request, 'orders/add_order_product.html', data)
 
+
+
+# operation links
 
 @require_POST
 def update_order_status(request):

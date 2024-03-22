@@ -36,7 +36,7 @@
             <div class="text-end">
               <button type="submit"
                       class="btn btn-dark w-100 w-md-50"
-                      href="{% url 'orders:add_order' %}">Submit</button>
+                      href="{% url 'orders:add_order' %}">Save & Add Products</button>
             </div>
           </form>
         </div>
@@ -57,5 +57,9 @@
       id_customer_whatsapp.val(974 + phoneNumberValue);
     });
   });
+ // Initialize select2 in pickuplocation search field
+  $("#id_pickup_location").select2();
+  $("#id_product_list").select2();
+
   </script>
 {% endblock extra_js %}

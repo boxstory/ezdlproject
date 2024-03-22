@@ -41,10 +41,10 @@ COD_STATUS_BY_STAFF = {
 
 
 class Order(models.Model):
-    order_number = models.CharField(max_length=100)
+    order_number = models.CharField(max_length=64, unique=True)
     business = models.ForeignKey(
         business_models.Business, on_delete=models.CASCADE, related_name='order')
-    client_order_code = models.CharField(max_length=100)
+    client_order_code = models.CharField(max_length=64, unique=True)
     order_notes = models.CharField(max_length=100)
     order_status = models.CharField(
         max_length=100, choices=ORDER_STATUS, default='to_review',
@@ -54,11 +54,6 @@ class Order(models.Model):
     pickup_location = models.ForeignKey(
         business_models.PickupLocation, on_delete=models.SET_NULL, null=True)
 
-    # product details
-    product_catgory = models.CharField(max_length=100, blank=True)
-    product_sub_catgory = models.CharField(max_length=100, blank=True)
-    product_list = models.ManyToManyField(product_models.Product, blank=True)
-
     # cod details
     cash_on_delivery = models.BooleanField(default=False)
     cod_status_by_client = models.CharField(
@@ -66,8 +61,8 @@ class Order(models.Model):
     cod_status_by_staff = models.CharField(
         max_length=100, choices=COD_STATUS_BY_STAFF, blank=True, null=True)
     cod_amount = models.IntegerField(default=0)
-    dl_amount = models.IntegerField(default=0)
     dl_included = models.BooleanField(default="True")
+    dl_amount = models.IntegerField(default=0)
 
     # Delivery customer details
     customer_name = models.CharField(max_length=100, blank=True)
@@ -79,12 +74,53 @@ class Order(models.Model):
     dl_zone = models.PositiveIntegerField(blank=True)
     dl_building = models.PositiveIntegerField(blank=True)
     dl_street = models.PositiveIntegerField(blank=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.order_notes
+        return f'({self.order_number}-{self.client_order_code})'
 
     class Meta:
         verbose_name_plural = "Order"
+
+
+class OrderProductList(models.Model):
+    order =  models.ForeignKey(
+        orders_models.Order, on_delete=models.CASCADE, related_name='order_product_list')
+    product01_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product01_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product02_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product02_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product03_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product03_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product04_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product04_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product05_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product05_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product06_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product06_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product07_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product07_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product08_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product08_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product09_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product09_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product10_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product10_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product11_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product11_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product12_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product12_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product13_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product13_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product14_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product14_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+    product15_name = models.ForeignKey(product_models.Product, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='+')
+    product15_qty = models.PositiveIntegerField(blank=True, null=True, default=0)
+
+    
+    def __str__(self):
+        return self.order
+
+    class Meta:
+        verbose_name_plural = "Order product lists"

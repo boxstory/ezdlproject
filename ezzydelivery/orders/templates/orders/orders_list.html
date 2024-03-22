@@ -9,5 +9,12 @@
 {% endblock extra_css %}
 {% block content %}
   <!-- orders_list.html -->
-  {% include "orders/parts/orders_list.html" %}
+  <div class="col-12 col-md-9 col-lg-10">
+    <div class="d-none d-md-block ">
+      {% include "orders/parts/orders_list.html" %}
+    </div>
+    <div class="d-block d-md-none">
+      {% include "orders/parts/orders_list_mob.html" %}
+    </div>
+  </div>
 {% endblock content %}

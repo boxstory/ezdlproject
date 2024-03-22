@@ -38,13 +38,14 @@ def product_all_list_card(request):
 
 @login_required(login_url='account_login')
 def product_single_add(request):
+    print('Product add')
     if request.method == 'POST':
         form = product_forms.AddItemsForm(request.POST)
         if form.is_valid():
+            print('form valid')
             form.save()
-            form = product_forms.AddItemsForm()
             #@todo: change redirection
-            return redirect('/')
+            return redirect('/product/all/')
     else:
         form = product_forms.AddItemsForm()
 
@@ -73,7 +74,7 @@ def product_single_update(request, product_id):
             form.save()
             messages.success(
                 request, f'Your product details has been Updated!')
-            return redirect('business:business_dashboard' )
+            return redirect('/product/all/' )
 
     data = {
         'form': form,

@@ -2,10 +2,10 @@
 {% load static %}
 <!-- extra title -->
 {% block extra_head %}
-Products
+  Products
 {% endblock extra_head %}
 {% block extra_css %}
-<style>
+  <style>
   .img-avatar {
     width: 100%;
     /* Make the container div fill the width of its parent */
@@ -40,13 +40,9 @@ Products
   .card {
     background: #fff;
     border-radius: 4px;
-    box-shadow: 0px 8px 8px rgba(34, 35, 58, 0.5);
-    max-width: 400px;
-    display: flex;
-    flex-direction: row;
-    border-radius: 15px;
-    position: relative;
-  }
+    
+    border: 0
+      }
 
   .card h2 {
     margin: 0;
@@ -93,6 +89,13 @@ Products
   .card-text {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: #4CAF50;
+    border: 1px solid rgb(151, 12, 12);
+
   }
 
   .title-total {
@@ -130,42 +133,49 @@ Products
       transform: rotate(22deg)
     }
   }
-</style>
+  </style>
 {% endblock extra_css %}
 <!-- extra css -->
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container p-3">
-  {% if products %} {% for product in products %}
-  <div class="card">
-    <div class="img-avatar">
-      <div>
-        <img src="{{product.brand_logo.url}}" alt="">
-      </div>
-    </div>
-    <div class="card-text">
-      <div class="portada" style="background-image: url('{{product.product_image.url}}')"></div>
-      <div class="title-total">
-        <div class="title">{{product.product_category}}</div>
-        <h2>{{product.item_name}}</h2>
-        <div class="desc">{{product.item_discription}}
-          Morgan has collected ants since they were six years old and now has many dozen ants but none
-          in
-          their pants.
+  <div class="container p-md-2 p-0 m-0 d-flex flex-wrap">
+    {% if products %}
+      {% for product in products %}
+        <div class="card col-12 col-md-6 ">
+          <div class="m-2">
+            <div class="img-avatar">
+              <div>
+                <img src="{{ product.brand_logo.url }}" alt="">
+              </div>
+            </div>
+            <div class="card-text ">
+              <div class="portada"
+                   style="background-image: url('{{ product.product_image.url }}')"></div>
+              <div class="title-total">
+                <div class="title">{{ product.product_category }}</div>
+                <h2>{{ product.item_name }}</h2>
+                <div class="desc">
+                  {{ product.item_discription }}
+                  Morgan has collected ants since they were six years old and now has many dozen ants but none
+                  in
+                  their pants.
+                </div>
+                <div class="actions">
+                  <button>
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button>
+                    <i class="fa-solid fa-cart-plus"></i>
+                  </button>
+                  <button>
+                    <i class="fas fa-user-friends"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="actions">
-          <button>
-            <i class="far fa-heart"></i>
-          </button>
-          <button>
-            <i class="fa-solid fa-cart-plus"></i>
-          </button>
-          <button>
-            <i class="fas fa-user-friends"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>{% endfor %}{% endif %}
-</div>
+      {% endfor %}
+    {% endif %}
+  </div>
 {% endblock content %}

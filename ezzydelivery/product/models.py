@@ -69,9 +69,9 @@ class Product(models.Model):
     item_discription = models.CharField(max_length=100, null=True, blank=True)
 
     brand_logo = models.ImageField(
-        upload_to='product_images/brang_logo', null=True, blank=True, default="product_images/brang_logo_default.jpg")
+        upload_to='product_images/brang_logo', null=True, blank=True, default="business/product_images/brang_logo_default.jpg")
     product_image = models.ImageField(
-        upload_to='product_images/product_images', null=True, blank=True, default="product_images/product_image_default.jpg")
+        upload_to='product_images/product_images', null=True, blank=True, default="business/product_images/product_image_default.jpg")
     business = models.ForeignKey(
         business_models.Business, on_delete=models.SET_NULL, null=True, related_name='product')
     product_category = models.ForeignKey(

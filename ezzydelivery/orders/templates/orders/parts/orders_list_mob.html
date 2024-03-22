@@ -1,0 +1,106 @@
+<div class="col-md-12 d-flex flex-row justify-content-between py-2">
+  <h2 class="m-0">Orders list</h2>
+  <a class="btn btn-dark pe-3 text-white"
+     href="{% url 'orders:add_order' %}">
+    <i class="fa fa-plus me-3"></i> Add Orders
+  </a>
+</div>
+<div class=" m-2">
+  {% if not orders %}
+    <div class="h4 p-3 text-center">No orders</div>
+  {% else %}
+    {% for order in orders %}
+      <div class=" border border-2 mb-2 bg-light">
+        <div class="p-1 pt-2 col-12">
+          <table class="p-3 table table-bordered table-dark border-black border-2 rounded-3">
+            <div class="d-flex justify-content-between">
+              <div class="fw-bolder">{{ order.client_order_code }}</div>
+              <div class="fw-bold mb-2">{{ order.order_date }}</div>
+            </div>
+            <div class="">
+              <div class="d-flex justify-content-between">
+                <i class="fa-solid fa-location-pin" style="color: #008000;"></i>
+                <i class="fa-solid fa-location-pin" style="color: #ff0000;"></i>
+              </div>
+              <hr class="p-0 m-0" />
+              <div class="d-flex justify-content-between">
+                <p>{{ order.pickup_location }}</p>
+                <p>{{ order.dl_zone }} - {{ order.customer_address }}</p>
+              </div>
+            </div>
+            <div class="pb-1">
+              <div class="d-flex justify-content-between">
+                <div>Pickup Status</div>
+                <div>COD</div>
+                <div>More</div>
+              </div>
+              <hr class="p-0 m-0 align-content-center" />
+              <div class="d-flex justify-content-between pt-2">
+                <div>{{ order.order_status }}</div>
+                <div>{{ order.cash_on_delivery }} - {{ order.cod_amount }}</div>
+                <div class="d-flex justify-content-between">
+                  <a class="btn btn-dark btn-sm text-end"
+                     type="button"
+                     data-bs-toggle="collapse"
+                     data-bs-target="#collapse-{{ order.id }}"
+                     aria-expanded="false"
+                     aria-controls="collapse-{{ order.id }}"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </table>
+          <div class="collapse pb-2 bg-light p-3 pt-0" id="collapse-{{ order.id }}">
+            <div class="pb-2">
+              <div class="d-flex justify-content-between">
+                <div>Name</div>
+                <div>Mobile</div>
+              </div>
+              <hr class="p-0 m-0" />
+              <div class="d-flex justify-content-between p-0">
+                <p>{{ order.customer_name }}</p>
+                <p>{{ order.customer_phone }}</p>
+              </div>
+            </div>
+            <div class=" ">
+              <div class="d-flex justify-content-between">
+                <div>Category</div>
+                <div>Whatsapp</div>
+              </div>
+              <hr class="p-0 m-0 align-content-center" />
+              <div class="d-flex justify-content-between pt-2">
+                <div>{{ order.product_sub_catgory }}</div>
+                <div>
+                  <a class="text-decoration-none text-dark"
+                     href="http://wa.me/{{ order.customer_whatsapp }}"
+                     target="_blank">{{ order.customer_whatsapp }}</a>
+                </div>
+              </div>
+            </div>
+            <div class="py-2">
+              <div class="d-flex justify-content-between">
+                <div>Delivery Stauts</div>
+                <div>Deadline</div>
+                <div>Actions</div>
+              </div>
+              <hr class="p-0 m-0 align-content-center" />
+              <div class="d-flex justify-content-between pt-2">
+                <div>{{ order.cod_status_by_staff }}</div>
+                <div>{{ order.deadline_date }}</div>
+                <div>
+                  <a href="{% url 'orders:add_order_product' order.id %} " class="me-3 text-dark text-decoration-none">
+                <i class="me-2 fa-brands fa-product-hunt"></i>Product
+              </a> 
+              <a href="{% url 'orders:update_order' order.id %} " class="me-2 text-dark text-decoration-none">
+                <i class="fa fa-lg fa-edit me-2"></i>Edit Order
+              </a>
+              <a class="btn pe-1 text-dark text-decoration-none" href="{% url 'orders:delete_order' order.id %} ">
+                <i class="fa fa-lg fa-trash"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>

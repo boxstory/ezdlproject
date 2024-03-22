@@ -43,3 +43,9 @@ def order_post_save_receiver(sender, instance,  created, *args, **kwargs):
 
             )
             instance.save()
+        if instance.id not in OrderProductList.objects.values_list('order', flat=True):
+            OrderProductList.objects.create(
+                order_id=instance.id,
+                
+            )
+            instance.save()
